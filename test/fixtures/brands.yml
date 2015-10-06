@@ -3,11 +3,9 @@
 one:
   name: MyString
   filename: MyString
-  title: MyString
-  bio: MyText
+  link: MyString
 
 two:
   name: MyString
   filename: MyString
-  title: MyString
-  bio: MyText
+  link: MyString

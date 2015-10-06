@@ -1,5 +1,7 @@
-var Index = React.createClass({
+/* globals React */
+'use strict';
 
+var Index = React.createClass({
   render: function() {
     return <div />;
   }
