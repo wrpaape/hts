@@ -79,7 +79,3 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
 """
   }
 ])
-
-Unit.create([
-
-])

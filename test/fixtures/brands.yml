@@ -3,11 +3,9 @@
 one:
   key: MyString
   name: MyString
-  filename: MyString
   link: MyString
 
 two:
   key: MyString
   name: MyString
-  filename: MyString
   link: MyString

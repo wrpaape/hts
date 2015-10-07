@@ -2,12 +2,14 @@
 
 one:
   key: MyString
-  name: MyString
   title: MyString
-  bio: MyText
+  body: MyText
+  parent_type: MyString
+  parent_id: 1
 
 two:
   key: MyString
-  name: MyString
   title: MyString
-  bio: MyText
+  body: MyText
+  parent_type: MyString
+  parent_id: 1

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  type: 
+  path: MyString
+  default: MyString
+  parent_type: MyString
+  parent_id: 1
+
+two:
+  key: MyString
+  type: 
+  path: MyString
+  default: MyString
+  parent_type: MyString
+  parent_id: 1

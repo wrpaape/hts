@@ -1,4 +1,4 @@
 class Member < ActiveRecord::Base
-  include StripNewlines, SetFilename, SetKey
   has_many :contacts
+  has_many :assets, as: :parent
 end

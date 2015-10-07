@@ -3,7 +3,5 @@ class Contact < ActiveRecord::Base
 
   private
 
-  def self.inheritance_column
-    nil
-  end
+  self.inheritance_column = :_type_disabled
 end

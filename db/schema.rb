@@ -11,15 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006232558) do
+ActiveRecord::Schema.define(version: 20151007214418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "assets", force: :cascade do |t|
+    t.string   "key"
+    t.string   "type"
+    t.string   "path"
+    t.string   "default"
+    t.string   "parent_type"
+    t.integer  "parent_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "assets", ["parent_id"], name: "index_assets_on_parent_id", using: :btree
+
   create_table "brands", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
-    t.string   "filename"
     t.string   "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,7 +50,6 @@ ActiveRecord::Schema.define(version: 20151006232558) do
   create_table "members", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
-    t.string   "filename"
     t.string   "title"
     t.text     "bio"
     t.datetime "created_at", null: false
@@ -53,14 +64,26 @@ ActiveRecord::Schema.define(version: 20151006232558) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "units", force: :cascade do |t|
+  create_table "products", force: :cascade do |t|
     t.string   "key"
+    t.string   "type"
     t.string   "name"
-    t.string   "filename"
-    t.text     "details"
+    t.text     "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "specs", force: :cascade do |t|
+    t.string   "key"
+    t.string   "title"
+    t.text     "body"
+    t.string   "parent_type"
+    t.integer  "parent_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "specs", ["parent_id"], name: "index_specs_on_parent_id", using: :btree
 
   add_foreign_key "contacts", "members"
 end

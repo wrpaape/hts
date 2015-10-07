@@ -3,7 +3,6 @@ class CreateBrands < ActiveRecord::Migration
     create_table :brands do |t|
       t.string :key
       t.string :name
-      t.string :filename
       t.string :link
 
       t.timestamps null: false

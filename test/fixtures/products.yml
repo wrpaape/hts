@@ -2,12 +2,12 @@
 
 one:
   key: MyString
+  category: MyString
   name: MyString
-  filename: MyString
-  details: MyText
+  info: MyText
 
 two:
   key: MyString
+  category: MyString
   name: MyString
-  filename: MyString
-  details: MyText
+  info: MyText

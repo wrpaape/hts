@@ -1,3 +1,3 @@
 class Brand < ActiveRecord::Base
-  include SetFilename, SetKey
+  has_many :assets, as: :parent
 end
