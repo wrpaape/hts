@@ -56,5 +56,7 @@ group :development, :test do
 end
 
 gem 'bullet', group: :development
-gem 'react-rails'
 gem 'bcrypt'
+gem 'react-rails'
+gem 'react-rails-img'
+

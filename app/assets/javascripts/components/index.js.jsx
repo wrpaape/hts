@@ -3,6 +3,6 @@
 
 var Index = React.createClass({
   render: function() {
-    return <div />;
+    return <Team members={ this.props.members } />;
   }
 });

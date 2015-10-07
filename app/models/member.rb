@@ -1,4 +1,5 @@
 class Member < ActiveRecord::Base
+  include SetFilename
   before_create :strip_outer_newlines,
     :strip_single_newlines
   has_many :contacts

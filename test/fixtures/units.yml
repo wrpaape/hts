@@ -2,8 +2,10 @@
 
 one:
   name: MyString
+  filename: MyString
   details: MyText
 
 two:
   name: MyString
+  filename: MyString
   details: MyText

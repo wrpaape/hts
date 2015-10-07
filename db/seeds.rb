@@ -2,17 +2,14 @@
 Brand.create([
 	{
     name: "Club Car",
-    filename: "club_car",
     link: "http://www.clubcar.com/us/en/home.html"
   },
   {
     name: "Ingersoll Rand",
-    filename: "ingersoll_rand",
     link: "http://company.ingersollrand.com/ircorp/en/index.html"
   },
   {
     name: "Thermo King",
-    filename: "thermo_king",
     link: "http://www.thermoking.com/"
   }
 ])
@@ -21,7 +18,6 @@ Brand.create([
 Member.create([
   {
     name: "Dean Revering",
-    filename: "dean_revering",
     title: "Account Executive",
     contacts: Contact.create([
         {
@@ -50,7 +46,6 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
   },
   {
     name: "Kevin Baxter",
-    filename: "kevin_baxter",
     title: "General District Manager",
     bio:
 """
@@ -65,7 +60,6 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
   },
   {
     name: "Wally Bomhoff",
-    filename: "wally_bomhoff",
     title: "South Texas Area Manager",
     contacts: Contact.create([
         {
