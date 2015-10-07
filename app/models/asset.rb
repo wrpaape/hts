@@ -1,14 +1,16 @@
 class Asset < ActiveRecord::Base
-  before_create :bridge_paths
+  before_create :set_path
   belongs_to :parent, polymorphic: true
 
   private
 
-  def bridge_paths
-    [:path, :default].each do |path_end|
-      step1 = type == "Pdf" ? "public/assets" : "app/assets/images"
-      step2 = parent_type.underscore.pluralize
-      self[path_end] = "#{Rails.root}/#{step1}/#{step2}/#{path_end}"
+  def set_path
+    steps = ""
+    parent_class = parent_type.constantize
+    while parent_class != ActiveRecord::Base
+      steps.prepend("#{parent_class.to_s.underscore.pluralize}/")
+      parent_class = parent_class.superclass
     end
+    self.path = type == "Image" ? steps : Rails.root.join("public/assets", steps, filename)
   end
 end

@@ -3,8 +3,8 @@ class CreateAssets < ActiveRecord::Migration
     create_table :assets do |t|
       t.string :key
       t.string :type
+      t.string :filename
       t.string :path
-      t.string :default
       t.string :parent_type
       t.integer :parent_id
 
