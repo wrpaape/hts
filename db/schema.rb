@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20151006232558) do
   enable_extension "plpgsql"
 
   create_table "brands", force: :cascade do |t|
+    t.string   "key"
     t.string   "name"
     t.string   "filename"
     t.string   "link"
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20151006232558) do
   add_index "contacts", ["member_id"], name: "index_contacts_on_member_id", using: :btree
 
   create_table "members", force: :cascade do |t|
+    t.string   "key"
     t.string   "name"
     t.string   "filename"
     t.string   "title"
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20151006232558) do
   end
 
   create_table "perks", force: :cascade do |t|
+    t.string   "key"
     t.string   "name"
     t.text     "details"
     t.datetime "created_at", null: false
@@ -51,6 +54,7 @@ ActiveRecord::Schema.define(version: 20151006232558) do
   end
 
   create_table "units", force: :cascade do |t|
+    t.string   "key"
     t.string   "name"
     t.string   "filename"
     t.text     "details"

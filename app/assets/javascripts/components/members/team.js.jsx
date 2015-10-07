@@ -3,21 +3,13 @@
 
 var Team = React.createClass({
   render: function() {
-    var headshots = this.props.members.map(function(member) {
-      return(
-        React.createElement(
-          window.Headshot,
-          {
-            key: member.name,
-            src: Img.assetPath('members/headshot-' + member.filename + '.jpg')
-          }
-        )
-      );
+    var members = this.props.members.map(function(member) {
+      return React.createElement(window.Member, member);
     });
 
     return(
       <div>
-        { headshots }
+        { members }
       </div>
     );
   }

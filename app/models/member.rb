@@ -1,16 +1,4 @@
 class Member < ActiveRecord::Base
-  include SetFilename
-  before_create :strip_outer_newlines,
-    :strip_single_newlines
+  include StripNewlines, SetFilename, SetKey
   has_many :contacts
-
-  private
-
-  def strip_outer_newlines
-    bio.strip!
-  end
-
-  def strip_single_newlines
-    bio.gsub!(/(?<!\n)\n(?!\n)/, " ")
-  end
 end
