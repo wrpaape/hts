@@ -1,7 +1,7 @@
 class MainController < ApplicationController
 	def index
-		@units = Unit.all
-		@perks = Perk.all
-		@members = Member.all
+		@units = Unit.all_as_json
+		@perks = Perk.all_as_json
+		@members = Member.all_as_json
 	end
 end

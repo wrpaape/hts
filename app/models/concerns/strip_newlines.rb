@@ -8,7 +8,7 @@ module StripNewlines
 
     def strip_newlines
       self.class.columns.each do |col|
-        if col.type == :text
+        if col.type == :text && col.name
           strip_outer_newlines(col.name)
           strip_single_newlines(col.name)
         end

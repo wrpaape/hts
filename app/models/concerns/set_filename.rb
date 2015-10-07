@@ -7,7 +7,7 @@ module SetFilename
     private
 
     def set_filename
-      self.filename = name.downcase.sub(" ", "_") unless filename
+      self.filename = name ? name.downcase.sub(" ", "_") : "default" unless filename
     end
   end
 end

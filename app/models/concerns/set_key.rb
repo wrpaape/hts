@@ -7,7 +7,7 @@ module SetKey
     private
 
     def set_key
-      self.key = name unless key
+      self.key = "#{self.class.to_s.underscore}-#{self.class.count}" unless key
     end
   end
 end

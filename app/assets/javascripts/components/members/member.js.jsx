@@ -3,6 +3,13 @@
 
 var Member = React.createClass({
   render: function() {
-    return <Headshot src={ Img.assetPath('members/headshot-' + this.props.filename + '.jpg') } />;
+    return(
+      <div>
+        <Headshot src={ Img.assetPath('members/headshot-' + this.props.filename + '.jpg') } />
+        <p>
+          { this.props.bio }
+        </p>
+      </div>
+    );
   }
 });

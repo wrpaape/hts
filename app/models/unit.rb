@@ -1,3 +1,3 @@
 class Unit < ActiveRecord::Base
-  include SetFilename, SetKey
+  include StripNewlines, SetFilename, SetKey
 end
