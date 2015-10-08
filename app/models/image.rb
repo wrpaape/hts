@@ -4,6 +4,7 @@ class Image < Asset
   private
 
   def set_filename
-    filename.prepend("#{parent.name.downcase.sub(" ", "_")}-") if parent.name
+    prefix = parent.try(:name) || parent.try(:title)
+    filename.prepend("#{prefix.downcase.sub(" ", "_")}-") if prefix
   end
 end

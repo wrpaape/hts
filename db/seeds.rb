@@ -1,3 +1,11 @@
+def rand_assets(min, max, ext)
+  rand(min..max).times.map do |i|
+    {
+      filename: "#{i}.#{ext}"
+    }
+  end
+end
+
 # Ingersoll Rand brands
 Brand.create([
 	{
@@ -80,29 +88,28 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
   }
 ])
 
-Product.create(
-  20.times.map do
+products = Product.create(20.times.map {
+  {
+    type: ["Good", "Mod"].sample,
+    name: Faker::Commerce.product_name,
+    info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+  }
+})
+
+products.each do |product|
+  specs = Spec.create(rand(1..3).times.map { |i|
     {
-      type: Product.subclasses.sample.to_s,
-      name: Faker::Commerce.product_name,
-      info: Faker::Lorem.paragraphs(rand(1..3)).join('\n\n'),
-      images: Image.create(rand(1..5).times.map { |i|
-        {
-          filename: "image-#{i}.#{["gif", "png", "jpg"].sample}"
-        }
-      })
-      pdfs: Pdf.create(rand(0..3).times.map { |i|
-        {
-          filename: "#{i}.pdf"
-        }
-      }),
-      specs: Spec.create(rand(1..3).times.map { |i|
-        {
-          title: "Spec-#{i}",
-          body: Faker::Lorem.paragraphs(rand(1..5)).join('\n\n'),
-          images: Image.create()
-        }
-      })
+      title: "Spec-#{i}",
+      body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
     }
+  })
+
+  specs.each do |spec|
+    spec.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
+    spec.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
-  )
+
+  product.specs << specs
+  product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
+  product.pdfs.create(rand_assets(0, 3, "pdf"))
+end
