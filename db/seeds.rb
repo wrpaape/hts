@@ -92,24 +92,30 @@ products = Product.create(20.times.map {
   {
     type: ["Good", "Mod"].sample,
     name: Faker::Commerce.product_name,
-    info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+    info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n"),
+    specs: Spec.create(rand(1..3).times.map { |i|
+      {
+        title: "Spec-#{i}",
+        body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
+      }
+    })
   }
 })
 
 products.each do |product|
-  specs = Spec.create(rand(1..3).times.map { |i|
-    {
-      title: "Spec-#{i}",
-      body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
-    }
-  })
+  # specs = Spec.create(rand(1..3).times.map { |i|
+  #   {
+  #     title: "Spec-#{i}",
+  #     body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
+  #   }
+  # })
 
-  specs.each do |spec|
+  product.specs.each do |spec|
     spec.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
     spec.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
 
-  product.specs << specs
+  
   product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
