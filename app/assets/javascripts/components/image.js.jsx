@@ -9,7 +9,8 @@ var Image = React.createClass({
   },
   setDefault: function() {
     this.setState({
-      srcRaw: this.props.path + "default.png"
+      srcRaw: this.props.default
+
     });
   },
   render: function() {

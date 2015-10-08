@@ -7,7 +7,7 @@ var Member = React.createClass({
 
     return(
       <div>
-        <Image path={ headshot.path } filename={ headshot.filename } />
+        <Image path={ headshot.path } filename={ headshot.filename } default={ headshot.default } />
         <p>
           { this.props.bio }
         </p>

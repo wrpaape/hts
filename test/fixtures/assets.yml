@@ -5,6 +5,7 @@ one:
   type: 
   filename: MyString
   path: MyString
+  default: MyString
   parent_type: MyString
   parent_id: 1
 
@@ -13,5 +14,6 @@ two:
   type: 
   filename: MyString
   path: MyString
+  default: MyString
   parent_type: MyString
   parent_id: 1

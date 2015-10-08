@@ -5,6 +5,7 @@ class CreateAssets < ActiveRecord::Migration
       t.string :type
       t.string :filename
       t.string :path
+      t.string :default
       t.string :parent_type
       t.integer :parent_id
 

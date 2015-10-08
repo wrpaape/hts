@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.string   "type"
     t.string   "filename"
     t.string   "path"
+    t.string   "default"
     t.string   "parent_type"
     t.integer  "parent_id"
     t.datetime "created_at",  null: false
