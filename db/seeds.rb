@@ -103,19 +103,11 @@ products = Product.create(20.times.map {
 })
 
 products.each do |product|
-  # specs = Spec.create(rand(1..3).times.map { |i|
-  #   {
-  #     title: "Spec-#{i}",
-  #     body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
-  #   }
-  # })
-
   product.specs.each do |spec|
     spec.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
     spec.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
 
-  
   product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end

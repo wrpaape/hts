@@ -4,12 +4,12 @@ class Image < Asset
   private
 
   def set_default
-    self.default =
+    regex =
     case parent_type
-      when "Product", "Spec"
-        path.sub(/(?<=\/).*/, "default.png")
-      else
-        path.sub(/[^\/]+\/$/, "default.png")
+      when "Product", "Spec" then /(?<=\/).*/
+      else /[^\/]+\/$/
     end
+    
+    self.default = path.sub(regex, "default.png")
   end
 end
