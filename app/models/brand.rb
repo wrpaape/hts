@@ -1,3 +1,7 @@
 class Brand < ActiveRecord::Base
-  has_many :images, as: :parent
+  include AddImage
+
+  after_create "add_image('logo.png')"
+  
+  has_one :logo, as: :parent, class_name: "Image"
 end

@@ -4,8 +4,8 @@ class ActiveRecord::Base
   def serializable_hash(options)
     options ||= {}
     children = [:has_one, :has_many].flat_map { |assoc| self.class.reflect_on_all_associations(assoc).map(&:name) }
-    ids_timestamps = self.class.column_names.grep(/_id|_at/).map(&:to_sym) << :id
-    custom_options = options.merge(include: children, except: ids_timestamps)
+    ids_types_timestamps = self.class.column_names.grep(/_id|_type|_at/).map(&:to_sym) << :id
+    custom_options = options.merge(include: children, except: ids_types_timestamps)
     
     super(custom_options).compact
   end
@@ -26,10 +26,10 @@ class ActiveRecord::Base
   end
 
   def strip_outer_newlines(text)
-    self[text].strip!
+    self[text].try(:strip!)
   end
 
   def strip_single_newlines(text)
-    self[text].gsub!(/(?<!\n)\n(?!\n)/, " ")
+    self[text].try(:gsub!, /(?<!\n)\n(?!\n)/, " ")
   end
 end

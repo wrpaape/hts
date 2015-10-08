@@ -1,11 +1,8 @@
 class Member < ActiveRecord::Base
-  after_create :add_headshot
+  include AddImage
+
+  after_create "add_image('headshot.jpg')"
+  
   has_many :contacts
-  has_many :images, as: :parent
-
-  private
-
-  def add_headshot
-    images.create(filename: "headshot.jpg")
-  end
+  has_one :headshot, as: :parent, class_name: "Image"
 end

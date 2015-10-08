@@ -4,6 +4,6 @@ class Image < Asset
   private
 
   def set_filename
-    filename.prepend("#{parent.name.sub(" ", "_")}-") 
+    filename.prepend("#{parent.name.downcase.sub(" ", "_")}-") if parent.name
   end
 end

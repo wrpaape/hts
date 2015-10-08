@@ -3,9 +3,11 @@
 
 var Member = React.createClass({
   render: function() {
+    var headshot = this.props.headshot;
+
     return(
       <div>
-        <Headshot src={ Img.assetPath('members/headshot-' + this.props.filename + '.jpg') } />
+        <Image path={ headshot.path } filename={ headshot.filename } />
         <p>
           { this.props.bio }
         </p>

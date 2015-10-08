@@ -79,3 +79,30 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
 """
   }
 ])
+
+Product.create(
+  20.times.map do
+    {
+      type: Product.subclasses.sample.to_s,
+      name: Faker::Commerce.product_name,
+      info: Faker::Lorem.paragraphs(rand(1..3)).join('\n\n'),
+      images: Image.create(rand(1..5).times.map { |i|
+        {
+          filename: "image-#{i}.#{["gif", "png", "jpg"].sample}"
+        }
+      })
+      pdfs: Pdf.create(rand(0..3).times.map { |i|
+        {
+          filename: "#{i}.pdf"
+        }
+      }),
+      specs: Spec.create(rand(1..3).times.map { |i|
+        {
+          title: "Spec-#{i}",
+          body: Faker::Lorem.paragraphs(rand(1..5)).join('\n\n'),
+          images: Image.create()
+        }
+      })
+    }
+  end
+  )

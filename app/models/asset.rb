@@ -6,7 +6,7 @@ class Asset < ActiveRecord::Base
 
   def set_path
     steps = ""
-    parent_class = parent_type.constantize
+    parent_class = parent.class
     while parent_class != ActiveRecord::Base
       steps.prepend("#{parent_class.to_s.underscore.pluralize}/")
       parent_class = parent_class.superclass
