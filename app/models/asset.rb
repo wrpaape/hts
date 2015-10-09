@@ -25,6 +25,6 @@ class Asset < ActiveRecord::Base
       steps.prepend("#{ancestor.to_s.underscore.pluralize}/")
     end
     
-    self.path = type == "Image" ? steps : Rails.root.join("public/assets", steps, filename)
+    build_path(steps)
   end
 end

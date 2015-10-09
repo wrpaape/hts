@@ -9,7 +9,11 @@ class Image < Asset
       when "Product", "Spec" then /(?<=\/).*/
       else /[^\/]+\/$/
     end
-    
+
     self.default = path.sub(regex, "default.png")
+  end
+
+  def build_path(steps)
+    self.path = steps
   end
 end

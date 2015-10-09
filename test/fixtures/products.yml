@@ -2,12 +2,14 @@
 
 one:
   key: MyString
+  type: MyString
   category: MyString
   name: MyString
   info: MyText
 
 two:
   key: MyString
+  type: MyString
   category: MyString
   name: MyString
   info: MyText
