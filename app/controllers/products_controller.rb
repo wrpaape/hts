@@ -4,6 +4,10 @@ class ProductsController < ApplicationController
     @products = product_type.all.as_json
   end
 
+  def search
+    render json: query(ALLparams[:input])
+  end
+
   private
 
   def product_type

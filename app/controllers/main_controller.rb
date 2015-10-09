@@ -6,7 +6,7 @@ class MainController < ApplicationController
 	end
 
   def search
-
+    render json: query(params[:input])
   end
 
   def download_file

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   #   resources :air_conditioners, as: "acs", type: "Ac"
   # end
   resources :modifications, controller: "products", type: "Mod"
+  resources :members
   get "download_pdf/:id", to: "main#download_pdf", as: "download_pdf"
 
   root 'main#index'
