@@ -4,7 +4,8 @@
 var SearchBar = React.createClass({
   getInitialState: function() {
     return({
-      value: ''
+      value: '',
+      results: []
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -13,24 +14,44 @@ var SearchBar = React.createClass({
     });
   },
   updateValue: function(event) {
-    this.setState({
-      value: event.target.value
-    });
-  },
-  submitValue: function(event) {
-    if (event.keyCode === 13) {
-      ajax.get(
-        this.props.url,
-        { input: this.state.value },
+    var newValue = event.target.value;
+    if (newValue.length) {
+      ajax.get(this.props.url,
+        { input: newValue },
         function(output) {
-          console.log(output);
+          var results = JSON.parse(output).map(function(result) {
+            return React.createElement(window.NavBtnLi, result);
+          });
+
+          this.setState({
+            value: newValue,
+            results: results
+          });
         }.bind(this),
-        true
-      );
+        true);
+    } else {
+      this.setState({
+        value: newValue,
+        results: []
+      });
     }
   },
+  // submitValue: function(event) {
+  //   if (event.keyCode === 13) {
+  //     ajax.get(
+  //       this.props.url,
+  //       { input: this.state.value },
+  //       function(output) {
+  //         output.map(function(result) {
+
+  //         })
+  //       },
+  //       true
+  //     );
+  //   }
+  // },
   render: function() {
-    return React.createElement(
+    var input = React.createElement(
       'input',
       {
         type: 'text',
@@ -40,6 +61,15 @@ var SearchBar = React.createClass({
         onChange: this.updateValue,
         onKeyUp: this.submitValue
       }
+    );
+
+    return(
+      <div>
+        { input }
+        <ul>
+          { this.state.results }
+        </ul>
+      </div>
     );
   }
 });
