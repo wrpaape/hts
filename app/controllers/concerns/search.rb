@@ -4,7 +4,7 @@ module Search
   ALL = {
     products: {
       name: {
-        results: ->(input) { Product.where("LOWER(name) LIKE (?)", "%#{input.downcase}%").pluck(:type, :id, :name) },
+        results: ->(input) { Product.fuzzy(:name, input).pluck(:type, :id, :name) },
         link: ->(result) { eval("#{result[0].underscore}_path(#{result[1]})") },
         display: ->(result) { result[2] }
       },
@@ -14,7 +14,7 @@ module Search
         display: ->(result) { result }
       },
       info: {
-        results: ->(input) { input.pluck(:type, :id, :info, :name).uniq },
+        results: ->(input) { Product.fuzzy(:info, input).pluck(:type, :id, :info, :name) },
         link: ->(result) { eval("#{result[0].underscore}_path(#{result[1]})") },
         display: ->(result) { "...#{result[2]}... (#{result[3]})" }
       }
@@ -31,7 +31,7 @@ module Search
   ]
 
   def self.query(pool = ALL, value)
-    pool 
+
   end
 
   def query(value)

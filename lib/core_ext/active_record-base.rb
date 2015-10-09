@@ -1,6 +1,10 @@
 class ActiveRecord::Base
   before_create :set_key, :strip_newlines
 
+  def self.fuzzy(field, input)
+    where("LOWER(#{field}) LIKE (?)", "%#{input.downcase}%")
+  end
+
   def serializable_hash(options)
     options ||= {}
     if options[:include_all]
