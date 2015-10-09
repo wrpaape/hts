@@ -1,7 +1,11 @@
 class MainController < ApplicationController
 	def index
-		@products = Product.all.as_json
-		@perks = Perk.all.as_json
+		@goods = Good.all_main_index
+		@mods = Mod.all_main_index
 		@members = Member.all.as_json
 	end
+
+  def search
+    
+  end
 end
