@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :modifications, controller: "products", type: "Mod"
   resources :members
   get "download_pdf/:id", to: "main#download_pdf", as: "download_pdf"
+  get "search", to: "main#search", as: "search"
 
-  root 'main#index'
+  root "main#index"
 end

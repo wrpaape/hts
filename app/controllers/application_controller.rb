@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  protected
+  # protected
   
   ALL = {
     products: {
@@ -44,7 +44,8 @@ class ApplicationController < ActionController::Base
     }
   }
 
-  def self.query(pool = ALL, input)
+  def query(pool = ALL, input)
+    # include Rails.application.routes.url_helpers
     output = {}
     pool.each do |search_for, fields|
       fields.each do |field, procs|
@@ -53,7 +54,7 @@ class ApplicationController < ActionController::Base
         output[search_for] ||= {}
         output[search_for][field] = results.map do |result|
           {
-            path: procs[:path].call(result),
+            path: instance_exec(result, &procs[:path]),
             display: procs[:display].call(result, input)
           }
         end

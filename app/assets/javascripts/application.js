@@ -17,4 +17,5 @@
 //= require react_ujs
 //= require react_rails_img
 //= require components
+//= require ajax
 //= require_tree .

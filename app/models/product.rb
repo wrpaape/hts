@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
 
   has_many :specs, as: :parent
 
-  def all_main_index
+  def self.all_main_index
     all.map { |product| Hash[product.key, product.name] }
   end
 end
