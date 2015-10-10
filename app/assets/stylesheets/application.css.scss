@@ -49,9 +49,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
     background-color: lighten($c-bg, 10%);
   }
   &:active {
-    // -webkite-filter: invert(100%);
-    color: lighten($c-bg, 10%);
-    background-color: $c-txt;
+    text-shadow: 1px 1px 1px black;
   }
 }
 @mixin filters($filters) { 
@@ -83,11 +81,10 @@ img {
   & > div {
     position: relative;
     width: 200px;
-    input {
+    & > input {
       @include text-field;
       width: 100%;
       padding-right: 36px;
-      text-shadow: 1px 1px 1px black;
       box-sizing: border-box;
     }
     & > span{
@@ -95,13 +92,20 @@ img {
       top: 0;
       right: 0;
       bottom: 0;
-      img {
-        @include filters($m-ds);
+      button {
+        width: 20px;
+        height: 20px;
         margin: 9px;
+        border: 0;
+        outline: none;
         cursor: pointer;
-        content: url("icons/search.png");
+        background-color: transparent;
+        background-image: url(icons/search.png);
         &:hover {
-          @include filters($m-ww $m-ds)
+          @include filters($m-ww)
+        }
+        &:active {
+          @include filters($m-ww $m-ds);
         }
       }
     }
@@ -111,6 +115,5 @@ img {
     display: block;
     padding: 5px;
     margin: 5px 0;
-    text-shadow: 1px 1px 1px black;
   }
 }
