@@ -11,6 +11,8 @@ $c-btn-txt2: white;
 $c-btn-bg2: #588F15;
 $f-main: 'Exo', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
+$m-ww: brightness(5000%);
+$m-ds: drop-shadow(1px 1px 1px black);
 
 @mixin round-corners($r) {
   -moz-border-radius-topleft: $r;
@@ -48,16 +50,16 @@ $f-logo: 'Bowlby One SC', cursive;
   }
   &:active {
     // -webkite-filter: invert(100%);
-    color: lighten($c-txt, 10%);
-    background-color: lighten($c-bg, 10%);
+    color: lighten($c-bg, 10%);
+    background-color: $c-txt;
   }
 }
-@mixin white-wash {
-  filter: brightness(5000%);
-  -webkit-filter: brightness(5000%);
-  -moz-filter: brightness(5000%);
-  -o-filter: brightness(5000%);
-  -ms-filter: brightness(5000%);
+@mixin filters($filters) { 
+  -webkit-filter: $filters;
+  -moz-filter: $filters;
+  -ms-filter: $filters;
+  -o-filter: $filters;
+  filter: $filters;
 }
 
 body {
@@ -85,6 +87,7 @@ img {
       @include text-field;
       width: 100%;
       padding-right: 36px;
+      text-shadow: 1px 1px 1px black;
       box-sizing: border-box;
     }
     & > span{
@@ -93,11 +96,12 @@ img {
       right: 0;
       bottom: 0;
       img {
+        @include filters($m-ds);
         margin: 9px;
         cursor: pointer;
         content: url("icons/search.png");
         &:hover {
-          @include white-wash;
+          @include filters($m-ww $m-ds)
         }
       }
     }
@@ -107,5 +111,6 @@ img {
     display: block;
     padding: 5px;
     margin: 5px 0;
+    text-shadow: 1px 1px 1px black;
   }
 }
