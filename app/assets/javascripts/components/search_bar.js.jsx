@@ -13,7 +13,7 @@ var SearchBar = React.createClass({
       value: nextProps.value
     });
   },
-  submitInput: function(event) {
+  updateSearch: function(event) {
     var newValue = event.target.value;
     if (newValue.length) {
       ajax.get(this.props.url,
@@ -36,9 +36,14 @@ var SearchBar = React.createClass({
       });
     }
   },
-  goToFirstResult: function(event) {
+  submitSearch: function(event) {
+    if (event.keyCode === 13) {
+      this.goToFirstResult();
+    }
+  },
+  goToFirstResult: function() {
     var firstResult = this.state.results[0];
-    if (event.keyCode === 13 && firstResult) {
+    if (firstResult) {
       window.location.href = firstResult.props.path;
     }
   },
@@ -49,8 +54,8 @@ var SearchBar = React.createClass({
         type: 'text',
         value: this.state.value,
         placeholder: this.props.placeholder,
-        onChange: this.submitInput,
-        onKeyUp: this.goToFirstResult
+        onChange: this.updateSearch,
+        onKeyUp: this.submitSearch
       }
     );
 
