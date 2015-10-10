@@ -68,6 +68,7 @@ class ApplicationController < ActionController::Base
         procs[:results].call(input).each_with_index do |result, i|
           output.push({
             key: "#{input}-#{search_for}-#{field}-result-#{i}",
+            input: input,
             path: instance_exec(result, &procs[:path]),
             display: procs[:display].call(result, input)
           })
