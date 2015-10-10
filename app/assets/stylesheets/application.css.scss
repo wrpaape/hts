@@ -12,23 +12,20 @@ $c-btn-bg2: #588F15;
 $f-main: 'Ropa Sans', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
 
-@mixin trans-all {
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-}
-@mixin fine-border($r, $c) {
+@mixin round-corners($r) {
   -moz-border-radius-topleft: $r;
   -moz-border-radius-bottomright: $r;
   -webkit-border-top-left-radius: $r;
   -webkit-border-bottom-right-radius: $r;
+}
+@mixin fine-border($c) {
   $c-l: lighten($c, 10%);
   $c-d: darken($c, 10%);
   border-color: $c-l $c-l $c-d $c-d;
 }
 @mixin text-field {
-  @include fine-border(10px, $c-btn-bg1);
+  @include round-corners(10px);
+  @include fine-border($c-btn-bg1); 
   outline: none;
   color: $c-btn-txt1;
   background-color: $c-btn-bg1;
@@ -36,11 +33,13 @@ $f-logo: 'Bowlby One SC', cursive;
   font-size: 18px;
   padding: 5px;
   &:focus {
-    outline: none;
+    -webkit-box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
+    -moz-box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
+    box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
   }
 }
 @mixin btn($r, $c-txt, $c-bg) {
-  @include fine-border($r, $c-bg);
+  @include round-corners($r);
   color: $c-txt;
   background-color: $c-bg;
   cursor: pointer;
@@ -48,6 +47,7 @@ $f-logo: 'Bowlby One SC', cursive;
     background-color: lighten($c-bg, 10%);
   }
   &:active {
+    // -webkite-filter: invert(100%);
     color: lighten($c-txt, 10%);
     background-color: lighten($c-bg, 10%);
   }
@@ -71,19 +71,30 @@ img {
 }
 #search-bar {
   display: inline-block;
-  input {
-    @include text-field;
-  }
-  // ul{
-    // margin: 0;
-    // padding: 0;
-  // }
-  li {
-    display: block;
-    margin: 0.5em 0;
+  & > div {
+    position: relative;
+    width: 200px;
+    input {
+      @include text-field;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    & > img {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      right: 0;
+      content: url("icons/search.png");
+      &:hover {
+        -webkit-filter: invert(100%);
+        filter: invert(100%);
+      }
+    }
   }
   a {
+    @include btn(10px, $c-btn-txt1, $c-btn-bg1);
     display: block;
-    @include btn(5px, $c-btn-txt1, $c-btn-bg1);
+    padding: 5px;
+    margin: 5px 0;
   }
 }

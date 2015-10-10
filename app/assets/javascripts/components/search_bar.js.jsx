@@ -47,7 +47,6 @@ var SearchBar = React.createClass({
       'input',
       {
         type: 'text',
-        size: '20',
         value: this.state.value,
         placeholder: this.props.placeholder,
         onChange: this.submitInput,
@@ -57,10 +56,11 @@ var SearchBar = React.createClass({
 
     return(
       <div id='search-bar'>
-        { input }
-        <ul>
-          { this.state.results }
-        </ul>
+        <div>
+          { input }
+          <img onClick={ this.goToFirstResult } />
+        </div>
+        { this.state.results }
       </div>
     );
   }
