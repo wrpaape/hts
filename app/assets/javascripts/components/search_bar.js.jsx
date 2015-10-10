@@ -13,7 +13,7 @@ var SearchBar = React.createClass({
       value: nextProps.value
     });
   },
-  updateValue: function(event) {
+  submitInput: function(event) {
     var newValue = event.target.value;
     if (newValue.length) {
       ajax.get(this.props.url,
@@ -36,20 +36,12 @@ var SearchBar = React.createClass({
       });
     }
   },
-  // submitValue: function(event) {
-  //   if (event.keyCode === 13) {
-  //     ajax.get(
-  //       this.props.url,
-  //       { input: this.state.value },
-  //       function(output) {
-  //         output.map(function(result) {
-
-  //         })
-  //       },
-  //       true
-  //     );
-  //   }
-  // },
+  goToFirstResult: function(event) {
+    var firstResult = this.state.results[0];
+    if (event.keyCode === 13 && firstResult) {
+      window.location.href = firstResult.props.path;
+    }
+  },
   render: function() {
     var input = React.createElement(
       'input',
@@ -58,13 +50,13 @@ var SearchBar = React.createClass({
         size: '20',
         value: this.state.value,
         placeholder: this.props.placeholder,
-        onChange: this.updateValue,
-        onKeyUp: this.submitValue
+        onChange: this.submitInput,
+        onKeyUp: this.goToFirstResult
       }
     );
 
     return(
-      <div>
+      <div id='search-bar'>
         { input }
         <ul>
           { this.state.results }

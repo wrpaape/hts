@@ -1,23 +1,89 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 
+$c-bg-main: white;
+$c-logo-blue: #0062A7;
+$c-btn-txt1: white;
+$c-btn-bg1: #0062A7;
+$c-btn-txt2: white;
+$c-btn-bg2: #588F15;
+$f-main: 'Ropa Sans', sans-serif;
+$f-logo: 'Bowlby One SC', cursive;
+
+@mixin trans-all {
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+}
+@mixin fine-border($r, $c) {
+  -moz-border-radius-topleft: $r;
+  -moz-border-radius-bottomright: $r;
+  -webkit-border-top-left-radius: $r;
+  -webkit-border-bottom-right-radius: $r;
+  $c-l: lighten($c, 10%);
+  $c-d: darken($c, 10%);
+  border-color: $c-l $c-l $c-d $c-d;
+}
+@mixin text-field {
+  @include fine-border(10px, $c-btn-bg1);
+  outline: none;
+  color: $c-btn-txt1;
+  background-color: $c-btn-bg1;
+  font-family: $f-main;
+  font-size: 18px;
+  padding: 5px;
+  &:focus {
+    outline: none;
+  }
+}
+@mixin btn($r, $c-txt, $c-bg) {
+  @include fine-border($r, $c-bg);
+  color: $c-txt;
+  background-color: $c-bg;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten($c-bg, 10%);
+  }
+  &:active {
+    color: lighten($c-txt, 10%);
+    background-color: lighten($c-bg, 10%);
+  }
+}
+
+body {
+  background-color: $c-bg-main;
+  font-family: $f-main;
+}
+a {
+  text-decoration: none;
+}
 img {
   max-width: 100px;
 }
 
-a {
-  display: block;
+.header {
+  // img {
+    // max-height: 100%
+  // }
+}
+#search-bar {
+  display: inline-block;
+  input {
+    @include text-field;
+  }
+  // ul{
+    // margin: 0;
+    // padding: 0;
+  // }
+  li {
+    display: block;
+    margin: 0.5em 0;
+  }
+  a {
+    display: block;
+    @include btn(5px, $c-btn-txt1, $c-btn-bg1);
+  }
 }
