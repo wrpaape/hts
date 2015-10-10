@@ -9,7 +9,7 @@ $c-btn-txt1: white;
 $c-btn-bg1: #0062A7;
 $c-btn-txt2: white;
 $c-btn-bg2: #588F15;
-$f-main: 'Ropa Sans', sans-serif;
+$f-main: 'Exo', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
 
 @mixin round-corners($r) {
@@ -52,6 +52,13 @@ $f-logo: 'Bowlby One SC', cursive;
     background-color: lighten($c-bg, 10%);
   }
 }
+@mixin white-wash {
+  filter: brightness(5000%);
+  -webkit-filter: brightness(5000%);
+  -moz-filter: brightness(5000%);
+  -o-filter: brightness(5000%);
+  -ms-filter: brightness(5000%);
+}
 
 body {
   background-color: $c-bg-main;
@@ -77,17 +84,21 @@ img {
     input {
       @include text-field;
       width: 100%;
+      padding-right: 36px;
       box-sizing: border-box;
     }
-    & > img {
+    & > span{
       position: absolute;
-      height: 100%;
       top: 0;
       right: 0;
-      content: url("icons/search.png");
-      &:hover {
-        -webkit-filter: invert(100%);
-        filter: invert(100%);
+      bottom: 0;
+      img {
+        margin: 9px;
+        cursor: pointer;
+        content: url("icons/search.png");
+        &:hover {
+          @include white-wash;
+        }
       }
     }
   }

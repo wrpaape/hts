@@ -58,7 +58,9 @@ var SearchBar = React.createClass({
       <div id='search-bar'>
         <div>
           { input }
-          <img onClick={ this.goToFirstResult } />
+          <span>
+            <img onClick={ this.goToFirstResult } />
+          </span>
         </div>
         { this.state.results }
       </div>
