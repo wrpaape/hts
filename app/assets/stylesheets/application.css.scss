@@ -66,7 +66,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
 @mixin color-block($c) {
-  position: relative;
+  position: absolute;
   content: "";
   z-index: -1;
   display: inline-block;
@@ -76,13 +76,13 @@ $m-ds: drop-shadow(1px 1px 1px black);
 }
 @mixin before-block($c) {
   @include color-block($c);
-  bottom: -55px;
-  left: -112px;
+  top: 25px;
+  left: -50%;
 }
 @mixin after-block($c) {
   @include color-block($c);
-  // bottom: -55px;
-  // right: 225px;
+  top: 0;
+  left: 100%;
 }
 @mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
@@ -132,6 +132,7 @@ img {
   /* foo */
 }
 .nav-btns, .search-bar {
+  position: relative;
   display: inline-block;
   vertical-align: top;
 }
@@ -185,6 +186,12 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
+  & > :first-child > :first-child {
+    @include border-radii(0 0 50% 0 / 0 0 50% 0);
+  }
+  input {
+    @include border-radii(50% 0 0 0 / 50% 0 0 0);
+  }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
