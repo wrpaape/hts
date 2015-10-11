@@ -1,8 +1,8 @@
 class MainController < ApplicationController
   def index
-		@goods = Good.all_main_index
-		@mods = Mod.all_main_index
-		@members = Member.all.as_json
+		# @goods = Good.all_main_index
+		# @mods = Mod.all_main_index
+		# @members = Member.all.as_json
     @url = search_path
     @placeholder = "search everything"
 	end
