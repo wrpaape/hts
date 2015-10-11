@@ -3,11 +3,13 @@
 one:
   key: MyString
   name: MyString
+  path: MyString
   title: MyString
   bio: MyText
 
 two:
   key: MyString
   name: MyString
+  path: MyString
   title: MyString
   bio: MyText

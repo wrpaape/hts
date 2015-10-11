@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :type
       t.string :category
       t.string :name
+      t.string :path
       t.text :info
 
       t.timestamps null: false

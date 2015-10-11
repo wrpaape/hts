@@ -1,9 +1,11 @@
 class Product < ActiveRecord::Base
-  include HasAllAssets
+  include AddShowPath, HasAllAssets
 
   has_many :specs, as: :parent
 
-  def self.all_main_index
-    all.map { |product| Hash[product.key, product.name] }
+  private
+
+  def add_show_path
+    update(path: eval("#{category.singularize}_path(#{id})"))
   end
 end

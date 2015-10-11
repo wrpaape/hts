@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20151007230811) do
   create_table "members", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
+    t.string   "path"
     t.string   "title"
     t.text     "bio"
     t.datetime "created_at", null: false
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.string   "type"
     t.string   "category"
     t.string   "name"
+    t.string   "path"
     t.text     "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
