@@ -1,7 +1,7 @@
 /* globals React */
 'use strict';
 
-var NavBtnSub = React.createClass({
+var SearchResult = React.createClass({
   getInitialState: function() {
     return({
       hovered: false,
@@ -14,10 +14,6 @@ var NavBtnSub = React.createClass({
       return React.createElement(i % 2 ? 'strong' : 'span', { key: i }, sec);
     });
 
-    return(
-      <a href={ this.props.path }>
-        { display }
-      </a>
-    );
+    return <NavBtn path={ this.props.path } display={ display } />;
   }
 });

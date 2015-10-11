@@ -20,7 +20,7 @@ var SearchBar = React.createClass({
         { input: newValue },
         function(output) {
           var results = JSON.parse(output).map(function(result) {
-            return React.createElement(window.NavBtnSub, result);
+            return React.createElement(window.SearchResult, result);
           });
 
           this.setState({
@@ -60,7 +60,7 @@ var SearchBar = React.createClass({
     );
 
     return(
-      <div id='search-bar'>
+      <div className='search-bar'>
         <div>
           { input }
           <span>

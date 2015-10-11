@@ -1,7 +1,7 @@
 /* globals React */
 'use strict';
 
-var NavBtnHead = React.createClass({
+var NavBtn = React.createClass({
   getInitialState: function() {
     return({
       hovered: false,
@@ -9,6 +9,6 @@ var NavBtnHead = React.createClass({
     });
   },
   render: function() {
-    return <div />;
+    return <a href={ this.props.path }>{ this.props.display }</a>;
   }
 });

@@ -3,6 +3,38 @@
  *= require_self
  */
 
+// ************************************
+// ▼▼▼▼▼▼▼ VENDOR PREFIX MIXINS ▼▼▼▼▼▼▼
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  -ms-box-sizing: $val;
+  -o-box-sizing: $val;
+  box-sizing: $val;
+}
+@mixin filters($filters) { 
+  -webkit-filter: $filters;
+  -moz-filter: $filters;
+  -ms-filter: $filters;
+  -o-filter: $filters;
+  filter: $filters;
+}
+@mixin border-radii($rs) {
+  -webkit-border-radius: $rs;
+  -moz-border-radius: $rs;
+  -ms-border-radius: $rs;
+  -o-border-radius: $rs;
+  border-radius: $rs;
+}
+// ▲▲▲▲▲▲▲ VENDOR PREFIX MIXINS ▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼ VARIABLES ▼▼▼▼▼▼▼▼▼▼▼▼
 $c-bg-main: white;
 $c-logo-blue: #0062A7;
 $c-btn-txt1: white;
@@ -13,37 +45,30 @@ $f-main: 'Exo', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
 $m-ww: brightness(5000%);
 $m-ds: drop-shadow(1px 1px 1px black);
-
+// ▲▲▲▲▲▲▲▲▲▲▲▲ VARIABLES ▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
 @mixin round-corners($r) {
-  -moz-border-radius-topleft: $r;
-  -moz-border-radius-bottomright: $r;
-  -webkit-border-top-left-radius: $r;
-  -webkit-border-bottom-right-radius: $r;
+  @include border-radii($r 0);
 }
 @mixin fine-border($c) {
   $c-l: lighten($c, 10%);
   $c-d: darken($c, 10%);
   border-color: $c-l $c-l $c-d $c-d;
 }
-@mixin text-field {
+@mixin nav-btn {
+  @include box-sizing(border-box);
   @include round-corners(10px);
-  @include fine-border($c-btn-bg1); 
-  outline: none;
+  width: 200px;
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 5px;
   color: $c-btn-txt1;
   background-color: $c-btn-bg1;
   font-family: $f-main;
-  font-size: 18px;
-  padding: 5px;
-  &:focus {
-    -webkit-box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
-    -moz-box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
-    box-shadow: inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2);
-  }
 }
-@mixin btn($r, $c-txt, $c-bg) {
-  @include round-corners($r);
-  color: $c-txt;
-  background-color: $c-bg;
+@mixin btn($c-bg) {
   cursor: pointer;
   &:hover {
     background-color: lighten($c-bg, 10%);
@@ -52,50 +77,56 @@ $m-ds: drop-shadow(1px 1px 1px black);
     text-shadow: 1px 1px 1px black;
   }
 }
-@mixin filters($filters) { 
-  -webkit-filter: $filters;
-  -moz-filter: $filters;
-  -ms-filter: $filters;
-  -o-filter: $filters;
-  filter: $filters;
-}
-
+// ▲▲▲▲▲▲▲▲▲ CUSTOM MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼ TAGS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 body {
   background-color: $c-bg-main;
   font-family: $f-main;
 }
 a {
+  @include nav-btn;
+  @include btn($c-btn-bg1);
+  line-height: 26px;
+  display: block;
   text-decoration: none;
 }
 img {
   max-width: 100px;
 }
-
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 .header {
   // img {
     // max-height: 100%
   // }
 }
-#search-bar {
+
+.search-bar {
   display: inline-block;
   & > div {
     position: relative;
-    width: 200px;
     & > input {
-      @include text-field;
-      width: 100%;
+      @include nav-btn;
+      @include fine-border($c-btn-bg1); 
       padding-right: 36px;
-      box-sizing: border-box;
+      outline: none;
+      &:focus {
+        @include box-shadow(inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2));
+      }
     }
     & > span{
       position: absolute;
       top: 0;
       right: 0;
-      bottom: 0;
+      bottom: 5px;
+      padding: 9px;
       button {
         width: 20px;
         height: 20px;
-        margin: 9px;
         border: 0;
         outline: none;
         cursor: pointer;
@@ -110,10 +141,6 @@ img {
       }
     }
   }
-  a {
-    @include btn(10px, $c-btn-txt1, $c-btn-bg1);
-    display: block;
-    padding: 5px;
-    margin: 5px 0;
-  }
 }
+// ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************

@@ -1,5 +1,4 @@
 class ActiveRecord::Base
-  include Rails.application.routes.url_helpers
   before_create :set_key, :strip_newlines
 
   def self.fuzzy(field, input)

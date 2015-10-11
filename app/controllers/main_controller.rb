@@ -1,10 +1,28 @@
 class MainController < ApplicationController
   def index
-		# @goods = Good.all_main_index
-		# @mods = Mod.all_main_index
-		# @members = Member.all.as_json
-    @url = search_path
-    @placeholder = "search everything"
+    @nav_bar_props = {
+      navBtnsAll: [
+        {
+          key: "goods",
+          keyHead: "goods-index",
+          path: products_path,
+          display: "Products",
+          navBtns: Good.all_nav_props
+        },
+        {
+          key: "mods",
+          keyHead: "mods-index",
+          path: modifications_path,
+          display: "Modifications",
+          navBtns: Mod.all_nav_props
+        }
+      ],
+      searchBar: {
+        key: "search-bar-main",
+        url: search_path,
+        placeholder: "search everything"
+      }
+    }
 	end
 
   def search
