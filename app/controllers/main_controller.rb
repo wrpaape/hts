@@ -18,7 +18,7 @@ class MainController < ApplicationController
         }
       ],
       searchBar: {
-        key: "search-bar-main",
+        key: "search-bar",
         url: search_path,
         placeholder: "search everything"
       }
