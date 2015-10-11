@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   ALL = {
     products: {
       name: {
-        results: Proc.new { |input| Product.fuzzy(:name, input).pluck(:path_show, :name) },
+        results: Proc.new { |input| Product.where("name ~* ?", input).pluck(:path_show, :name) },
         display: Proc.new { |result| result[1] }
       },
       category: {
@@ -16,23 +16,23 @@ class ApplicationController < ActionController::Base
         display: Proc.new { |result| result[1] }
       },
       info: {
-        results: Proc.new { |input| Product.fuzzy(:info, input).pluck(:path_show, :info, :name) },
-        display: Proc.new { |result, input| "...#{result[1][Regexp.new("\\w*\\s*\\w*#{input}\\w*\\s*\\w*", "i")]}... (#{result[2]})" }
+        results: Proc.new { |input| Product.where("info ~* ?", input).pluck(:path_show, :info, :name) },
+        display: Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓(#{result[2]})" }
       }
     },
     members: {
       name: {
-        results: Proc.new { |input| Member.fuzzy(:name, input).pluck(:path_show, :name, :title) },
+        results: Proc.new { |input| Member.where("name ~* ?", input).pluck(:path_show, :name, :title) },
         display: Proc.new { |result| "#{result[1]} (#{result[2]})" }
       },
       title: {
-        results: Proc.new { |input| Member.fuzzy(:title, input).pluck(:path_show, :title, :name) },
+        results: Proc.new { |input| Member.where("title ~* ?", input).pluck(:path_show, :title, :name) },
         display: Proc.new { |result| "#{result[1]} (#{result[2]})" }
       }
     },
     pdfs: {
       filename: {
-        results: Proc.new { |input| Pdf.fuzzy(:filename, input).pluck(:path_alt, :filename) },
+        results: Proc.new { |input| Pdf.where("filename ~* ?", input).pluck(:path_alt, :filename) },
         display: Proc.new { |result| result[1] }
       }
     }

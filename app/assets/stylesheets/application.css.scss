@@ -51,24 +51,22 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
-@mixin round-corners($r) {
-  @include border-radii($r 0);
-}
 @mixin fine-border($c) {
   $c-l: lighten($c, 10%);
   $c-d: darken($c, 10%);
-  border-color: $c-l $c-l $c-d $c-d;
+  border-color: $c-l $c-d $c-d $c-l;
 }
 @mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
-  @include round-corners(10px);
-  width: 200px;
+  @include border-radii(20px 0 / 40px 0);
+  width: 225px;
   font-size: 18px;
   line-height: 24px;
-  padding: 5px;
+  padding: 5px 10px;
   margin: 0 5px 5px 0;
   color: $c-txt;
   background-color: $c-bg;
+  border-color: $c-bg;
   font-family: $f-main;
 }
 @mixin btn($c-bg) {
@@ -91,9 +89,12 @@ body {
 a {
   @include nav-btn($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
-  border: 2px solid;
   display: block;
   text-decoration: none;
+}
+a, input {
+  border-width: 6px;
+  border-style: solid;
 }
 img {
   max-width: 100px;
@@ -126,9 +127,9 @@ img {
   & > span{
     position: absolute;
     top: 0;
-    right: 5px;
+    right: 10px;
     bottom: 5px;
-    padding: 9px;
+    padding: 14px;
     button {
       width: 20px;
       height: 20px;

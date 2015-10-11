@@ -4,8 +4,7 @@
 var NavBtns= React.createClass({
   getInitialState: function() {
     return({
-      hovered: false,
-      selected: false
+      hovered: false
     });
   },
   render: function() {
