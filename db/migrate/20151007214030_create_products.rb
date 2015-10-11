@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :type
       t.string :category
       t.string :name
-      t.string :path
+      t.string :path_show
       t.text :info
 
       t.timestamps null: false

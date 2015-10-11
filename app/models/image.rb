@@ -1,19 +1,17 @@
 class Image < Asset
-  before_create :set_default, unless: :default
-
   private
 
-  def set_default
+  def add_path
     regex =
     case parent_type
       when "Product", "Spec" then /(?<=\/).*/
       else /[^\/]+\/$/
     end
 
-    self.default = path.sub(regex, "default.png")
+    update(path_alt: path_file.sub(regex, "default.png"))
   end
 
-  def build_path(steps)
-    self.path = steps
+  def set_path_file(steps)
+    self.path_file = steps
   end
 end

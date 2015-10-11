@@ -1,5 +1,5 @@
 class Member < ActiveRecord::Base
-  include AddImage, AddShowPath
+  include AddImage, AddPath
 
   has_many :contacts
   has_one :headshot, as: :parent, class_name: "Image"
@@ -10,7 +10,7 @@ class Member < ActiveRecord::Base
     "headshot.jpg"
   end
 
-  def add_show_path
-    update(path: member_path(id))
+  def add_path
+    update(path_show: member_path(id))
   end
 end

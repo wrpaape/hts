@@ -4,12 +4,12 @@
 var Image = React.createClass({
   getInitialState: function() {
     return({
-      srcRaw: this.props.path + this.props.filename
+      srcRaw: this.props.path_file + this.props.filename
     });
   },
   setDefault: function() {
     this.setState({
-      srcRaw: this.props.default
+      srcRaw: this.props.path_alt
     });
   },
   render: function() {

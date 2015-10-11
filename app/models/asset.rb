@@ -1,5 +1,7 @@
 class Asset < ActiveRecord::Base
-  before_create :set_filename, :set_path
+  include AddPath
+
+  before_create :set_filename, :build_path_file
   belongs_to :parent, polymorphic: true
 
   private
@@ -9,7 +11,7 @@ class Asset < ActiveRecord::Base
     filename.prepend("#{prefix.downcase.gsub(/\s/, "_")}-") if prefix
   end
 
-  def set_path
+  def build_path_file
     steps = ""
     ancestor = self
     while ancestor.respond_to?(:parent)
@@ -25,6 +27,6 @@ class Asset < ActiveRecord::Base
       steps.prepend("#{ancestor.to_s.underscore.pluralize}/")
     end
     
-    build_path(steps)
+    set_path_file(steps)
   end
 end

@@ -5,7 +5,7 @@ one:
   type: MyString
   category: MyString
   name: MyString
-  path: MyString
+  path_show: MyString
   info: MyText
 
 two:
@@ -13,5 +13,5 @@ two:
   type: MyString
   category: MyString
   name: MyString
-  path: MyString
+  path_show: MyString
   info: MyText

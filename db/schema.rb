@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.string   "key"
     t.string   "type"
     t.string   "filename"
-    t.string   "path"
-    t.string   "default"
+    t.string   "path_file"
+    t.string   "path_alt"
     t.string   "parent_type"
     t.integer  "parent_id"
     t.datetime "created_at",  null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20151007230811) do
   create_table "members", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
-    t.string   "path"
+    t.string   "path_show"
     t.string   "title"
     t.text     "bio"
     t.datetime "created_at", null: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.string   "type"
     t.string   "category"
     t.string   "name"
-    t.string   "path"
+    t.string   "path_show"
     t.text     "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

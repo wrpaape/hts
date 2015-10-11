@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   ALL = {
     products: {
       name: {
-        results: Proc.new { |input| Product.fuzzy(:name, input).pluck(:category, :id, :name) },
-        path: Proc.new { |result| eval("#{result[0].singularize}_path(#{result[1]})") },
-        display: Proc.new { |result| result[2] }
+        results: Proc.new { |input| Product.fuzzy(:name, input).pluck(:path, :name) },
+        path: Proc.new { |result| result[0] },
+        display: Proc.new { |result| result[1] }
       },
       category: {
         results: Proc.new { |input| %w(products modifications).grep(Regexp.new(input, "i")) },
@@ -18,20 +18,20 @@ class ApplicationController < ActionController::Base
         display: Proc.new { |result| result }
       },
       info: {
-        results: Proc.new { |input| Product.fuzzy(:info, input).pluck(:category, :id, :info, :name) },
-        path: Proc.new { |result| eval("#{result[0].singularize}_path(#{result[1]})") },
-        display: Proc.new { |result, input| "...#{result[2][Regexp.new("\\w*\\s*\\w*#{input}\\w*\\s*\\w*", "i")]}... (#{result[3]})" }
+        results: Proc.new { |input| Product.fuzzy(:info, input).pluck(:link, :info, :name) },
+        path: Proc.new { |result| result[0] },
+        display: Proc.new { |result, input| "...#{result[1][Regexp.new("\\w*\\s*\\w*#{input}\\w*\\s*\\w*", "i")]}... (#{result[2]})" }
       }
     },
     members: {
       name: {
-        results: Proc.new { |input| Member.fuzzy(:name, input).pluck(:id, :name, :title) },
-        path: Proc.new { |result| member_path(result[0]) },
+        results: Proc.new { |input| Member.fuzzy(:name, input).pluck(:path, :name, :title) },
+        path: Proc.new { |result| result[0] },
         display: Proc.new { |result| "#{result[1]} (#{result[2]})" }
       },
       title: {
-        results: Proc.new { |input| Member.fuzzy(:title, input).pluck(:id, :title, :name) },
-        path: Proc.new { |result| member_path(result[0]) },
+        results: Proc.new { |input| Member.fuzzy(:title, input).pluck(:path, :title, :name) },
+        path: Proc.new { |result| result[0] },
         display: Proc.new { |result| "#{result[1]} (#{result[2]})" }
       }
     },
