@@ -11,7 +11,7 @@ var SearchResult = React.createClass({
   render: function() {
     var regexp = new RegExp('(' + this.props.input + ')', 'i');
     var display = this.props.display.split(regexp).map(function(sec, i) {
-      return React.createElement(i % 2 ? 'strong' : 'span', { key: i }, sec);
+      return React.createElement(i % 2 ? 'strong' : 'span', { key: i }, sec.replace(/-|_/g,'$&\u200b'));
     });
 
     return <NavBtn path={ this.props.path } display={ display } />;

@@ -59,16 +59,16 @@ $m-ds: drop-shadow(1px 1px 1px black);
   $c-d: darken($c, 10%);
   border-color: $c-l $c-l $c-d $c-d;
 }
-@mixin nav-btn {
+@mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include round-corners(10px);
   width: 200px;
   font-size: 18px;
   line-height: 24px;
   padding: 5px;
-  margin-bottom: 5px;
-  color: $c-btn-txt1;
-  background-color: $c-btn-bg1;
+  margin: 0 5px 5px 0;
+  color: $c-txt;
+  background-color: $c-bg;
   font-family: $f-main;
 }
 @mixin btn($c-bg) {
@@ -89,9 +89,9 @@ body {
   font-family: $f-main;
 }
 a {
-  @include nav-btn;
+  @include nav-btn($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
-  line-height: 26px;
+  border: 2px solid;
   display: block;
   text-decoration: none;
 }
@@ -105,39 +105,43 @@ img {
 .header {
   /* foo */
 }
-.search-bar {
+.nav-btns, .search-bar {
   display: inline-block;
-  & > div {
-    position: relative;
-    & > input {
-      @include nav-btn;
-      @include fine-border($c-btn-bg1); 
-      padding-right: 36px;
-      outline: none;
-      &:focus {
-        @include box-shadow(inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2));
-      }
+  vertical-align: top;
+}
+.nav-btns > :first-child {
+  @include fine-border($c-btn-bg1);
+}
+.search-bar > div {
+  position: relative;
+  & > input {
+    @include nav-btn($c-btn-txt2, $c-btn-bg2);
+    @include fine-border($c-btn-bg2); 
+    padding-right: 36px;
+    outline: none;
+    &:focus {
+      @include box-shadow(inset 0px 0px 10px 5px rgba($c-btn-txt1, 0.2));
     }
-    & > span{
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 5px;
-      padding: 9px;
-      button {
-        width: 20px;
-        height: 20px;
-        border: 0;
-        outline: none;
-        cursor: pointer;
-        background-color: transparent;
-        background-image: url(icons/search.png);
-        &:hover {
-          @include filters($m-ww)
-        }
-        &:active {
-          @include filters($m-ww $m-ds);
-        }
+  }
+  & > span{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    bottom: 5px;
+    padding: 9px;
+    button {
+      width: 20px;
+      height: 20px;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      background-color: transparent;
+      background-image: url(icons/search.png);
+      &:hover {
+        @include filters($m-ww)
+      }
+      &:active {
+        @include filters($m-ww $m-ds);
       }
     }
   }

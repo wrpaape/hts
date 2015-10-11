@@ -9,15 +9,22 @@ var NavBtns= React.createClass({
     });
   },
   render: function() {
-    var navBtns = this.props.navBtns.map(function(props) {
-      return React.createElement(window.NavBtn, props);
-    });
-    navBtns.unshift(React.createElement(window.NavBtn, {
+    var toggleHovered = this.props.toggleState.bind(this, 'hovered');
+    var navBtns = [React.createElement(window.NavBtn, {
       key: this.props.keyHead,
       path: this.props.path,
-      display: this.props.display,
-    }));
+      display: this.props.display
+    })];
+    if (this.state.hovered) {
+      navBtns.push(this.props.navBtns.map(function(props) {
+        return React.createElement(window.NavBtn, props);
+      }));
+    }
 
-    return <div className='nav-btns'>{ navBtns }</div>;
+    return React.createElement('div', {
+      className: 'nav-btns',
+      onMouseEnter: toggleHovered,
+      onMouseLeave: toggleHovered
+    }, navBtns);
   }
 });
