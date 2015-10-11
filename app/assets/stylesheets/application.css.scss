@@ -8,6 +8,8 @@
 @mixin box-shadow($args) {
   -webkit-box-shadow: $args;
   -moz-box-shadow: $args;
+  -ms-box-shadow: $args;
+  -o-box-shadow: $args;
   box-shadow: $args;
 }
 @mixin box-sizing($val) {
@@ -62,6 +64,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
   @include round-corners(10px);
   width: 200px;
   font-size: 18px;
+  line-height: 24px;
   padding: 5px;
   margin-bottom: 5px;
   color: $c-btn-txt1;
@@ -100,11 +103,8 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 .header {
-  // img {
-    // max-height: 100%
-  // }
+  /* foo */
 }
-
 .search-bar {
   display: inline-block;
   & > div {

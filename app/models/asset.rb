@@ -8,7 +8,7 @@ class Asset < ActiveRecord::Base
 
   def set_filename
     prefix = parent.try(:name) || parent.try(:title)
-    filename.prepend("#{prefix.downcase.gsub(/\s/, "_")}-") if prefix
+    filename.prepend("#{prefix.downcase.gsub(/\s/, "_\u200B")}-\u200B") if prefix
   end
 
   def build_path_file
