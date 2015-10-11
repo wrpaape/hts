@@ -65,22 +65,22 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
-@mixin color-block($h, $c) {
+@mixin color-block($c) {
   position: absolute;
   content: "";
   z-index: -1;
   display: inline-block;
   width: 50%;
-  height: $h;
+  height: 50%;
   background-color: $c;
 }
-@mixin before-block($h, $c) {
-  @include color-block($h, $c);
-  top: $h;
+@mixin before-block($c) {
+  @include color-block($c);
+  bottom: 0;
   left: -50%;
 }
-@mixin after-block($h, $c) {
-  @include color-block($h, $c);
+@mixin after-block($c) {
+  @include color-block($c);
   top: 0;
   left: 100%;
 }
@@ -101,9 +101,6 @@ $m-ds: drop-shadow(1px 1px 1px black);
 }
 @mixin btn($c-bg) {
   cursor: pointer;
-  &:hover {
-    background-color: lighten($c-bg, 10%);
-  }
   &:active {
     text-shadow: 1px 1px 1px black;
   }
@@ -134,33 +131,38 @@ img {
   /* foo */
 }
 .nav-btns, .search-bar {
-  position: relative;
   display: inline-block;
   vertical-align: top;
 }
 .nav-btns {
-  &:not(:first-of-type) {
-    &:before {
-      @include before-block(24px, $c-btn-bg1);
-    }
-    &:hover:before {
-      background-color: lighten($c-btn-bg1, 10%);
-    }
+  .true {
+    background-color: lighten($c-btn-bg1, 10%);
   }
-  &:not(:last-of-type) {
-    &:after {
-      @include after-block(24px, $c-btn-bg1);
+  & > div {
+    position: relative;
+  }
+  &:not(:first-of-type) > div {
+    & > :first-child {
+      @include before-block($c-btn-bg1);
     }
-    &:hover:after {
-      background-color: lighten($c-btn-bg1, 10%);
+    // &:hover > :first-child {
+    //   background-color: lighten($c-btn-bg1, 10%);
+    // }
+  }
+  &:not(:last-of-type) > div {
+    & > :last-child {
+      @include after-block($c-btn-bg1);
     }
+    // &:hover:after {
+    //   background-color: lighten($c-btn-bg1, 10%);
+    // }
   }
 }
 
 .search-bar > div {
   position: relative;
   &:before {
-    @include before-block(50%, $c-btn-bg2);
+    @include before-block($c-btn-bg2);
   }
   &:hover > input, &:hover:before {
     background-color: lighten($c-btn-bg2, 10%);
