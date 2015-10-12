@@ -81,9 +81,9 @@ $m-ds: drop-shadow(1px 1px 1px black);
 }
 @mixin color-block($c) {
   @include hoverable($c);
+  // z-index: -1;
   position: absolute;
   display: inline-block;
-  overflow: hidden;
   width: 50%;
   height: 50%;
   background-color: $c;
@@ -92,9 +92,10 @@ $m-ds: drop-shadow(1px 1px 1px black);
   @include color-block($c);
   bottom: 0;
   left: -50%;
+  z-index: -1;
   &:before {
     @include none-block;
-    @include border-radii(0 0 100% 0 / 0 0 100% 0);
+    @include border-radii(0 0 120% 0 / 0 0 120% 0);
     bottom: 0;
   }
 }
@@ -110,7 +111,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
 }
 @mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
-  @include border-radii(50% 0 50% 0);
+  @include border-radii(60% 0 60% 0);
   width: 300px;
   font-size: 18px;
   line-height: 28px;
@@ -155,6 +156,7 @@ img {
   vertical-align: top;
 }
 .nav-btns {
+  margin-right: 10px;
   .nav-btn * {
     @include btn($c-btn-bg1);
     @include hoverable($c-btn-bg1);
@@ -215,11 +217,11 @@ img {
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
   & > :first-child > :first-child > a {
-    @include border-radii(0 0 50% 0 / 0 0 50% 0);
+    @include border-radii(0 0 60% 0 / 0 0 60% 0);
     // z-index: 1;
   }
   input {
-    @include border-radii(50% 0 0 0 / 50% 0 0 0);
+    @include border-radii(60% 0 0 0 / 60% 0 0 0);
     // z-index: 1;
   }
   & > div > :not(:first-child) {
@@ -232,3 +234,21 @@ img {
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
+
+
+
+// div {
+//   display: inline-block;
+//   background-color: green;
+//   &:nth-of-type(3n - 2) {
+//     color: orange;
+//     width: 100px;
+//     height: 20px;
+//   }
+// }
+
+
+
+
+
+
