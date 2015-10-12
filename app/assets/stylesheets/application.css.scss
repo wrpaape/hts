@@ -65,53 +65,29 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
-@mixin hoverable($c) {
-  &.true {
-    background-color: lighten($c, 10%);
-  }
-}
-@mixin none-block {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: white;
-  cursor: default;
-}
 @mixin color-block($c) {
-  @include hoverable($c);
   // z-index: -1;
+  content: "";
   position: absolute;
-  display: inline-block;
   width: 50%;
   height: 50%;
-  background-color: $c;
+  background-color: red;
 }
-@mixin before-block($c) {
-  @include color-block($c);
-  bottom: 0;
-  left: -50%;
-  z-index: -1;
+@mixin top-block {
   &:before {
-    @include none-block;
-    @include border-radii(0 0 120% 0 / 0 0 120% 0);
-    bottom: 0;
+    @include color-block($c-btn-bg1);
+    top: -50%;
+    right: 0;
   }
 }
-@mixin after-block($c) {
-  @include color-block($c);
-  top: 0;
-  left: 100%;
-  &:after {
-    @include none-block;
-    @include border-radii(100% 0 0 0 / 100% 0 0 0);
-    top: 0;
-  }
+@mixin bot-block {
+  @include color-block($c-btn-bg1);
+  bottom: -50%;
+  left: 0;
 }
-@mixin nav-btn($c-txt, $c-bg) {
+@mixin tes-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
-  @include border-radii(60% 0 60% 0);
+  @include border-radii(60% 0);
   width: 300px;
   font-size: 18px;
   line-height: 28px;
@@ -135,12 +111,7 @@ body {
   background-color: $c-bg-main;
   font-family: $f-main;
 }
-a {
-  @include nav-btn($c-btn-txt1, $c-btn-bg1);
-  display: block;
-  padding: 10px 24px;
-  text-decoration: none;
-}
+
 img {
   max-width: 100px;
 }
@@ -148,67 +119,51 @@ img {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-.header {
-  /* foo */
+.nav-btn:nth-of-type(odd) {
+  @include tes-block($c-btn-txt1, $c-btn-bg1);
+  @include btn($c-btn-bg1);
+  display: block;
+  position: relative;
+  padding: 10px 24px;
+  text-decoration: none;
 }
-.nav-btns, .search-bar {
+.nav-btns, .search-results {
   display: inline-block;
   vertical-align: top;
 }
+
 .nav-btns {
   margin-right: 10px;
-  .nav-btn * {
-    @include btn($c-btn-bg1);
-    @include hoverable($c-btn-bg1);
-  }
-  & > div {
-    position: relative;
-  }
-  &:not(:first-of-type) > div {
-    & > :first-child {
-      @include before-block($c-btn-bg1);
-    }
-  }
-  &:not(:last-of-type) > div {
-    & > :last-child {
-      @include after-block($c-btn-bg1);
-    }
+  &:first-of-type > .nav-btn:first-of-type {
+    @include border-radii(0 0 60% 0 / 0 0 60% 0);
   }
 }
 
-.search-bar > div {
+.search-bar {
+  @include border-radii(60% 0);
   position: relative;
-  & > div:first-of-type {
-    @include before-block($c-btn-bg2);
-    @include hoverable($c-btn-bg2);
-    cursor: text;
-  }
-  & > input {
-    @include nav-btn($c-btn-txt2, $c-btn-bg2);
-    @include hoverable($c-btn-bg2);
+  input {
+    @include tes-block($c-btn-txt2, $c-btn-bg2);
     height: 48px;
     padding: 5px 48px 5px 24px;
     outline: none; 
   }
-  & > span{
+  button {
     position: absolute;
-    right: 0;
+    width: 20px;
     height: 20px;
-    padding: 14px;
-    button {
-      width: 20px;
-      height: 20px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      background-color: transparent;
-      background-image: url(icons/search.png);
-      &:hover {
-        @include filters($m-ww)
-      }
-      &:active {
-        @include filters($m-ww $m-ds);
-      }
+    top: 25%;
+    right: 20%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url(icons/search.png);
+    &:hover {
+      @include filters($m-ww)
+    }
+    &:active {
+      @include filters($m-ww $m-ds);
     }
   }
 }
@@ -216,37 +171,17 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
-  & > :first-child > :first-child > a {
-    @include border-radii(0 0 60% 0 / 0 0 60% 0);
-    // z-index: 1;
+  .nav-btn:not(:first-child) {
+    @include top-block;
+    &:nth-of-type(even) {
+      @include bot-block;      
+    }
+    
+    // @include bottom-block;
   }
-  input {
-    @include border-radii(60% 0 0 0 / 60% 0 0 0);
-    // z-index: 1;
-  }
-  & > div > :not(:first-child) {
-    margin-top: 10px;
-  }
-  // .nav-btn > a, input {
-  //   @include border-radii(50%);
-  //   z-index: -1;
-  // }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
-
-
-
-// div {
-//   display: inline-block;
-//   background-color: green;
-//   &:nth-of-type(3n - 2) {
-//     color: orange;
-//     width: 100px;
-//     height: 20px;
-//   }
-// }
-
 
 
 

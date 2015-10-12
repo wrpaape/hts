@@ -5,9 +5,7 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return({
       value: '',
-      results: [],
-      hoveredInput: false,
-      hoveredBlock: false
+      results: []
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -21,11 +19,19 @@ var SearchBar = React.createClass({
       ajax.get(this.props.url,
         { input: newValue },
         function(output) {
-          var results = JSON.parse(output).map(function(result) {
-            result.toggleState = this.props.toggleState;
+          var rawResults = JSON.parse(output);
+          var results = rawResults.map(function(result, i) {
+            result.zIndex = rawResults.length - i - 1;
+            var tesBlock = React.createElement(window.SearchResult, result);
+            var botBlock = React.createElement(window.NavBtn, {
+              key: result.key + '-bot-block',
+              zIndex: result.zIndex - 1,
+              path: result.path,
+              display: ''
+            });
 
-            return React.createElement(window.SearchResult, result);
-          }.bind(this));
+            return [tesBlock, botBlock];
+          });
 
           this.setState({
             value: newValue,
@@ -51,48 +57,25 @@ var SearchBar = React.createClass({
       window.location.href = firstResult.props.path;
     }
   },
-  focusInput: function() {
-    this.refs.searchBar.getDOMNode().focus(); 
-  },
   render: function() {
-    var hovered = this.state.hoveredInput || this.state.hoveredBlock;
+    var results = this.state.results;
+    var input = React.createElement('input', {
+      style: { zIndex: results.length },
+      type: 'text',
+      value: this.state.value,
+      placeholder: this.props.placeholder,
+      onChange: this.updateSearch,
+      onKeyUp: this.submitSearch
+    }, React.createElement('button', { onClick: this.goToFirstResult }));
 
-    var toggleState = this.props.toggleState;
-    var toggleHoveredInput = toggleState.bind(this, 'hoveredInput');
-    var toggleHoveredBlock = toggleState.bind(this, 'hoveredBlock');
+    var searchBar = React.createElement('div', {
+      key: 'search-bar',
+      className: 'search-bar',
+      style: { zIndex : results.length }
+    }, input);
 
-    var input = React.createElement(
-      'input',
-      {
-        type: 'text',
-        ref: 'searchBar',
-        className: hovered,
-        value: this.state.value,
-        placeholder: this.props.placeholder,
-        onChange: this.updateSearch,
-        onKeyUp: this.submitSearch,
-        onMouseEnter: toggleHoveredInput,
-        onMouseLeave: toggleHoveredInput
-      }
-    );
-    var block = React.createElement('div', {
-      className: hovered,
-      onMouseEnter: toggleHoveredBlock,
-      onMouseLeave: toggleHoveredBlock,
-      onClick: this.focusInput
-    });
-
-    return(
-      <div className='search-bar'>
-        <div>
-          { block }
-          { input }
-          <span>
-            <button onClick={ this.goToFirstResult } />
-          </span>
-        </div>
-        { this.state.results }
-      </div>
-    );
+    return React.createElement('div', {
+      className: 'search-results'
+    }, [searchBar].concat(results));
   }
 });

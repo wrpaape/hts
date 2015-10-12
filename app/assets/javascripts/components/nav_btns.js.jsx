@@ -8,18 +8,14 @@ var NavBtns= React.createClass({
     });
   },
   render: function() {
-    var toggleState = this.props.toggleState;
-    var toggleHovered = toggleState.bind(this, 'hovered');
+    var toggleHovered = this.props.toggleState.bind(this, 'hovered');
     var navBtns = [React.createElement(window.NavBtn, {
       key: this.props.keyHead,
       path: this.props.path,
-      display: this.props.display,
-      toggleState: toggleState
+      display: this.props.display
     })];
     if (this.state.hovered) {
       navBtns.push(this.props.navBtns.map(function(props) {
-        props.toggleState = toggleState;
-
         return React.createElement(window.NavBtn, props);
       }));
     }

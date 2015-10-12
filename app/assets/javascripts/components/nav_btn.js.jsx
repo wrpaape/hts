@@ -2,40 +2,11 @@
 'use strict';
 
 var NavBtn = React.createClass({
-  getInitialState: function() {
-    return({
-      hoveredAnchor: false,
-      hoveredBlock: false
-    });
-  },
-  goToLink: function() {
-    window.location.href = this.props.path;
-  },
   render: function() {
-    var hovered = this.state.hoveredAnchor || this.state.hoveredBlock;
-
-    var toggleState = this.props.toggleState;
-    var toggleHoveredAnchor = toggleState.bind(this, 'hoveredAnchor');
-    var toggleHoveredBlock = toggleState.bind(this, 'hoveredBlock');
-
-    var anchor = React.createElement('a', {
-      className: hovered,
-      href: this.props.path,
-      onMouseEnter: toggleHoveredAnchor,
-      onMouseLeave: toggleHoveredAnchor
+    return React.createElement('a', {
+      style: { zIndex: this.props.zIndex || 0 },
+      className: 'nav-btn',
+      href: this.props.path
     }, this.props.display);
-    var block = React.createElement('div', {
-      className: hovered,
-      onMouseEnter: toggleHoveredBlock,
-      onMouseLeave: toggleHoveredBlock,
-      onClick: this.goToLink
-    });
-    return(
-      <div className='nav-btn'>
-        { block }
-        { anchor }
-        { block }
-      </div>
-    );
   }
 });

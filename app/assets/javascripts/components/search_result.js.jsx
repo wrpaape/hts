@@ -2,12 +2,6 @@
 'use strict';
 
 var SearchResult = React.createClass({
-  getInitialState: function() {
-    return({
-      hovered: false,
-      selected: false
-    });
-  },
   render: function() {
     var raw = this.props.display;
     var input = '(' + this.props.input + ')';
@@ -32,9 +26,9 @@ var SearchResult = React.createClass({
     });
 
     return React.createElement(window.NavBtn, {
+      zIndex: this.props.zIndex,
       path: this.props.path,
-      display: display,
-      toggleState: this.props.toggleState
+      display: display
     });
   }
 });
