@@ -70,12 +70,20 @@ $m-ds: drop-shadow(1px 1px 1px black);
     background-color: lighten($c, 10%);
   }
 }
+@mixin none-block {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: white;
+  cursor: default;
+}
 @mixin color-block($c) {
   @include hoverable($c);
   position: absolute;
-  // z-index: -1;
-  content: "";
   display: inline-block;
+  overflow: hidden;
   width: 50%;
   height: 50%;
   background-color: $c;
@@ -85,13 +93,20 @@ $m-ds: drop-shadow(1px 1px 1px black);
   bottom: 0;
   left: -50%;
   &:before {
-
+    @include none-block;
+    @include border-radii(0 0 100% 0 / 0 0 100% 0);
+    bottom: 0;
   }
 }
 @mixin after-block($c) {
   @include color-block($c);
   top: 0;
   left: 100%;
+  &:after {
+    @include none-block;
+    @include border-radii(100% 0 0 0 / 100% 0 0 0);
+    top: 0;
+  }
 }
 @mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
@@ -161,12 +176,9 @@ img {
 
 .search-bar > div {
   position: relative;
-  &:before {
-    @include before-block($c-btn-bg2);
-  }
-  &:hover > input, &:hover:before {
-    background-color: lighten($c-btn-bg2, 10%);
-  }
+    & > div:first-child {
+      @include before-block($c-btn-bg2);
+    }
   & > input {
     @include nav-btn($c-btn-txt2, $c-btn-bg2);
     height: 48px;
@@ -199,11 +211,14 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
-  & > :first-child > :first-child {
+  & > :first-child > :first-child > a {
     @include border-radii(0 0 50% 0 / 0 0 50% 0);
+    // z-index: 1;
   }
   input {
     @include border-radii(50% 0 0 0 / 50% 0 0 0);
+    @include hoverable($c-btn-bg2);
+    // z-index: 1;
   }
   & > div > :not(:first-child) {
     margin-top: 10px;

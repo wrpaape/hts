@@ -4,9 +4,8 @@
 var NavBtn = React.createClass({
   getInitialState: function() {
     return({
-      hoveredBefore: false,
       hoveredAnchor: false,
-      hoveredAfter: false
+      hoveredBlock: false
     });
   },
   render: function() {
@@ -16,31 +15,25 @@ var NavBtn = React.createClass({
     });
 
     var toggleState = this.props.toggleState;
-    var toggleHoveredBefore = toggleState.bind(this, 'hoveredBefore');
     var toggleHoveredAnchor = toggleState.bind(this, 'hoveredAnchor');
-    var toggleHoveredAfter = toggleState.bind(this, 'hoveredAfter');
+    var toggleHoveredBlock = toggleState.bind(this, 'hoveredBlock');
 
-    var before = React.createElement('div', {
-      className: hovered,
-      onMouseEnter: toggleHoveredBefore,
-      onMouseLeave: toggleHoveredBefore
-    });
     var anchor = React.createElement('a', {
       className: hovered,
       href: this.props.path,
       onMouseEnter: toggleHoveredAnchor,
       onMouseLeave: toggleHoveredAnchor
     }, this.props.display);
-    var after = React.createElement('div', {
+    var block = React.createElement('div', {
       className: hovered,
-      onMouseEnter: toggleHoveredAfter,
-      onMouseLeave: toggleHoveredAfter
+      onMouseEnter: toggleHoveredBlock,
+      onMouseLeave: toggleHoveredBlock
     });
     return(
       <div className='nav-btn'>
-        { before }
+        { block }
         { anchor }
-        { after }
+        { block }
       </div>
     );
   }

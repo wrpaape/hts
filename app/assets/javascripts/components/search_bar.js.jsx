@@ -5,7 +5,9 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return({
       value: '',
-      results: []
+      results: [],
+      hoveredInput: false,
+      hoveredBlock: false
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -50,20 +52,35 @@ var SearchBar = React.createClass({
     }
   },
   render: function() {
+    var hovered = this.state.hoveredInput || this.state.hoveredBlock;
+
+    var toggleState = this.props.toggleState;
+    var toggleHoveredInput = toggleState.bind(this, 'hoveredInput');
+    var toggleHoveredBlock = toggleState.bind(this, 'hoveredBlock');
+
     var input = React.createElement(
       'input',
       {
         type: 'text',
+        className: hovered,
         value: this.state.value,
         placeholder: this.props.placeholder,
         onChange: this.updateSearch,
-        onKeyUp: this.submitSearch
+        onKeyUp: this.submitSearch,
+        onMouseEnter: toggleHoveredInput,
+        onMouseLeave: toggleHoveredInput
       }
     );
+    var block = React.createElement('div', {
+      className: hovered,
+      onMouseEnter: toggleHoveredBlock,
+      onMouseLeave: toggleHoveredBlock
+    });
 
     return(
       <div className='search-bar'>
         <div>
+          { block }
           { input }
           <span>
             <button onClick={ this.goToFirstResult } />
