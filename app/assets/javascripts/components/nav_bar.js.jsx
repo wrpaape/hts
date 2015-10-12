@@ -18,13 +18,19 @@ var NavBar = React.createClass({
       stateChange[boolState] = !this.state[boolState];
       this.setState(stateChange);
     };
-    // var toggleExpand = this.props.toggleState.bind(this, 'expand');
+    // var toggleExpand = toggleState.bind(this, 'expand');
     var navBtns = this.props.navBtnsAll.map(function(props) {
       props.toggleState = toggleState;
 
       return React.createElement(window.NavBtns, props);
     });
-    var searchBar = React.createElement(window.SearchBar, this.props.searchBar);
+    var searchBarProps = this.props.searchBar;
+    var searchBar = React.createElement(window.SearchBar,{
+        key: searchBarProps.key,
+        url: searchBarProps.url,
+        placeholder: searchBarProps.placeholder,
+        toggleState: toggleState
+    });
 
     return(
       <div id='nav-bar' className={ this.state.expand } onClick={ this.toggleExpand }>

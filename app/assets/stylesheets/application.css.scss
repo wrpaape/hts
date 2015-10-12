@@ -65,10 +65,16 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
+@mixin hoverable($c) {
+  &.true {
+    background-color: lighten($c, 10%);
+  }
+}
 @mixin color-block($c) {
+  @include hoverable($c);
   position: absolute;
+  // z-index: -1;
   content: "";
-  z-index: -1;
   display: inline-block;
   width: 50%;
   height: 50%;
@@ -78,6 +84,9 @@ $m-ds: drop-shadow(1px 1px 1px black);
   @include color-block($c);
   bottom: 0;
   left: -50%;
+  &:before {
+
+  }
 }
 @mixin after-block($c) {
   @include color-block($c);
@@ -87,11 +96,8 @@ $m-ds: drop-shadow(1px 1px 1px black);
 @mixin nav-btn($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include border-radii(50% 0 50% 0);
-  width: 225px;
+  width: 300px;
   font-size: 18px;
-  &:not(:first-child) {
-    margin-top: 10px;
-  }
   line-height: 28px;
   color: $c-txt;
   background-color: $c-bg;
@@ -115,7 +121,6 @@ body {
 }
 a {
   @include nav-btn($c-btn-txt1, $c-btn-bg1);
-  @include btn($c-btn-bg1);
   display: block;
   padding: 10px 24px;
   text-decoration: none;
@@ -135,8 +140,9 @@ img {
   vertical-align: top;
 }
 .nav-btns {
-  .true {
-    background-color: lighten($c-btn-bg1, 10%);
+  .nav-btn * {
+    @include btn($c-btn-bg1);
+    @include hoverable($c-btn-bg1);
   }
   & > div {
     position: relative;
@@ -145,17 +151,11 @@ img {
     & > :first-child {
       @include before-block($c-btn-bg1);
     }
-    // &:hover > :first-child {
-    //   background-color: lighten($c-btn-bg1, 10%);
-    // }
   }
   &:not(:last-of-type) > div {
     & > :last-child {
       @include after-block($c-btn-bg1);
     }
-    // &:hover:after {
-    //   background-color: lighten($c-btn-bg1, 10%);
-    // }
   }
 }
 
@@ -205,6 +205,13 @@ img {
   input {
     @include border-radii(50% 0 0 0 / 50% 0 0 0);
   }
+  & > div > :not(:first-child) {
+    margin-top: 10px;
+  }
+  // .nav-btn > a, input {
+  //   @include border-radii(50%);
+  //   z-index: -1;
+  // }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

@@ -31,6 +31,10 @@ var SearchResult = React.createClass({
       return React.createElement(i % 2 ? 'strong' : 'span', { key: i }, sec.replace(/-|_/g,'$&\u200b'));
     });
 
-    return <NavBtn path={ this.props.path } display={ display } />;
+    return React.createElement(window.NavBtn, {
+      path: this.props.path,
+      display: display,
+      toggleState: this.props.toggleState
+    });
   }
 });

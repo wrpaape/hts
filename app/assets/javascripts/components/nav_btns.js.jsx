@@ -4,7 +4,7 @@
 var NavBtns= React.createClass({
   getInitialState: function() {
     return({
-      hovered: true
+      hovered: false
     });
   },
   render: function() {
@@ -25,9 +25,9 @@ var NavBtns= React.createClass({
     }
 
     return React.createElement('div', {
-      className: 'nav-btns'
-      // onMouseEnter: toggleHovered,
-      // onMouseLeave: toggleHovered
+      className: 'nav-btns',
+      onMouseEnter: toggleHovered,
+      onMouseLeave: toggleHovered
     }, navBtns);
   }
 });

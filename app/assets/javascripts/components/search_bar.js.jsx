@@ -20,8 +20,10 @@ var SearchBar = React.createClass({
         { input: newValue },
         function(output) {
           var results = JSON.parse(output).map(function(result) {
+            result.toggleState = this.props.toggleState;
+
             return React.createElement(window.SearchResult, result);
-          });
+          }.bind(this));
 
           this.setState({
             value: newValue,
