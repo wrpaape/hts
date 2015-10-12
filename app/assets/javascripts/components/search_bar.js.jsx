@@ -1,4 +1,4 @@
-/* globals React */
+/* globals React, ajax */
 'use strict';
 
 var SearchBar = React.createClass({
@@ -20,18 +20,21 @@ var SearchBar = React.createClass({
         { input: newValue },
         function(output) {
           var rawResults = JSON.parse(output);
-          var results = rawResults.map(function(result, i) {
-            result.zIndex = rawResults.length - i - 1;
-            var tesBlock = React.createElement(window.SearchResult, result);
-            var botBlock = React.createElement(window.NavBtn, {
-              key: result.key + '-bot-block',
-              zIndex: result.zIndex - 1,
-              path: result.path,
+          var results = [];
+          var result;
+          var i = rawResults.length;
+          var z = 0;
+          while (i-- > 0) {
+            result = rawResults[i];
+            result.zIndex = z;
+            results.unshift(React.createElement(window.SearchResult, rawResults[i]));
+            results.unshift(React.createElement(window.NavBtn, {
+              key: 'bot-block-' + i,
+              zIndex: z++,
+              path: rawResults[i - 1] && rawResults[i - 1].path,
               display: ''
-            });
-
-            return [tesBlock, botBlock];
-          });
+            }));
+          }
 
           this.setState({
             value: newValue,
@@ -73,6 +76,12 @@ var SearchBar = React.createClass({
       className: 'search-bar',
       style: { zIndex : results.length }
     }, input);
+    // var botBlock = React.createElement(window.NavBtn, {
+    //   key: 'search-bar-bot-block',
+    //   zIndex: result.zIndex - 1,
+    //   path: result.path,
+    //   display: ''
+    // });
 
     return React.createElement('div', {
       className: 'search-results'

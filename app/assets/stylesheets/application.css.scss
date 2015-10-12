@@ -81,9 +81,11 @@ $m-ds: drop-shadow(1px 1px 1px black);
   }
 }
 @mixin bot-block {
-  @include color-block($c-btn-bg1);
-  bottom: -50%;
-  left: 0;
+  position: absolute;
+  display: inline-block;
+  width: 150px;
+  height: 25px;
+  background-color: red;
 }
 @mixin tes-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
@@ -111,7 +113,6 @@ body {
   background-color: $c-bg-main;
   font-family: $f-main;
 }
-
 img {
   max-width: 100px;
 }
@@ -119,13 +120,19 @@ img {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-.nav-btn:nth-of-type(odd) {
+.nav-btns > .nav-btn:nth-of-type(odd),
+.search-results > .nav-btn:nth-of-type(even) {
   @include tes-block($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
+  @include top-block;
   display: block;
   position: relative;
   padding: 10px 24px;
   text-decoration: none;
+}
+.nav-btns > .nav-btn:nth-of-type(even),
+.search-results > .nav-btn:nth-of-type(odd) {
+  @include bot-block;      
 }
 .nav-btns, .search-results {
   display: inline-block;
@@ -134,8 +141,12 @@ img {
 
 .nav-btns {
   margin-right: 10px;
+  & > :first-child:before {
+    display: none;
+  }
   &:first-of-type > .nav-btn:first-of-type {
     @include border-radii(0 0 60% 0 / 0 0 60% 0);
+   
   }
 }
 
@@ -172,10 +183,12 @@ img {
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
   .nav-btn:not(:first-child) {
-    @include top-block;
-    &:nth-of-type(even) {
-      @include bot-block;      
-    }
+    // &:nth-of-type(odd) {
+    //   @include bot-block;      
+    // }
+    // &:nth-of-type(even) {
+    //   @include top-block;
+    // }
     
     // @include bottom-block;
   }
