@@ -51,6 +51,9 @@ var SearchBar = React.createClass({
       window.location.href = firstResult.props.path;
     }
   },
+  focusInput: function() {
+    this.refs.searchBar.getDOMNode().focus(); 
+  },
   render: function() {
     var hovered = this.state.hoveredInput || this.state.hoveredBlock;
 
@@ -62,6 +65,7 @@ var SearchBar = React.createClass({
       'input',
       {
         type: 'text',
+        ref: 'searchBar',
         className: hovered,
         value: this.state.value,
         placeholder: this.props.placeholder,
@@ -74,7 +78,8 @@ var SearchBar = React.createClass({
     var block = React.createElement('div', {
       className: hovered,
       onMouseEnter: toggleHoveredBlock,
-      onMouseLeave: toggleHoveredBlock
+      onMouseLeave: toggleHoveredBlock,
+      onClick: this.focusInput
     });
 
     return(

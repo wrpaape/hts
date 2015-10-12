@@ -176,11 +176,14 @@ img {
 
 .search-bar > div {
   position: relative;
-    & > div:first-child {
-      @include before-block($c-btn-bg2);
-    }
+  & > div:first-of-type {
+    @include before-block($c-btn-bg2);
+    @include hoverable($c-btn-bg2);
+    cursor: text;
+  }
   & > input {
     @include nav-btn($c-btn-txt2, $c-btn-bg2);
+    @include hoverable($c-btn-bg2);
     height: 48px;
     padding: 5px 48px 5px 24px;
     outline: none; 
@@ -217,7 +220,6 @@ img {
   }
   input {
     @include border-radii(50% 0 0 0 / 50% 0 0 0);
-    @include hoverable($c-btn-bg2);
     // z-index: 1;
   }
   & > div > :not(:first-child) {

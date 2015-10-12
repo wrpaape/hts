@@ -8,11 +8,11 @@ var NavBtn = React.createClass({
       hoveredBlock: false
     });
   },
+  goToLink: function() {
+    window.location.href = this.props.path;
+  },
   render: function() {
-    var thisState = this.state;
-    var hovered = Object.keys(thisState).some(function(hoveredI) {
-      return thisState[hoveredI];
-    });
+    var hovered = this.state.hoveredAnchor || this.state.hoveredBlock;
 
     var toggleState = this.props.toggleState;
     var toggleHoveredAnchor = toggleState.bind(this, 'hoveredAnchor');
@@ -27,7 +27,8 @@ var NavBtn = React.createClass({
     var block = React.createElement('div', {
       className: hovered,
       onMouseEnter: toggleHoveredBlock,
-      onMouseLeave: toggleHoveredBlock
+      onMouseLeave: toggleHoveredBlock,
+      onClick: this.goToLink
     });
     return(
       <div className='nav-btn'>
