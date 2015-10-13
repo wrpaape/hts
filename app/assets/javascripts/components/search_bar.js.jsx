@@ -66,7 +66,7 @@ var SearchBar = React.createClass({
     }
   },
   goToFirstResult: function() {
-    var firstResult = this.state.results[0];
+    var firstResult = this.state.results[2];
     if (firstResult) {
       window.location.href = firstResult.props.path;
     }
@@ -76,11 +76,11 @@ var SearchBar = React.createClass({
     var searchBarStyle = results.length ? {
       zIndex: results.length * 2
     } : {
-      WebkitBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
-      MozBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
-      msBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
-      OBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
-      borderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0'
+      WebkitBorderRadius: '55% 0',
+      MozBorderRadius: '55% 0',
+      msBorderRadius: '55% 0',
+      OBorderRadius: '55% 0',
+      borderRadius: '55% 0'
     };
     var input = React.createElement('input', {
       type: 'text',
@@ -96,7 +96,8 @@ var SearchBar = React.createClass({
     var searchBar = React.createElement('div', {
       key: 'search-bar',
       className: 'search-bar',
-      style: searchBarStyle
+      style: searchBarStyle,
+      onClick: this.focusInput
     }, input);
 
     return React.createElement('div', {
