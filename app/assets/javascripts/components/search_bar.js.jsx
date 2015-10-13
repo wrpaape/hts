@@ -81,8 +81,7 @@ var SearchBar = React.createClass({
     } else {
       this.setState({
         value: newValue,
-        results: [],
-        resultsHovered: []
+        resultsProps: []
       });
     }
   },
@@ -92,9 +91,9 @@ var SearchBar = React.createClass({
     }
   },
   goToFirstResult: function() {
-    var firstResult = this.state.results[2];
+    var firstResult = this.state.resultsProps[0];
     if (firstResult) {
-      window.location.href = firstResult.props.path;
+      window.location.href = firstResult.mid.path;
     }
   },
   render: function() {
@@ -102,31 +101,33 @@ var SearchBar = React.createClass({
       return([
         React.createElement(window.NavBtn, result.top),
         React.createElement(window.SearchResult, result.mid),
-        React.createElement(window.NavBtn, result.bot)
+        React.createElement(window.NavBtn, result.bot) 
       ]);
     });
 
     var searchBarStyle;
     if (results.length) {
-      var zSearch = results.length * 2;
+      var zSearch = this.state.resultsProps.length * 2;
       searchBarStyle = {
         zIndex: zSearch
       };
+      results.splice(-1);
       results.unshift(React.createElement('a', {
         key: 'search-bar-bot',
-        zIndex: zSearch - 1,
-        className: 'nav-btn bot search-bar',
+        style: { zIndex: zSearch - 2 },
+        className: 'nav-btn bot search-bar-bot',
         onClick: this.focusInput
       }));
-    } else {
-      searchBarStyle = {
-        WebkitBorderRadius: '55% 0',
-        MozBorderRadius: '55% 0',
-        msBorderRadius: '55% 0',
-        OBorderRadius: '55% 0',
-        borderRadius: '55% 0'
-      };
     };
+    // else {
+    //   searchBarStyle = {
+    //     WebkitBorderRadius: '55% 0',
+    //     MozBorderRadius: '55% 0',
+    //     msBorderRadius: '55% 0',
+    //     OBorderRadius: '55% 0',
+    //     borderRadius: '55% 0'
+    //   };
+    // };
 
     var input = React.createElement('input', {
       type: 'text',
@@ -140,7 +141,7 @@ var SearchBar = React.createClass({
 
     var searchBar = React.createElement('div', {
       key: 'search-bar',
-      className: 'search-bar',
+      className: 'search-bar mid',
       style: searchBarStyle,
       onClick: this.focusInput
     }, input);
