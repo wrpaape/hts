@@ -73,23 +73,43 @@ $m-ds: drop-shadow(1px 1px 1px black);
   height: 50%;
   background-color: red;
 }
+// @mixin top-block {
+//   &:before {
+//     @include color-block($c-btn-bg1);
+//     top: -50%;
+//     right: 0;
+//   }
+// }
 @mixin top-block {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 58px;
+  margin-top: -49px;
+  background-color: $c-btn-bg1;
   &:before {
-    @include color-block($c-btn-bg1);
-    top: -50%;
-    right: 0;
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 47px;
+    margin-top: -1;
+    background-color: white;
+    border-bottom-right-radius: 100%;
+    border-right: 11px solid white;
+    border-bottom: 11px solid white;
   }
 }
 @mixin bot-block {
   position: absolute;
   display: inline-block;
-  width: 150px;
-  height: 25px;
-  background-color: red;
+  width: 50%;
+  height: 32px;
+  background-color: $c-btn-bg1
 }
 @mixin tes-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
-  @include border-radii(60% 0);
+  @include border-radii(55% 0);
   width: 300px;
   font-size: 18px;
   line-height: 28px;
@@ -120,23 +140,31 @@ img {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+.search-results > .nav-btn:nth-of-type(3n - 1) {
+  @include top-block;
+}
 .nav-btns > .nav-btn:nth-of-type(odd),
-.search-results > .nav-btn:nth-of-type(even) {
+.search-results > .nav-btn:nth-of-type(3n) {
   @include tes-block($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
-  @include top-block;
   display: block;
   position: relative;
+  border-top: 9px solid white;
   padding: 10px 24px;
   text-decoration: none;
 }
 .nav-btns > .nav-btn:nth-of-type(even),
-.search-results > .nav-btn:nth-of-type(odd) {
+.search-results > .nav-btn:nth-of-type(3n - 2) {
   @include bot-block;      
 }
 .nav-btns, .search-results {
   display: inline-block;
   vertical-align: top;
+  position: relative;
+  overflow: hidden;
+  .nav-btn:not(:first-child):last-child {
+    @include border-radii(55% 0 0 0 / 55% 0 0 0);
+  }
 }
 
 .nav-btns {
@@ -145,13 +173,18 @@ img {
     display: none;
   }
   &:first-of-type > .nav-btn:first-of-type {
-    @include border-radii(0 0 60% 0 / 0 0 60% 0);
+    @include border-radii(0 0 55% 0 / 0 0 55% 0);
    
   }
 }
 
+.search-results > .nav-btn:first-of-type {
+  background-color: $c-btn-bg2;
+  cursor: text;
+}
+
 .search-bar {
-  @include border-radii(60% 0);
+  @include border-radii(55% 0);
   position: relative;
   input {
     @include tes-block($c-btn-txt2, $c-btn-bg2);
@@ -183,14 +216,7 @@ img {
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
   .nav-btn:not(:first-child) {
-    // &:nth-of-type(odd) {
-    //   @include bot-block;      
-    // }
-    // &:nth-of-type(even) {
-    //   @include top-block;
-    // }
-    
-    // @include bottom-block;
+
   }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲

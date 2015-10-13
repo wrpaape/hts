@@ -27,13 +27,20 @@ var SearchBar = React.createClass({
           while (i-- > 0) {
             result = rawResults[i];
             result.zIndex = z;
-            results.unshift(React.createElement(window.SearchResult, rawResults[i]));
+            results.unshift(React.createElement(window.SearchResult, result));
+            results.unshift(React.createElement(window.NavBtn, {
+              key: 'top-block-' + i,
+              zIndex: z + 1,
+              path: result.path,
+              display: ''
+            }));
             results.unshift(React.createElement(window.NavBtn, {
               key: 'bot-block-' + i,
-              zIndex: z++,
+              zIndex: z,
               path: rawResults[i - 1] && rawResults[i - 1].path,
               display: ''
             }));
+            z+= 2;
           }
 
           this.setState({
@@ -63,7 +70,6 @@ var SearchBar = React.createClass({
   render: function() {
     var results = this.state.results;
     var input = React.createElement('input', {
-      style: { zIndex: results.length },
       type: 'text',
       value: this.state.value,
       placeholder: this.props.placeholder,
@@ -74,14 +80,8 @@ var SearchBar = React.createClass({
     var searchBar = React.createElement('div', {
       key: 'search-bar',
       className: 'search-bar',
-      style: { zIndex : results.length }
+      style: { zIndex : results.length * 2 }
     }, input);
-    // var botBlock = React.createElement(window.NavBtn, {
-    //   key: 'search-bar-bot-block',
-    //   zIndex: result.zIndex - 1,
-    //   path: result.path,
-    //   display: ''
-    // });
 
     return React.createElement('div', {
       className: 'search-results'
