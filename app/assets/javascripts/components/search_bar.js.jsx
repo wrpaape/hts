@@ -69,18 +69,29 @@ var SearchBar = React.createClass({
   },
   render: function() {
     var results = this.state.results;
+    var searchBarStyle = results.length ? {
+      zIndex: results.length * 2
+    } : {
+      WebkitBorderRadius: '55% 0 0 0\/55% 0 0 0',
+      MozBorderRadius: '55% 0 0 0\/55% 0 0 0',
+      msBorderRadius: '55% 0 0 0\/55% 0 0 0',
+      OBorderRadius: '55% 0 0 0\/55% 0 0 0',
+      borderRadius: '55% 0 0 0\/55% 0 0 0'
+    };
     var input = React.createElement('input', {
       type: 'text',
+      style: searchBarStyle,
       value: this.state.value,
       placeholder: this.props.placeholder,
       onChange: this.updateSearch,
       onKeyUp: this.submitSearch
     }, React.createElement('button', { onClick: this.goToFirstResult }));
 
+
     var searchBar = React.createElement('div', {
       key: 'search-bar',
       className: 'search-bar',
-      style: { zIndex : results.length * 2 }
+      style: searchBarStyle
     }, input);
 
     return React.createElement('div', {
