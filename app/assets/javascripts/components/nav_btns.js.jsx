@@ -7,9 +7,6 @@ var NavBtns= React.createClass({
       hovered: false
     });
   },
-  // goToIndex: function() {
-  //   window.location.href = this.props.path;
-  // },
   render: function() {
     var toggleHovered = this.props.toggleState.bind(this, 'hovered');
     var navBtnsShowProps = this.props.navBtns;

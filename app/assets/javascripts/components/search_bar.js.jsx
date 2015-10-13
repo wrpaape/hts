@@ -5,7 +5,8 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return({
       value: '',
-      results: []
+      results: [],
+      hoveredId: -1
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -16,6 +17,22 @@ var SearchBar = React.createClass({
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();
   },
+  setBtnsClassName: function(btns, newClassName) {
+    btns.some(function(btn) {
+      return btn.state.className == newClassName || btn.setState({ className: newClassName });
+    });
+  },
+  setHoveredId: function(newId) {
+    var lastId = this.state.hoveredId;
+    if (newId != lastId) {
+      // this.setBtnsClassName(this.state.results.slice(lastId, lastId + 2), 'nav-btn');
+      // this.setBtnsClassName(this.state.results.slice(newId, newId + 2), 'nav-btn hovered');
+      console.log(this.refs);
+      this.setState({
+        hoveredId: newId
+      });
+    }
+  },
   updateSearch: function(event) {
     var newValue = event.target.value;
     if (newValue.length) {
@@ -24,27 +41,44 @@ var SearchBar = React.createClass({
         function(output) {
           var rawResults = JSON.parse(output);
           var results = [];
-          var result;
           var i = rawResults.length;
-          var z = 0;
+          var z = -2;
+          var lastId = 3 * (i - 1); 
+          var setLastId = this.setHoveredId.bind(this, lastId);
+          var clearId = this.setHoveredId.bind(this, -1);
+          var result, path, lastPath, setId;
           while (i-- > 0) {
+            z += 2;
+            lastId -= 3;
             result = rawResults[i];
+            path = result.path;
+            lastPath = i ? rawResults[i - 1].path : '';
+            setId = setLastId;
+            setLastId = this.setHoveredId.bind(this, lastId);
+            result.setId = setId;
+            result.clearId = clearId;
             result.zIndex = z;
+            // result.ref = 'result-' + (lastId + 1);
             results.unshift(React.createElement(window.SearchResult, result));
             results.unshift(React.createElement(window.NavBtn, {
               key: 'top-block-' + i,
+              ref: 'result-' + (lastId + 1),
               zIndex: z + 1,
-              path: result.path,
+              path: path,
+              setId: setId,
+              clearId: clearId,
               display: ''
             }));
             results.unshift(React.createElement(window.NavBtn, {
               key: 'bot-block-' + i,
+              ref: 'result-' + lastId,
               zIndex: z,
-              path: rawResults[i - 1] && rawResults[i - 1].path,
+              path: lastPath,
+              setId: setLastId,
+              clearId: clearId,
               display: '',
               onClick: i ? null : this.focusInput
             }));
-            z+= 2;
           }
 
           this.setState({
@@ -61,7 +95,7 @@ var SearchBar = React.createClass({
     }
   },
   submitSearch: function(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode == 13) {
       this.goToFirstResult();
     }
   },
