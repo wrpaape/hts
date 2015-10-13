@@ -208,7 +208,7 @@ img {
     outline: none;
     cursor: pointer;
     background-color: transparent;
-    background-image: url(icons/search.png);
+    background-image: asset-url("icons/search.png");
     &:hover {
       @include filters($m-ww)
     }

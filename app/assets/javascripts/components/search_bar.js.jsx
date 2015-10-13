@@ -5,8 +5,21 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return({
       value: '',
-      results: [],
-      hoveredId: -1
+      resultsProps: []
+    });
+  },
+  toggleResultsHovered: function(id, pos) {
+    var resultsProps = this.state.resultsProps;
+    var result = resultsProps[id];
+    result[pos].hovered = !result[pos].hovered;
+    var hoveredAny = Object.keys(result).some(function(pos) {
+      return result[pos].hovered;
+    });
+    Object.keys(result).forEach(function(pos) {
+      result[pos].className = 'nav-btn ' + pos + ' ' + hoveredAny;
+    });
+    this.setState({
+      resultsProps: resultsProps
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -17,22 +30,6 @@ var SearchBar = React.createClass({
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();
   },
-  setBtnsClassName: function(btns, newClassName) {
-    btns.some(function(btn) {
-      return btn.state.className == newClassName || btn.setState({ className: newClassName });
-    });
-  },
-  setHoveredId: function(newId) {
-    var lastId = this.state.hoveredId;
-    if (newId != lastId) {
-      // this.setBtnsClassName(this.state.results.slice(lastId, lastId + 2), 'nav-btn');
-      // this.setBtnsClassName(this.state.results.slice(newId, newId + 2), 'nav-btn hovered');
-      console.log(this.refs);
-      this.setState({
-        hoveredId: newId
-      });
-    }
-  },
   updateSearch: function(event) {
     var newValue = event.target.value;
     if (newValue.length) {
@@ -40,57 +37,52 @@ var SearchBar = React.createClass({
         { input: newValue },
         function(output) {
           var rawResults = JSON.parse(output);
-          var results = [];
-          var i = rawResults.length;
-          var z = -2;
-          var lastId = 3 * (i - 1); 
-          var setLastId = this.setHoveredId.bind(this, lastId);
-          var clearId = this.setHoveredId.bind(this, -1);
-          var result, path, lastPath, setId;
-          while (i-- > 0) {
-            z += 2;
-            lastId -= 3;
-            result = rawResults[i];
-            path = result.path;
-            lastPath = i ? rawResults[i - 1].path : '';
-            setId = setLastId;
-            setLastId = this.setHoveredId.bind(this, lastId);
-            result.setId = setId;
-            result.clearId = clearId;
-            result.zIndex = z;
-            // result.ref = 'result-' + (lastId + 1);
-            results.unshift(React.createElement(window.SearchResult, result));
-            results.unshift(React.createElement(window.NavBtn, {
-              key: 'top-block-' + i,
-              ref: 'result-' + (lastId + 1),
-              zIndex: z + 1,
-              path: path,
-              setId: setId,
-              clearId: clearId,
-              display: ''
-            }));
-            results.unshift(React.createElement(window.NavBtn, {
-              key: 'bot-block-' + i,
-              ref: 'result-' + lastId,
-              zIndex: z,
-              path: lastPath,
-              setId: setLastId,
-              clearId: clearId,
-              display: '',
-              onClick: i ? null : this.focusInput
-            }));
-          }
+          var resultsProps = rawResults.map(function(result, i) {
+            var zTop = 2 * (rawResults.length - i) - 1;
+            var zMid = zTop - 1;
+            var zBot = zMid - 2;
+            return({
+              top: {
+                key: 'result-top-' + i,
+                path: result.path,
+                display: '',
+                zIndex: zTop,
+                toggleHovered: this.toggleResultsHovered.bind(this, i, 'top'),
+                hovered: false,
+                className: 'nav-btn top false'
+              },
+              mid: {
+                key: result.key,
+                path: result.path,
+                display: result.display,
+                zIndex: zMid,
+                toggleHovered: this.toggleResultsHovered.bind(this, i, 'mid'),
+                hovered: false,
+                className: 'nav-btn mid false'
+              },
+              bot: {
+                key: 'result-bot-' + i,
+                path: result.path,
+                display: '',
+                zIndex: zBot,
+                toggleHovered: this.toggleResultsHovered.bind(this, i, 'top'),
+                hovered: false,
+                className: 'nav-btn bot false'
+              }
+            });
+          }.bind(this));
 
           this.setState({
             value: newValue,
-            results: results
+            resultsProps: resultsProps
           });
         }.bind(this),
         true);
     } else {
       this.setState({
         value: newValue,
-        results: []
+        results: [],
+        resultsHovered: []
       });
     }
   },
@@ -106,7 +98,13 @@ var SearchBar = React.createClass({
     }
   },
   render: function() {
-    var results = this.state.results;
+    var results = this.state.resultsProps.map(function(result) {
+      return([
+        React.createElement(window.NavBtn, result.top),
+        React.createElement(window.SearchResult, result.mid),
+        React.createElement(window.NavBtn, result.bot)
+      ]);
+    });
     var searchBarStyle = results.length ? {
       zIndex: results.length * 2
     } : {

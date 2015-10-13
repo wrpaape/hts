@@ -25,7 +25,9 @@ var NavBar = React.createClass({
 
       return React.createElement(window.NavBtns, props);
     });
-    var searchBar = React.createElement(window.SearchBar, this.props.searchBar);
+    var searchBarProps = this.props.searchBar;
+    searchBarProps.toggleState = toggleState;
+    var searchBar = React.createElement(window.SearchBar, searchBarProps);
 
     return(
       <div id='nav-bar'>
