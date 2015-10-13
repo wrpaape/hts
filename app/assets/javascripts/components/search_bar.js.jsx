@@ -8,6 +8,11 @@ var SearchBar = React.createClass({
       resultsProps: []
     });
   },
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      value: nextProps.value
+    });
+  },
   toggleResultsHovered: function(id, pos) {
     var resultsProps = this.state.resultsProps;
     var result = resultsProps[id];
@@ -20,11 +25,6 @@ var SearchBar = React.createClass({
     });
     this.setState({
       resultsProps: resultsProps
-    });
-  },
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      value: nextProps.value
     });
   },
   focusInput: function() {
@@ -105,15 +105,29 @@ var SearchBar = React.createClass({
         React.createElement(window.NavBtn, result.bot)
       ]);
     });
-    var searchBarStyle = results.length ? {
-      zIndex: results.length * 2
-    } : {
-      WebkitBorderRadius: '55% 0',
-      MozBorderRadius: '55% 0',
-      msBorderRadius: '55% 0',
-      OBorderRadius: '55% 0',
-      borderRadius: '55% 0'
+
+    var searchBarStyle;
+    if (results.length) {
+      var zSearch = results.length * 2;
+      searchBarStyle = {
+        zIndex: zSearch
+      };
+      results.unshift(React.createElement('a', {
+        key: 'search-bar-bot',
+        zIndex: zSearch - 1,
+        className: 'nav-btn bot search-bar',
+        onClick: this.focusInput
+      }));
+    } else {
+      searchBarStyle = {
+        WebkitBorderRadius: '55% 0',
+        MozBorderRadius: '55% 0',
+        msBorderRadius: '55% 0',
+        OBorderRadius: '55% 0',
+        borderRadius: '55% 0'
+      };
     };
+
     var input = React.createElement('input', {
       type: 'text',
       ref: 'searchBar',
@@ -123,7 +137,6 @@ var SearchBar = React.createClass({
       onChange: this.updateSearch,
       onKeyUp: this.submitSearch
     }, React.createElement('button', { onClick: this.goToFirstResult }));
-
 
     var searchBar = React.createElement('div', {
       key: 'search-bar',

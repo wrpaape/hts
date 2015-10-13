@@ -19,7 +19,6 @@ var NavBtn = React.createClass({
       style: { zIndex: this.props.zIndex },
       className: this.props.className,
       href: this.props.path,
-      onClick: this.props.onClick,
       onMouseEnter: toggleHovered,
       onMouseLeave: toggleHovered
     }, this.props.display);

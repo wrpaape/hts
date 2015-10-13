@@ -113,7 +113,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
   background-color: $c-btn-bg1;
   cursor: pointer;
 }
-@mixin tes-block($c-txt, $c-bg) {
+@mixin mid-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include border-radii(55% 0);
   width: 300px;
@@ -152,7 +152,7 @@ img {
 }
 .nav-btns > .nav-btn:nth-of-type(3n + 1),
 .search-results > .nav-btn:nth-of-type(3n) {
-  @include tes-block($c-btn-txt1, $c-btn-bg1);
+  @include mid-block($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
   display: block;
   position: relative;
@@ -192,7 +192,7 @@ img {
   position: relative;
   cursor: text;
   input {
-    @include tes-block($c-btn-txt2, $c-btn-bg2);
+    @include mid-block($c-btn-txt2, $c-btn-bg2);
     // @include border-radii(180px 0 180px 0 / 26.5px 0 26.5px 0);
     border-top: 9px solid white;
     padding: 10px 104px 10px 24px;
