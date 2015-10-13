@@ -22,13 +22,13 @@ var NavBar = React.createClass({
 
     var navBtns = this.props.navBtnsAll.map(function(props) {
       props.toggleState = toggleState;
-      
+
       return React.createElement(window.NavBtns, props);
     });
     var searchBar = React.createElement(window.SearchBar, this.props.searchBar);
 
     return(
-      <div id='nav-bar' className={ this.state.expand } onClick={ this.toggleExpand }>
+      <div id='nav-bar'>
         { navBtns.concat(searchBar) }
       </div>
     );

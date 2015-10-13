@@ -13,6 +13,9 @@ var SearchBar = React.createClass({
       value: nextProps.value
     });
   },
+  focusInput: function() {
+    this.refs.searchBar.getDOMNode().focus();
+  },
   updateSearch: function(event) {
     var newValue = event.target.value;
     if (newValue.length) {
@@ -38,7 +41,8 @@ var SearchBar = React.createClass({
               key: 'bot-block-' + i,
               zIndex: z,
               path: rawResults[i - 1] && rawResults[i - 1].path,
-              display: ''
+              display: '',
+              onClick: i ? null : this.focusInput
             }));
             z+= 2;
           }
@@ -80,6 +84,7 @@ var SearchBar = React.createClass({
     };
     var input = React.createElement('input', {
       type: 'text',
+      ref: 'searchBar',
       style: searchBarStyle,
       value: this.state.value,
       placeholder: this.props.placeholder,

@@ -6,7 +6,8 @@ var NavBtn = React.createClass({
     return React.createElement('a', {
       style: { zIndex: this.props.zIndex },
       className: 'nav-btn',
-      href: this.props.path
+      href: this.props.path,
+      onClick: this.props.onClick
     }, this.props.display);
   }
 });
