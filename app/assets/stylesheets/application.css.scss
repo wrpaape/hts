@@ -95,7 +95,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
     height: 47px;
     margin-top: -1;
     background-color: white;
-    border-bottom-right-radius: 100%;
+    @include border-radii(0 0 100% 0 / 0 0 100% 0);
     border-right: 11px solid white;
     border-bottom: 11px solid white;
   }
@@ -104,8 +104,9 @@ $m-ds: drop-shadow(1px 1px 1px black);
   position: absolute;
   display: inline-block;
   width: 50%;
-  height: 32px;
-  background-color: $c-btn-bg1
+  height: 48px;
+  background-color: $c-btn-bg1;
+  cursor: pointer;
 }
 @mixin tes-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
@@ -140,10 +141,11 @@ img {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+.nav-btns > .nav-btn:nth-of-type(3n),
 .search-results > .nav-btn:nth-of-type(3n - 1) {
   @include top-block;
 }
-.nav-btns > .nav-btn:nth-of-type(odd),
+.nav-btns > .nav-btn:nth-of-type(3n + 1),
 .search-results > .nav-btn:nth-of-type(3n) {
   @include tes-block($c-btn-txt1, $c-btn-bg1);
   @include btn($c-btn-bg1);
@@ -153,7 +155,7 @@ img {
   padding: 10px 24px;
   text-decoration: none;
 }
-.nav-btns > .nav-btn:nth-of-type(even),
+.nav-btns > .nav-btn:nth-of-type(3n - 1),
 .search-results > .nav-btn:nth-of-type(3n - 2) {
   @include bot-block;      
 }
@@ -168,10 +170,7 @@ img {
 }
 
 .nav-btns {
-  margin-right: 10px;
-  & > :first-child:before {
-    display: none;
-  }
+  margin-right: 5px;
   &:first-of-type > .nav-btn:first-of-type {
     @include border-radii(0 0 55% 0 / 0 0 55% 0);
    
@@ -184,21 +183,21 @@ img {
 }
 
 .search-bar {
-  @include border-radii(55% 0);
+  @include border-radii(180px 0 180px 0 / 26.5px 0 26.5px 0);
   position: relative;
   input {
     @include tes-block($c-btn-txt2, $c-btn-bg2);
-    // @include border-radii(0);
-    height: 48px;
-    padding: 5px 48px 5px 24px;
+    @include border-radii(180px 0 180px 0 / 26.5px 0 26.5px 0);
+    border-top: 9px solid white;
+    padding: 10px 104px 10px 24px;
     outline: none;
   }
   button {
     position: absolute;
     width: 20px;
     height: 20px;
-    top: 25%;
-    right: 20%;
+    right: 72px;
+    bottom: 14px;
     border: none;
     outline: none;
     cursor: pointer;

@@ -76,11 +76,11 @@ var SearchBar = React.createClass({
     var searchBarStyle = results.length ? {
       zIndex: results.length * 2
     } : {
-      WebkitBorderRadius: '55% 0 0 0\/55% 0 0 0',
-      MozBorderRadius: '55% 0 0 0\/55% 0 0 0',
-      msBorderRadius: '55% 0 0 0\/55% 0 0 0',
-      OBorderRadius: '55% 0 0 0\/55% 0 0 0',
-      borderRadius: '55% 0 0 0\/55% 0 0 0'
+      WebkitBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
+      MozBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
+      msBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
+      OBorderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0',
+      borderRadius: '180px 0 180px 0 \/ 26.5px 0 26.5px 0'
     };
     var input = React.createElement('input', {
       type: 'text',
