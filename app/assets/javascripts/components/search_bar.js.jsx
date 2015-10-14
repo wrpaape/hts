@@ -71,6 +71,7 @@ var SearchBar = React.createClass({
     return React.createElement('a', {
       key: 'search-bar-' + pos,
       style: { zIndex: z },
+      tabIndex: -1,
       className: 'nav-btn search-bar-block ' + pos,
       onClick: this.focusInput
     });
@@ -86,7 +87,7 @@ var SearchBar = React.createClass({
       };
       var searchBarBot = this.buildBlock('bot', zSearch - 2);
       results.unshift(searchBarBot);
-      results[results.length - 1].splice(-1);
+      results[results.length - 1].splice(-2, 1);
     }
 
     var input = React.createElement('input', {

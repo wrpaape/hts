@@ -143,6 +143,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
   display: inline-block;
   width: 50%;
   height: 48px;
+  margin-top: 48px;
   background-color: $c;
   cursor: pointer;
 }
@@ -158,10 +159,24 @@ $m-ds: drop-shadow(1px 1px 1px black);
   font-family: $f-main;
   border: none;
 }
-@mixin btn($c-bg) {
-  cursor: pointer;
+@mixin btn-mid {
   &:active {
     text-shadow: 1px 1px 1px black;
+  }
+}
+@mixin btn-bot {
+  &:active {
+    & + .mid {
+      text-shadow: 1px 1px 1px black;
+    }
+  }
+}
+@mixin btn-top {
+  @include btn-bot;
+  &:active {
+    & + .bot + .mid {
+      text-shadow: 1px 1px 1px black;
+    }
   }
 }
 // ▲▲▲▲▲▲▲▲▲ CUSTOM MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
@@ -184,15 +199,18 @@ img {
   display: inline-block;
   vertical-align: top;
   position: relative;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: overlay;
   .nav-btn {
     &:not(.search-bar-block) {
+      cursor: pointer;
       &.top {
         @include top-block($c-btn-bg1);
+        @include btn-top;
       }
       &.mid {
         @include mid-block($c-btn-txt1, $c-btn-bg1);
-        @include btn($c-btn-bg1);
+        @include btn-mid;
         display: block;
         position: relative;
         border-top: 9px solid white;
@@ -201,16 +219,20 @@ img {
       }
       &.bot {
         @include bot-block($c-btn-bg1);
+        @include btn-bot;
       }
       @include lighten-on-change($c-btn-bg1);
     }
     &.search-bar-block {
-      cursor: text;
-      &.bot {
-        @include bot-block($c-btn-bg2);
-      }
       &.top {
         @include top-block($c-btn-bg2);
+      }
+      &.bot {
+        @include bot-block($c-btn-bg2);
+        margin-top: 0;
+      }
+      &.top, &.bot {
+        cursor: text;
       }
     }
   }

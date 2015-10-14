@@ -49,7 +49,7 @@ var NavBtns= React.createClass({
   render: function() {
     var toggleExpanded = this.props.toggleState.bind(this, 'expanded', this.setBtnsProps);
     var btns = this.props.buildBtns(this.state.btnsProps);
-    btns[btns.length - 1].splice(-1);
+    btns[btns.length - 1].splice(-2, 1);
 
     return React.createElement('div', {
       className: 'nav-btns',

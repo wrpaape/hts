@@ -76,8 +76,8 @@ var NavBar = React.createClass({
       return btnsProps.map(function(btnProps) {
         return([
           React.createElement(window.NavBtn, btnProps.top),
-          React.createElement(midComp, btnProps.mid),
-          React.createElement(window.NavBtn, btnProps.bot) 
+          React.createElement(window.NavBtn, btnProps.bot),
+          React.createElement(midComp, btnProps.mid) 
         ]);
       });
     };
@@ -86,7 +86,7 @@ var NavBar = React.createClass({
       props.toggleState = toggleState;
       props.toggleHovered = toggleHovered;
       props.buildBtnProps = buildBtnProps;
-      
+
       props.buildBtns = buildBtns.bind(null, window.NavBtn);
 
       return React.createElement(window.NavBtns, props);
