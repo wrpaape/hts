@@ -67,22 +67,25 @@ var SearchBar = React.createClass({
       window.location.href = firstResult.mid.path;
     }
   },
+  buildBlock: function(pos, z) {
+    return React.createElement('a', {
+      key: 'search-bar-' + pos,
+      style: { zIndex: z },
+      className: 'nav-btn search-bar-block ' + pos,
+      onClick: this.focusInput
+    });
+  },
   render: function() {
-    // var results = this.props.buildBtns(this.state.btnsProps, window.SearchResult);
     var results = this.props.buildBtns(this.state.btnsProps);
 
+    var zSearch = this.state.btnsProps.length * 2;
     var searchBarStyle;
     if (results.length) {
-      var zSearch = this.state.btnsProps.length * 2;
       searchBarStyle = {
         zIndex: zSearch
       };
-      results.unshift(React.createElement('a', {
-        key: 'search-bar-bot',
-        style: { zIndex: zSearch - 2 },
-        className: 'nav-btn bot search-bar-bot',
-        onClick: this.focusInput
-      }));
+      var searchBarBot = this.buildBlock('bot', zSearch - 2);
+      results.unshift(searchBarBot);
       results[results.length - 1].splice(-1);
     }
 
@@ -105,6 +108,6 @@ var SearchBar = React.createClass({
 
     return React.createElement('div', {
       className: 'search-results'
-    }, [searchBar].concat(results));
+    }, [this.buildBlock('top', zSearch + 1), searchBar].concat(results));
   }
 });

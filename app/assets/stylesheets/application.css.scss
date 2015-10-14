@@ -186,7 +186,7 @@ img {
   position: relative;
   overflow: hidden;
   .nav-btn {
-    &:not(.search-bar-bot) {
+    &:not(.search-bar-block) {
       &.top {
         @include top-block($c-btn-bg1);
       }
@@ -204,9 +204,14 @@ img {
       }
       @include lighten-on-change($c-btn-bg1);
     }
-    &.search-bar-bot {
-      @include bot-block($c-btn-bg2);
+    &.search-bar-block {
       cursor: text;
+      &.bot {
+        @include bot-block($c-btn-bg2);
+      }
+      &.top {
+        @include top-block($c-btn-bg2);
+      }
     }
   }
   .nav-btn, .search-bar {
