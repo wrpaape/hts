@@ -68,7 +68,8 @@ var SearchBar = React.createClass({
     }
   },
   render: function() {
-    var results = this.props.buildBtns(this.state.btnsProps, window.SearchResult, window.NavBtn);
+    // var results = this.props.buildBtns(this.state.btnsProps, window.SearchResult);
+    var results = this.props.buildBtns(this.state.btnsProps);
 
     var searchBarStyle;
     if (results.length) {

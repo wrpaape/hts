@@ -43,7 +43,7 @@ var NavBar = React.createClass({
       var zBot = zMid - 2;
       return({
         top: {
-          key: 'nav-btn-top-' + args.id,
+          key: 'nav-btn-top-' + args.key,
           path: args.path,
           display: '',
           zIndex: zTop,
@@ -62,7 +62,7 @@ var NavBar = React.createClass({
           className: 'nav-btn mid false'
         },
         bot: {
-          key: 'nav-btn-bot-' + args.id,
+          key: 'nav-btn-bot-' + args.key,
           path: args.path,
           display: '',
           zIndex: zBot,
@@ -72,12 +72,12 @@ var NavBar = React.createClass({
         }
       });
     };
-    var buildBtns = function(btnsProps, midComp, outerComp) {
+    var buildBtns = function(midComp, btnsProps) {
       return btnsProps.map(function(btnProps) {
         return([
-          React.createElement(outerComp, btnProps.top),
+          React.createElement(window.NavBtn, btnProps.top),
           React.createElement(midComp, btnProps.mid),
-          React.createElement(outerComp, btnProps.bot) 
+          React.createElement(window.NavBtn, btnProps.bot) 
         ]);
       });
     };
@@ -86,14 +86,15 @@ var NavBar = React.createClass({
       props.toggleState = toggleState;
       props.toggleHovered = toggleHovered;
       props.buildBtnProps = buildBtnProps;
-      props.buildBtns = buildBtns;
+      
+      props.buildBtns = buildBtns.bind(null, window.NavBtn);
 
       return React.createElement(window.NavBtns, props);
     });
     var searchBarProps = this.props.searchBar;
     searchBarProps.toggleHovered = toggleHovered;
     searchBarProps.buildBtnProps = buildBtnProps;
-    searchBarProps.buildBtns = buildBtns;
+    searchBarProps.buildBtns = buildBtns.bind(null, window.SearchResult);
     var searchBar = React.createElement(window.SearchBar, searchBarProps);
 
     return React.createElement('div', {
