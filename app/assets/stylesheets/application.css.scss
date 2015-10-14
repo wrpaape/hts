@@ -85,6 +85,7 @@ $c-btn-txt1: white;
 $c-btn-bg1: #0062A7;
 $c-btn-txt2: white;
 $c-btn-bg2: #588F15;
+$c-txt-ph: #A7A8A9;
 $f-main: 'Exo', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
 $m-ww: brightness(5000%);
@@ -93,14 +94,46 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
-// @mixin color-block($c) {
-//   // z-index: -1;
-//   content: "";
-//   position: absolute;
-//   width: 50%;
-//   height: 50%;
-//   background-color: red;
-// }
+@mixin mag-glass($s-f, $c, $c-hov) {
+  @include border-radii(50%);
+  // @include hover-c-b($c-hov);
+  // @include active-ds;
+  &:hover {
+    border-color: $c-hov;
+    &:before {
+      background-color: $c-hov;
+    }
+  }
+  &:active {
+    @include filters($m-ds);
+  }
+  position: absolute;
+  display: inline-block;
+  font-size: $s-f;
+  bottom: 1em;
+  right: 5em;
+  width: 1em;
+  height: 1em;
+  border: 0.125em solid $c;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  &:before {
+    @include transforms(rotate(60deg));
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -0.25em;
+    bottom: -0.3em;
+    width: 0.625em;
+    height: 0.125em;
+    border-width: 0;
+    background-color: $c;
+    &:hover {
+      background-color: $c-hov;
+    }
+  }
+}
 @mixin lighten-on-change($c) {
   &.true {
     background-color: lighten($c, 10%);
@@ -239,13 +272,15 @@ img {
   .nav-btn, .search-bar {
     &.mid:last-child, &.mid:last-child > input {
       @include border-radius-br(0);
+      padding-right: 36px;
+      width: 300px;
+      box-sizing: border-box;
       button {
-        right: 20px;
+        right: 0.75em;
       }
     }
   }
 }
-
 
 .nav-btns {
   margin-right: 5px;
@@ -262,31 +297,13 @@ img {
     outline: none;
   }
   button {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    right: 72px;
-    bottom: 14px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: transparent;
-    background-image: asset-url("icons/search.png");
-    &:hover {
-      @include filters($m-ww)
-    }
-    &:active {
-      @include filters($m-ww $m-ds);
-    }
+    @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
   }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
-  .nav-btn:not(:first-child) {
-
-  }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
