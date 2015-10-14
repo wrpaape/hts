@@ -13,10 +13,10 @@ var NavBar = React.createClass({
   //   });
   // },
   render: function() {
-    var toggleState = function(boolState) {
+    var toggleState = function(boolState, callback) {
       var stateChange = {};
       stateChange[boolState] = !this.state[boolState];
-      this.setState(stateChange);
+      this.setState(stateChange, callback);
     };
     // var toggleExpand = toggleState.bind(this, 'expand');
 
@@ -72,23 +72,32 @@ var NavBar = React.createClass({
         }
       });
     };
+    var buildBtns = function(btnsProps, midComp, outerComp) {
+      return btnsProps.map(function(btnProps) {
+        return([
+          React.createElement(outerComp, btnProps.top),
+          React.createElement(midComp, btnProps.mid),
+          React.createElement(outerComp, btnProps.bot) 
+        ]);
+      });
+    };
 
     var navBtns = this.props.navBtnsAll.map(function(props) {
       props.toggleState = toggleState;
       props.toggleHovered = toggleHovered;
       props.buildBtnProps = buildBtnProps;
+      props.buildBtns = buildBtns;
 
       return React.createElement(window.NavBtns, props);
     });
     var searchBarProps = this.props.searchBar;
     searchBarProps.toggleHovered = toggleHovered;
     searchBarProps.buildBtnProps = buildBtnProps;
+    searchBarProps.buildBtns = buildBtns;
     var searchBar = React.createElement(window.SearchBar, searchBarProps);
 
-    return(
-      <div id='nav-bar'>
-        { navBtns.concat(searchBar) }
-      </div>
-    );
+    return React.createElement('div', {
+      id: 'nav-bar'
+    }, navBtns.concat(searchBar));
   }
 });

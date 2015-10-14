@@ -13,42 +13,6 @@ var SearchBar = React.createClass({
       value: nextProps.value
     });
   },
-  // setBtnProps: function(id, btnsLength, key, path, display, input) {
-  //   var toggleHovered = this.props.toggleHovered;
-  //   var zTop = 2 * (btnsLength - id) - 1;
-  //   var zMid = zTop - 1;
-  //   var zBot = zMid - 2;
-  //   return({
-  //     top: {
-  //       key: 'nav-btn-top-' + id,
-  //       path: path,
-  //       display: '',
-  //       zIndex: zTop,
-  //       toggleHovered: toggleHovered.bind(this, id, 'top'),
-  //       hovered: false,
-  //       className: 'nav-btn top false'
-  //     },
-  //     mid: {
-  //       key: key,
-  //       path: path,
-  //       display: display,
-  //       zIndex: zMid,
-  //       input: input,
-  //       toggleHovered: toggleHovered.bind(this, id, 'mid'),
-  //       hovered: false,
-  //       className: 'nav-btn mid false'
-  //     },
-  //     bot: {
-  //       key: 'nav-btn-bot-' + id,
-  //       path: path,
-  //       display: '',
-  //       zIndex: zBot,
-  //       toggleHovered: toggleHovered.bind(this, id, 'bot'),
-  //       hovered: false,
-  //       className: 'nav-btn bot false'
-  //     }
-  //   });
-  // },
   setBtnsProps: function(output, newValue) {
     var rawResults = JSON.parse(output);
     var toggleHovered = this.props.toggleHovered;
@@ -104,13 +68,7 @@ var SearchBar = React.createClass({
     }
   },
   render: function() {
-    var results = this.state.btnsProps.map(function(result) {
-      return([
-        React.createElement(window.NavBtn, result.top),
-        React.createElement(window.SearchResult, result.mid),
-        React.createElement(window.NavBtn, result.bot) 
-      ]);
-    });
+    var results = this.props.buildBtns(this.state.btnsProps, window.SearchResult, window.NavBtn);
 
     var searchBarStyle;
     if (results.length) {
