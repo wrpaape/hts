@@ -96,8 +96,6 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
 @mixin mag-glass($s-f, $c, $c-hov) {
   @include border-radii(50%);
-  // @include hover-c-b($c-hov);
-  // @include active-ds;
   &:hover {
     border-color: $c-hov;
     &:before {
@@ -120,7 +118,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
   outline: none;
   &:before {
     @include transforms(rotate(60deg));
-    content: "";
+    content: '';
     display: inline-block;
     position: absolute;
     right: -0.25em;

@@ -41,6 +41,9 @@ var NavBtns= React.createClass({
       btnsProps: btnsIndex,
     });
   },
+  componentDidUpdate: function() {
+    this.props.resizeScrollbar();
+  },
   setBtnsProps: function() {
     this.setState({
       btnsProps: this.state.expanded ? this.state.btnsAll : this.state.btnsIndex

@@ -1,25 +1,14 @@
-/* globals React */
+/* globals React, $ */
 'use strict';
 
 var NavBar = React.createClass({
-  // getInitialState: function() {
-  //   return({
-  //     expand: false
-  //   });
-  // },
-  // toggleExpand: function() {
-  //   this.setState({
-  //     expand: !this.state.expand
-  //   });
-  // },
   render: function() {
+    var resizeScrollbar = $('html').getNiceScroll()[0].resize;
     var toggleState = function(boolState, callback) {
       var stateChange = {};
       stateChange[boolState] = !this.state[boolState];
       this.setState(stateChange, callback);
     };
-    // var toggleExpand = toggleState.bind(this, 'expand');
-
     var toggleHovered = function(id, pos) {
       var btnsProps = this.state.btnsProps;
       var btn = btnsProps[id];
@@ -83,15 +72,16 @@ var NavBar = React.createClass({
     };
 
     var navBtns = this.props.navBtnsAll.map(function(props) {
+      props.resizeScrollbar = resizeScrollbar;
       props.toggleState = toggleState;
       props.toggleHovered = toggleHovered;
       props.buildBtnProps = buildBtnProps;
-
       props.buildBtns = buildBtns.bind(null, window.NavBtn);
 
       return React.createElement(window.NavBtns, props);
     });
     var searchBarProps = this.props.searchBar;
+    searchBarProps.resizeScrollbar = resizeScrollbar;
     searchBarProps.toggleHovered = toggleHovered;
     searchBarProps.buildBtnProps = buildBtnProps;
     searchBarProps.buildBtns = buildBtns.bind(null, window.SearchResult);

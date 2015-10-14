@@ -12,10 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.nicescroll
 //= require turbolinks
 //= require react
 //= require react_ujs
 //= require react_rails_img
 //= require components
-//= require ajax
 //= require_tree .
+
+/* globals $, Iscroll */
+'use strict';
+
+$(function() {  
+  $('html').niceScroll({
+    scrollspeed: 50,
+    mousescrollstep: 80
+  });
+});

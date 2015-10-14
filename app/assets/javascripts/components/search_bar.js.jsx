@@ -8,10 +8,8 @@ var SearchBar = React.createClass({
       btnsProps: []
     });
   },
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      value: nextProps.value
-    });
+  componentDidUpdate: function() {
+    this.props.resizeScrollbar();
   },
   setBtnsProps: function(output, newValue) {
     var rawResults = JSON.parse(output);
@@ -108,6 +106,7 @@ var SearchBar = React.createClass({
     }, input);
 
     return React.createElement('div', {
+      id: 'search-results',
       className: 'search-results'
     }, [this.buildBlock('top', zSearch + 1), searchBar].concat(results));
   }

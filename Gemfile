@@ -60,3 +60,4 @@ gem 'bullet', group: :development
 gem 'bcrypt'
 gem 'react-rails'
 gem 'react-rails-img'
+gem 'nicescroll-rails'
