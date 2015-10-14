@@ -5,7 +5,7 @@ var SearchBar = React.createClass({
   getInitialState: function() {
     return({
       value: '',
-      resultsProps: []
+      btnsProps: []
     });
   },
   componentWillReceiveProps: function(nextProps) {
@@ -13,18 +13,64 @@ var SearchBar = React.createClass({
       value: nextProps.value
     });
   },
-  toggleResultsHovered: function(id, pos) {
-    var resultsProps = this.state.resultsProps;
-    var result = resultsProps[id];
-    result[pos].hovered = !result[pos].hovered;
-    var hoveredAny = Object.keys(result).some(function(pos) {
-      return result[pos].hovered;
-    });
-    Object.keys(result).forEach(function(pos) {
-      result[pos].className = 'nav-btn ' + pos + ' ' + hoveredAny;
-    });
+  // setBtnProps: function(id, btnsLength, key, path, display, input) {
+  //   var toggleHovered = this.props.toggleHovered;
+  //   var zTop = 2 * (btnsLength - id) - 1;
+  //   var zMid = zTop - 1;
+  //   var zBot = zMid - 2;
+  //   return({
+  //     top: {
+  //       key: 'nav-btn-top-' + id,
+  //       path: path,
+  //       display: '',
+  //       zIndex: zTop,
+  //       toggleHovered: toggleHovered.bind(this, id, 'top'),
+  //       hovered: false,
+  //       className: 'nav-btn top false'
+  //     },
+  //     mid: {
+  //       key: key,
+  //       path: path,
+  //       display: display,
+  //       zIndex: zMid,
+  //       input: input,
+  //       toggleHovered: toggleHovered.bind(this, id, 'mid'),
+  //       hovered: false,
+  //       className: 'nav-btn mid false'
+  //     },
+  //     bot: {
+  //       key: 'nav-btn-bot-' + id,
+  //       path: path,
+  //       display: '',
+  //       zIndex: zBot,
+  //       toggleHovered: toggleHovered.bind(this, id, 'bot'),
+  //       hovered: false,
+  //       className: 'nav-btn bot false'
+  //     }
+  //   });
+  // },
+  setBtnsProps: function(output, newValue) {
+    var rawResults = JSON.parse(output);
+    var toggleHovered = this.props.toggleHovered;
+    var btnsProps = rawResults.map(function(result, i) {
+      var args = {
+        id: i,
+        btnsLength: rawResults.length,
+        key: result.key,
+        path: result.path,
+        display: result.display,
+        toggleHoveredTop: toggleHovered.bind(this, i, 'top'),
+        toggleHoveredMid: toggleHovered.bind(this, i, 'mid'),
+        toggleHoveredBot: toggleHovered.bind(this, i, 'bot'),
+        input: newValue
+      };
+
+      return this.props.buildBtnProps(args);
+    }.bind(this));
+
     this.setState({
-      resultsProps: resultsProps
+      value: newValue,
+      btnsProps: btnsProps
     });
   },
   focusInput: function() {
@@ -36,52 +82,13 @@ var SearchBar = React.createClass({
       ajax.get(this.props.url,
         { input: newValue },
         function(output) {
-          var rawResults = JSON.parse(output);
-          var resultsProps = rawResults.map(function(result, i) {
-            var zTop = 2 * (rawResults.length - i) - 1;
-            var zMid = zTop - 1;
-            var zBot = zMid - 2;
-            return({
-              top: {
-                key: 'result-top-' + i,
-                path: result.path,
-                display: '',
-                zIndex: zTop,
-                toggleHovered: this.toggleResultsHovered.bind(this, i, 'top'),
-                hovered: false,
-                className: 'nav-btn top false'
-              },
-              mid: {
-                key: result.key,
-                path: result.path,
-                display: result.display,
-                zIndex: zMid,
-                toggleHovered: this.toggleResultsHovered.bind(this, i, 'mid'),
-                hovered: false,
-                className: 'nav-btn mid false'
-              },
-              bot: {
-                key: 'result-bot-' + i,
-                path: result.path,
-                display: '',
-                zIndex: zBot,
-                toggleHovered: this.toggleResultsHovered.bind(this, i, 'top'),
-                hovered: false,
-                className: 'nav-btn bot false'
-              }
-            });
-          }.bind(this));
-
-          this.setState({
-            value: newValue,
-            resultsProps: resultsProps
-          });
+          this.setBtnsProps(output, newValue);
         }.bind(this),
         true);
     } else {
       this.setState({
         value: newValue,
-        resultsProps: []
+        btnsProps: []
       });
     }
   },
@@ -91,13 +98,13 @@ var SearchBar = React.createClass({
     }
   },
   goToFirstResult: function() {
-    var firstResult = this.state.resultsProps[0];
+    var firstResult = this.state.btnsProps[0];
     if (firstResult) {
       window.location.href = firstResult.mid.path;
     }
   },
   render: function() {
-    var results = this.state.resultsProps.map(function(result) {
+    var results = this.state.btnsProps.map(function(result) {
       return([
         React.createElement(window.NavBtn, result.top),
         React.createElement(window.SearchResult, result.mid),
@@ -107,27 +114,18 @@ var SearchBar = React.createClass({
 
     var searchBarStyle;
     if (results.length) {
-      var zSearch = this.state.resultsProps.length * 2;
+      var zSearch = this.state.btnsProps.length * 2;
       searchBarStyle = {
         zIndex: zSearch
       };
-      results.splice(-1);
       results.unshift(React.createElement('a', {
         key: 'search-bar-bot',
         style: { zIndex: zSearch - 2 },
         className: 'nav-btn bot search-bar-bot',
         onClick: this.focusInput
       }));
-    };
-    // else {
-    //   searchBarStyle = {
-    //     WebkitBorderRadius: '55% 0',
-    //     MozBorderRadius: '55% 0',
-    //     msBorderRadius: '55% 0',
-    //     OBorderRadius: '55% 0',
-    //     borderRadius: '55% 0'
-    //   };
-    // };
+      results[results.length - 1].splice(-1);
+    }
 
     var input = React.createElement('input', {
       type: 'text',
