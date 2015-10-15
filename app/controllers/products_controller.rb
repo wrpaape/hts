@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = product_type.all.as_json
+    @url =
+    @placeholder = "search #{}"
   end
 
   def search
