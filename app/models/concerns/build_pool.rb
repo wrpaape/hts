@@ -24,7 +24,7 @@ module BuildPool
       return Proc.new { |result| "#{result[1]} (#{result[2]})" } if is_a?(Member)
       case search_for
         when :info
-          Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓(#{result[2]})" }
+          Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2].tr("/ /", " ")})" }
         else
           Proc.new { |result| result[1] }
       end

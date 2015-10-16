@@ -5,9 +5,11 @@ var SearchResult = React.createClass({
   render: function() {
     var raw = this.props.display;
     var input = '(' + this.props.input + ')';
+    var className = this.props.className;
     var regInput = new RegExp(input, 'i');
     var splitRaw = raw.split('▓');
     if (splitRaw[1]) {
+      className += ' info';
       var infoBit = splitRaw[0];
       var name = splitRaw[1];
       switch (infoBit.replace(regInput, '').split(' ').length) {
@@ -28,7 +30,7 @@ var SearchResult = React.createClass({
     return React.createElement(window.NavBtn, {
       zIndex: this.props.zIndex,
       path: this.props.path,
-      className: this.props.className,
+      className: className,
       toggleHovered: this.props.toggleHovered,
       display: display
     });

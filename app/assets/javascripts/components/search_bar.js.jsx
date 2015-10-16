@@ -10,6 +10,17 @@ var SearchBar = React.createClass({
   },
   componentDidUpdate: function() {
     this.props.resizeScrollbar();
+    var infos = document.getElementsByClassName('info');
+    var lastInfo = infos.pop();
+    if (!lastInfo) {
+      return;
+    }
+    var lastResult = document.getElementById('search-results').lastChild;
+    for (var i = 0; i < infos.length; i++) {
+      this.addInfoClass(infos[i].previousSibling);
+      this.addInfoClass(infos[i].nextSibling);
+    }
+    this.addInfoClass(lastResult.previousSibling);
   },
   setBtnsProps: function(output, newValue) {
     var rawResults = JSON.parse(output);
@@ -34,6 +45,11 @@ var SearchBar = React.createClass({
       value: newValue,
       btnsProps: btnsProps
     });
+  },
+  checkInfo: function(el) {
+    if(!(/info/.test(el.className))) {
+      el.className += ' info';
+    }
   },
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();

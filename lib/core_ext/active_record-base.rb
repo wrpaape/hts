@@ -32,6 +32,6 @@ class ActiveRecord::Base
   end
 
   def strip_single_newlines(text)
-    self[text].try(:gsub!, /(?<!\n)\n(?!\n)/, " ")
+    self[text].try(:tr!, "/(?<!\n)\n(?!\n)/", " ")
   end
 end

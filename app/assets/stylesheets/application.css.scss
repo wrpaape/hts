@@ -251,14 +251,12 @@ img {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-
 .nav-btns, .search-results {
   display: inline-block;
   vertical-align: top;
   position: relative;
   overflow: hidden;
   .nav-btn {
-    @include fade-in;
     outline: none;
     &:not(.search-bar-block) {
       cursor: pointer;
@@ -310,6 +308,9 @@ img {
 
 .nav-btns {
   margin-right: 5px;
+  .nav-btn {
+    @include fade-in;
+  }
 }
 
 .search-bar {
@@ -332,6 +333,9 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
+  .mid {
+    background-color: rgba(200,200,200,0.5)!important;
+  }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

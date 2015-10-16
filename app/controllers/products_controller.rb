@@ -1,9 +1,12 @@
 class ProductsController < ApplicationController
   def index
-    @search_bar_props = {
-      key: "search-bar",
-      url: product_search_path,
-      placeholder: product_placeholder
+    @nav_bar_props = {
+      navBtnsAll: [],
+      searchBar: {
+        key: "search-bar",
+        url: product_search_path,
+        placeholder: product_placeholder
+      }
     }
   end
   
@@ -14,7 +17,7 @@ class ProductsController < ApplicationController
   end
 
   def product_placeholder
-     "search #{product_type.category.to_s.gsub(/_/, " ")}"
+     "search #{product_type.category.to_s.tr("/_/", " ")}"
   end
 
   def product_search_path

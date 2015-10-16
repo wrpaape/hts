@@ -27,11 +27,11 @@ module Hts
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.after_initialize do
-      # Rails.application.eager_load!
-      # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
-      # searchable.each(&:set_pool)
-      # SearchController.set_attributes(searchable)
-    end
+    # config.after_initialize do
+    #   # Rails.application.eager_load!
+    #   # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
+    #   # searchable.each(&:set_pool)
+    #   # SearchController.set_attributes(searchable)
+    # end
   end
 end

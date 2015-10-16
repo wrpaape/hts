@@ -18,7 +18,7 @@ var NavBar = React.createClass({
         return btn[pos].hovered;
       });
       positions.forEach(function(pos) {
-        btn[pos].className = 'nav-btn ' + pos + ' ' + hoveredAny;
+        btn[pos].className =  btn[pos].className.replace(!hoveredAny, hoveredAny);
       });
 
       this.setState({
@@ -71,14 +71,14 @@ var NavBar = React.createClass({
       });
     };
 
-    var navBtns = this.props.navBtnsAll.map(function(props) {
-      props.resizeScrollbar = resizeScrollbar;
-      props.toggleState = toggleState;
-      props.toggleHovered = toggleHovered;
-      props.buildBtnProps = buildBtnProps;
-      props.buildBtns = buildBtns.bind(null, window.NavBtn);
+    var navBtns = this.props.navBtnsAll.map(function(navBtnsProps) {
+      navBtnsProps.resizeScrollbar = resizeScrollbar;
+      navBtnsProps.toggleState = toggleState;
+      navBtnsProps.toggleHovered = toggleHovered;
+      navBtnsProps.buildBtnProps = buildBtnProps;
+      navBtnsProps.buildBtns = buildBtns.bind(null, window.NavBtn);
 
-      return React.createElement(window.NavBtns, props);
+      return React.createElement(window.NavBtns, navBtnsProps);
     });
     var searchBarProps = this.props.searchBar;
     searchBarProps.resizeScrollbar = resizeScrollbar;

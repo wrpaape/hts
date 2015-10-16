@@ -25,8 +25,8 @@ class MainController < ApplicationController
     }
 	end
 
-  def download_file
+  def download_pdf
     pdf = Pdf.find(params[:id])
-    send_file(path: pdf.path, filename: pdf.filename, type: "application/pdf")
+    send_file(path: pdf.path_file, filename: pdf.filename, type: "application/pdf")
   end
 end
