@@ -1,9 +1,9 @@
 class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
-      t.string :key
-      t.string :name
-      t.string :link
+      t.string :key, uniqueness: true
+      t.string :name, uniqueness: true
+      t.string :link, uniqueness: true
 
       t.timestamps null: false
     end

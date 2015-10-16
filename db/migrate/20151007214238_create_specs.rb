@@ -1,9 +1,9 @@
 class CreateSpecs < ActiveRecord::Migration
   def change
     create_table :specs do |t|
-      t.string :key
-      t.string :title
-      t.text :body
+      t.string :key, uniqueness: true
+      t.string :title, uniqueness: true
+      t.text :body, uniqueness: true
       t.string :parent_type
       t.integer :parent_id
 
