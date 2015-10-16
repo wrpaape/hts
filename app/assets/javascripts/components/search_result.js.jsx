@@ -27,11 +27,12 @@ var SearchResult = React.createClass({
       return React.createElement(i % 2 ? 'strong' : 'span', { key: i }, sec.replace(/-|_/g,'$&\u200b'));
     });
 
-    return React.createElement(window.NavBtn, {
+    return React.createElement(window.MidBlock, {
       zIndex: this.props.zIndex,
       path: this.props.path,
       className: className,
       toggleHovered: this.props.toggleHovered,
+      setLines: this.props.setLines,
       display: display
     });
   }

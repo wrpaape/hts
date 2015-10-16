@@ -8,24 +8,50 @@ var SearchBar = React.createClass({
       btnsProps: []
     });
   },
-  componentDidUpdate: function() {
-    this.props.resizeScrollbar();
-    var infos = document.getElementsByClassName('info');
-    var lastInfo = infos.pop();
-    if (!lastInfo) {
-      return;
-    }
-    var lastResult = document.getElementById('search-results').lastChild;
-    for (var i = 0; i < infos.length; i++) {
-      this.addInfoClass(infos[i].previousSibling);
-      this.addInfoClass(infos[i].nextSibling);
-    }
-    this.addInfoClass(lastResult.previousSibling);
-  },
+  // componentWillUpdate: function(nextProps, nextState) {
+  //   var lengthResults = nextState.btnsProps.length;
+  //   if (this.state.value != nextState.value && lengthResults) {
+  //     this.fixTesBlocks(lengthResults);
+  //   }
+  // }
+  // componentDidUpdate: function() {
+  //   this.props.resizeScrollbar();
+  // },
+  // addLinesClassToBots: function(i, linesClass) {
+  //   this.refs['bot-' + (i - 1)].getDOMNode().className += linesClass;
+  //   this.refs['bot-' + i].getDOMNode().className += linesClass;
+  // },
+  // getLinesClass: function(height) {
+  //   var linesClass = '';
+  //   if (height > 75) {
+  //     linesClass = height < 104 ? ' lines-2' : ' lines-3'; 
+  //   }
+  //   return linesClass;
+  // },
+  // fixTesBlocks: function(lengthResults) {
+  //   var result, linesClass;
+  //   for(var i = 0; i < lengthResults; i++) {
+  //     result = this.refs['mid-' + i].getDOMNode();
+  //     linesClass = this.getLinesClass(result.clientHeight);
+  //     result.className += linesClass;
+  //     this.addLinesClassToBots(i, linesClass);
+  //     if (i < lengthResults - 1) {
+  //       this.refs['top-' + (i + 1)].getDOMNode().className += linesClass;
+  //     }
+  //   }
+  // },
   setBtnsProps: function(output, newValue) {
     var rawResults = JSON.parse(output);
     var toggleHovered = this.props.toggleHovered;
+    var setLines = this.props.setLines;
     var btnsProps = rawResults.map(function(result, i) {
+      var ids = [i, i - 1];
+      if (!i) {
+        ids.pop();
+      }
+      if (i == rawResults.length - 1) {
+        ids.pop();
+      }
       var args = {
         id: i,
         btnsLength: rawResults.length,
@@ -35,6 +61,7 @@ var SearchBar = React.createClass({
         toggleHoveredTop: toggleHovered.bind(this, i, 'top'),
         toggleHoveredMid: toggleHovered.bind(this, i, 'mid'),
         toggleHoveredBot: toggleHovered.bind(this, i, 'bot'),
+        setLines: setLines.bind(this, ids),
         input: newValue
       };
 
@@ -45,11 +72,6 @@ var SearchBar = React.createClass({
       value: newValue,
       btnsProps: btnsProps
     });
-  },
-  checkInfo: function(el) {
-    if(!(/info/.test(el.className))) {
-      el.className += ' info';
-    }
   },
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();
@@ -84,6 +106,7 @@ var SearchBar = React.createClass({
   buildBlock: function(pos, z) {
     return React.createElement('a', {
       key: 'search-bar-' + pos,
+      ref: pos + '--1',
       style: { zIndex: z },
       tabIndex: -1,
       className: 'nav-btn search-bar-block ' + pos,
@@ -106,7 +129,6 @@ var SearchBar = React.createClass({
 
     var input = React.createElement('input', {
       type: 'text',
-      ref: 'searchBar',
       style: searchBarStyle,
       value: this.state.value,
       placeholder: this.props.placeholder,
@@ -116,12 +138,14 @@ var SearchBar = React.createClass({
 
     var searchBar = React.createElement('div', {
       key: 'search-bar',
+      ref: 'searchBar',
       className: 'search-bar mid',
       style: searchBarStyle,
       onClick: this.focusInput
     }, input);
 
     return React.createElement('div', {
+      ref: 'searchResults',
       id: 'search-results',
       className: 'search-results'
     }, [this.buildBlock('top', zSearch + 1), searchBar].concat(results));

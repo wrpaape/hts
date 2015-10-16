@@ -18,7 +18,18 @@ var NavBar = React.createClass({
         return btn[pos].hovered;
       });
       positions.forEach(function(pos) {
-        btn[pos].className =  btn[pos].className.replace(!hoveredAny, hoveredAny);
+        btn[pos].className = btn[pos].className.replace(!hoveredAny, hoveredAny);
+      });
+
+      this.setState({
+        btnsProps: btnsProps
+      });
+    };
+
+    var setLines = function(botIds, linesClass) {
+      var btnsProps = this.state.btnsProps;
+      botIds.forEach(function(id) {
+        btnsProps[id].bot.className = btnsProps[id].bot.className.replace(/ lines-(\d)|$/, linesClass);
       });
 
       this.setState({
@@ -32,6 +43,7 @@ var NavBar = React.createClass({
       var zBot = zMid - 2;
       return({
         top: {
+          ref: 'top-' + args.id,
           key: 'nav-btn-top-' + args.key,
           path: args.path,
           display: '',
@@ -41,16 +53,19 @@ var NavBar = React.createClass({
           className: 'nav-btn top false'
         },
         mid: {
+          ref: 'mid-' + args.id,
           key: args.key,
           path: args.path,
           display: args.display,
           zIndex: zMid,
           input: args.input,
           toggleHovered: args.toggleHoveredMid,
+          setLines: args.setLines,
           hovered: false,
           className: 'nav-btn mid false'
         },
         bot: {
+          ref: 'bot-' + args.id,
           key: 'nav-btn-bot-' + args.key,
           path: args.path,
           display: '',
@@ -75,6 +90,7 @@ var NavBar = React.createClass({
       navBtnsProps.resizeScrollbar = resizeScrollbar;
       navBtnsProps.toggleState = toggleState;
       navBtnsProps.toggleHovered = toggleHovered;
+      navBtnsProps.setLines = setLines;
       navBtnsProps.buildBtnProps = buildBtnProps;
       navBtnsProps.buildBtns = buildBtns.bind(null, window.NavBtn);
 
@@ -83,6 +99,7 @@ var NavBar = React.createClass({
     var searchBarProps = this.props.searchBar;
     searchBarProps.resizeScrollbar = resizeScrollbar;
     searchBarProps.toggleHovered = toggleHovered;
+    searchBarProps.setLines = setLines;
     searchBarProps.buildBtnProps = buildBtnProps;
     searchBarProps.buildBtns = buildBtns.bind(null, window.SearchResult);
     var searchBar = React.createElement(window.SearchBar, searchBarProps);

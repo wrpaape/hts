@@ -187,21 +187,35 @@ $m-ds: drop-shadow(1px 1px 1px black);
     background-color: $c-bg-main;
     @include border-radius-br(100%);
   }
+  &.info {
+    height: 58px;
+    margin-top: -49px;
+    &:before {
+      height: 58px;
+    }
+  }
 }
 @mixin bot-block($c) {
   position: absolute;
   display: inline-block;
   width: 50%;
-  height: 26px;
+  height: 27px;
   margin-top: 57px;
   background-color: $c;
-    &:before {
+  &:before {
     content: '';
     position: absolute;
     width: 100%;
     height: 27px;
     background-color: $c-bg-main;
     @include border-radius-tl(100%);
+  }
+  &.info {
+    height: 47px;
+    margin-top: 113px;
+    &:before {
+      height: 47px;
+    }
   }
 }
 @mixin mid-block($c-txt, $c-bg) {
@@ -215,6 +229,12 @@ $m-ds: drop-shadow(1px 1px 1px black);
   border-color: $c-bg;
   font-family: $f-main;
   border: none;
+  &.info {
+    height: 113px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
 }
 @mixin btn-mid {
   &:active {
@@ -333,9 +353,9 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
-  .mid {
-    background-color: rgba(200,200,200,0.5)!important;
-  }
+  // .mid {
+  //   background-color: rgba(200,200,200,0.5)!important;
+  // }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
