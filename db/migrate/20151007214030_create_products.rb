@@ -1,12 +1,12 @@
 class CreateProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
-      t.string :key, uniqueness: true
+      t.string :key, index: true, uniqueness: true
       t.string :type
       t.string :type_display
-      t.string :name, uniqueness: true
-      t.string :path_show, uniqueness: true
-      t.text :info, uniqueness: true
+      t.string :name, index: true, uniqueness: true
+      t.string :path_show, index: true, uniqueness: true
+      t.text :info, index: true, uniqueness: true
 
       t.timestamps null: false
     end

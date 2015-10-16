@@ -28,7 +28,13 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "assets", ["filename"], name: "index_assets_on_filename", using: :btree
+  add_index "assets", ["key"], name: "index_assets_on_key", using: :btree
+  add_index "assets", ["parent_id", "parent_type"], name: "index_assets_on_parent_id_and_parent_type", using: :btree
   add_index "assets", ["parent_id"], name: "index_assets_on_parent_id", using: :btree
+  add_index "assets", ["parent_type"], name: "index_assets_on_parent_type", using: :btree
+  add_index "assets", ["path_alt"], name: "index_assets_on_path_alt", using: :btree
+  add_index "assets", ["path_file"], name: "index_assets_on_path_file", using: :btree
 
   create_table "brands", force: :cascade do |t|
     t.string   "key"
@@ -58,6 +64,12 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "members", ["bio"], name: "index_members_on_bio", using: :btree
+  add_index "members", ["key"], name: "index_members_on_key", using: :btree
+  add_index "members", ["name"], name: "index_members_on_name", using: :btree
+  add_index "members", ["path_show"], name: "index_members_on_path_show", using: :btree
+  add_index "members", ["title"], name: "index_members_on_title", using: :btree
+
   create_table "perks", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
@@ -65,6 +77,10 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "perks", ["details"], name: "index_perks_on_details", using: :btree
+  add_index "perks", ["key"], name: "index_perks_on_key", using: :btree
+  add_index "perks", ["name"], name: "index_perks_on_name", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "key"
@@ -77,6 +93,11 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "products", ["info"], name: "index_products_on_info", using: :btree
+  add_index "products", ["key"], name: "index_products_on_key", using: :btree
+  add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["path_show"], name: "index_products_on_path_show", using: :btree
+
   create_table "specs", force: :cascade do |t|
     t.string   "key"
     t.string   "title"
@@ -87,7 +108,12 @@ ActiveRecord::Schema.define(version: 20151007230811) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "specs", ["body"], name: "index_specs_on_body", using: :btree
+  add_index "specs", ["key"], name: "index_specs_on_key", using: :btree
+  add_index "specs", ["parent_id", "parent_type"], name: "index_specs_on_parent_id_and_parent_type", using: :btree
   add_index "specs", ["parent_id"], name: "index_specs_on_parent_id", using: :btree
+  add_index "specs", ["parent_type"], name: "index_specs_on_parent_type", using: :btree
+  add_index "specs", ["title"], name: "index_specs_on_title", using: :btree
 
   add_foreign_key "contacts", "members"
 end
