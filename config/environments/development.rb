@@ -41,7 +41,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.after_initialize do
-    puts "JUST"
     Rails.application.eager_load!
     searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
     searchable.each(&:set_pool)
