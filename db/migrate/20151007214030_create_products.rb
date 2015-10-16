@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :key
       t.string :type
-      t.string :category
+      t.string :type_display
       t.string :name
       t.string :path_show
       t.text :info

@@ -1,8 +1,10 @@
 class Member < ActiveRecord::Base
-  include AddImage, AddPath
+  include AddImage, AddPath, Searchable
 
   has_many :contacts
   has_one :headshot, as: :parent, class_name: "Image"
+
+  self.pool_fields = [:name, :title]
 
   private
 

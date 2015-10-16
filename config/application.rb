@@ -18,6 +18,7 @@ module Hts
     config.assets.enabled = true  
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile += %w(.svg .eot .woff .ttf)
+    config.eager_load = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -25,5 +26,12 @@ module Hts
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.after_initialize do
+      # Rails.application.eager_load!
+      # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
+      # searchable.each(&:set_pool)
+      # SearchController.set_attributes(searchable)
+    end
   end
 end

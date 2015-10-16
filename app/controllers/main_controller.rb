@@ -25,10 +25,6 @@ class MainController < ApplicationController
     }
 	end
 
-  def search
-    render json: query(params[:input])
-  end
-
   def download_file
     pdf = Pdf.find(params[:id])
     send_file(path: pdf.path, filename: pdf.filename, type: "application/pdf")

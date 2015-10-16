@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20151007230811) do
   create_table "products", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.string   "category"
+    t.string   "type_display"
     t.string   "name"
     t.string   "path_show"
     t.text     "info"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "specs", force: :cascade do |t|

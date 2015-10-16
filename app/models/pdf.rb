@@ -1,4 +1,8 @@
 class Pdf < Asset
+  include Searchable
+
+  self.pool_fields = [:filename]
+
   private
 
   def add_path

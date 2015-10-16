@@ -1,12 +1,16 @@
 class Product < ActiveRecord::Base
-  include AddPath, HasAllAssets
+  include AddPath, HasAllAssets, Searchable
 
-  before_create :set_category
+  before_create :set_type_display
 
   has_many :specs, as: :parent
 
   alias_attribute :display, :name
   alias_attribute :path, :path_show
+
+  class_attribute :category
+  self.category = "products and modifications"
+  self.pool_fields = [:name, :type_display, :info]
 
   protected
 
@@ -18,6 +22,10 @@ class Product < ActiveRecord::Base
   private
 
   def add_path
-    update(path_show: eval("#{category.singularize}_path(#{id})"))
+    update(path_show: eval("#{type_display.singularize}_path(#{id})"))
+  end
+
+  def set_type_display
+    self.type_display = category
   end
 end

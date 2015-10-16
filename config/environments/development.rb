@@ -7,7 +7,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -27,6 +27,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.preload_frameworks = true
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
@@ -38,4 +39,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.after_initialize do
+    puts "JUST"
+    Rails.application.eager_load!
+    searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
+    searchable.each(&:set_pool)
+    SearchController.set_attributes(searchable)
+  end
 end

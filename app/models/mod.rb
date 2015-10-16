@@ -1,7 +1,4 @@
 class Mod < Product
-  private
-
-  def set_category
-    self.category = "modifications"
-  end
+  self.category = "modifications"
+  self.pool_fields -= [:category]
 end
