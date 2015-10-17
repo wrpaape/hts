@@ -88,7 +88,7 @@ var NavBar = React.createClass({
       navBtnsProps.toggleHovered = toggleHovered;
       navBtnsProps.setLines = setLines;
       navBtnsProps.buildBtnProps = buildBtnProps;
-      navBtnsProps.buildBtns = buildBtns.bind(null, window.NavBtn);
+      navBtnsProps.buildBtns = buildBtns.bind(null, window.MidBlock);
 
       return React.createElement(window.NavBtns, navBtnsProps);
     });

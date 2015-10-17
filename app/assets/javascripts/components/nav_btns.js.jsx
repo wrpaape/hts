@@ -4,6 +4,7 @@
 var NavBtns= React.createClass({
   getInitialState: function() {
     var toggleHovered = this.props.toggleHovered;
+    var setLines = this.props.setLines;
     var buildBtnProps = this.props.buildBtnProps;
     var btnsShow = this.props.navBtns;
     var btnsAllLength = btnsShow.length + 1;
@@ -15,7 +16,8 @@ var NavBtns= React.createClass({
       display: this.props.display,
       toggleHoveredTop: toggleHovered.bind(this, 0, 'top'),
       toggleHoveredMid: toggleHovered.bind(this, 0, 'mid'),
-      toggleHoveredBot: toggleHovered.bind(this, 0, 'bot')
+      toggleHoveredBot: toggleHovered.bind(this, 0, 'bot'),
+      setLines: setLines.bind(this, 0)
     };
     var btnsIndex = [buildBtnProps(args)];
     btnsShow = btnsShow.map(function(btnProps, i) {
@@ -28,17 +30,19 @@ var NavBtns= React.createClass({
         display: btnProps.display,
         toggleHoveredTop: toggleHovered.bind(this, id, 'top'),
         toggleHoveredMid: toggleHovered.bind(this, id, 'mid'),
-        toggleHoveredBot: toggleHovered.bind(this, id, 'bot')
+        toggleHoveredBot: toggleHovered.bind(this, id, 'bot'),
+        setLines: setLines.bind(this, i)
       };
 
       return buildBtnProps(args);
     }.bind(this));
 
     return({
-      expanded: false,
+      expanded: true,
       btnsIndex: btnsIndex,
       btnsAll: btnsIndex.concat(btnsShow),
-      btnsProps: btnsIndex,
+      btnsProps: btnsIndex.concat(btnsShow)
+      // btnsProps: btnsIndex,
     });
   },
   componentDidUpdate: function() {
@@ -52,12 +56,12 @@ var NavBtns= React.createClass({
   render: function() {
     var toggleExpanded = this.props.toggleState.bind(this, 'expanded', this.setBtnsProps);
     var btns = this.props.buildBtns(this.state.btnsProps);
-    btns[btns.length - 1].splice(-2, 1);
+    // btns[btns.length - 1].splice(-2, 1);
 
     return React.createElement('div', {
       className: 'nav-btns',
-      onMouseEnter: toggleExpanded,
-      onMouseLeave: toggleExpanded
+      // onMouseEnter: toggleExpanded,
+      // onMouseLeave: toggleExpanded
     }, btns);
   }
 });

@@ -159,16 +159,45 @@ $m-ds: drop-shadow(1px 1px 1px black);
     background-color: lighten($c, 10%);
   }
 }
-@mixin right-block($c) {
-  &:after {
+@mixin bot-block($c) {
+  position: absolute;
+  display: inline-block;
+  width: 50%;
+  margin-top: 58px;
+  background-color: $c;
+  &, &:before {
+    height: 33px;
+  }
+  &:before {
     content: '';
-    display: inline-block;
-    width: 50%;
     position: absolute;
-    height: 24px;
-    background-color: red;
-    right: -50%;
-    top: 0;
+    width: 100%;
+    background-color: $c-bg-main;
+    @include border-radius-tl(100%);
+  }
+  &.above-lines-2 {
+    margin-top: 86px;
+  }
+  &.above-lines-3 {
+    margin-top: 114px;
+  }
+  &.above-lines-4 {
+    margin-top: 142px;
+  }
+  &.below-lines-2 {
+    &, &:before {
+      height: 46px;
+    }
+  }
+  &.below-lines-3 {
+    &, &:before {
+      height: 60px;
+    }
+  }
+  &.below-lines-4 {
+    &, &:before {
+      height: 72px;
+    }
   }
 }
 @mixin top-block($c) {
@@ -176,10 +205,10 @@ $m-ds: drop-shadow(1px 1px 1px black);
   position: absolute;
   right: 0;
   width: 50%;
-  margin-top: -20px;
+  margin-top: -22px;
   background-color: $c;
   &, &:before {
-    height: 40px;
+    height: 32px;
   }
   &:before {
     content: '';
@@ -189,43 +218,10 @@ $m-ds: drop-shadow(1px 1px 1px black);
     @include border-radius-br(100%);
   }
 }
-@mixin bot-block($c) {
-  position: absolute;
-  display: inline-block;
-  width: 50%;
-  margin-top: 68px;
-  background-color: $c;
-  &, &:before {
-    height: 40px;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    background-color: $c-bg-main;
-    @include border-radius-tl(100%);
-  }
-  &.above-lines-3 {
-    margin-top: 124px;
-  }
-  &.above-lines-2 {
-    margin-top: 96px;
-  }
-  &.below-lines-3 {
-    &, &:before {
-      height: 70px;
-    }
-  }
-  &.below-lines-2 {
-    &, &:before {
-      height: 60px;
-    }
-  }
-}
 @mixin mid-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include border-radii(50% 0);
-  width: 300px;
+  width: 250px;
   font-size: 18px;
   line-height: 28px;
   color: $c-txt;
@@ -234,17 +230,34 @@ $m-ds: drop-shadow(1px 1px 1px black);
   &.info {
     text-align: center;
   }
-  &.lines-2 + .top {
-    margin-top: -40px;
-    &, &:before {
-      height: 60px;
+  &.lines-1 {
+    height: 48px;
+  }
+  &.lines-2 {
+    height: 76px;
+    & + .top {
+      margin-top: -38px;
+      &, &:before {
+        height: 48px;
+      }
     }
   }
-
-  &.lines-3 + .top {
-    margin-top: -50px;
-    &, &:before {
-      height: 70px;
+  &.lines-3 {
+    height: 104px;
+    & + .top {
+      margin-top: -48px;
+      &, &:before {
+        height: 58px;
+      }
+    }
+  }
+  &.lines-4 {
+    height: 132px;
+    & + .top {
+      margin-top: -58px;
+      &, &:before {
+        height: 68px;
+      }
     }
   }
 }
@@ -302,8 +315,8 @@ img {
         @include user-select('none');
         display: block;
         position: relative;
-        margin-top: 20px;
-        padding: 10px 24px;
+        margin-top: 10px;
+        padding: 10px 25px;
         text-decoration: none;
       }
       &.bot {
@@ -318,8 +331,6 @@ img {
       }
       &.bot {
         @include bot-block($c-btn-bg2);
-        margin-top: 0;
-        top: 68px;
       }
       &.top, &.bot {
         cursor: text;
@@ -330,13 +341,15 @@ img {
     }
   }
   .nav-btn, .search-bar {
-    &.mid:last-child, &.mid:last-child > input {
-      @include border-radius-br(0);
-      padding-right: 36px;
-      width: 300px;
-      box-sizing: border-box;
-      button {
-        right: 0.75em;
+    &.mid:last-child {
+      &, & > input {
+        @include border-radius-br(0);
+        & > input {
+          padding-right: 36px;
+        }
+        & > button {
+          right: 0.75em;
+        } 
       }
     }
   }
@@ -348,25 +361,26 @@ img {
   //   @include fade-in;
   // }
 }
-  .nav-btn {
-    @include fade-in;
-  }
+  // .nav-btn {
+  //   @include fade-in;
+  // }
 .search-bar {
   @include border-radii(50% 0);
   position: relative;
-  margin-top: 20px;
+  height: 48px;
+  margin-top: 10px;
   cursor: text;
   input {
     @include mid-block($c-btn-txt2, $c-btn-bg2);
-    @include fade-in;
+    // @include fade-in;
+    height: 48px;
     border: none;
     outline: none;
-    margin-top: 0;
     padding: 10px 104px 10px 24px;
   }
   button {
     @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
-    @include fade-in;
+    // @include fade-in;
   }
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
