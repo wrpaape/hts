@@ -26,7 +26,6 @@ var MidBlock = React.createClass({
       ref: 'midBlock',
       zIndex: this.props.zIndex,
       path: this.props.path,
-      // className: this.state.className.replace(/lines-/, 'lines-' + this.state.lines),
       className: this.state.className + ' lines-' + this.state.lines,
       toggleHovered: this.props.toggleHovered,
       display: this.props.display

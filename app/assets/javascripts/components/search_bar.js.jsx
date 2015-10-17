@@ -40,7 +40,7 @@ var SearchBar = React.createClass({
         toggleHoveredTop: toggleHovered.bind(this, i + 1, 'top'),
         toggleHoveredMid: toggleHovered.bind(this, i + 1, 'mid'),
         toggleHoveredBot: toggleHovered.bind(this, i + 1, 'bot'),
-        setLines: setLines.bind(this, [i, i + 1]),
+        setLines: setLines.bind(this, i),
         input: newValue
       };
 

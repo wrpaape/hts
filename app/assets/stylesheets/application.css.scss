@@ -117,7 +117,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
 @mixin mag-glass($s-f, $c, $c-hov) {
-  @include border-radii(55%);
+  @include border-radii(50%);
   &:hover {
     border-color: $c-hov;
     &:before {
@@ -176,55 +176,51 @@ $m-ds: drop-shadow(1px 1px 1px black);
   position: absolute;
   right: 0;
   width: 50%;
-  height: 38px;
-  margin-top: -29px;
+  margin-top: -20px;
   background-color: $c;
+  &, &:before {
+    height: 40px;
+  }
   &:before {
     content: '';
     position: absolute;
     width: 100%;
-    height: 38px;
     background-color: $c-bg-main;
     @include border-radius-br(100%);
   }
-  // &.info {
-  //   height: 58px;
-  //   margin-top: -49px;
-  //   &:before {
-  //     height: 58px;
-  //   }
-  // }
 }
 @mixin bot-block($c) {
   position: absolute;
   display: inline-block;
   width: 50%;
-  height: 27px;
-  margin-top: 57px;
+  margin-top: 68px;
   background-color: $c;
+  &, &:before {
+    height: 40px;
+  }
   &:before {
     content: '';
     position: absolute;
     width: 100%;
-    height: 27px;
     background-color: $c-bg-main;
     @include border-radius-tl(100%);
   }
-  &.lines-3:not(.lines-1) {
-    height: 47px;
-    margin-top: 113px;
-    &:before {
-      height: 47px;
+  &.above-lines-3 {
+    margin-top: 124px;
+  }
+  &.above-lines-2 {
+    margin-top: 96px;
+  }
+  &.below-lines-3 {
+    &, &:before {
+      height: 70px;
     }
   }
-  &.lines-2:not(.lines-1) {
-    height: 37px;
-    margin-top: 85px;
-    &:before {
-      height: 37px;
+  &.below-lines-2 {
+    &, &:before {
+      height: 60px;
     }
   }
-
 }
 @mixin mid-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
@@ -234,28 +230,21 @@ $m-ds: drop-shadow(1px 1px 1px black);
   line-height: 28px;
   color: $c-txt;
   background-color: $c-bg;
-  border-color: $c-bg;
   font-family: $f-main;
-  border: none;
   &.info {
-    // height: 113px;
-    display: table-cell;
-    vertical-align: middle;
     text-align: center;
   }
   &.lines-2 + .top {
-    height: 48px;
-    margin-top: -39px;
-    &:before {
-      height: 48px;
+    margin-top: -40px;
+    &, &:before {
+      height: 60px;
     }
   }
 
   &.lines-3 + .top {
-    height: 58px;
-    margin-top: -49px;
-    &:before {
-      height: 58px;
+    margin-top: -50px;
+    &, &:before {
+      height: 70px;
     }
   }
 }
@@ -298,7 +287,7 @@ img {
   display: inline-block;
   vertical-align: top;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   .nav-btn {
     outline: none;
     &:not(.search-bar-block) {
@@ -313,7 +302,7 @@ img {
         @include user-select('none');
         display: block;
         position: relative;
-        border-top: 9px solid $c-bg-main;
+        margin-top: 20px;
         padding: 10px 24px;
         text-decoration: none;
       }
@@ -330,10 +319,14 @@ img {
       &.bot {
         @include bot-block($c-btn-bg2);
         margin-top: 0;
+        top: 68px;
       }
       &.top, &.bot {
         cursor: text;
       }
+    }
+    &.bot:nth-last-child(2) {
+      display: none;
     }
   }
   .nav-btn, .search-bar {
@@ -351,21 +344,25 @@ img {
 
 .nav-btns {
   margin-right: 5px;
+  // .nav-btn {
+  //   @include fade-in;
+  // }
+}
   .nav-btn {
     @include fade-in;
   }
-}
-
 .search-bar {
-  @include border-radii(55% 0);
+  @include border-radii(50% 0);
   position: relative;
+  margin-top: 20px;
   cursor: text;
   input {
     @include mid-block($c-btn-txt2, $c-btn-bg2);
     @include fade-in;
-    border-top: 9px solid $c-bg-main;
-    padding: 10px 104px 10px 24px;
+    border: none;
     outline: none;
+    margin-top: 0;
+    padding: 10px 104px 10px 24px;
   }
   button {
     @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
