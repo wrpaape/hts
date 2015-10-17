@@ -26,12 +26,12 @@ var NavBar = React.createClass({
       });
     };
 
-    var setLines = function(botIds, linesClass) {
+    var setLines = function(botIds, lines) {
       var btnsProps = this.state.btnsProps;
       botIds.forEach(function(id) {
-        btnsProps[id].bot.className = btnsProps[id].bot.className.replace(/ lines-(\d)|$/, linesClass);
+        btnsProps[id].bot.className += ' lines-' + lines;
       });
-
+      
       this.setState({
         btnsProps: btnsProps
       });
@@ -43,7 +43,7 @@ var NavBar = React.createClass({
       var zBot = zMid - 2;
       return({
         top: {
-          ref: 'top-' + args.id,
+          // ref: 'top-' + args.id,
           key: 'nav-btn-top-' + args.key,
           path: args.path,
           display: '',
@@ -53,7 +53,7 @@ var NavBar = React.createClass({
           className: 'nav-btn top false'
         },
         mid: {
-          ref: 'mid-' + args.id,
+          // ref: 'mid-' + args.id,
           key: args.key,
           path: args.path,
           display: args.display,
@@ -65,7 +65,7 @@ var NavBar = React.createClass({
           className: 'nav-btn mid false'
         },
         bot: {
-          ref: 'bot-' + args.id,
+          // ref: 'bot-' + args.id,
           key: 'nav-btn-bot-' + args.key,
           path: args.path,
           display: '',

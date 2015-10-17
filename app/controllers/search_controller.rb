@@ -11,6 +11,10 @@ class SearchController < ApplicationController
     render json: query(search_pool, params[:input])
   end
 
+    # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
+    searchable = [Member, Pdf, Product, Good, Mod]
+    searchable.each(&:set_pool)
+    set_attributes(searchable)
   private
 
   def searchable_type

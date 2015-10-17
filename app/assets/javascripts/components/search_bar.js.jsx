@@ -3,75 +3,51 @@
 
 var SearchBar = React.createClass({
   getInitialState: function() {
+    var btnsSearch = [{ 
+      bot: { className: 'nav-btn search-bar-block bot' },
+      top: { className: 'nav-btn search-bar-block top' }
+    }];
+
     return({
       value: '',
-      btnsProps: []
+      btnsSearch: btnsSearch,
+      btnsResults: [],
+      btnsProps: btnsSearch
     });
   },
-  // componentWillUpdate: function(nextProps, nextState) {
-  //   var lengthResults = nextState.btnsProps.length;
-  //   if (this.state.value != nextState.value && lengthResults) {
-  //     this.fixTesBlocks(lengthResults);
-  //   }
-  // }
-  // componentDidUpdate: function() {
-  //   this.props.resizeScrollbar();
-  // },
-  // addLinesClassToBots: function(i, linesClass) {
-  //   this.refs['bot-' + (i - 1)].getDOMNode().className += linesClass;
-  //   this.refs['bot-' + i].getDOMNode().className += linesClass;
-  // },
-  // getLinesClass: function(height) {
-  //   var linesClass = '';
-  //   if (height > 75) {
-  //     linesClass = height < 104 ? ' lines-2' : ' lines-3'; 
-  //   }
-  //   return linesClass;
-  // },
-  // fixTesBlocks: function(lengthResults) {
-  //   var result, linesClass;
-  //   for(var i = 0; i < lengthResults; i++) {
-  //     result = this.refs['mid-' + i].getDOMNode();
-  //     linesClass = this.getLinesClass(result.clientHeight);
-  //     result.className += linesClass;
-  //     this.addLinesClassToBots(i, linesClass);
-  //     if (i < lengthResults - 1) {
-  //       this.refs['top-' + (i + 1)].getDOMNode().className += linesClass;
-  //     }
-  //   }
-  // },
+  updateAll: function(newValue, newBtnsResults) {
+    var btnsSearch = this.state.btnsSearch;
+    btnsSearch[0].bot.className = 'nav-btn search-bar-block bot';
+    
+    this.setState({
+      value: newValue,
+      btnsSearch: btnsSearch,
+      btnsResults: newBtnsResults,
+      btnsProps: btnsSearch.concat(newBtnsResults)
+    });
+  },
   setBtnsProps: function(output, newValue) {
     var rawResults = JSON.parse(output);
     var toggleHovered = this.props.toggleHovered;
     var setLines = this.props.setLines;
-    var btnsProps = rawResults.map(function(result, i) {
-      var ids = [i, i - 1];
-      if (!i) {
-        ids.pop();
-      }
-      if (i == rawResults.length - 1) {
-        ids.pop();
-      }
+    var newBtnsResults = rawResults.map(function(result, i) {
       var args = {
         id: i,
         btnsLength: rawResults.length,
         key: result.key,
         path: result.path,
         display: result.display,
-        toggleHoveredTop: toggleHovered.bind(this, i, 'top'),
-        toggleHoveredMid: toggleHovered.bind(this, i, 'mid'),
-        toggleHoveredBot: toggleHovered.bind(this, i, 'bot'),
-        setLines: setLines.bind(this, ids),
+        toggleHoveredTop: toggleHovered.bind(this, i + 1, 'top'),
+        toggleHoveredMid: toggleHovered.bind(this, i + 1, 'mid'),
+        toggleHoveredBot: toggleHovered.bind(this, i + 1, 'bot'),
+        setLines: setLines.bind(this, [i, i + 1]),
         input: newValue
       };
 
       return this.props.buildBtnProps(args);
     }.bind(this));
 
-    this.setState({
-      value: newValue,
-      btnsProps: btnsProps
-    });
+    this.updateAll(newValue, newBtnsResults);
   },
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();
@@ -86,10 +62,7 @@ var SearchBar = React.createClass({
         }.bind(this),
         true);
     } else {
-      this.setState({
-        value: newValue,
-        btnsProps: []
-      });
+      this.updateAll(newValue, []);
     }
   },
   submitSearch: function(event) {
@@ -98,34 +71,32 @@ var SearchBar = React.createClass({
     }
   },
   goToFirstResult: function() {
-    var firstResult = this.state.btnsProps[0];
+    var firstResult = this.state.btnsResults[0];
     if (firstResult) {
       window.location.href = firstResult.mid.path;
     }
   },
-  buildBlock: function(pos, z) {
+  buildSearchBlock: function(pos, z) {
     return React.createElement('a', {
-      key: 'search-bar-' + pos,
-      ref: pos + '--1',
+      key: 'search-bar-' + pos + new Date(),
       style: { zIndex: z },
       tabIndex: -1,
-      className: 'nav-btn search-bar-block ' + pos,
+      className: this.state.btnsSearch[0][pos].className,
       onClick: this.focusInput
     });
   },
   render: function() {
-    var results = this.props.buildBtns(this.state.btnsProps);
+    var results = this.props.buildBtns(this.state.btnsResults);
 
-    var zSearch = this.state.btnsProps.length * 2;
-    var searchBarStyle;
-    if (results.length) {
-      searchBarStyle = {
-        zIndex: zSearch
-      };
-      var searchBarBot = this.buildBlock('bot', zSearch - 2);
-      results.unshift(searchBarBot);
-      results[results.length - 1].splice(-2, 1);
-    }
+    var zSearch = results.length * 2;
+    // if (results.length) {
+    var searchBarStyle = {
+      zIndex: zSearch
+    };
+      // var searchBarBot = this.buildSearchBlock('bot', zSearch - 2);
+      // results.unshift(searchBarBot);
+      // results[results.length - 1].splice(-2, 1);
+    // }
 
     var input = React.createElement('input', {
       type: 'text',
@@ -144,10 +115,12 @@ var SearchBar = React.createClass({
       onClick: this.focusInput
     }, input);
 
+    var btnsSearch = [this.buildSearchBlock('top', zSearch + 1), this.buildSearchBlock('bot', zSearch - 2), searchBar];
+
     return React.createElement('div', {
       ref: 'searchResults',
       id: 'search-results',
       className: 'search-results'
-    }, [this.buildBlock('top', zSearch + 1), searchBar].concat(results));
+    }, btnsSearch.concat(results));
   }
 });
