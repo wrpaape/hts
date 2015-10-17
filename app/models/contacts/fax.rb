@@ -1,0 +1,2 @@
+class Fax < Phone
+end

@@ -2,10 +2,8 @@
 
 one:
   type: 
-  info: MyString
   member_id: 
 
 two:
   type: 
-  info: MyString
   member_id: 

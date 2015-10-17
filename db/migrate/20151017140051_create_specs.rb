@@ -4,8 +4,8 @@ class CreateSpecs < ActiveRecord::Migration
       t.string :key, index: true, uniqueness: true
       t.string :title, index: true, uniqueness: true
       t.text :body, index: true, uniqueness: true
-      t.string :parent_type, index: true
       t.integer :parent_id, index: true
+      t.string :parent_type, index: true
 
       t.timestamps null: false
     end

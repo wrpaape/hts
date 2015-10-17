@@ -2,14 +2,20 @@
 
 one:
   key: MyString
-  name: MyString
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  full_name: MyString
   path_show: MyString
   title: MyString
   bio: MyText
 
 two:
   key: MyString
-  name: MyString
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  full_name: MyString
   path_show: MyString
   title: MyString
   bio: MyText

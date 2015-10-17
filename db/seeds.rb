@@ -7,14 +7,14 @@ def rand_assets(min, max, ext)
 end
 
 # Ingersoll Rand brands
-Brand.create([
-	{
-    name: "Club Car",
-    link: "http://www.clubcar.com/us/en/home.html"
-  },
+Company.create([
   {
-    name: "Ingersoll Rand",
-    link: "http://company.ingersollrand.com/ircorp/en/index.html"
+    name: "ModWerks",
+    link: "/"
+  },
+	{
+    name: "HTS",
+    link: "http://www.hts.com/"
   },
   {
     name: "Thermo King",
@@ -23,24 +23,24 @@ Brand.create([
 ])
 
 # team members and their contacts
-Member.create([
+Employee.create([
   {
     name: "Dean Revering",
     title: "Account Executive",
     contacts: Contact.create([
-        {
-          type: "email",
-          info: "dean_revering@example.com"
-        },
-        {
-          type: "phone",
-          info: "(111)-111-1111"
-        },
-        {
-          type: "fax",
-          info: "(222)-222-2222"
-        }
-      ]),
+      {
+        type: "Email",
+        address: "dean_revering@example.com"
+      },
+      {
+        type: "Phone",
+        number: "(512)459-2222"
+      },
+      {
+        type: "Fax",
+        number: "(513)459-2222"
+      }
+    ]),
     bio:
 """
 Franchise apophenia knife tiger-team drone convenience store silent
@@ -53,8 +53,23 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
 """
   },
   {
-    name: "Kevin Baxter",
-    title: "General District Manager",
+    name: "Ross Wojcik",
+    title: "Director of ModWerks",
+    contacts: Contact.create([
+      {
+        type: "Email",
+        address: Address.create(value: "ross.wojcik@hts.com")
+      },
+      {
+        type: "Mobile",
+        number: Number.create(value: "(502)939-4110")
+      },
+      {
+        type: "Office",
+        number: Number.create(value: "(512)381-0091"),
+        extension: Extension.create(value: "1218")
+      }
+    ]),
     bio:
 """
 Franchise apophenia knife tiger-team drone convenience store silent
@@ -71,8 +86,8 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
     title: "South Texas Area Manager",
     contacts: Contact.create([
         {
-          type: "email",
-          info: "walter.bomhoff@trane.com"
+          type: "Email",
+          address: Address.create(value: "walter.bomhoff@trane.com")
         }
       ]),
     bio:
