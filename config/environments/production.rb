@@ -77,8 +77,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.after_initialize do
-    searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
-    searchable.each(&:set_pool)
-    SearchController.set_attributes(searchable)
+    # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
+    # searchable.each(&:set_pool)
+    # SearchController.set_attributes(searchable)
   end
 end

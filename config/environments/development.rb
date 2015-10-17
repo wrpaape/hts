@@ -41,6 +41,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.after_initialize do
-    Rails.application.eager_load!
+    # Rails.application.eager_load!
   end
 end
