@@ -32,6 +32,7 @@ var SearchBar = React.createClass({
     var setLines = this.props.setLines;
     var newBtnsResults = rawResults.map(function(result, i) {
       var id = i + 1;
+      var mids = [{id: i, from: 'below'}, {id: id, from: 'above'}];
       var args = {
         id: i,
         btnsLength: rawResults.length,
@@ -41,7 +42,7 @@ var SearchBar = React.createClass({
         toggleHoveredTop: toggleHovered.bind(this, id, 'top'),
         toggleHoveredMid: toggleHovered.bind(this, id, 'mid'),
         toggleHoveredBot: toggleHovered.bind(this, id, 'bot'),
-        setLines: setLines.bind(this, i),
+        setLines: setLines.bind(this, mids),
         input: newValue
       };
 

@@ -1,13 +1,15 @@
 class SearchController < ApplicationController
-  class_attribute :searchable, :search_all_pool
+  class_attribute :searchable, :search_all_pool, :search_all_pool_no_text
   
   def self.set_attributes(searchable)
     self.searchable = searchable
     self.search_all_pool = (searchable - searchable.flat_map(&:descendants)).map(&:search_pool).reduce({}, :merge)
+    self.search_all_pool_no_text = search_all_pool.except(:products)
+    self.search_all_pool_no_text[:products] = search_all_pool[:products].except(:info)
   end
 
   def search
-    search_pool = searchable_type.try(:search_pool) || search_all_pool
+    search_pool = searchable_type.try(:search_pool) || (params[:input].length > 2 ? search_all_pool : search_all_pool_no_text)
     render json: query(search_pool, params[:input])
   end
 
@@ -15,6 +17,7 @@ class SearchController < ApplicationController
     searchable = [Member, Pdf, Product, Good, Mod]
     searchable.each(&:set_pool)
     set_attributes(searchable)
+
   private
 
   def searchable_type
