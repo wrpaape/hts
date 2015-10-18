@@ -9,7 +9,7 @@ class Employee < ActiveRecord::Base
 
   alias_attribute :name, :full_name
 
-  self.pool_fields = [:name, :title]
+  self.pool_fields = [:full_name, :title]
 
   private
 

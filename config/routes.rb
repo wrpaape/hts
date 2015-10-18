@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   scope :search do
     get "products", to: "search#search", as: "products_search", type: "Good"
     get "modifications", to: "search#search", as: "modifications_search", type: "Mod"
-    root "search#search", as: "search"
+    root "search#search", as: "search", type: "SearchController"
   end
   root "main#index"
 end
