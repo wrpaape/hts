@@ -42,9 +42,10 @@ class SearchController < ApplicationController
             path: result[0],
             display: procs[:display].call(result, input)
           })
+          return output if output.length > 9
         end
       end
     end
-    output.first(10)
+    output
   end
 end
