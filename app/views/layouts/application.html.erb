@@ -9,7 +9,17 @@
 </head>
 <body>
   <div class='header'>
-    <%= image_tag 'brands/hts/hts-logo-main.png' %>
+    <table>
+      <caption>
+        Delivering Real Success®
+      </caption>
+      <tbody>
+        <tr>
+          <td><%= image_tag 'companies/hts/hts-logo-main.png' %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= react_component("NavBar", @nav_bar_props) %>
   </div>
   <%= yield %>
 </body>

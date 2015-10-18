@@ -129,3 +129,20 @@ products.each do |product|
   product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
+
+Good.create({
+  name: "High Perf AHU",
+  info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+})
+Good.last.pdfs.create(filename: "0.pdf")
+
+Good.create({
+  name: "Multi-zone VAV",
+  info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+})
+Good.last.pdfs.create(filename: "0.pdf")
+
+
+
+
+

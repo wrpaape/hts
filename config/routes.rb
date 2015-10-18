@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   # end
   resources :modifications, controller: "products", type: "Mod"
   resources :members
-  get "download_pdf/:id", to: "main#download_pdf", as: "download_pdf"
+  scope :download do
+    get "pdf/:id", to: "download#pdf", as: "download_pdf"
+  end
   scope :search do
     get "products", to: "search#search", as: "products_search", type: "Good"
     get "modifications", to: "search#search", as: "modifications_search", type: "Mod"

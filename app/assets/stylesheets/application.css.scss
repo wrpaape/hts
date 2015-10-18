@@ -286,20 +286,36 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼ TAGS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 body {
+  // padding: 150px 20px 20px;
+  margin: 0;
   background-color: $c-bg-main;
   font-family: $f-main;
 }
-img {
-  max-width: 100px;
+caption {
+  caption-side: bottom;
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+.header {
+  position: absolute;
+  @include box-sizing(border-box);
+  width: 100%;
+  padding: 20px 20px 0;
+  table {
+    width: 200px;
+    text-align: center;
+    float: left;
+  }
+  img {
+    width: 100px;
+  }
+}
 .nav-btns, .search-results {
   display: inline-block;
-  vertical-align: top;
   position: relative;
+  vertical-align: top;
   // overflow: hidden;
   .nav-btn {
     outline: none;
@@ -361,9 +377,6 @@ img {
   //   @include fade-in;
   // }
 }
-  // .nav-btn {
-  //   @include fade-in;
-  // }
 .search-bar {
   @include border-radii(50% 0);
   position: relative;
@@ -387,9 +400,8 @@ img {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
-  // .mid {
-  //   background-color: rgba(200,200,200,0.5)!important;
-  // }
+  display: inline-block;
+  float: right;
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
