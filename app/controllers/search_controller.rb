@@ -3,9 +3,9 @@ class SearchController < ApplicationController
   
   def self.set_attributes(searchable)
     self.searchable = searchable
-    self.search_all_pool = (searchable - searchable.flat_map(&:descendants)).map(&:search_pool).reduce({}, :merge)
-    self.search_all_pool_no_text = search_all_pool.except(:products)
-    self.search_all_pool_no_text[:products] = search_all_pool[:products].except(:info)
+    combine_pools = ->(search_pool) { (searchable - searchable.flat_map(&:descendants)).map(&search_pool).reduce({}, :merge) }
+    self.search_all_pool = combine_pools.call(:search_pool)
+    self.search_all_pool_no_text = combine_pools.call(:search_pool_no_text)
   end
 
   def search
@@ -14,8 +14,8 @@ class SearchController < ApplicationController
   end
 
     # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
-    searchable = [Member, Pdf, Product, Good, Mod]
-    searchable.each(&:set_pool)
+    searchable = [Employee, Pdf, Product, Good, Mod]
+    searchable.each(&:set_pools)
     set_attributes(searchable)
 
   private

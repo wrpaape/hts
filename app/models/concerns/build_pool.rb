@@ -6,7 +6,7 @@ module BuildPool
       pluck_results =
         case search_for
           when :name
-            is_a?(Member) ? [:path_show, :name, :title] : [:path_show, :name] 
+            is_a?(Employee) ? [:path_show, :name, :title] : [:path_show, :name] 
           when :type_display
             return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [eval("#{cat}_path"), cat] } }
           when :info
@@ -21,7 +21,7 @@ module BuildPool
     end
 
     def self.display_proc(search_for)
-      return Proc.new { |result| "#{result[1]} (#{result[2]})" } if is_a?(Member)
+      return Proc.new { |result| "#{result[1]} (#{result[2]})" } if is_a?(Employee)
       case search_for
         when :info
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }
