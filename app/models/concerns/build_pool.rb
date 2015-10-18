@@ -5,7 +5,7 @@ module BuildPool
     def self.results_proc(search_for)
       pluck_results =
         case search_for
-          when :name
+          when :name, :full_name
             is_a?(Employee) ? [:path_show, :name, :title] : [:path_show, :name] 
           when :type_display
             return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [eval("#{cat}_path"), cat] } }

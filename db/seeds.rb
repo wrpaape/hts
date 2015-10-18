@@ -25,7 +25,8 @@ Company.create([
 # team members and their contacts
 Employee.create([
   {
-    name: "Dean Revering",
+    first_name: "Dean",
+    last_name: "Revering",
     title: "Account Executive",
     contacts: Contact.create([
       {
@@ -34,11 +35,11 @@ Employee.create([
       },
       {
         type: "Phone",
-        number: "(512)459-2222"
+        number: "(512)459-2222",
       },
       {
         type: "Fax",
-        number: "(513)459-2222"
+        number: "(513)459-2222",
       }
     ]),
     bio:
@@ -53,7 +54,8 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
 """
   },
   {
-    name: "Ross Wojcik",
+    first_name: "Ross",
+    last_name: "Wojcik",
     title: "Director of ModWerks",
     contacts: Contact.create([
       {
@@ -61,13 +63,13 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
         address: "ross.wojcik@hts.com"
       },
       {
-        type: "Mobile",
-        number: "(502)939-4110"
+        type: "OfficePhone",
+        number: "(512)381-0091",
+        extension: "1218"
       },
       {
-        type: "Office",
-        number: Number.create(value: "(512)381-0091"),
-        extension: Extension.create(value: "1218")
+        type: "MobilePhone",
+        number: "(502)939-4110",
       }
     ]),
     bio:
@@ -82,12 +84,13 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
 """
   },
   {
-    name: "Wally Bomhoff",
+    first_name: "Walter",
+    last_name: "bomhoff",
     title: "South Texas Area Manager",
     contacts: Contact.create([
         {
           type: "Email",
-          address: Address.create(value: "walter.bomhoff@trane.com")
+          address: "walter.bomhoff@trane.com"
         }
       ]),
     bio:

@@ -52,15 +52,15 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "contacts", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.boolean  "primary"
+    t.boolean  "primary",     default: true
     t.string   "info1"
     t.string   "info2"
     t.string   "info3"
     t.string   "info4"
     t.string   "parent_type"
     t.integer  "parent_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "contacts", ["info1"], name: "index_contacts_on_info1", using: :btree
@@ -77,13 +77,14 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "employees", force: :cascade do |t|
     t.string   "key"
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.string   "full_name"
     t.string   "path_show"
     t.string   "title"
     t.text     "bio"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "employees", ["bio"], name: "index_employees_on_bio", using: :btree
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "employees", ["full_name"], name: "index_employees_on_full_name", using: :btree
   add_index "employees", ["key"], name: "index_employees_on_key", using: :btree
   add_index "employees", ["last_name"], name: "index_employees_on_last_name", using: :btree
+  add_index "employees", ["middle_name"], name: "index_employees_on_middle_name", using: :btree
   add_index "employees", ["path_show"], name: "index_employees_on_path_show", using: :btree
   add_index "employees", ["title"], name: "index_employees_on_title", using: :btree
 

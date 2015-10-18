@@ -1,11 +1,11 @@
 class Email < Contact
-  before_create :set_secondary_if_any_primary
+  # before_create :set_secondary_if_any_primary
 
   alias_attribute :address, :info1
 
-  private
+  # private
 
-  def set_secondary_if_any_primary
-    self.primary = false if parent.emails.any?(&:primary)
-  end
+  # def set_secondary_if_any_primary
+  #   self.primary = false if parent.emails.any?(&:primary)
+  # end
 end
