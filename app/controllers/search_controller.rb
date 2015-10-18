@@ -1,30 +1,21 @@
 class SearchController < ApplicationController
-  class_attribute :searchable, :search_pool, :search_pool_no_text
+  class_attribute :searchable
   
-  def self.set_attributes(searchable)
-    self.searchable = searchable
-    combine_pools = ->(search_pool) { (searchable - searchable.flat_map(&:descendants)).map(&search_pool).reduce({}, :merge) }
-    self.search_pool = combine_pools.call(:search_pool)
-    self.search_pool_no_text = combine_pools.call(:search_pool_no_text)
+  def self.get_pool(exclude_text)
+    (searchable - searchable.flat_map(&:descendants)).map{ |model| model.get_pool(exclude_text) }.reduce({}, :merge)
   end
 
   def search
-    render json: query(get_search_pool, params[:input])
+    search_pool = searchable_type.get_pool(exclude_text?)
+    render json: query(search_pool, params[:input])
   end
 
-    # searchable = ActiveRecord::Base.descendants.select{ |model| model.include?(Searchable) }
-    searchable = [Employee, Pdf, Product, Good, Mod]
-    searchable.each(&:set_pools)
-    set_attributes(searchable)
-
+  self.searchable = [Employee, Pdf, Product, Good, Mod]
+    
   private
 
-  def get_search_pool
-    searchable_type.send(search_text? ? :search_pool : :search_pool_no_text)
-  end
-
-  def search_text?
-    params[:input].length > 2
+  def exclude_text?
+    params[:input].length < 3
   end
 
   def searchable_type

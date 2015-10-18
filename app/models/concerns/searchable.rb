@@ -3,13 +3,10 @@ module Searchable
   include BuildPool
 
   included do
-    class_attribute :pool_fields, :search_pool, :search_pool_no_text
+    class_attribute :pool_fields
 
-    def self.set_pools
-      self.search_pool = build_pool
-      key = to_s.underscore.pluralize.to_sym
-      hash = search_pool[key].except(:info)
-      self.search_pool_no_text = Hash[key, hash]
+    def self.get_pool(exclude_text)
+      exclude_text ? build_pool.tap { |pool| pool[to_s.underscore.pluralize.to_sym].delete(:info) } : build_pool
     end
   end
 end
