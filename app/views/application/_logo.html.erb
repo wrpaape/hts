@@ -1,0 +1,13 @@
+<% slogan = company.slogan %>
+<% link = company.link %>
+<% logo = company.logo %>
+<table>
+  <caption>
+    <%= link_to(slogan, link) %>
+  </caption>
+  <tbody>
+    <tr>
+      <td><%= link_to(image_tag(logo.instance_exec { path_file + filename }), link) %></td>
+    </tr>
+  </tbody>
+</table>

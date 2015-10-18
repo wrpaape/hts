@@ -8,7 +8,7 @@ class Asset < ActiveRecord::Base
 
   def set_filename
     prefix = parent.try(:name) || parent.try(:title)
-    filename.prepend("#{prefix.downcase.tr("/ /", "_")}-") if prefix
+    filename.prepend("#{prefix.underscore.tr("/ /", "_")}-") if prefix
   end
 
   def build_path_file
@@ -19,7 +19,7 @@ class Asset < ActiveRecord::Base
       steps.prepend("#{ancestor.class.to_s.underscore.pluralize}/")
     end
 
-    steps.sub!(/\//, "/#{ancestor.name.downcase.tr("/ /", "_")}/")
+    steps.sub!(/\//, "/#{ancestor.name.underscore.tr("/ /", "_")}/")
 
     ancestor = ancestor.class
     until ancestor.superclass == ActiveRecord::Base

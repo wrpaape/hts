@@ -8,19 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class='header'>
-    <table>
-      <caption>
-        Delivering Real Success®
-      </caption>
-      <tbody>
-        <tr>
-          <td><%= image_tag 'companies/hts/hts-logo-main.png' %></td>
-        </tr>
-      </tbody>
-    </table>
-    <%= react_component("NavBar", @nav_bar_props) %>
-  </div>
+  <%= render partial: "header", locals: @header_locals %>
   <%= yield %>
 </body>
 </html>

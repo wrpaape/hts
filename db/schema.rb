@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "companies", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
+    t.string   "slogan"
     t.string   "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "companies", ["key"], name: "index_companies_on_key", using: :btree
   add_index "companies", ["link"], name: "index_companies_on_link", using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
+  add_index "companies", ["slogan"], name: "index_companies_on_slogan", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "key"

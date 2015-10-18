@@ -1,3 +1,7 @@
+def rand_paragraphs(min, max)
+  Faker::Lorem.paragraphs(rand(min..max)).join("\n\n")
+end
+
 def rand_assets(min, max, ext)
   rand(min..max).times.map do |i|
     {
@@ -8,17 +12,15 @@ end
 
 # Ingersoll Rand brands
 Company.create([
-  {
-    name: "ModWerks",
-    link: "/"
-  },
 	{
     name: "HTS",
-    link: "http://www.hts.com/"
+    link: "http://www.hts.com/",
+    slogan: "Delivering Real Success®"
   },
   {
-    name: "Thermo King",
-    link: "http://www.thermoking.com/"
+    name: "ModWerks",
+    link: "/",
+    slogan: "coming soon™"
   }
 ])
 
@@ -42,16 +44,7 @@ Employee.create([
         number: "(513)459-2222",
       }
     ]),
-    bio:
-"""
-Franchise apophenia knife tiger-team drone convenience store silent
-hotdog geodesic euro-pop BASE jump long-chain hydrocarbons receding.
-Math-assault woman pen disposable A.I. alcohol neon sprawl
-tank-traps city neural pistol savant rifle apophenia. Voodoo god
-tanto semiotics grenade Kowloon tank-traps sub-orbital woman
-towards savant media dissident. Claymore mine nano-narrative into
-Kowloon ablative corrupted hacker sentient assassin warehouse. 
-"""
+    bio: rand_paragraphs(1, 3)
   },
   {
     first_name: "Ross",
@@ -72,16 +65,7 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
         number: "(502)939-4110",
       }
     ]),
-    bio:
-"""
-Franchise apophenia knife tiger-team drone convenience store silent
-hotdog geodesic euro-pop BASE jump long-chain hydrocarbons receding.
-Math-assault woman pen disposable A.I. alcohol neon sprawl
-tank-traps city neural pistol savant rifle apophenia. Voodoo god
-tanto semiotics grenade Kowloon tank-traps sub-orbital woman
-towards savant media dissident. Claymore mine nano-narrative into
-Kowloon ablative corrupted hacker sentient assassin warehouse. 
-"""
+    bio: rand_paragraphs(1, 3)
   },
   {
     first_name: "Walter",
@@ -93,16 +77,7 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
           address: "walter.bomhoff@trane.com"
         }
       ]),
-    bio:
-"""
-Franchise apophenia knife tiger-team drone convenience store silent
-hotdog geodesic euro-pop BASE jump long-chain hydrocarbons receding.
-Math-assault woman pen disposable A.I. alcohol neon sprawl
-tank-traps city neural pistol savant rifle apophenia. Voodoo god
-tanto semiotics grenade Kowloon tank-traps sub-orbital woman
-towards savant media dissident. Claymore mine nano-narrative into
-Kowloon ablative corrupted hacker sentient assassin warehouse. 
-"""
+    bio: rand_paragraphs(1, 3)
   }
 ])
 
@@ -110,7 +85,7 @@ products = Product.create(20.times.map {
   {
     type: ["Good", "Mod"].sample,
     name: Faker::Commerce.product_name,
-    info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+    info: rand_paragraphs(1, 3)
   }
 })
 
@@ -118,7 +93,7 @@ products.each do |product|
   product.specs.create(rand(1..3).times.map { |i|
     {
       title: "Spec-#{i}",
-      body: Faker::Lorem.paragraphs(rand(1..5)).join("\n\n"),
+      body: rand_paragraphs(1, 5),
     }
   })
   product.specs.each do |spec|
@@ -132,17 +107,20 @@ end
 
 Good.create({
   name: "High Perf AHU",
-  info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+  info: rand_paragraphs(1, 3)
 })
 Good.last.pdfs.create(filename: "0.pdf")
 
 Good.create({
   name: "Multi-zone VAV",
-  info: Faker::Lorem.paragraphs(rand(1..3)).join("\n\n")
+  info: rand_paragraphs(1, 3)
 })
 Good.last.pdfs.create(filename: "0.pdf")
 
-
+Spec.create({
+  title: "About Us",
+  body: rand_paragraphs(1, 5),
+})
 
 
 
