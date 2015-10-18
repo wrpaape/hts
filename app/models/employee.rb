@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  include AddImage, AddPath, Searchable
+  include AddImage, AddPath, Searchable, Contactable
 
   has_one :location
   has_one :company, through: :location

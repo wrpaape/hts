@@ -58,11 +58,11 @@ Kowloon ablative corrupted hacker sentient assassin warehouse.
     contacts: Contact.create([
       {
         type: "Email",
-        address: Address.create(value: "ross.wojcik@hts.com")
+        address: "ross.wojcik@hts.com"
       },
       {
         type: "Mobile",
-        number: Number.create(value: "(502)939-4110")
+        number: "(502)939-4110"
       },
       {
         type: "Office",

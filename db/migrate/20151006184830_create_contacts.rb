@@ -3,7 +3,7 @@ class CreateContacts < ActiveRecord::Migration
     create_table :contacts do |t|
       t.string :key, index: true, uniqueness: true
       t.string :type, index: true
-      t.boolean :primary, index: true
+      t.boolean :primary, index: true, default: true
       t.string :info1, index: true
       t.string :info2, index: true
       t.string :info3, index: true
