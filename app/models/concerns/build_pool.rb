@@ -22,7 +22,6 @@ module BuildPool
 
     def self.display_proc(search_for)
       searchable_model = self
-      10.times {pp searchable_model}
       return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
       case search_for
         when :info
