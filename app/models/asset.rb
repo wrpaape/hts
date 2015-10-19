@@ -1,20 +1,17 @@
 class Asset < ActiveRecord::Base
   include AddPath
 
-  before_create :set_filename_prefix, :build_path_file, :add_class_name
+  before_create :set_filename, :build_path_file
   belongs_to :parent, polymorphic: true
-
-  alias_attribute :link, :path_link
 
   private
 
-  def set_filename_prefix
+  def set_filename
     prefix = parent.try(:name) || parent.try(:title)
-    filename.prepend("#{prefix.fileize}-") if prefix
+    filename.prepend("#{prefix.downcase.tr("/ /", "_")}-") if prefix
   end
 
   def build_path_file
-    return if path_file
     steps = ""
     ancestor = self
     while ancestor.respond_to?(:parent)
@@ -22,7 +19,7 @@ class Asset < ActiveRecord::Base
       steps.prepend("#{ancestor.class.to_s.fileize.pluralize}/")
     end
 
-    steps.sub!(/\//, "/#{ancestor.name.fileize}/")
+    steps.sub!(/\//, "/#{ancestor.name.downcase.tr("/ /", "_")}/")
 
     ancestor = ancestor.class
     until ancestor.superclass == ActiveRecord::Base
@@ -31,9 +28,5 @@ class Asset < ActiveRecord::Base
     end
     
     set_path_file(steps)
-  end
-
-  def add_class_name
-    self.class_name = type.fileize
   end
 end

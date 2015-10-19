@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   class_attribute :searchable
   
   def self.get_pool(exclude_text)
-    (searchable - searchable.flat_map(&:descendants)).map{ |model| model.get_pool(exclude_text) }.reduce({}, :merge)
+    (searchable - searchable.flat_map(&:descendants)).map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
   end
 
   def search

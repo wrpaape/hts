@@ -4,7 +4,7 @@
   class: class_name) %>
   <tbody>
     <tr>
-      <td><%= link_to(image_tag(path_file + filename, class: class_name), path_show) %></td>
+      <td><%= link_to(react_component("Image", local_assigns.except(:slogan, :path_show)), path_show) %></td>
     </tr>
   </tbody>
 </table>

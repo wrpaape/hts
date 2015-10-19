@@ -15,7 +15,7 @@ class ActiveRecord::Base
   protected
 
   def set_key
-    self.key = "#{self.class.to_s.underscore}-#{self.class.count}" if respond_to?(:key) && !key
+    self.key = "#{self.class.to_s.fileize}-#{self.class.count}" if respond_to?(:key) && !key
   end 
 
   def strip_newlines

@@ -122,11 +122,31 @@ Spec.create({
   body: rand_paragraphs(1, 5),
 })
 
-# HomePageImage.create([
-#   {
-#     filename:
-#   }
-
-# ])
+HomePageImage.create([
+  {
+    title: "Modifications",
+    path_link: ApplicationController.modifications_path
+  },
+  {
+    title: "Equipment Screens",
+    path_link: modifications_path
+  },
+  {
+    title: "Low Profile ERV",
+    path_link: modifications_path
+  },
+  {
+    title: "Multi-Zone VAV",
+    path_link: modifications_path
+  },
+  {
+    title: "Equipment Screens",
+    path_link: modifications_path
+  },
+  {
+    title: "Equipment Screens",
+    path_link: modifications_path
+  }
+])
 
 

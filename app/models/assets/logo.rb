@@ -11,6 +11,6 @@ class Logo < Image
   private
 
   def prepend_company_name_to_class_name
-    class_name.prepend("#{parent.name.underscore.tr("/_/","-")} ")
+    class_name.prepend("#{parent.name.fileize.tr("/_/","-")} ")
   end
 end

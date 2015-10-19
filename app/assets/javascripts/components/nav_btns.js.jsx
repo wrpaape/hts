@@ -6,13 +6,13 @@ var NavBtns= React.createClass({
     var toggleHovered = this.props.toggleHovered;
     var setLines = this.props.setLines;
     var buildBtnProps = this.props.buildBtnProps;
-    var btnsShow = this.props.navBtns;
+    var btnsShow = this.props.nav_btns;
     var btnsAllLength = btnsShow.length + 1;
     var mids = [{id: 0, from: 'above'}];
     var args = {
       id: 0,
       btnsLength: btnsAllLength,
-      key: this.props.keyHead,
+      key: this.props.key_head,
       path: this.props.path,
       display: this.props.display,
       toggleHoveredTop: toggleHovered.bind(this, 0, 'top'),

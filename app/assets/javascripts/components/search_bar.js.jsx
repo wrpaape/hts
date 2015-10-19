@@ -91,14 +91,9 @@ var SearchBar = React.createClass({
     var results = this.props.buildBtns(this.state.btnsResults);
 
     var zSearch = results.length * 2;
-    // if (results.length) {
     var searchBarStyle = {
       zIndex: zSearch
     };
-      // var searchBarBot = this.buildSearchBlock('bot', zSearch - 2);
-      // results.unshift(searchBarBot);
-      // results[results.length - 1].splice(-2, 1);
-    // }
 
     var input = React.createElement('input', {
       type: 'text',

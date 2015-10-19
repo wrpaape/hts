@@ -14,27 +14,27 @@ class ApplicationController < ActionController::Base
 
   def nav_bar_props
     {
-      aboutUs: {
+      about_us: {
           key: "about-us",
           path: products_path,
         },
-      navBtnsAll: [
+      nav_btns_all: [
         {
           key: "goods",
-          keyHead: "goods-index",
+          key_head: "goods-index",
           path: products_path,
           display: "Products",
-          navBtns: Good.all_nav_props
+          nav_btns: Good.all_nav_props
         },
         # {
         #   key: "mods",
-        #   keyHead: "mods-index",
+        #   key_head: "mods-index",
         #   path: modifications_path,
         #   display: "Modifications",
         #   navBtns: Mod.all_nav_props
         # }
       ],
-      searchBar: {
+      search_bar: {
         key: "search-bar",
         url: search_path,
         placeholder: "search everything"

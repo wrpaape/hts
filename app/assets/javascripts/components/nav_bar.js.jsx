@@ -83,7 +83,7 @@ var NavBar = React.createClass({
       });
     };
 
-    var navBtns = this.props.navBtnsAll.map(function(navBtnsProps) {
+    var navBtns = this.props.nav_btns_all.map(function(navBtnsProps) {
       navBtnsProps.resizeScrollbar = resizeScrollbar;
       navBtnsProps.toggleState = toggleState;
       navBtnsProps.toggleHovered = toggleHovered;
@@ -93,7 +93,7 @@ var NavBar = React.createClass({
 
       return React.createElement(window.NavBtns, navBtnsProps);
     });
-    var searchBarProps = this.props.searchBar;
+    var searchBarProps = this.props.search_bar;
     searchBarProps.resizeScrollbar = resizeScrollbar;
     searchBarProps.toggleHovered = toggleHovered;
     searchBarProps.setLines = setLines;

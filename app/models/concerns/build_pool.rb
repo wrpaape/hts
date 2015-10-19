@@ -9,7 +9,7 @@ module BuildPool
           when :name, :full_name
             searchable_model == Employee ? [:path_show, :name, :title] : [:path_show, :name] 
           when :type_display
-            return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [eval("#{cat}_path"), cat] } }
+            return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
           when :info
             [:path_show, :info, :name]
           when :title
@@ -22,7 +22,7 @@ module BuildPool
 
     def self.display_proc(search_for)
       searchable_model = self
-      return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
+        return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
       case search_for
         when :info
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }
@@ -32,7 +32,7 @@ module BuildPool
     end
 
     def self.build_procs(search_for)
-      Hash[[:results, :display].map { |proc_type| [proc_type, eval("#{proc_type}_proc(search_for)")] }]
+      Hash[[:results, :display].map { |proc_type| [proc_type, send("#{proc_type}_proc", search_for)] }]
     end
 
     def self.build_categories
@@ -40,7 +40,7 @@ module BuildPool
     end
 
     def self.build_pool
-      Hash[to_s.underscore.pluralize.to_sym, build_categories]
+      Hash[to_s.fileize.pluralize.to_sym, build_categories]
     end
   end
 end
