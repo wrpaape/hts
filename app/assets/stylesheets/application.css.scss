@@ -290,7 +290,6 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼ TAGS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 body {
-  // padding: 150px 20px 20px;
   margin: 0;
   background-color: $c-bg-main;
   font-family: $f-main;
@@ -309,10 +308,10 @@ a {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 .header {
-  position: absolute;
   @include box-sizing(border-box);
+  position: absolute;
   width: 100%;
-  height: 130px;
+  height: 158px;
   padding: 20px 20px 0;
   table {
     width: 200px;
@@ -324,16 +323,24 @@ a {
     max-height: 100px;
   }
 }
-.logo {
+img.logo {
+  &.hts {
+    &:active {
+      content: image-url("companies/hts/hts-logo-inverted.png");
+    }
+  }
+}
+caption.logo {
   &.hts {
     @include border-radii(4px);
     padding: 5px 0;
     margin-top: -3px;
     font-weight: bold;
-    color: $c-hts-blue;
+    color: $c-hts-white;
+    background-color: $c-hts-blue;
     &:active {
-      color: $c-hts-white;
-      background-color: $c-hts-blue;
+      color: $c-hts-blue;
+      background-color: $c-hts-white;
     }
   }
 }
@@ -425,8 +432,9 @@ a {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 #nav-bar {
+  position: absolute;
   display: inline-block;
-  float: right;
+  top: 100px;
 }
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
