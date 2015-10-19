@@ -11,14 +11,15 @@ var Image = React.createClass({
   setDefault: function() {
     this.setState({
       srcRaw: this.props.path_default,
-      className: 'default'
+      className: 'default ' + this.props.class_name
     });
   },
   render: function() {
     return React.createElement('img', {
       src: Img.assetPath(this.state.srcRaw),
       className: this.state.className,
-      onError: this.setDefault
+      onError: this.setDefault,
+      onClick: this.props.onClick
     });
   }
 });

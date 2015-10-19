@@ -1,0 +1,10 @@
+<table class="image-caption">
+  <%= content_tag(:caption,
+    link_to(description, path_link),
+  class: class_name) %>
+  <tbody>
+    <tr>
+      <td><%= react_component(type, local_assigns.except(:description)) %></td>
+    </tr>
+  </tbody>
+</table>
