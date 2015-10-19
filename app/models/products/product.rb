@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
   private
 
   def add_path
-    update(path_show: eval("#{type_display.singularize}_path(#{id})"))
+    update(path_show: eval("#{type_display.fileize.singularize}_path(#{id})"))
   end
 
   def set_type_display

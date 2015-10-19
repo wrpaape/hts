@@ -16,12 +16,16 @@ class Employee < ActiveRecord::Base
 
   private
 
+  def all_names
+    [first_name, middle_name, last_name].compact
+  end
+  
   def titleize_names
-    [first_name, middle_name, last_name].compact.each(&:titleize!)
+    all_names.each(&:titleize!)
   end
 
   def set_full_name
-    self.full_name = [first_name, middle_name, last_name].compact.join(" ")
+    self.full_name = all_names.join(" ")
   end
 
   def add_path

@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   private
 
   def product_type
-    Product.subclasses && params[:type].constantize 
+    Product.descendants && params[:type].constantize 
   end
 
   def product_placeholder

@@ -34,6 +34,6 @@ class Asset < ActiveRecord::Base
   end
 
   def add_class_name
-    self.class_name = type.fileize
+    self.class_name = type.fileize.dasherize
   end
 end

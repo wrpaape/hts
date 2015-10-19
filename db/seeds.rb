@@ -1,3 +1,4 @@
+include Rails.application.routes.url_helpers
 def rand_paragraphs(min, max)
   Faker::Lorem.paragraphs(rand(min..max)).join("\n\n")
 end
@@ -105,6 +106,21 @@ products.each do |product|
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
 
+Spec.create({
+  title: "About Us",
+  body: rand_paragraphs(2, 5),
+})
+
+ExtGasSec.create({
+  name: "Extended Gas Section X",
+  info: rand_paragraphs(1, 3)
+})
+
+EquipScreen.create({
+  name: "Equipment Screen X",
+  info: rand_paragraphs(1, 3)
+})
+
 Good.create({
   name: "High Perf AHU",
   info: rand_paragraphs(1, 3)
@@ -117,36 +133,28 @@ Good.create({
 })
 Good.last.pdfs.create(filename: "0.pdf")
 
-Spec.create({
-  title: "About Us",
-  body: rand_paragraphs(1, 5),
-})
+Good.create({
+  name: "Low Profile ERV",
+  info: rand_paragraphs(1, 3)
+}).images
 
-# HomePageImage.create([
-#   {
-#     title: "Modifications",
-#     path_link: ApplicationController.modifications_path
-#   },
-#   {
-#     title: "Equipment Screens",
-#     path_link: modifications_path
-#   },
-#   {
-#     title: "Low Profile ERV",
-#     path_link: modifications_path
-#   },
-#   {
-#     title: "Multi-Zone VAV",
-#     path_link: modifications_path
-#   },
-#   {
-#     title: "Equipment Screens",
-#     path_link: modifications_path
-#   },
-#   {
-#     title: "Equipment Screens",
-#     path_link: modifications_path
-#   }
-# ])
 
+
+
+HomePageImage.create([
+  {
+    caption: "Modifications",
+    path_link: modifications_path
+  },
+  {
+    caption: "Equipment Screens",
+    path_link: equipment_screens_path
+  },
+  {
+    caption: "Extended Gas Sections",
+    path_link: extended_gas_sections_path
+  }
+])
+
+Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
 

@@ -7,19 +7,20 @@ class Asset < ActiveRecord::Base
   private
 
   def set_filename
-    prefix = parent.try(:name) || parent.try(:title)
-    filename.prepend("#{prefix.downcase.tr("/ /", "_")}-") if prefix
+    prefix = parent.try(:name) || parent.try(:title) || try(:caption)
+    filename.prepend("#{prefix.fileize}-") if prefix
   end
 
   def build_path_file
-    steps = ""
+    return if path_file
+    steps = "" 
     ancestor = self
     while ancestor.respond_to?(:parent)
       ancestor = ancestor.parent
       steps.prepend("#{ancestor.class.to_s.fileize.pluralize}/")
     end
 
-    steps.sub!(/\//, "/#{ancestor.name.downcase.tr("/ /", "_")}/")
+    steps.sub!(/\//, "/#{ancestor.name.fileize}/")
 
     ancestor = ancestor.class
     until ancestor.superclass == ActiveRecord::Base
