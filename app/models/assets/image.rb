@@ -8,7 +8,7 @@ class Image < Asset
       else /[^\/]+\/$/
     end
 
-    update(path_alt: path_file.sub(regex, "default.png"))
+    update(path_default: path_file.sub(regex, "default.png"))
   end
 
   def set_path_file(steps)

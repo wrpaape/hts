@@ -102,7 +102,8 @@
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ VARIABLES ▼▼▼▼▼▼▼▼▼▼▼▼▼
 $c-bg-main: white;
-$c-logo-blue: #0062A7;
+$c-hts-blue: #0062A7;
+$c-hts-white: white;
 $c-btn-txt1: white;
 $c-btn-bg1: #0062A7;
 $c-btn-txt2: white;
@@ -116,6 +117,9 @@ $m-ds: drop-shadow(1px 1px 1px black);
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼ CUSTOM MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
+@mixin blk-txt-shdw {
+  text-shadow: 1px 1px 1px black;
+}
 @mixin mag-glass($s-f, $c, $c-hov) {
   @include border-radii(50%);
   &:hover {
@@ -263,13 +267,13 @@ $m-ds: drop-shadow(1px 1px 1px black);
 }
 @mixin btn-mid {
   &:active {
-    text-shadow: 1px 1px 1px black;
+    @include blk-txt-shdw
   }
 }
 @mixin btn-bot {
   &:active {
     & + .mid {
-      text-shadow: 1px 1px 1px black;
+      @include blk-txt-shdw
     }
   }
 }
@@ -277,7 +281,7 @@ $m-ds: drop-shadow(1px 1px 1px black);
   @include btn-bot;
   &:active {
     & + .bot + .mid {
-      text-shadow: 1px 1px 1px black;
+      @include blk-txt-shdw
     }
   }
 }
@@ -294,6 +298,12 @@ body {
 caption {
   caption-side: bottom;
 }
+a {
+  text-decoration: none;
+  &, &:active, &:visited {
+    color: inherit;
+  }
+}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
@@ -302,6 +312,7 @@ caption {
   position: absolute;
   @include box-sizing(border-box);
   width: 100%;
+  height: 130px;
   padding: 20px 20px 0;
   table {
     width: 200px;
@@ -311,6 +322,19 @@ caption {
   img {
     max-width: 100%;
     max-height: 100px;
+  }
+}
+.logo {
+  &.hts {
+    @include border-radii(4px);
+    padding: 5px 0;
+    margin-top: -3px;
+    font-weight: bold;
+    color: $c-hts-blue;
+    &:active {
+      color: $c-hts-white;
+      background-color: $c-hts-blue;
+    }
   }
 }
 .nav-btns, .search-results {

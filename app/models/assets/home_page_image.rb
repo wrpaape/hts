@@ -1,0 +1,3 @@
+class HomePageImage < Image
+
+end

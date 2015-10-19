@@ -12,15 +12,15 @@ end
 
 # Ingersoll Rand brands
 Company.create([
-	{
-    name: "HTS",
-    link: "http://www.hts.com/",
-    slogan: "Delivering Real Success®"
-  },
   {
     name: "ModWerks",
-    link: "/",
+    path_show: "/",
     slogan: "coming soon™"
+  },
+  {
+    name: "HTS",
+    path_show: "http://www.hts.com/",
+    slogan: "Delivering Real Success®"
   }
 ])
 
@@ -122,5 +122,11 @@ Spec.create({
   body: rand_paragraphs(1, 5),
 })
 
+# HomePageImage.create([
+#   {
+#     filename:
+#   }
+
+# ])
 
 

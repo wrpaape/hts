@@ -3,10 +3,11 @@ module BuildPool
 
   included do
     def self.results_proc(search_for)
-      pluck_results =
+      searchable_model = self
+      attrs =
         case search_for
           when :name, :full_name
-            is_a?(Employee) ? [:path_show, :name, :title] : [:path_show, :name] 
+            searchable_model == Employee ? [:path_show, :name, :title] : [:path_show, :name] 
           when :type_display
             return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [eval("#{cat}_path"), cat] } }
           when :info
@@ -14,14 +15,15 @@ module BuildPool
           when :title
             [:path_show, :title, :name]
           when :filename
-            [:path_alt, :filename]
+            [:path_dl, :filename]
         end
-      model = self
-      Proc.new { |input| model.where("#{search_for} ~* ?", input).pluck(*pluck_results) }
+      Proc.new { |input| searchable_model.where("#{search_for} ~* ?", input).pluck(*attrs) }
     end
 
     def self.display_proc(search_for)
-      return Proc.new { |result| "#{result[1]} (#{result[2]})" } if is_a?(Employee)
+      searchable_model = self
+      10.times {pp searchable_model}
+      return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
       case search_for
         when :info
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }

@@ -1,3 +1,5 @@
-<% companies.each do |company| %>
-  <%= render partial: "logo", locals: { company: company } %>
+<% attrs = [:slogan, :path_show, :class_name, :path_file, :filename] %>
+<% logos.each do |logo| %>
+  <% logo = Hash[attrs.map { |attr| [attr, logo.send(attr)] }] %>
+  <%= render partial: "logo", locals: logo %>
 <% end %>

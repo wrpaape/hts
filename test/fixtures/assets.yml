@@ -2,18 +2,24 @@
 
 one:
   key: MyString
-  type: 
+  type:
+  description: MyString 
   filename: MyString
-  path: MyString
+  path_file: MyString
+  path_default: MyString
+  path_link: MyString
   default: MyString
   parent_type: MyString
   parent_id: 1
 
 two:
   key: MyString
-  type: 
+  type:
+  description: MyString 
   filename: MyString
-  path: MyString
+  path_file: MyString
+  path_default: MyString
+  path_link: MyString
   default: MyString
   parent_type: MyString
   parent_id: 1

@@ -5,14 +5,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def get_header_locals
+  def header
     { 
-      companies: Company.includes(:logo),
-      nav_bar_props: get_nav_bar_props
+      logos: Logo.order(:filename),
+      nav_bar_props: nav_bar_props
     }
   end
 
-  def get_nav_bar_props
+  def nav_bar_props
     {
       aboutUs: {
           key: "about-us",

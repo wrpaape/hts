@@ -1,13 +1,10 @@
-<% slogan = company.slogan %>
-<% link = company.link %>
-<% logo = company.logo %>
 <table>
-  <caption>
-    <%= link_to(slogan, link) %>
-  </caption>
+  <%= content_tag(:caption,
+    link_to(slogan, path_show),
+  class: class_name) %>
   <tbody>
     <tr>
-      <td><%= link_to(image_tag(logo.instance_exec { path_file + filename }), link) %></td>
+      <td><%= link_to(image_tag(path_file + filename), path_show) %></td>
     </tr>
   </tbody>
 </table>

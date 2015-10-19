@@ -19,36 +19,42 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "assets", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.string   "filename"
+    t.string   "class_name"
+    t.string   "description"
+    t.string   "filename",     default: ""
     t.string   "path_file"
-    t.string   "path_alt"
+    t.string   "path_default"
+    t.string   "path_link"
     t.string   "parent_type"
     t.integer  "parent_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
+  add_index "assets", ["class_name"], name: "index_assets_on_class_name", using: :btree
+  add_index "assets", ["description"], name: "index_assets_on_description", using: :btree
   add_index "assets", ["filename"], name: "index_assets_on_filename", using: :btree
   add_index "assets", ["key"], name: "index_assets_on_key", using: :btree
   add_index "assets", ["parent_id", "parent_type"], name: "index_assets_on_parent_id_and_parent_type", using: :btree
   add_index "assets", ["parent_id"], name: "index_assets_on_parent_id", using: :btree
   add_index "assets", ["parent_type"], name: "index_assets_on_parent_type", using: :btree
-  add_index "assets", ["path_alt"], name: "index_assets_on_path_alt", using: :btree
+  add_index "assets", ["path_default"], name: "index_assets_on_path_default", using: :btree
   add_index "assets", ["path_file"], name: "index_assets_on_path_file", using: :btree
+  add_index "assets", ["path_link"], name: "index_assets_on_path_link", using: :btree
   add_index "assets", ["type"], name: "index_assets_on_type", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
     t.string   "slogan"
-    t.string   "link"
+    t.string   "path_show"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "companies", ["key"], name: "index_companies_on_key", using: :btree
-  add_index "companies", ["link"], name: "index_companies_on_link", using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
+  add_index "companies", ["path_show"], name: "index_companies_on_path_show", using: :btree
   add_index "companies", ["slogan"], name: "index_companies_on_slogan", using: :btree
 
   create_table "contacts", force: :cascade do |t|

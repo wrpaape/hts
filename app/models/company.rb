@@ -3,11 +3,7 @@ class Company < ActiveRecord::Base
 
   has_many :locations
   has_many :employees, through: :locations
-  has_one :logo, as: :parent, class_name: "Image"
+  has_one :logo, as: :parent
 
-  private
-
-  def image_type
-    "logo.png"
-  end
+  self.image_type = Logo
 end
