@@ -107,7 +107,8 @@ var SearchBar = React.createClass({
     var searchBar = React.createElement('div', {
       key: 'search-bar',
       ref: 'searchBar',
-      className: 'search-bar mid',
+      id: 'search-bar',
+      className: 'mid',
       style: searchBarStyle,
       onClick: this.focusInput
     }, input);
@@ -117,7 +118,6 @@ var SearchBar = React.createClass({
     return React.createElement('div', {
       ref: 'searchResults',
       id: 'search-results',
-      className: 'search-results'
     }, btnsSearch.concat(results));
   }
 });

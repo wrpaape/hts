@@ -138,8 +138,7 @@ Good.create({
   info: rand_paragraphs(1, 3)
 }).images
 
-
-
+6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
 
 HomePageImage.create([
   {

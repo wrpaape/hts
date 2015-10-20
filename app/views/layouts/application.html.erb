@@ -9,6 +9,8 @@
 </head>
 <body>
   <%= render partial: "header", locals: @header %>
-  <%= yield %>
+  <div class="content">
+    <%= yield %>
+  </div>
 </body>
 </html>

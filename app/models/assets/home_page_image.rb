@@ -1,6 +1,6 @@
 class HomePageImage < Image
   include PrimaryImage
-  
+
   before_save :set_path_file
 
   alias_attribute :caption, :description
@@ -11,6 +11,6 @@ class HomePageImage < Image
   private
 
   def set_path_file
-    self.path_file = "/home_page/"
+    self.path_file = "home_page/"
   end
 end

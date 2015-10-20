@@ -307,37 +307,25 @@ a {
 // ************************************
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-.header {
-  @include box-sizing(border-box);
-  position: absolute;
-  width: 100%;
-  height: 158px;
-  padding: 20px 20px 0;
-  table {
-    width: 200px;
-    border-spacing: 0;
-    border-collapse: collapse;
-    text-align: center;
-    float: left;
-    tbody {
-      &, tr, td {
-        padding: 0;
-      }
-      a {
-        margin: 0;
-        vertical-align: top;
-      }
-      a, div, img {
-        display: inline-block;
-        max-width: 158px;
-        max-height: 100px;
-      }
-    }
-  }
+.content {
+  margin-top: 168px;
 }
 .link {
   cursor: pointer;
 }
+.image-caption {
+  border-collapse: collapse;
+  text-align: center;
+  tbody {
+    &, tr, td {
+      padding: 0;
+    }
+    div, img {
+      display: inline-block;
+    }
+  }
+}
+
 img.logo {
   &.hts {
     &:active {
@@ -361,77 +349,107 @@ caption.logo {
     }
   }
 }
-.image-caption {
-  a > div {
-    display: inline-block;
-  }
-}
-.nav-btns, .search-results {
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
-  // overflow: hidden;
-  .nav-btn {
-    outline: none;
-    &:not(.search-bar-block) {
-      cursor: pointer;
-      &.top {
-        @include top-block($c-btn-bg1);
-        @include btn-top;
-      }
-      &.mid {
-        @include mid-block($c-btn-txt1, $c-btn-bg1);
-        @include btn-mid;
-        @include user-select('none');
-        display: block;
-        position: relative;
-        margin-top: 10px;
-        padding: 10px 25px;
-        text-decoration: none;
-      }
-      &.bot {
-        @include bot-block($c-btn-bg1);
-        @include btn-bot;
-      }
-      @include lighten-on-change($c-btn-bg1);
-    }
-    &.search-bar-block {
-      &.top {
-        @include top-block($c-btn-bg2);
-      }
-      &.bot {
-        @include bot-block($c-btn-bg2);
-      }
-      &.top, &.bot {
-        cursor: text;
-      }
-    }
-    &.bot:nth-last-child(2) {
-      display: none;
-    }
-  }
-  .nav-btn, .search-bar {
-    &.mid:last-child {
-      &, & > input {
-        @include border-radius-br(0);
-        & > input {
-          padding-right: 36px;
-        }
-        & > button {
-          right: 0.75em;
-        } 
-      }
-    }
-  }
-}
-
 .nav-btns {
   margin-right: 5px;
   // .nav-btn {
   //   @include fade-in;
   // }
 }
-.search-bar {
+.nav-btn {
+  outline: none;
+  &:not(.search-bar-block) {
+    cursor: pointer;
+    &.top {
+      @include top-block($c-btn-bg1);
+      @include btn-top;
+    }
+    &.mid {
+      @include mid-block($c-btn-txt1, $c-btn-bg1);
+      @include btn-mid;
+      @include user-select('none');
+      display: block;
+      position: relative;
+      margin-top: 10px;
+      padding: 10px 25px;
+      text-decoration: none;
+    }
+    &.bot {
+      @include bot-block($c-btn-bg1);
+      @include btn-bot;
+    }
+    @include lighten-on-change($c-btn-bg1);
+  }
+  &.search-bar-block {
+    &.top {
+      @include top-block($c-btn-bg2);
+    }
+    &.bot {
+      @include bot-block($c-btn-bg2);
+    }
+    &.top, &.bot {
+      cursor: text;
+    }
+  }
+  &.bot:nth-last-child(2) {
+    display: none;
+  }
+}
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 128px;
+  padding: 20px 20px 0;
+  z-index: 1;
+  table {
+    width: 200px;
+    float: left;
+    div, img {
+      max-width: 158px;
+      max-height: 100px;
+    }
+  }
+}
+#home-page-images {
+  padding: 0 20px;
+  overflow: hidden;
+  table {
+    display: inline-block;
+    float: left;
+    img {
+      width: 100%;
+    }
+  }
+}
+#nav-bar {
+  position: absolute;
+  display: inline-block;
+  top: 88px;
+}
+#search-results, .nav-btns {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+#search-bar, .nav-btn {
+  &.mid:last-child {
+    &, & > input {
+      @include border-radius-br(0);
+      & > input {
+        padding-right: 36px;
+      }
+      & > button {
+        right: 0.75em;
+      } 
+    }
+  }
+}
+#search-bar {
   @include border-radii(50% 0);
   position: relative;
   height: 48px;
@@ -450,17 +468,56 @@ caption.logo {
     // @include fade-in;
   }
 }
-// ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-// ************************************
-// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-#nav-bar {
-  position: absolute;
-  display: inline-block;
-  top: 100px;
-}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼ MEDIA QUERY MIXINS ▼▼▼▼▼▼▼▼
+@mixin hp-img-cols($cols) {
+  #home-page-images > table {
+    $m-rem:
+      if($cols == 1, 0%,
+        if($cols == 2, 2.5%,
+          if($cols == 3, 10%,
+            if($cols == 4, 25%, 25%))));
+    $m-btwn: $m-rem / (2 * ($cols - 1));
 
+    width: (100% - $m-rem) / $cols;
+    margin: 0 $m-btwn $m-btwn;
+    &:nth-child(#{$cols}n - #{$cols - 1}) {
+      margin-left: 0;
+    }
+    &:nth-child(#{$cols}n) {
+      margin-right: 0;
+    }
+  }
+}
+// ▲▲▲▲▲▲▲▲ MEDIA QUERY MIXINS ▲▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼ MEDIA QUERIES ▼▼▼▼▼▼▼▼▼▼▼
+/* smartphones portrait */
+@media only screen and (min-width: 320px) and (max-width: 479px){
+  @include hp-img-cols(1);
+}
+/* smartphones landscacpe */
+@media only screen and (min-width: 480px) and (max-width: 767px){
+  @include hp-img-cols(2);
+}
+/* tablets portrait */
+@media only screen and (min-width: 768px) and (max-width: 991px){
+  @include hp-img-cols(3);
+}
+/* tablets landscape / desktop */
+@media only screen and (min-width: 992px) and (max-width: 1999px){
+  @include hp-img-cols(4);
+}
+@media print {
+  #header {
+    display: none;
+  }
+}
+// ▲▲▲▲▲▲▲▲▲▲ MEDIA QUERIES ▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
 
 
 
