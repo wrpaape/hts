@@ -5,9 +5,6 @@ body {
   background-color: $c-bg-main;
   font-family: $f-main;
 }
-caption {
-  caption-side: bottom;
-}
 a {
   text-decoration: none;
   &, &:active, &:visited {
@@ -25,15 +22,9 @@ a {
   cursor: pointer;
 }
 .image-caption {
-  border-collapse: collapse;
   text-align: center;
-  tbody {
-    &, tr, td {
-      padding: 0;
-    }
-    div, img {
-      display: inline-block;
-    }
+  &, & * {
+    display: inline-block;
   }
 }
 
@@ -44,15 +35,15 @@ img.logo {
     }
   }
 }
-caption.logo {
+div.logo {
   &.hts {
     @include border-radii(4px);
-    // padding: 5px 0;
     font-weight: bold;
     color: $c-hts-white;
     background-color: $c-hts-blue;
     a {
-      margin: 5px 0;
+      margin: 5px;
+      font-size: 0.8em;
     }
     &:active {
       color: $c-hts-blue;
@@ -117,9 +108,9 @@ caption.logo {
   height: 128px;
   padding: 20px 20px 0;
   z-index: 1;
-  table {
+  .image-caption {
     width: 200px;
-    float: left;
+    vertical-align: top;
     div, img {
       max-width: 158px;
       max-height: 100px;
@@ -129,11 +120,15 @@ caption.logo {
 #home-page-images {
   padding: 0 20px;
   overflow: hidden;
-  table {
-    display: inline-block;
+  .image-caption {
     float: left;
-    &:hover img {
-      @include filters(blur(1.5px));
+    &:hover {
+      img {
+        @include filters(blur(1.5px));
+      }
+    }
+    img, caption {
+      @include transitions(all 0.5s cubic-bezier(.29, .96, .49, .99));
     }
     img {
       width: 100%;
@@ -144,6 +139,7 @@ caption.logo {
   position: absolute;
   display: inline-block;
   top: 88px;
+  right: 20px;
 }
 #search-results, .nav-btns {
   display: inline-block;

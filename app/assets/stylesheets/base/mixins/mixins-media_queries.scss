@@ -1,7 +1,7 @@
 // ************************************
 // ▼▼▼▼▼▼▼▼ MEDIA QUERY MIXINS ▼▼▼▼▼▼▼▼
 @mixin hp-img-cols($cols) {
-  #home-page-images > table {
+  #home-page-images > .image-caption {
     $m-rem:
       if($cols == 1, 0,
         if($cols == 2, 0.025,
@@ -17,6 +17,7 @@
 
     &:nth-child(#{$cols}n - #{$cols - 1}) {
       margin-left: 0;
+      clear: left;
     }
     &:nth-child(#{$cols}n) {
       margin-right: 0;
