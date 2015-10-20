@@ -1,3 +1,8 @@
-// Place all the styles related to the main controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "base/variables.scss";
+@import "base/animation_keyframes.scss";
+@import "base/mixins/mixins-vendor_prefixes.scss";
+@import "base/mixins/mixins-media_queries.scss";
+@import "base/mixins/mixins-misc.scss";
+@import "base/globals.scss";
+@import "base/media_queries.scss";
+/*@import "styles/search.scss";*/

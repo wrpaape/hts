@@ -1,0 +1,27 @@
+// ************************************
+// ▼▼▼▼▼▼▼▼ MEDIA QUERY MIXINS ▼▼▼▼▼▼▼▼
+@mixin hp-img-cols($cols) {
+  #home-page-images > table {
+    $m-rem:
+      if($cols == 1, 0,
+        if($cols == 2, 0.025,
+          if($cols == 3, 0.1,
+            if($cols == 4, 0.25, 0.25))));
+
+    $m: if($cols == 1, 0, $m-rem / (2 * ($cols - 1)));
+    $m-lr: percentage($m);
+    $m-bot: percentage(2 * $m);
+
+    width: percentage((1 - $m-rem) / $cols);
+    margin: 0 $m-lr $m-bot;
+
+    &:nth-child(#{$cols}n - #{$cols - 1}) {
+      margin-left: 0;
+    }
+    &:nth-child(#{$cols}n) {
+      margin-right: 0;
+    }
+  }
+}
+// ▲▲▲▲▲▲▲▲ MEDIA QUERY MIXINS ▲▲▲▲▲▲▲▲
+// ************************************

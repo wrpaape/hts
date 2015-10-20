@@ -1,0 +1,172 @@
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼ MISC MIXINS ▼▼▼▼▼▼▼▼▼▼▼▼
+@mixin blk-txt-shdw {
+  text-shadow: 1px 1px 1px black;
+}
+@mixin mag-glass($s-f, $c, $c-hov) {
+  @include border-radii(50%);
+  &:hover {
+    border-color: $c-hov;
+    &:before {
+      background-color: $c-hov;
+    }
+  }
+  &:active {
+    @include filters($m-ds);
+  }
+  position: absolute;
+  display: inline-block;
+  font-size: $s-f;
+  bottom: 1em;
+  right: 5em;
+  width: 1em;
+  height: 1em;
+  border: 0.125em solid $c;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  &:before {
+    @include transforms(rotate(60deg));
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: -0.25em;
+    bottom: -0.3em;
+    width: 0.625em;
+    height: 0.125em;
+    border-width: 0;
+    background-color: $c;
+    &:hover {
+      background-color: $c-hov;
+    }
+  }
+}
+@mixin lighten-on-change($c) {
+  &.true {
+    background-color: lighten($c, 10%);
+  }
+}
+@mixin bot-block($c) {
+  position: absolute;
+  display: inline-block;
+  width: 50%;
+  margin-top: 58px;
+  background-color: $c;
+  &, &:before {
+    height: 33px;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background-color: $c-bg-main;
+    @include border-radius-tl(100%);
+  }
+  &.above-lines-2 {
+    margin-top: 86px;
+  }
+  &.above-lines-3 {
+    margin-top: 114px;
+  }
+  &.above-lines-4 {
+    margin-top: 142px;
+  }
+  &.below-lines-2 {
+    &, &:before {
+      height: 46px;
+    }
+  }
+  &.below-lines-3 {
+    &, &:before {
+      height: 60px;
+    }
+  }
+  &.below-lines-4 {
+    &, &:before {
+      height: 72px;
+    }
+  }
+}
+@mixin top-block($c) {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 50%;
+  margin-top: -22px;
+  background-color: $c;
+  &, &:before {
+    height: 32px;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background-color: $c-bg-main;
+    @include border-radius-br(100%);
+  }
+}
+@mixin mid-block($c-txt, $c-bg) {
+  @include box-sizing(border-box);
+  @include border-radii(50% 0);
+  width: 250px;
+  font-size: 18px;
+  line-height: 28px;
+  color: $c-txt;
+  background-color: $c-bg;
+  font-family: $f-main;
+  &.info {
+    text-align: center;
+  }
+  &.lines-1 {
+    height: 48px;
+  }
+  &.lines-2 {
+    height: 76px;
+    & + .top {
+      margin-top: -38px;
+      &, &:before {
+        height: 48px;
+      }
+    }
+  }
+  &.lines-3 {
+    height: 104px;
+    & + .top {
+      margin-top: -48px;
+      &, &:before {
+        height: 58px;
+      }
+    }
+  }
+  &.lines-4 {
+    height: 132px;
+    & + .top {
+      margin-top: -58px;
+      &, &:before {
+        height: 68px;
+      }
+    }
+  }
+}
+@mixin btn-mid {
+  &:active {
+    @include blk-txt-shdw
+  }
+}
+@mixin btn-bot {
+  &:active {
+    & + .mid {
+      @include blk-txt-shdw
+    }
+  }
+}
+@mixin btn-top {
+  @include btn-bot;
+  &:active {
+    & + .bot + .mid {
+      @include blk-txt-shdw
+    }
+  }
+}
+// ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************

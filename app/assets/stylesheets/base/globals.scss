@@ -1,0 +1,186 @@
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼ TAGS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+body {
+  margin: 0;
+  background-color: $c-bg-main;
+  font-family: $f-main;
+}
+caption {
+  caption-side: bottom;
+}
+a {
+  text-decoration: none;
+  &, &:active, &:visited {
+    color: inherit;
+  }
+}
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+.content {
+  margin-top: 168px;
+}
+.link {
+  cursor: pointer;
+}
+.image-caption {
+  border-collapse: collapse;
+  text-align: center;
+  tbody {
+    &, tr, td {
+      padding: 0;
+    }
+    div, img {
+      display: inline-block;
+    }
+  }
+}
+
+img.logo {
+  &.hts {
+    &:active {
+      content: image-url("companies/hts/hts-logo-inverted.png");
+    }
+  }
+}
+caption.logo {
+  &.hts {
+    @include border-radii(4px);
+    // padding: 5px 0;
+    font-weight: bold;
+    color: $c-hts-white;
+    background-color: $c-hts-blue;
+    a {
+      margin: 5px 0;
+    }
+    &:active {
+      color: $c-hts-blue;
+      background-color: $c-hts-white;
+    }
+  }
+}
+.nav-btns {
+  margin-right: 5px;
+  // .nav-btn {
+  //   @include fade-in;
+  // }
+}
+.nav-btn {
+  outline: none;
+  &:not(.search-bar-block) {
+    cursor: pointer;
+    &.top {
+      @include top-block($c-btn-bg1);
+      @include btn-top;
+    }
+    &.mid {
+      @include mid-block($c-btn-txt1, $c-btn-bg1);
+      @include btn-mid;
+      @include user-select('none');
+      display: block;
+      position: relative;
+      margin-top: 10px;
+      padding: 10px 25px;
+      text-decoration: none;
+    }
+    &.bot {
+      @include bot-block($c-btn-bg1);
+      @include btn-bot;
+    }
+    @include lighten-on-change($c-btn-bg1);
+  }
+  &.search-bar-block {
+    &.top {
+      @include top-block($c-btn-bg2);
+    }
+    &.bot {
+      @include bot-block($c-btn-bg2);
+    }
+    &.top, &.bot {
+      cursor: text;
+    }
+  }
+  &.bot:nth-last-child(2) {
+    display: none;
+  }
+}
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 128px;
+  padding: 20px 20px 0;
+  z-index: 1;
+  table {
+    width: 200px;
+    float: left;
+    div, img {
+      max-width: 158px;
+      max-height: 100px;
+    }
+  }
+}
+#home-page-images {
+  padding: 0 20px;
+  overflow: hidden;
+  table {
+    display: inline-block;
+    float: left;
+    &:hover img {
+      @include filters(blur(1.5px));
+    }
+    img {
+      width: 100%;
+    }
+  }
+}
+#nav-bar {
+  position: absolute;
+  display: inline-block;
+  top: 88px;
+}
+#search-results, .nav-btns {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+#search-bar, .nav-btn {
+  &.mid:last-child {
+    &, & > input {
+      @include border-radius-br(0);
+      & > input {
+        padding-right: 36px;
+      }
+      & > button {
+        right: 0.75em;
+      } 
+    }
+  }
+}
+#search-bar {
+  @include border-radii(50% 0);
+  position: relative;
+  height: 48px;
+  margin-top: 10px;
+  cursor: text;
+  input {
+    @include mid-block($c-btn-txt2, $c-btn-bg2);
+    // @include fade-in;
+    height: 48px;
+    border: none;
+    outline: none;
+    padding: 10px 104px 10px 24px;
+  }
+  button {
+    @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
+    // @include fade-in;
+  }
+}
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ IDS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+// ************************************

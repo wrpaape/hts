@@ -1,0 +1,88 @@
+// ************************************
+// ▼▼▼▼▼▼▼ VENDOR PREFIX MIXINS ▼▼▼▼▼▼▼
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  -ms-box-shadow: $args;
+  -o-box-shadow: $args;
+  box-shadow: $args;
+}
+@mixin box-sizing($val) {
+  -webkit-box-sizing: $val;
+  -moz-box-sizing: $val;
+  -ms-box-sizing: $val;
+  -o-box-sizing: $val;
+  box-sizing: $val;
+}
+@mixin filters($filters) { 
+  -webkit-filter: $filters;
+  -moz-filter: $filters;
+  -ms-filter: $filters;
+  -o-filter: $filters;
+  filter: $filters;
+}
+@mixin border-radii($rs) {
+  -webkit-border-radius: $rs;
+  -moz-border-radius: $rs;
+  -ms-border-radius: $rs;
+  -o-border-radius: $rs;
+  border-radius: $rs;
+}
+@mixin border-radius-tl($r) {
+  -webkit-border-top-left-radius: $r;
+  -moz-border-top-left-radius: $r;
+  -ms-border-top-left-radius: $r;
+  -o-border-top-left-radius: $r;
+  border-top-left-radius: $r;
+}
+@mixin border-radius-tr($r) {
+  -webkit-border-top-right-radius: $r;
+  -moz-border-top-right-radius: $r;
+  -ms-border-top-right-radius: $r;
+  -o-border-top-right-radius: $r;
+  border-top-right-radius: $r;
+}
+@mixin border-radius-br($r) {
+  -webkit-border-bottom-right-radius: $r;
+  -moz-border-bottom-right-radius: $r;
+  -ms-border-bottom-right-radius: $r;
+  -o-border-bottom-right-radius: $r;
+  border-bottom-right-radius: $r;
+}
+@mixin border-radius-bl($r) {
+  -webkit-border-bottom-left-radius: $r;
+  -moz-border-bottom-left-radius: $r;
+  -ms-border-bottom-left-radius: $r;
+  -o-border-bottom-left-radius: $r;
+  border-bottom-left-radius: $r;
+}
+@mixin transform-origin($args) {
+  -ms-transform-origin: $args;
+  -webkit-transform-origin: $args;
+  -moz-transform-origin: $args;
+  -o-transform-origin: $args;
+  transform-origin: $args;
+}
+@mixin transforms($ts) {
+  -ms-transform: $ts;
+  -moz-transform: $ts;
+  -webkit-transform: $ts;
+  -o-transform: $ts;
+  transform: $ts;
+}
+@mixin transitions($ts) {
+  -ms-transition: $ts;
+  -webkit-transition: $ts;
+  -moz-transition: $ts;
+  -o-transition: $ts;
+  transition: $ts;
+}
+@mixin user-select($args) {
+  -webkit-user-select: $args;
+  -moz-user-select: $args;
+  -ms-user-select: $args;
+  -o-user-select: $args;
+  user-select: $args;
+}
+// ▲▲▲▲▲▲▲ VENDOR PREFIX MIXINS ▲▲▲▲▲▲▲
+// ************************************
