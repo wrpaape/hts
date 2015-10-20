@@ -480,10 +480,11 @@ caption.logo {
           if($cols == 3, 10%,
             if($cols == 4, 25%, 25%))));
 
-    $m-btwn: calc($m-rem / (2 * ($cols - 1)));
+    $m-lr: $m-rem / (2 * ($cols - 1));
+    $m-bot: 2 * $m-lr;
 
     width: (100% - $m-rem) / $cols;
-    margin: 0 $m-btwn calc(2 * $m-btwn);
+    margin: 0 $m-lr $m-bot;
 
     &:nth-child(#{$cols}n - #{$cols - 1}) {
       margin-left: 0;
