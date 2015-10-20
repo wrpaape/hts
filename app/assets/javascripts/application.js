@@ -20,7 +20,7 @@
 //= require components
 //= require_tree .
 
-/* globals $, Iscroll */
+/* globals $ */
 'use strict';
 
 $(function() {  
