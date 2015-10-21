@@ -1,0 +1,38 @@
+@import "base/mixins/mixins-vendor_prefixes.scss";
+// ************************************
+// ▼▼▼▼▼▼▼ ANIMATION KEYFRAMES ▼▼▼▼▼▼▼▼
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes unblur {
+  from {
+    @include filters(blur(1.5px));
+  }
+  to {
+    @include filters(blur(0));
+  }
+}
+@keyframes sit {
+  from {
+    top: -10px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+// ▲▲▲▲▲▲▲ ANIMATION KEYFRAMES ▲▲▲▲▲▲▲▲
+// ************************************
+@mixin fade-in {
+  animation: fade-in ease-in 1s forwards;
+}
+@mixin animate-result {
+  animation: fade-in $tf-main $dur-main forwards,
+    unblur $tf-main $dur-main forwards,
+    sit $tf-main $dur-main forwards;
+}

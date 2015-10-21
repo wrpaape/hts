@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :equipment_screens, as: "equipment_screens", type: "EquipScreen"
   end
 
-  resources :members
+  resources :employees
 
   scope :download do
     get "pdf/:id", to: "download#pdf", as: "download_pdf"

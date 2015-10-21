@@ -73,7 +73,12 @@ div.logo {
       position: relative;
       margin-top: 10px;
       padding: 10px 25px;
+      overflow: hidden;
       text-decoration: none;
+      span, strong {
+        @include animate-result;
+        position: relative;
+      }
     }
     &.bot {
       @include bot-block($c-btn-bg1);
@@ -121,17 +126,31 @@ div.logo {
   padding: 0 20px;
   overflow: hidden;
   .image-caption {
+    position: relative;
     float: left;
     &:hover {
       img {
         @include filters(blur(1.5px));
+        width: 90%;
+      }
+      .caption {
+        margin-top: -50%;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-shadow: -1px -1px 0 $c-bg-main,
+          1px -1px 0 $c-bg-main,
+          -1px 1px 0 $c-bg-main,
+          1px 1px 0 $c-bg-main;
       }
     }
-    img, caption {
-      @include transitions(all 0.5s cubic-bezier(.29, .96, .49, .99));
-    }
-    img {
+    img, .caption {
+      @include transitions(all $dur-main $tf-main);
       width: 100%;
+      text-align: center;
+    }
+    .caption {
+      position: absolute;
+      left: 0;
     }
   }
 }

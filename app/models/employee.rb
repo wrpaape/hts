@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   def all_names
     [first_name, middle_name, last_name].compact
   end
-  
+
   def titleize_names
     all_names.each(&:titleize!)
   end
@@ -29,6 +29,6 @@ class Employee < ActiveRecord::Base
   end
 
   def add_path
-    update(path_show: member_path(id))
+    update(path_show: employee_path(id))
   end
 end
