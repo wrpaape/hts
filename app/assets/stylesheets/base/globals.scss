@@ -11,6 +11,9 @@ a {
     color: inherit;
   }
 }
+h1 {
+  text-align: center;
+}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
@@ -35,16 +38,15 @@ img.logo {
     }
   }
 }
-div.logo {
+a.logo {
   &.hts {
     @include border-radii(4px);
     font-weight: bold;
     color: $c-hts-white;
     background-color: $c-hts-blue;
-    a {
-      margin: 5px;
-      font-size: 0.8em;
-    }
+    padding: 3px;
+    font-size: 9.5px;
+    vertical-align: top;
     &:active {
       color: $c-hts-blue;
       background-color: $c-hts-white;
@@ -116,11 +118,12 @@ div.logo {
   padding: 20px 20px 0;
   z-index: 1;
   .image-caption {
-    width: 200px;
-    vertical-align: top;
+    max-width: 150px;
+    max-height: 100px;
+    vertical-align: bottom;
     div, img {
-      max-width: 158px;
-      max-height: 100px;
+      max-width: 150px;
+      max-height: 75px;
     }
   }
 }
@@ -170,20 +173,42 @@ div.logo {
 }
 #about-us {
   width: 250px;
-  .about-us-image {
-    position: absolute;
-    width: 200px;
-    &.bg {
-      width: 100%;
-      z-index: -1;
-    }
-  }
 }
 #about-us-btns {
+  position: absolute;
   display: inline-block;
 }
-#about-us-body {
-  // background-image: $url-about-us-bg;
+#about-us-content {
+  @include transitions(top $dur-main $tf-main);
+  position: fixed;
+  top: -650px;
+  right: 20px;
+  left: 20px;
+  z-index: -1;
+  overflow: hidden;
+  &.true {
+    top: 168px;
+  }
+  p {
+    margin: 20px;
+    font-size: 20px;
+  }
+  .about-us-image {
+    width: 200px;
+    &.bg {
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+      opacity: 0.5;
+    }
+    &.fg {
+      margin: 0 20px;
+      float: left;
+      &:last-of-type {
+        float: right;
+      }
+    }
+  }
 }
 #search-bar, .nav-btn {
   &.mid:last-child {

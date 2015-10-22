@@ -28,29 +28,35 @@ render: function() {
     var toggleExpanded = this.props.toggleState.bind(this, 'expanded', this.setBtnsProps);
     var btnsAboutUs = React.createElement('div', {
       key: 'about-us-btns',
-      id: 'about-us-btns'
+      id: 'about-us-btns',
+      onClick: toggleExpanded
     }, this.props.buildBtns(this.state.btnsProps));
 
     var bgImage = React.createElement(window.Image, this.props.bg_image);
-    var body = React.createElement('div', {
-      key: 'about-us-body',
-      id: 'about-us-body',
-    }, this.props.body);
-    var fgImages = this.props.fg_images.map(function(img) {
-      return React.createElement(window.Image, img);
-    });
+
+    var title = React.createElement('h1', {
+      key: 'about-us-title'
+    }, this.props.title);
+
+    var body = this.props.body.split('\n\n').map(function(p, i) {
+      var image = React.createElement(window.Image, this.props.fg_images[i]);
+      var paragraph = React.createElement('p', {
+        key: 'about-us-body-' + i
+      }, p);
+
+      return [image, paragraph];
+    }.bind(this));
+
     var content = React.createElement('div', {
       key: 'about-us-content',
       id: 'about-us-content',
-      className: this.state.expanded,
-      onClick: toggleExpanded
-    }, [bgImage, body, fgImages]);
+      className: this.state.expanded
+    }, [bgImage, title, body]);
 
 
     return React.createElement('div', {
       id: 'about-us',
-      className: this.state.expanded,
-      onClick: toggleExpanded
+      className: this.state.expanded
     }, btnsAboutUs, content);
   }
 });

@@ -3,6 +3,10 @@ def rand_paragraphs(min, max)
   Faker::Lorem.paragraphs(rand(min..max)).join("\n\n")
 end
 
+def big_paragraphs(num)
+  num.times.map { Faker::Lorem.paragraphs(6).join }.join("\n\n")
+end
+
 def rand_assets(min, max, ext)
   rand(min..max).times.map do |i|
     {
@@ -158,7 +162,7 @@ HomePageImage.create([
 Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
 
 AboutUs.create({
-  body: rand_paragraphs(2, 4)
+  body: big_paragraphs(2)
 });
 
 AboutUsImage.create([
@@ -167,10 +171,12 @@ AboutUsImage.create([
     class_name: "bg"
   },
   {
-    description: "units assembled"
+    description: "units assembled",
+    class_name: "fg"
   },
   {
-    description: "unit dismantled"
+    description: "unit dismantled",
+    class_name: "fg"
   }
 ])
 
