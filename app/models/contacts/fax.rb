@@ -1,3 +1,3 @@
 class Fax < Contact
-  include HasNumber
+  include HasContactNumber
 end

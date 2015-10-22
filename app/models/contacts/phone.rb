@@ -1,3 +1,3 @@
 class Phone < Contact
-  include HasNumber
+  include HasContactNumber
 end

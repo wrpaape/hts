@@ -1,4 +1,4 @@
-module HasNumber
+module HasContactNumber
   extend ActiveSupport::Concern
 
   included do

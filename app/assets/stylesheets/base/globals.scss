@@ -31,7 +31,7 @@ a {
 img.logo {
   &.hts {
     &:active {
-      content: image-url("companies/hts/hts-logo-inverted.png");
+      content: $url-hts-logo-inv;
     }
   }
 }
@@ -52,7 +52,7 @@ div.logo {
   }
 }
 .nav-btns {
-  margin-right: 5px;
+  // margin-right: 5px;
   // .nav-btn {
   //   @include fade-in;
   // }
@@ -72,7 +72,9 @@ div.logo {
       display: block;
       position: relative;
       margin-top: 10px;
-      padding: 10px 25px;
+      padding: 14px 25px;
+      font-size: 14px;
+      line-height: 24px;
       overflow: hidden;
       text-decoration: none;
       span, strong {
@@ -158,12 +160,30 @@ div.logo {
   position: absolute;
   display: inline-block;
   top: 88px;
-  right: 20px;
+  right: 0;
 }
-#search-results, .nav-btns {
+#about-us, #search-results, .nav-btns {
+  margin-right: 20px;
   display: inline-block;
   position: relative;
   vertical-align: top;
+}
+#about-us {
+  width: 250px;
+  .about-us-image {
+    position: absolute;
+    width: 200px;
+    &.bg {
+      width: 100%;
+      z-index: -1;
+    }
+  }
+}
+#about-us-btns {
+  display: inline-block;
+}
+#about-us-body {
+  // background-image: $url-about-us-bg;
 }
 #search-bar, .nav-btn {
   &.mid:last-child {

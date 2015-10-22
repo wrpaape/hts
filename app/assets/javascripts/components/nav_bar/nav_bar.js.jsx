@@ -3,7 +3,7 @@
 
 var NavBar = React.createClass({
   render: function() {
-    var resizeScrollbar = $('html').getNiceScroll()[0].resize;
+    // var resizeScrollbar = $('html').getNiceScroll()[0].resize;
     var toggleState = function(boolState, callback) {
       var stateChange = {};
       stateChange[boolState] = !this.state[boolState];
@@ -83,8 +83,16 @@ var NavBar = React.createClass({
       });
     };
 
+    var aboutUsProps = this.props.about_us;
+    aboutUsProps.toggleState = toggleState;
+    aboutUsProps.toggleHovered = toggleHovered;
+    aboutUsProps.setLines = setLines;
+    aboutUsProps.buildBtnProps = buildBtnProps;
+    aboutUsProps.buildBtns = buildBtns.bind(null, window.MidBlock);
+    var aboutUs = React.createElement(window.AboutUs, aboutUsProps);
+
     var navBtns = this.props.nav_btns_all.map(function(navBtnsProps) {
-      navBtnsProps.resizeScrollbar = resizeScrollbar;
+      // navBtnsProps.resizeScrollbar = resizeScrollbar;
       navBtnsProps.toggleState = toggleState;
       navBtnsProps.toggleHovered = toggleHovered;
       navBtnsProps.setLines = setLines;
@@ -93,8 +101,9 @@ var NavBar = React.createClass({
 
       return React.createElement(window.NavBtns, navBtnsProps);
     });
+
     var searchBarProps = this.props.search_bar;
-    searchBarProps.resizeScrollbar = resizeScrollbar;
+    // searchBarProps.resizeScrollbar = resizeScrollbar;
     searchBarProps.toggleHovered = toggleHovered;
     searchBarProps.setLines = setLines;
     searchBarProps.buildBtnProps = buildBtnProps;
@@ -103,6 +112,6 @@ var NavBar = React.createClass({
 
     return React.createElement('div', {
       id: 'nav-bar'
-    }, navBtns.concat(searchBar));
+    }, [aboutUs, navBtns, searchBar]);
   }
 });

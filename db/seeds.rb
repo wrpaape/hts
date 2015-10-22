@@ -91,22 +91,22 @@ products = Product.create(20.times.map {
 })
 
 products.each do |product|
-  product.specs.create(rand(1..3).times.map { |i|
+  product.details.create(rand(1..3).times.map { |i|
     {
-      title: "Spec-#{i}",
+      title: "Detail-#{i}",
       body: rand_paragraphs(1, 5),
     }
   })
-  product.specs.each do |spec|
-    spec.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
-    spec.pdfs.create(rand_assets(0, 1, "pdf")) 
+  product.details.each do |detail|
+    detail.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
+    detail.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
 
   product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
 
-Spec.create({
+Detail.create({
   title: "About Us",
   body: rand_paragraphs(2, 5),
 })
@@ -156,4 +156,23 @@ HomePageImage.create([
 ])
 
 Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
+
+AboutUs.create({
+  body: rand_paragraphs(2, 4)
+});
+
+AboutUsImage.create([
+  {
+    description: "about us bg",
+    class_name: "bg"
+  },
+  {
+    description: "units assembled"
+  },
+  {
+    description: "unit dismantled"
+  }
+])
+
+AboutUs.take.images << AboutUsImage.all
 

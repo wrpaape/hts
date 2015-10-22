@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "assets", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.string   "class_name"
+    t.string   "class_name",   default: ""
     t.string   "description"
     t.string   "filename",     default: ""
     t.string   "path_file"
@@ -82,6 +82,25 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "contacts", ["primary"], name: "index_contacts_on_primary", using: :btree
   add_index "contacts", ["type"], name: "index_contacts_on_type", using: :btree
 
+  create_table "details", force: :cascade do |t|
+    t.string   "key"
+    t.string   "type"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "details", ["body"], name: "index_details_on_body", using: :btree
+  add_index "details", ["key"], name: "index_details_on_key", using: :btree
+  add_index "details", ["parent_id", "parent_type"], name: "index_details_on_parent_id_and_parent_type", using: :btree
+  add_index "details", ["parent_id"], name: "index_details_on_parent_id", using: :btree
+  add_index "details", ["parent_type"], name: "index_details_on_parent_type", using: :btree
+  add_index "details", ["title"], name: "index_details_on_title", using: :btree
+  add_index "details", ["type"], name: "index_details_on_type", using: :btree
+
   create_table "employees", force: :cascade do |t|
     t.string   "key"
     t.string   "first_name"
@@ -135,23 +154,6 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "products", ["path_show"], name: "index_products_on_path_show", using: :btree
   add_index "products", ["type"], name: "index_products_on_type", using: :btree
   add_index "products", ["type_display"], name: "index_products_on_type_display", using: :btree
-
-  create_table "specs", force: :cascade do |t|
-    t.string   "key"
-    t.string   "title"
-    t.text     "body"
-    t.integer  "parent_id"
-    t.string   "parent_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "specs", ["body"], name: "index_specs_on_body", using: :btree
-  add_index "specs", ["key"], name: "index_specs_on_key", using: :btree
-  add_index "specs", ["parent_id", "parent_type"], name: "index_specs_on_parent_id_and_parent_type", using: :btree
-  add_index "specs", ["parent_id"], name: "index_specs_on_parent_id", using: :btree
-  add_index "specs", ["parent_type"], name: "index_specs_on_parent_type", using: :btree
-  add_index "specs", ["title"], name: "index_specs_on_title", using: :btree
 
   add_foreign_key "locations", "companies"
   add_foreign_key "locations", "employees"

@@ -1,4 +1,4 @@
-<% attrs = [:type, :description, :path_file, :path_default, :path_link, :class_name, :filename] %>
+<% attrs = [:type, :caption, :path_file, :path_default, :path_link, :class_name, :filename] %>
 <% images.each do |image| %>
   <% image = Hash[attrs.map { |attr| [attr, image.send(attr)] }] %>
   <%= render partial: "image_caption", locals: image %>

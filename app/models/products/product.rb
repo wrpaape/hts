@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
 
   before_create :set_type_display
 
-  has_many :specs, as: :parent
+  has_many :details, as: :parent
 
   alias_attribute :display, :name
   alias_attribute :path, :path_show
@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
 
   protected
 
-  def self.all_nav_props
+  def self.component_props
     keys = [:key, :path, :display]
     pluck(*keys).map { |values| Hash[keys.zip(values)] }
   end

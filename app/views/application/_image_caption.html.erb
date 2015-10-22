@@ -1,6 +1,6 @@
 <div class="image-caption">
-  <%= react_component(type, local_assigns.except(:description)) %>
+  <%= react_component(type, local_assigns.except(:caption)) %>
   <%= content_tag(:div,
-    link_to(description, path_link),
+    link_to(caption, path_link),
   class: "#{class_name} caption") %>
 </div>

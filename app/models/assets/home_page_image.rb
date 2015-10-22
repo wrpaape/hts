@@ -1,5 +1,5 @@
 class HomePageImage < Image
-  include PrimaryImage
+  include PrimaryImage, HasClassPathFile
 
   before_save :set_path_file
 
@@ -7,10 +7,5 @@ class HomePageImage < Image
 
   self.file_extension = "png"
   self.desc_lambda = -> { name }
-
-  private
-
-  def set_path_file
-    self.path_file = "home_page/"
-  end
+  self.class_path_file = "home_page/"
 end

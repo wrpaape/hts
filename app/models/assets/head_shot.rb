@@ -1,5 +1,5 @@
 class HeadShot < Image
-  include PrimaryImage
+  include PrimaryImage, HasCaption
 
   alias_attribute :name_and_title, :description
 

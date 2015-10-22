@@ -1,7 +1,8 @@
-class CreateSpecs < ActiveRecord::Migration
+class CreateDetails < ActiveRecord::Migration
   def change
-    create_table :specs do |t|
+    create_table :details do |t|
       t.string :key, index: true, uniqueness: true
+      t.string :type, index: true
       t.string :title, index: true, uniqueness: true
       t.text :body, index: true, uniqueness: true
       t.integer :parent_id, index: true
@@ -10,6 +11,6 @@ class CreateSpecs < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :specs, [:parent_id, :parent_type]
+    add_index :details, [:parent_id, :parent_type]
   end
 end

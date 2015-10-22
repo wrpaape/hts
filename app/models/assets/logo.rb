@@ -1,5 +1,5 @@
 class Logo < Image
-  include PrimaryImage
+  include PrimaryImage, HasCaption
 
   before_create :prepend_company_name_to_class_name
 

@@ -16,6 +16,7 @@ var Image = React.createClass({
   },
   render: function() {
     return React.createElement('img', {
+      key: this.props.key,
       src: Img.assetPath(this.state.srcRaw),
       className: this.state.className,
       onError: this.setDefault,

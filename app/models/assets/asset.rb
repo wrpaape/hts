@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
   private
 
   def set_filename_prefix
-    prefix = parent.try(:name) || parent.try(:title) || try(:caption)
+    prefix = parent.try(:name) || parent.try(:title) || try(:description)
     filename.prepend("#{prefix.fileize}-")
   end
 
@@ -32,6 +32,6 @@ class Asset < ActiveRecord::Base
   end
 
   def set_class_name
-    self.class_name = type.fileize.dasherize
+    class_name.prepend("#{type.fileize.dasherize}#{class_name.present? ? " " : ""}")
   end
 end
