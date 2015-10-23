@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   def header
     { 
+      about_us_props: AboutUs.component_props,
       logos: Logo.order(:filename),
       nav_bar_props: nav_bar_props
     }
@@ -14,7 +15,6 @@ class ApplicationController < ActionController::Base
 
   def nav_bar_props
     {
-      about_us: AboutUs.component_props,
       nav_btns_all: [
         {
           key: "goods",

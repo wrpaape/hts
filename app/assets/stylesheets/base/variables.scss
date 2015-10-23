@@ -1,6 +1,7 @@
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ VARIABLES ▼▼▼▼▼▼▼▼▼▼▼▼▼
 $c-bg-main: white;
+$c-f-main: black;
 $c-hts-blue: #0062A7;
 $c-hts-white: white;
 $c-btn-txt1: white;
@@ -11,7 +12,8 @@ $c-txt-ph: #A7A8A9;
 $f-main: 'Exo', sans-serif;
 $f-logo: 'Bowlby One SC', cursive;
 $url-hts-logo-inv: image-url("companies/hts/hts-logo-inverted.png");
-// $url-about-us-bg: image-url("about_us/about_us_bg-about_us_image.png");
+$url-hts-logo-hov: image-url("companies/hts/hts-logo-hovered.png");
+$url-about-us-bg: image-url("about_us/about_us_bg-about_us_image.jpg");
 $m-ww: brightness(5000%);
 $m-ds: drop-shadow(1px 1px 1px black);
 $dur-main: 0.5s;

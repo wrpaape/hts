@@ -83,13 +83,14 @@ var NavBar = React.createClass({
       });
     };
 
-    var aboutUsProps = this.props.about_us;
-    aboutUsProps.toggleState = toggleState;
-    aboutUsProps.toggleHovered = toggleHovered;
-    aboutUsProps.setLines = setLines;
-    aboutUsProps.buildBtnProps = buildBtnProps;
-    aboutUsProps.buildBtns = buildBtns.bind(null, window.MidBlock);
-    var aboutUs = React.createElement(window.AboutUs, aboutUsProps);
+    var aboutUsBtn = React.createElement(window.AboutUsBtn, {
+      key: 'about-us-btn',
+      toggleState: toggleState,
+      toggleHovered: toggleHovered,
+      setLines: setLines,
+      buildBtnProps: buildBtnProps,
+      buildBtns: buildBtns.bind(null, window.MidBlock)
+    });
 
     var navBtns = this.props.nav_btns_all.map(function(navBtnsProps) {
       // navBtnsProps.resizeScrollbar = resizeScrollbar;
@@ -112,6 +113,6 @@ var NavBar = React.createClass({
 
     return React.createElement('div', {
       id: 'nav-bar'
-    }, [aboutUs, navBtns, searchBar]);
+    }, [aboutUsBtn, navBtns, searchBar]);
   }
 });
