@@ -97,7 +97,6 @@ var SearchBar = React.createClass({
 
     var input = React.createElement('input', {
       type: 'text',
-      className: 'lines-1',
       style: searchBarStyle,
       value: this.state.value,
       placeholder: this.props.placeholder,

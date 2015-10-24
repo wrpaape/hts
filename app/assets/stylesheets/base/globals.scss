@@ -5,6 +5,26 @@ body {
   background-color: $c-bg-main;
   font-family: $f-main;
 }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em;
+  z-index: 1;
+  background-color: $c-bg-main;
+  box-shadow: 0 0.05em 0.1em grey;
+  .image-caption {
+    vertical-align: bottom;
+    max-height: 4em;
+    &, div, img {
+      max-width: 8em;
+    }
+    img {
+      max-height: 2.5em;
+    }
+  }
+}
 a {
   text-decoration: none;
   &, &:active, &:visited {
@@ -19,7 +39,7 @@ h1 {
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼ CLASSES ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 .content {
-  margin-top: 168px;
+  margin-top: 5.75em;
 }
 .link {
   cursor: pointer;
@@ -121,26 +141,6 @@ a.logo {
 // ▲▲▲▲▲▲▲▲▲▲▲▲ CLASSES ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ IDS ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-#header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4em;
-  padding: 0.5em;
-  z-index: 1;
-  background-color: $c-bg-main;
-  .image-caption {
-    vertical-align: bottom;
-    max-height: 4em;
-    &, div, img {
-      max-width: 8em;
-    }
-    img {
-      max-height: 2.5em;
-    }
-  }
-}
 #home-page-images {
   padding: 0 1.25em;
   overflow: hidden;
@@ -176,11 +176,11 @@ a.logo {
 #nav-bar {
   position: absolute;
   display: inline-block;
-  top: 3.875em;
+  top: 2.25em;
   right: 0;
 }
 #about-us-btn, #search-results, .nav-btns {
-  margin-right: 1.25em;
+  margin-right: 0.5em;
   display: inline-block;
   position: relative;
   vertical-align: top;
@@ -189,8 +189,7 @@ a.logo {
   @include transitions(all $dur-main $tf-main);
   @include hide-under-header;
   position: fixed;
-  margin: 1.25em;
-  padding: 1.25em 0;
+  margin: 0.5em;
   z-index: 1;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.5),
@@ -201,7 +200,6 @@ a.logo {
     @include unhide-under-header;
   }
   h1 {
-    margin-top: 0;
     text-shadow: -1px -1px 0 $c-bg-main,
       1px -1px 0 $c-bg-main,
       -1px 1px 0 $c-bg-main,
@@ -209,17 +207,20 @@ a.logo {
       2px 2px 2px $c-f-main;
   }
   p {
-    margin: 1.25em;
+    margin: 1em;
     color: $c-bg-main;
   }
   .about-us-image {
-    width: 12.5em;
-    margin: 0 1.25em;
+    width: 10em;
+    margin: 0 1em;
     float: left;
     &:last-of-type {
       float: right;
     }
   }
+}
+#search-results > .mid {
+  text-align: center;
 }
 #search-bar, .nav-btn {
   &.mid:last-child {

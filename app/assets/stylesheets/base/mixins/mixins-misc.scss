@@ -50,11 +50,9 @@
   position: absolute;
   display: inline-block;
   width: 50%;
-  // margin-top: 58px;
   margin-top: 3.00em;
   background-color: $c;
   &, &:before {
-    // height: 33px;
     height: 1.7em;
   }
   &:before {
@@ -65,11 +63,9 @@
     @include border-radius-tl(100%);
   }
   &.above-lines-2 {
-    // margin-top: 86px;
     margin-top: 4.50em;
   }
   &.above-lines-3 {
-    // margin-top: 114px;
     margin-top: 6.00em;
   }
   &.above-lines-4 {
@@ -78,19 +74,16 @@
   }
   &.below-lines-2 {
     &, &:before {
-      // height: 46px;
       height: 2.5em;
     }
   }
   &.below-lines-3 {
     &, &:before {
-      // height: 60px;
       height: 3em;
     }
   }
   &.below-lines-4 {
     &, &:before {
-      // height: 72px;
       height: 5.5em;
     }
   }
@@ -100,11 +93,9 @@
   position: absolute;
   right: 0;
   width: 50%;
-  // margin-top: -22px;
   margin-top: -1.2em;
   background-color: $c;
   &, &:before {
-    // height: 32px;
     height: 1.7em;
   }
   &:before {
@@ -118,51 +109,37 @@
 @mixin mid-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include border-radii(50% 0);
-  // width: 250px;
   width: 15em;
   line-height: 1.5em;
   color: $c-txt;
   background-color: $c-bg;
   font-family: $f-main;
-  &:not(.lines-1) {
-    text-align: center;
-  }
   &.lines-1 {
-    // height: 48px;
     height: 2.5em;
   }
   &.lines-2 {
-    // height: 76px
     height: 4em;
     & + .top {
-      // margin-top: -38px;
       margin-top: -2em;
       &, &:before {
-        // height: 48px;
         height: 2.5em;
       }
     }
   }
   &.lines-3 {
-    // height: 104px;
     height: 5.5em;
     & + .top {
-      // margin-top: -48px;
       margin-top: -2.5em;
       &, &:before {
-        // height: 58px;
         height: 3em;
       }
     }
   }
   &.lines-4 {
-    // height: 132px;
     height: 7em;
     & + .top {
-      // margin-top: -58px;
       margin-top: -3em;
       &, &:before {
-        // height: 68px;
         height: 3.5em;
       }
     }
@@ -189,18 +166,18 @@
   }
 }
 @mixin hide-under-header {
-  @include transforms(translateY(-webkit-calc(-100% - 3em)));
-  @include transforms(translateY(-moz-calc(-100% - 3em)));
-  @include transforms(translateY(-ms-calc(-100% - 3em)));
-  @include transforms(translateY(-o-calc(-100% - 3em)));
-  @include transforms(translateY(calc(-100% - 3em)));
+  @include transforms(translateY(-webkit-calc(-100% - 1.25em - 1px)));
+  @include transforms(translateY(-moz-calc(-100% - 1.25em - 1px)));
+  @include transforms(translateY(-ms-calc(-100% - 1.25em - 1px)));
+  @include transforms(translateY(-o-calc(-100% - 1.25em - 1px)));
+  @include transforms(translateY(calc(-100% - 1.25em - 1px)));
 }
 @mixin unhide-under-header {
-  @include transforms(translateY(-3em));
-  @include transforms(translateY(-3em));
-  @include transforms(translateY(-3em));
-  @include transforms(translateY(-3em));
-  @include transforms(translateY(-3em));
+  @include transforms(translateY(-1.25em));
+  @include transforms(translateY(-1.25em));
+  @include transforms(translateY(-1.25em));
+  @include transforms(translateY(-1.25em));
+  @include transforms(translateY(-1.25em));
 }
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

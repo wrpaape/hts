@@ -1,5 +1,5 @@
-<% react_component("AboutUsContent", about_us_props) %>
-<div id="header">
-  <% render partial: "image_captions", locals: { images: logos } %>
+<%= react_component("AboutUsContent", about_us_props) %>
+<header>
+  <%= render partial: "image_captions", locals: { images: logos } %>
   <%= react_component("NavBar", nav_bar_props) %>
-</div>
+</header>

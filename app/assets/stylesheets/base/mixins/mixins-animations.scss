@@ -19,10 +19,12 @@
 }
 @keyframes sit {
   from {
-    top: -10px;
+    // top: -10px;
+    @include transforms(translateY(-1em));
   }
   to {
-    top: 0;
+    // top: 0;
+    @include transforms(translateY(0));
   }
 }
 
