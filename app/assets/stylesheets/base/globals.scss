@@ -14,6 +14,12 @@ a {
 h1 {
   text-align: center;
 }
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
@@ -121,7 +127,7 @@ a.logo {
   left: 0;
   right: 0;
   height: 100px;
-  padding: 1.25em;
+  padding: 20px;
   z-index: 1;
   background-color: $c-bg-main;
   .image-caption {
@@ -135,7 +141,7 @@ a.logo {
   }
 }
 #home-page-images {
-  padding: 0 1.25em;
+  padding: 0 20px;
   overflow: hidden;
   .image-caption {
     position: relative;
@@ -173,7 +179,7 @@ a.logo {
   right: 0;
 }
 #about-us-btn, #search-results, .nav-btns {
-  margin-right: 1.25em;
+  margin-right: 20px;
   display: inline-block;
   position: relative;
   vertical-align: top;
@@ -181,14 +187,14 @@ a.logo {
 #about-us-content {
   @include transitions(top $dur-main $tf-main);
   position: fixed;
-  top: -100vh;
-  margin: 1.25em;
-  padding: 1.25em 0;
+  top: -30.2em;
+  margin: 20px;
+  padding: 20px 0;
   z-index: 1;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ),$url-about-us-bg;
+    ), $url-about-us-bg;
   background-size: cover;
   &.true {
     top: 120px;
@@ -202,13 +208,13 @@ a.logo {
       2px 2px 2px $c-f-main;
   }
   p {
-    font-size: 1.25em;
-    margin: 1em;
+    font-size: 20px;
+    margin: 20px;
     color: $c-bg-main;
   }
   .about-us-image {
     width: 200px;
-    margin: 0 1.25em;
+    margin: 0 20px;
     float: left;
     &:last-of-type {
       float: right;
