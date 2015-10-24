@@ -168,5 +168,19 @@
     }
   }
 }
+@mixin hide-under-header {
+  @include transforms(translateY(-webkit-calc(-100% - 3em)));
+  @include transforms(translateY(-moz-calc(-100% - 3em)));
+  @include transforms(translateY(-ms-calc(-100% - 3em)));
+  @include transforms(translateY(-o-calc(-100% - 3em)));
+  @include transforms(translateY(calc(-100% - 3em)));
+}
+@mixin unhide-under-header {
+  @include transforms(translateY(-3em));
+  @include transforms(translateY(-3em));
+  @include transforms(translateY(-3em));
+  @include transforms(translateY(-3em));
+  @include transforms(translateY(-3em));
+}
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

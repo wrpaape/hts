@@ -14,12 +14,6 @@ a {
 h1 {
   text-align: center;
 }
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
@@ -126,22 +120,20 @@ a.logo {
   top: 0;
   left: 0;
   right: 0;
-  height: 100px;
-  padding: 20px;
+  height: 6.25em;
+  padding: 1.25em;
   z-index: 1;
   background-color: $c-bg-main;
   .image-caption {
-    max-width: 150px;
-    max-height: 80px;
     vertical-align: bottom;
-    div, img {
-      max-width: 150px;
-      max-height: 75px;
+    &, & div, & img {
+      max-width: 10em;
+      max-height: 4.75em;
     }
   }
 }
 #home-page-images {
-  padding: 0 20px;
+  padding: 0 1.25em;
   overflow: hidden;
   .image-caption {
     position: relative;
@@ -153,7 +145,7 @@ a.logo {
       }
       .caption {
         margin-top: -50%;
-        font-size: 1.2em;
+        font-size: 1.25em;
         font-weight: bold;
         text-shadow: -1px -1px 0 $c-bg-main,
           1px -1px 0 $c-bg-main,
@@ -175,21 +167,21 @@ a.logo {
 #nav-bar {
   position: absolute;
   display: inline-block;
-  top: 62px;
+  top: 3.875em;
   right: 0;
 }
 #about-us-btn, #search-results, .nav-btns {
-  margin-right: 20px;
+  margin-right: 1.25em;
   display: inline-block;
   position: relative;
   vertical-align: top;
 }
 #about-us-content {
-  @include transitions(top $dur-main $tf-main);
+  @include transitions(all $dur-main $tf-main);
+  @include hide-under-header;
   position: fixed;
-  top: -30.2em;
-  margin: 20px;
-  padding: 20px 0;
+  margin: 1.25em;
+  padding: 1.25em 0;
   z-index: 1;
   background-image: linear-gradient(
       rgba(0, 0, 0, 0.5),
@@ -197,7 +189,7 @@ a.logo {
     ), $url-about-us-bg;
   background-size: cover;
   &.true {
-    top: 120px;
+    @include unhide-under-header;
   }
   h1 {
     margin-top: 0;
@@ -208,13 +200,12 @@ a.logo {
       2px 2px 2px $c-f-main;
   }
   p {
-    font-size: 20px;
-    margin: 20px;
+    margin: 1.25em;
     color: $c-bg-main;
   }
   .about-us-image {
-    width: 200px;
-    margin: 0 20px;
+    width: 12.5em;
+    margin: 0 1.25em;
     float: left;
     &:last-of-type {
       float: right;
@@ -226,7 +217,7 @@ a.logo {
     &, & > input {
       @include border-radius-br(0);
       & > input {
-        padding-right: 36px;
+        padding-right: 2em;
       }
       & > button {
         right: 0.75em;
@@ -237,16 +228,16 @@ a.logo {
 #search-bar {
   @include border-radii(50% 0);
   position: relative;
-  height: 48px;
-  margin-top: 10px;
+  height: 3em;
+  margin-top: 0.625em;
   cursor: text;
   input {
     @include mid-block($c-btn-txt2, $c-btn-bg2);
     // @include fade-in;
-    height: 48px;
+    height: 3rem;
     border: none;
     outline: none;
-    padding: 10px 104px 10px 24px;
+    padding: 0.625rem 6.5rem 0.625rem 1.5rem;
   }
   button {
     @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
