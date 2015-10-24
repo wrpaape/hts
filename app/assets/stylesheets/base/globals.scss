@@ -43,11 +43,11 @@ img.logo {
 }
 a.logo {
   &.hts {
-    @include border-radii(4px);
+    @include border-radii(0.3em);
     font-weight: bold;
     color: $c-hts-white;
     background-color: $c-hts-blue;
-    padding: 3px;
+    padding: 0.3em;
     font-size: 0.6em;
     vertical-align: top;
     &:hover {
@@ -120,15 +120,18 @@ a.logo {
   top: 0;
   left: 0;
   right: 0;
-  height: 6.25em;
-  padding: 1.25em;
+  height: 4em;
+  padding: 0.5em;
   z-index: 1;
   background-color: $c-bg-main;
   .image-caption {
     vertical-align: bottom;
-    &, & div, & img {
-      max-width: 10em;
-      max-height: 4.75em;
+    max-height: 4em;
+    &, div, img {
+      max-width: 8em;
+    }
+    img {
+      max-height: 2.5em;
     }
   }
 }
