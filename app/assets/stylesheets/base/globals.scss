@@ -65,6 +65,9 @@ a.logo {
   //   @include fade-in;
   // }
 }
+.top, .mid, .bot {
+  font-size: 12px;
+}
 .nav-btn {
   outline: none;
   &:not(.search-bar-block) {
@@ -79,10 +82,13 @@ a.logo {
       @include user-select('none');
       display: block;
       position: relative;
-      margin-top: 10px;
-      padding: 14px 25px;
-      font-size: 14px;
-      line-height: 24px;
+      // margin-top: 10px;
+      // margin-top: 0.625rem;
+      margin-top: 0.5em;
+      // padding: 14px 25px;
+      padding: 0.5em 2em;
+      // font-size: 14px;
+      // line-height: 24px;
       overflow: hidden;
       text-decoration: none;
       span, strong {
@@ -231,19 +237,22 @@ a.logo {
 #search-bar {
   @include border-radii(50% 0);
   position: relative;
-  height: 3em;
-  margin-top: 0.625em;
+  height: 2.5em;
+  margin-top: 0.5em;
   cursor: text;
+  &, & input {
+    font-size: 12px;
+  }
   input {
     @include mid-block($c-btn-txt2, $c-btn-bg2);
     // @include fade-in;
-    height: 3rem;
+    height: 2.5em;
     border: none;
     outline: none;
-    padding: 0.625rem 6.5rem 0.625rem 1.5rem;
+    padding: 0.5em 6.5em 0.5em 1.5em;
   }
   button {
-    @include mag-glass(16px, $c-txt-ph, $c-btn-txt2);
+    @include mag-glass(12px, $c-txt-ph, $c-btn-txt2);
     // @include fade-in;
   }
 }

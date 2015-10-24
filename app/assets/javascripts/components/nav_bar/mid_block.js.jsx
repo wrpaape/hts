@@ -10,7 +10,7 @@ var MidBlock = React.createClass({
   },
   componentDidMount: function() {
     var height = this.refs.midBlock.getDOMNode().clientHeight;
-    var lines = Math.round((height - 48) / 28 + 1);
+    var lines = Math.round((height - 30) / 18 + 1);
 
     this.setState({
       lines: lines

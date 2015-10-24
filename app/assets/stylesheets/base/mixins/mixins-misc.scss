@@ -50,10 +50,12 @@
   position: absolute;
   display: inline-block;
   width: 50%;
-  margin-top: 58px;
+  // margin-top: 58px;
+  margin-top: 3.00em;
   background-color: $c;
   &, &:before {
-    height: 33px;
+    // height: 33px;
+    height: 1.7em;
   }
   &:before {
     content: '';
@@ -63,27 +65,33 @@
     @include border-radius-tl(100%);
   }
   &.above-lines-2 {
-    margin-top: 86px;
+    // margin-top: 86px;
+    margin-top: 4.50em;
   }
   &.above-lines-3 {
-    margin-top: 114px;
+    // margin-top: 114px;
+    margin-top: 6.00em;
   }
   &.above-lines-4 {
-    margin-top: 142px;
+    // margin-top: 142px;
+    margin-top: 7.50em;
   }
   &.below-lines-2 {
     &, &:before {
-      height: 46px;
+      // height: 46px;
+      height: 2.5em;
     }
   }
   &.below-lines-3 {
     &, &:before {
-      height: 60px;
+      // height: 60px;
+      height: 3em;
     }
   }
   &.below-lines-4 {
     &, &:before {
-      height: 72px;
+      // height: 72px;
+      height: 5.5em;
     }
   }
 }
@@ -92,10 +100,12 @@
   position: absolute;
   right: 0;
   width: 50%;
-  margin-top: -22px;
+  // margin-top: -22px;
+  margin-top: -1.2em;
   background-color: $c;
   &, &:before {
-    height: 32px;
+    // height: 32px;
+    height: 1.7em;
   }
   &:before {
     content: '';
@@ -108,42 +118,52 @@
 @mixin mid-block($c-txt, $c-bg) {
   @include box-sizing(border-box);
   @include border-radii(50% 0);
-  width: 250px;
-  font-size: 18px;
-  line-height: 28px;
+  // width: 250px;
+  width: 15em;
+  line-height: 1.5em;
   color: $c-txt;
   background-color: $c-bg;
   font-family: $f-main;
-  &.info {
+  &:not(.lines-1) {
     text-align: center;
   }
   &.lines-1 {
-    height: 48px;
+    // height: 48px;
+    height: 2.5em;
   }
   &.lines-2 {
-    height: 76px;
+    // height: 76px
+    height: 4em;
     & + .top {
-      margin-top: -38px;
+      // margin-top: -38px;
+      margin-top: -2em;
       &, &:before {
-        height: 48px;
+        // height: 48px;
+        height: 2.5em;
       }
     }
   }
   &.lines-3 {
-    height: 104px;
+    // height: 104px;
+    height: 5.5em;
     & + .top {
-      margin-top: -48px;
+      // margin-top: -48px;
+      margin-top: -2.5em;
       &, &:before {
-        height: 58px;
+        // height: 58px;
+        height: 3em;
       }
     }
   }
   &.lines-4 {
-    height: 132px;
+    // height: 132px;
+    height: 7em;
     & + .top {
-      margin-top: -58px;
+      // margin-top: -58px;
+      margin-top: -3em;
       &, &:before {
-        height: 68px;
+        // height: 68px;
+        height: 3.5em;
       }
     }
   }
