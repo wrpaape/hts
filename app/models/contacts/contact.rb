@@ -1,6 +1,9 @@
 class Contact < ActiveRecord::Base
   belongs_to :parent, polymorphic: true
 
+  scope :by_priority, -> { order(primary: :desc) }
+  scope :primary, -> { where(primary: true) }
+
   private
 
   def set_secondary_if_any_primary
