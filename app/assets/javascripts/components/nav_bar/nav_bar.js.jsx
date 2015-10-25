@@ -126,6 +126,6 @@ var NavBar = React.createClass({
 
     return React.createElement('div', {
       id: 'nav-bar'
-    }, [aboutUsBtn, navBtns, contactBtn, searchBar]);
+    }, aboutUsBtn, navBtns, contactBtn, searchBar);
   }
 });

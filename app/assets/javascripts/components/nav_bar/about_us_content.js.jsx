@@ -25,6 +25,7 @@ var AboutUsContent = React.createClass({
       key: 'about-us-content',
       ref: 'aboutUsContent',
       id: 'about-us-content',
+      className: 'hide',
       onWheel: this.hide,
       onDOMMouseScroll: this.hide
     }, title, content);
