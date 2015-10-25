@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  include AddImage, AddPath, Searchable, Contactable
+  include Contactable, AddImage, AddPath, Searchable
 
   before_save :titleize_names, :set_full_name
 
@@ -30,9 +30,5 @@ class Employee < ActiveRecord::Base
 
   def add_path
     update(path_show: employee_path(id))
-  end
-
-  def self.contact_component_props
-    all.as_json(include: :contacts)
   end
 end

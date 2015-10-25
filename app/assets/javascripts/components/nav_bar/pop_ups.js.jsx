@@ -20,6 +20,7 @@ var PopUps = React.createClass({
       content: aboutUsContent
     });
 
+    var contact = this.props.contact;
     var contactContent = <div />;
 
     return React.createElement('div', null, aboutUsContent, contactContent);

@@ -17,5 +17,32 @@ module Contactable
       conflict_type = Contact.subclasses.find { |child| contact.is_a?(child) }
       contact.update(primary: false) if contacts.select { |con| con.is_a?(conflict_type) }.any?(&:primary)
     end
+
+    def self.contact_component_props
+      all.as_json(only: [:key, :title, :path_show], include: [
+        {
+          primary_phone: {
+            only: :key,
+            methods: [:area_code, :number, :extension]
+          }
+        },
+        {
+          primary_fax: {
+            only: :key,
+            methods: [:area_code, :number]
+          }
+        },
+        {
+          primary_email: {
+            only: :key,
+            methods: :address
+          }
+        },
+        Hash[image_type.to_s.fileize.to_sym, {
+          only: [:key, :class_name, :filename, :path_file, :path_default, :path_link],
+          methods: image_type == Logo ? :slogan : :name_and_title
+        }]
+      ], methods: :name)
+    end
   end
 end

@@ -9,8 +9,8 @@ class CreateAssets < ActiveRecord::Migration
       t.string :path_file, index: true, uniqueness: true
       t.string :path_default, index: true, uniqueness: true
       t.string :path_link, index: true, uniqueness: true
-      t.string :parent_type, index: true
       t.integer :parent_id, index: true
+      t.string :parent_type, index: true
 
       t.timestamps null: false
     end
