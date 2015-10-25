@@ -118,6 +118,6 @@ var SearchBar = React.createClass({
     return React.createElement('div', {
       ref: 'searchResults',
       id: 'search-results',
-    }, btnsSearch.concat(results));
+    }, btnsSearch, results);
   }
 });

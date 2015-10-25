@@ -31,4 +31,8 @@ class Employee < ActiveRecord::Base
   def add_path
     update(path_show: employee_path(id))
   end
+
+  def self.contact_component_props
+    all.as_json(include: :contacts)
+  end
 end

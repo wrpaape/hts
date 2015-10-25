@@ -7,7 +7,13 @@ class ApplicationController < ActionController::Base
 
   def header
     { 
-      about_us_props: AboutUs.component_props,
+      pop_ups_props: {
+        about_us: AboutUs.component_props,
+        contact: {
+          company: Company.contact_component_props,
+          employee: Employee.contact_component_props
+        }
+      },
       logos: Logo.order(:filename),
       nav_bar_props: nav_bar_props
     }

@@ -6,4 +6,10 @@ class Company < ActiveRecord::Base
   has_one :logo, as: :parent
 
   self.image_type = Logo
+
+  private
+
+  def self.contact_component_props
+    find_by(name: "ModWerks").as_json(include: :contacts)
+  end
 end

@@ -10,6 +10,6 @@ class AboutUs < Detail
   end
 
   def self.component_props
-    AboutUs.take.as_json(include: :fg_images)
+    take.as_json(include: :fg_images)
   end
 end

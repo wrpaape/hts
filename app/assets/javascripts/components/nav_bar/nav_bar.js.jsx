@@ -1,4 +1,4 @@
-/* globals React, $ */
+/* globals React */
 'use strict';
 
 var NavBar = React.createClass({

@@ -179,5 +179,12 @@
   @include transforms(translateY(-1.25em));
   @include transforms(translateY(-1.25em));
 }
+@mixin outline-shadow($c-o, $c-s) {
+    text-shadow: -1px -1px 0 $c-o,
+  1px -1px 0 $c-o,
+  -1px 1px 0 $c-o,
+  1px 1px 0 $c-o,
+  2px 2px 2px $c-s;
+}
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

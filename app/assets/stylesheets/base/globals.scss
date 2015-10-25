@@ -34,6 +34,9 @@ a {
 h1 {
   text-align: center;
 }
+button {
+  cursor: pointer;
+}
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲ TAGS ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
 // ************************************
@@ -150,13 +153,10 @@ a.logo {
         width: 90%;
       }
       .caption {
+        @include outline-shadow($c-bg-main, $c-f-main);
         margin-top: -50%;
         font-size: 1.25em;
         font-weight: bold;
-        text-shadow: -1px -1px 0 $c-bg-main,
-          1px -1px 0 $c-bg-main,
-          -1px 1px 0 $c-bg-main,
-          1px 1px 0 $c-bg-main;
       }
     }
     img, .caption {
@@ -196,12 +196,23 @@ a.logo {
   &.show {
     @include unhide-under-header;
   }
-  h1 {
-    text-shadow: -1px -1px 0 $c-bg-main,
-      1px -1px 0 $c-bg-main,
-      -1px 1px 0 $c-bg-main,
-      1px 1px 0 $c-bg-main,
-      2px 2px 2px $c-f-main;
+  button {
+    position: absolute;
+    font-size: 8.75em;
+    height: 0.75em;
+    font-family: monospace;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    &:hover {
+      @include outline-shadow($c-f-main, $c-bg-main);
+      color: $c-bg-main;
+    }
+  }
+  button, button:active, h1 {
+    @include outline-shadow($c-bg-main, $c-f-main);
+    color: $c-f-main;
   }
   p {
     margin: 1em;
