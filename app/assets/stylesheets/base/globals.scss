@@ -102,18 +102,15 @@ a.logo {
       @include user-select('none');
       display: block;
       position: relative;
-      // margin-top: 10px;
-      // margin-top: 0.625rem;
       margin-top: 0.5em;
-      // padding: 14px 25px;
       padding: 0.5em 2em;
-      // font-size: 14px;
-      // line-height: 24px;
       overflow: hidden;
       text-decoration: none;
-      span, strong {
-        @include animate-result;
-        position: relative;
+      &:not(:nth-child(3)) {
+        span, strong {
+          @include animate-result;
+          position: relative;
+        }
       }
     }
     &.bot {
@@ -178,12 +175,12 @@ a.logo {
   display: inline-block;
   top: 2.25em;
   right: 0;
-}
-#about-us-btn, #search-results, .nav-btns {
-  margin-right: 0.5em;
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
+  & > div {
+    margin-right: 0.5em;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+  }
 }
 #about-us-content {
   @include transitions(all $dur-main $tf-main);
@@ -196,7 +193,7 @@ a.logo {
       rgba(0, 0, 0, 0.5)
     ), $url-about-us-bg;
   background-size: cover;
-  &.true {
+  &.show {
     @include unhide-under-header;
   }
   h1 {

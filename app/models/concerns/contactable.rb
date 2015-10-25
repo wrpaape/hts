@@ -2,10 +2,10 @@ module Contactable
   extend ActiveSupport::Concern
 
   included do
-    has_many :contacts, as: :parent, before_add: :set_secondary_if_any_primary
-    has_many :phones, as: :parent
-    has_many :faxes, as: :parent
-    has_many :emails, as: :parent
+    has_many :contacts, -> { order(primary: :desc) }, as: :parent, before_add: :set_secondary_if_any_primary
+    has_many :phones, -> { order(primary: :desc) }, as: :parent
+    has_many :faxes, -> { order(primary: :desc) }, as: :parent
+    has_many :emails, -> { order(primary: :desc) }, as: :parent
     has_many :primary_contacts, -> { where(primary: true) }, as: :parent, class_name: "Contact"
     has_one :primary_phone, ->(phones) { where(primary: true) }, as: :parent, class_name: "Phone"
     has_one :primary_fax, ->(phones) { where(primary: true) }, as: :parent, class_name: "Fax"

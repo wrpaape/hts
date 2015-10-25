@@ -33,7 +33,7 @@ class SearchController < ApplicationController
             path: result[0],
             display: procs[:display].call(result, input)
           })
-          return output if output.length > 9
+          return output if output.length > 4
         end
       end
     end

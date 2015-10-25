@@ -2,6 +2,11 @@
 'use strict';
 
 var AboutUsContent = React.createClass({
+  hide: function(e) {
+    if (e.deltaY < 0) {
+      this.refs.aboutUsContent.getDOMNode().className = 'hide';
+    }
+  },
   render: function() {
     var title = React.createElement('h1', {
       key: 'about-us-title'
@@ -18,8 +23,10 @@ var AboutUsContent = React.createClass({
 
     return React.createElement('div', {
       key: 'about-us-content',
+      ref: 'aboutUsContent',
       id: 'about-us-content',
-      className: 'false'
+      onWheel: this.hide,
+      onDOMMouseScroll: this.hide
     }, title, content);
   }
 });

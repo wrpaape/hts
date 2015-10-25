@@ -83,9 +83,11 @@ var NavBar = React.createClass({
       });
     };
 
-    var aboutUsBtn = React.createElement(window.AboutUsBtn, {
+    var aboutUsBtn = React.createElement(window.ContentBtn, {
       key: 'about-us-btn',
-      toggleState: toggleState,
+      display: 'About Us',
+      btnId: 'about-us-btn',
+      contentId: 'about-us-content',
       toggleHovered: toggleHovered,
       setLines: setLines,
       buildBtnProps: buildBtnProps,
@@ -103,6 +105,17 @@ var NavBar = React.createClass({
       return React.createElement(window.NavBtns, navBtnsProps);
     });
 
+    var contactBtn = React.createElement(window.ContentBtn, {
+      key: 'contact-btn',
+      display: 'Contact',
+      btnId: 'contact-btn',
+      contentId: 'contact-content',
+      toggleHovered: toggleHovered,
+      setLines: setLines,
+      buildBtnProps: buildBtnProps,
+      buildBtns: buildBtns.bind(null, window.MidBlock)
+    });
+
     var searchBarProps = this.props.search_bar;
     // searchBarProps.resizeScrollbar = resizeScrollbar;
     searchBarProps.toggleHovered = toggleHovered;
@@ -113,6 +126,6 @@ var NavBar = React.createClass({
 
     return React.createElement('div', {
       id: 'nav-bar'
-    }, [aboutUsBtn, navBtns, searchBar]);
+    }, [aboutUsBtn, navBtns, contactBtn, searchBar]);
   }
 });

@@ -20,7 +20,22 @@ Company.create([
   {
     name: "ModWerks",
     path_show: "/",
-    slogan: "coming soon™"
+    slogan: "coming soon™",
+    contacts: Contact.create([
+      {
+        type: "Email",
+        address: "texas@hts.com"
+      },
+      {
+        type: "Phone",
+        number: "(512)381-0091",
+      },
+      {
+        type: "Address",
+        line1: "6101 West Courtyard Dr., Building 4",
+        line2: "Austin, Texas 78730",
+      }
+    ]),
   },
   {
     name: "HTS",
@@ -86,7 +101,7 @@ Employee.create([
   }
 ])
 
-products = Product.create(20.times.map {
+products = Product.create(4.times.map {
   {
     type: ["Good", "Mod"].sample,
     name: Faker::Commerce.product_name,

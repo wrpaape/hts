@@ -12,6 +12,6 @@ var NavBtn = React.createClass({
       href: this.props.path,
       onMouseEnter: toggleHovered,
       onMouseLeave: toggleHovered
-    }, this.props.display);
+    }, React.createElement('span', null, this.props.display));
   }
 });
