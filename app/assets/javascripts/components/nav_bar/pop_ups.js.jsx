@@ -10,7 +10,7 @@ var PopUps = React.createClass({
         key: 'about-us-body-' + i
       }, p);
 
-      return image, paragraph;
+      return [image, paragraph];
     });
 
     aboutUsContent = React.createElement(window.Content, {
