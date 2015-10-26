@@ -166,6 +166,7 @@
   }
 }
 @mixin hide-under-header {
+  @include transforms(translateY(-110%));
   @include transforms(translateY(-webkit-calc(-100% - 1.25em - 1px)));
   @include transforms(translateY(-moz-calc(-100% - 1.25em - 1px)));
   @include transforms(translateY(-ms-calc(-100% - 1.25em - 1px)));
@@ -174,10 +175,6 @@
   opacity: 0;
 }
 @mixin unhide-under-header {
-  @include transforms(translateY(-1.25em));
-  @include transforms(translateY(-1.25em));
-  @include transforms(translateY(-1.25em));
-  @include transforms(translateY(-1.25em));
   @include transforms(translateY(-1.25em));
   opacity: 1;
 }
@@ -194,6 +191,14 @@
   background: -ms-linear-gradient($grad), $bg;
   background: -o-linear-gradient($grad), $bg;
   background: linear-gradient($grad), $bg;
+}
+@mixin calc-prop($prop, $exp, $fb) {
+  #{$prop}: $fb;
+  #{$prop}: -webkit-calc($exp);
+  #{$prop}: -moz-calc($exp);
+  #{$prop}: -ms-calc($exp);
+  #{$prop}: -o-calc($exp);
+  #{$prop}: calc($exp);
 }
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************

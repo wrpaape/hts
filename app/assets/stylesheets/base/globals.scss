@@ -200,7 +200,7 @@ a.logo {
   }
 }
 #contact-content {
-  @include bg-grad((45deg, $c-btn-bg1, $c-btn-bg2), none);
+  @include bg-grad((to left, $c-btn-bg2, $c-btn-bg1 25em, $c-btn-bg1), none);
   .link {
     max-width: 100px;
   }

@@ -20,19 +20,19 @@ module Contactable
       includes(:phones, :faxes, :emails, :image, add_contacts).as_json(only: [:key, :title, :path_show], include: [
         {
           phones: {
-            only: :key,
-            methods: [:display_type, :number, :extension]
+            only: [:key, :display_type],
+            methods: [:number, :extension]
           }
         },
         {
           faxes: {
-            only: :key,
+            only: [:key, :display_type],
             methods: :number
           }
         },
         {
           emails: {
-            only: :key,
+            only: [:key, :display_type],
             methods: :address
           }
         },

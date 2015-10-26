@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  before_create :set_display_type
+
   belongs_to :parent, polymorphic: true
 
   scope :by_priority, -> { order(primary: :desc) }
@@ -6,8 +8,7 @@ class Contact < ActiveRecord::Base
 
   private
 
-  def set_secondary_if_any_primary
-    contact_type = Contact.subclasses.select { |model| is_a?(model) }
-    update(primary: false) if parent.contacts.where(type: contact_type).any?(&:primary)
+  def set_display_type
+    self.display_type = type.underscore.dasherize
   end
 end

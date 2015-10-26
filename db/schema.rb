@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20151017230118) do
     t.string   "path_file"
     t.string   "path_default"
     t.string   "path_link"
-    t.string   "parent_type"
     t.integer  "parent_id"
+    t.string   "parent_type"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -60,17 +60,19 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "contacts", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.boolean  "primary",     default: true
+    t.string   "display_type"
+    t.boolean  "primary",      default: true
     t.string   "info1"
     t.string   "info2"
     t.string   "info3"
     t.string   "info4"
     t.string   "parent_type"
     t.integer  "parent_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
+  add_index "contacts", ["display_type"], name: "index_contacts_on_display_type", using: :btree
   add_index "contacts", ["info1"], name: "index_contacts_on_info1", using: :btree
   add_index "contacts", ["info2"], name: "index_contacts_on_info2", using: :btree
   add_index "contacts", ["info3"], name: "index_contacts_on_info3", using: :btree

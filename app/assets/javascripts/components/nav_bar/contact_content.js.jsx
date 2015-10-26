@@ -9,11 +9,11 @@ var ContactContent = React.createClass({
       if (contactable.phones.length) {
         var phoneLis = contactable.phones.map(function(phone) {
           var ext = phone.extension ? ' ext #' + phone.extension : '';
-          var disp = phone.display_type ? ' (' + phone.display_type + ')' : '';
 
           return React.createElement('li', {
-            key: phone.key
-          }, phone.number + disp + ext);
+            key: phone.key,
+            className: phone.display_type
+          }, phone.number + ext);
         });
         var phoneUl = React.createElement('ul', null, phoneLis);
         phones = React.createElement('li', {
@@ -24,7 +24,8 @@ var ContactContent = React.createClass({
       if (contactable.emails.length) {
         var emailLis = contactable.emails.map(function(email) {
           return React.createElement('li', {
-            key: email.key
+            key: email.key,
+            className: email.display_type
           }, email.address);
         });
         var emailUl = React.createElement('ul', null, emailLis);
@@ -42,7 +43,8 @@ var ContactContent = React.createClass({
         var faxUl = React.createElement('ul', null, faxLis);
         var faxH3 = React.createElement('h3', null, 'Fax');
         faxes = React.createElement('li', {
-          key: 'faxes'
+          key: 'faxes',
+          className: fax.display_type
         }, 'Fax', faxUl);
       }
 
