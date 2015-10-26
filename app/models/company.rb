@@ -11,9 +11,7 @@ class Company < ActiveRecord::Base
 
   self.image_type = Logo
 
-  private
-
-  def self.contact_component_props
-    contact_json(:addresses)
+  def display_name
+    name
   end
 end

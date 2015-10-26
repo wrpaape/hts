@@ -14,6 +14,10 @@ class Employee < ActiveRecord::Base
   self.image_type = HeadShot
   self.pool_fields = [:full_name, :title]
 
+  def display_name
+    "#{name} (#{title})"
+  end
+
   private
 
   def all_names
@@ -30,9 +34,5 @@ class Employee < ActiveRecord::Base
 
   def add_path
     update(path_show: employee_path(id))
-  end
-
-  def self.contact_component_props
-    contact_json(:office_phone, :mobile_phone)
   end
 end

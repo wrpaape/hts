@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     { 
       pop_ups_props: {
         about_us: AboutUs.component_props,
-        contact: [Company, Employee].flat_map(&:contact_component_props)
+        contact: [Company, Employee].flat_map(&:contact_content_props)
       },
       logos: Logo.order(:filename),
       nav_bar_props: nav_bar_props

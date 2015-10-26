@@ -200,5 +200,16 @@
   #{$prop}: -o-calc($exp);
   #{$prop}: calc($exp);
 }
+@mixin icon-bullet($url-icon) {
+  &:before{
+    content: '';
+    display: inline-block;
+    height: 1em;
+    width: 2em;
+    background-image: $url-icon;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
