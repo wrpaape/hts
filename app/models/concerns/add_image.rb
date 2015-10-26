@@ -6,6 +6,8 @@ module AddImage
 
     after_create :add_image
 
+    has_one :image, as: :parent
+
     private
 
     def add_image

@@ -20,27 +20,28 @@ module Contactable
     def self.contact_json(contactable)
       contactable.as_json(only: [:key, :title, :path_show], include: [
         {
-          phone: {
+          phones: {
             only: :key,
-            methods: [:area_code, :number, :extension]
+            methods: [:type, :area_code, :number, :extension]
           }
         },
         {
-          fax: {
+          faxes: {
             only: :key,
             methods: [:area_code, :number]
           }
         },
         {
-          email: {
+          emails: {
             only: :key,
             methods: :address
           }
         },
-        Hash[image_type.to_s.fileize, {
-          only: [:key, :class_name, :filename, :path_file, :path_default, :path_link],
-          methods: image_type == Logo ? :slogan : :name_and_title
-        }]
+        {
+          image: {
+            only: [:key, :class_name, :filename, :path_file, :path_default, :path_link]
+          }
+        }
       ], methods: :name)
     end
   end

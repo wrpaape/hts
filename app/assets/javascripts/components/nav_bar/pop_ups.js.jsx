@@ -20,9 +20,11 @@ var PopUps = React.createClass({
       content: aboutUsContent
     });
 
-    var contact = this.props.contact;
-    var contactContent = <div />;
-
+    var employees = this.props.contact.employees;
+    var contactContent = employees.map(function(emp) {
+      return React.createElement(window.ImageLink, emp.head_shot);
+    });
+    
     return React.createElement('div', null, aboutUsContent, contactContent);
   }
 });

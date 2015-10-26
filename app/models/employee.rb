@@ -5,11 +5,11 @@ class Employee < ActiveRecord::Base
 
   has_one :location
   has_one :company, through: :location
-  has_one :head_shot, as: :parent
   has_one :office_phone, as: :parent
   has_one :mobile_phone, as: :parent
 
   alias_attribute :name, :full_name
+  alias_attribute :head_shot, :image
 
   self.image_type = HeadShot
   self.pool_fields = [:full_name, :title]

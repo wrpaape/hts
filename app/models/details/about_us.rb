@@ -10,6 +10,10 @@ class AboutUs < Detail
   end
 
   def self.component_props
-    take.as_json(include: :fg_images)
+    take.as_json(only: [:key, :title, :body], include: {
+      fg_images: {
+        only: [:key, :class_name, :filename, :path_file, :path_default, :path_link]
+      }
+    })
   end
 end

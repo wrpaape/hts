@@ -1,4 +1,4 @@
 <div class="image-caption">
-  <%= react_component(type, local_assigns.except(:caption)) %>
+  <%= react_component("ImageLink", local_assigns.except(:caption)) %>
   <%= link_to(caption, path_link, class: "#{class_name} caption") %>
 </div>

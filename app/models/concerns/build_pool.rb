@@ -32,12 +32,10 @@ module BuildPool
     end
 
     def self.build_procs(search_for)
-      Hash[[:results, :display].map { |proc_type| [proc_type, send("#{proc_type}_proc", search_for)] }]
+      [:results, :display].hash_map { |proc_type| send("#{proc_type}_proc", search_for) }
     end
 
     def self.build_categories
-      # Hash[pool_fields.map { |search_for| [search_for, build_procs(search_for)] }]
-      # pool_fields.hash_map(:itself, )
       pool_fields.hash_map { |search_for| build_procs(search_for) }
     end
 
