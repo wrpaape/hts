@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  include Contactable, AddImage, AddPath, Searchable
+  include AddImage, AddPath, Searchable, Contactable
 
   before_save :titleize_names, :set_full_name
 
@@ -10,8 +10,6 @@ class Employee < ActiveRecord::Base
 
   alias_attribute :name, :full_name
   alias_attribute :head_shot, :image
-  alias_attribute :office, :office_phone
-  alias_attribute :mobile, :mobile_phone
 
   self.image_type = HeadShot
   self.pool_fields = [:full_name, :title]

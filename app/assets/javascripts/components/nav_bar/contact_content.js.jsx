@@ -4,49 +4,32 @@
 var ContactContent = React.createClass({
   render: function() {
     var contactLis = this.props.contactables.map(function(contactable) {
-      var phones, emails, faxes;
+      var contacts = ['phones', 'emails', 'faxes'].map(function(contact) {
 
-      if (contactable.phones.length) {
-        var phoneLis = contactable.phones.map(function(phone) {
-          var ext = phone.extension ? ' ext #' + phone.extension : '';
+      });
 
-          return React.createElement('li', {
-            key: phone.key,
-            className: phone.display_type
-          }, phone.number + ext);
-        });
-        var phoneUl = React.createElement('ul', null, phoneLis);
-        phones = React.createElement('li', {
-          key: 'phones'
-        }, 'Phone', phoneUl);
-      }     
+      var phoneLis = contactable.phones.map(function(phone) {
+        var ext = phone.extension ? ' ext #' + phone.extension : '';
 
-      if (contactable.emails.length) {
-        var emailLis = contactable.emails.map(function(email) {
-          return React.createElement('li', {
-            key: email.key,
-            className: email.display_type
-          }, email.address);
-        });
-        var emailUl = React.createElement('ul', null, emailLis);
-        emails = React.createElement('li', {
-          key: 'emails'
-        }, 'Email', emailUl);
-      }
+        return React.createElement('li', {
+          key: phone.key,
+          className: phone.display_type
+        }, phone.number + ext);
+      });
 
-      if (contactable.faxes.length) {
-        var faxLis = contactable.faxes.map(function(fax) {
-          return React.createElement('li', {
-            key: fax.key
-          }, fax.number);
-        });
-        var faxUl = React.createElement('ul', null, faxLis);
-        var faxH3 = React.createElement('h3', null, 'Fax');
-        faxes = React.createElement('li', {
-          key: 'faxes',
+      var emailLis = contactable.emails.map(function(email) {
+        return React.createElement('li', {
+          key: email.key,
+          className: email.display_type
+        }, email.address);
+      });
+
+      var faxLis = contactable.faxes.map(function(fax) {
+        return React.createElement('li', {
+          key: fax.key,
           className: fax.display_type
-        }, 'Fax', faxUl);
-      }
+        }, fax.number);
+      });
 
       var contacts = React.createElement('ul', null, phones, emails, faxes);
 

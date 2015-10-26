@@ -3,7 +3,9 @@ class Company < ActiveRecord::Base
 
   has_many :locations
   has_many :employees, through: :locations
+  has_many :addresses, -> { by_priority }, as: :parent
   has_one :phone, ->(phones) { primary }, as: :parent
+  has_one :address, ->(addresses) { primary }, as: :parent
 
   alias_attribute :logo, :image
 
@@ -12,6 +14,6 @@ class Company < ActiveRecord::Base
   private
 
   def self.contact_component_props
-    contact_json
+    contact_json(:addresses)
   end
 end

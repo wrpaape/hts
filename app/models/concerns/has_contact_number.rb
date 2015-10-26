@@ -7,6 +7,10 @@ module HasContactNumber
     alias_attribute :number, :info1
     alias_attribute :area_code, :info2
 
+    def display
+      number
+    end
+
     private
 
     def set_area_code

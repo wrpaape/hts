@@ -19,23 +19,23 @@ module Contactable
     def self.contact_json(*add_contacts)
       includes(:phones, :faxes, :emails, :image, add_contacts).as_json(only: [:key, :title, :path_show], include: [
         {
-          phones: {
+          contacts: {
             only: [:key, :display_type],
-            methods: [:number, :extension]
+            methods: :display
           }
         },
-        {
-          faxes: {
-            only: [:key, :display_type],
-            methods: :number
-          }
-        },
-        {
-          emails: {
-            only: [:key, :display_type],
-            methods: :address
-          }
-        },
+        # {
+        #   faxes: {
+        #     only: [:key, :display_type],
+        #     methods: :number
+        #   }
+        # },
+        # {
+        #   emails: {
+        #     only: [:key, :display_type],
+        #     methods: :address
+        #   }
+        # },
         {
           image: {
             only: [:key, :class_name, :filename, :path_file, :path_default, :path_link]

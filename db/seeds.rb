@@ -1,4 +1,5 @@
 include Rails.application.routes.url_helpers
+
 def rand_paragraphs(min, max)
   Faker::Lorem.paragraphs(rand(min..max)).join("\n\n")
 end
@@ -40,7 +41,30 @@ Company.create([
   {
     name: "HTS",
     path_show: "http://www.hts.com/",
-    slogan: "Delivering Real Success®"
+    slogan: "Delivering Real Success®",
+    contacts: Contact.create([
+      {
+        type: "Email",
+        address: "texas@hts.com"
+      },
+      {
+        type: "Phone",
+        number: "(832)328-1010",
+      },
+      {
+        type: "TollFreePhone",
+        number: "(866)544-1487",
+      },
+      {
+        type: "Fax",
+        number: "(832)328-1460",
+      },
+      {
+        type: "Address",
+        line1: "3350 Yale Street",
+        line2: "Houston, Texas 77018",
+      }
+    ])
   }
 ])
 

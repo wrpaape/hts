@@ -1,4 +1,4 @@
-class OfficePhone < Phone
+class TollFreePhone < Phone
   include HasExtension
 end
 
