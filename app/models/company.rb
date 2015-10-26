@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
 
   has_many :locations
   has_many :employees, through: :locations
+  has_one :phone, ->(phones) { primary }, as: :parent
 
   alias_attribute :logo, :image
 
@@ -11,26 +12,6 @@ class Company < ActiveRecord::Base
   private
 
   def self.contact_component_props
-    opts = [
-    {
-      phone: {
-        only: :key,
-        methods: [:area_code, :number]
-      }
-    },
-    {
-      fax: {
-        only: :key,
-        methods: [:area_code, :number]
-      }
-    },
-    {
-      email: {
-        only: :key,
-        methods: :address
-      }
-    }]
-
-    contact_json(all, opts)
+    contact_json
   end
 end

@@ -10,6 +10,8 @@ class Employee < ActiveRecord::Base
 
   alias_attribute :name, :full_name
   alias_attribute :head_shot, :image
+  alias_attribute :office, :office_phone
+  alias_attribute :mobile, :mobile_phone
 
   self.image_type = HeadShot
   self.pool_fields = [:full_name, :title]
@@ -33,6 +35,6 @@ class Employee < ActiveRecord::Base
   end
 
   def self.contact_component_props
-    contact_json(includes(:office_phone, :mobile_phone))
+    contact_json(:office_phone, :mobile_phone)
   end
 end
