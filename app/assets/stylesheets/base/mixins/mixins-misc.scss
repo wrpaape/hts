@@ -171,6 +171,7 @@
   @include transforms(translateY(-ms-calc(-100% - 1.25em - 1px)));
   @include transforms(translateY(-o-calc(-100% - 1.25em - 1px)));
   @include transforms(translateY(calc(-100% - 1.25em - 1px)));
+  opacity: 0;
 }
 @mixin unhide-under-header {
   @include transforms(translateY(-1.25em));
@@ -178,6 +179,7 @@
   @include transforms(translateY(-1.25em));
   @include transforms(translateY(-1.25em));
   @include transforms(translateY(-1.25em));
+  opacity: 1;
 }
 @mixin outline-shadow($c-o, $c-s) {
     text-shadow: -1px -1px 0 $c-o,
@@ -185,6 +187,13 @@
   -1px 1px 0 $c-o,
   1px 1px 0 $c-o,
   2px 2px 2px $c-s;
+}
+@mixin bg-grad($grad, $bg) {
+  background: -webkit-linear-gradient($grad), $bg;
+  background: -moz-linear-gradient($grad), $bg;
+  background: -ms-linear-gradient($grad), $bg;
+  background: -o-linear-gradient($grad), $bg;
+  background: linear-gradient($grad), $bg;
 }
 // ▲▲▲▲▲▲▲▲▲▲▲ MISC MIXINS ▲▲▲▲▲▲▲▲▲▲▲▲
 // ************************************
