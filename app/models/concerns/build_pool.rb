@@ -3,11 +3,12 @@ module BuildPool
 
   included do
     def self.results_proc(search_for)
-      searchable_model = self
       attrs =
         case search_for
-          when :name, :full_name
-            searchable_model == Employee ? [:path_show, :name, :title] : [:path_show, :name] 
+          when :name
+            [:path_show, :name] 
+          when :full_name
+            [:path_show, :name, :title] 
           when :type_display
             return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
           when :info
@@ -17,6 +18,7 @@ module BuildPool
           when :filename
             [:path_dl, :filename]
         end
+      searchable_model = self
       Proc.new { |input| searchable_model.where("#{search_for} ~* ?", input).pluck(*attrs) }
     end
 
