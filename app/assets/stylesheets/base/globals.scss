@@ -204,11 +204,8 @@ a.logo {
   @include bg-grad((to left, $c-btn-bg2, $c-btn-bg1 25em, $c-btn-bg1), none);
   color: $c-bg-main;
   a {
-    display: block;
     font-size: 1.5em;
-    margin-bottom: 0.5em;
     text-shadow: 2px 2px 2px $c-f-main;
-    text-align: center;
   }
   .all-contacts {
     padding: 1em;
@@ -223,6 +220,10 @@ a.logo {
   }
   .contactable, .contacts, .link {
     display: inline-block;
+  }
+  .name {
+    margin-bottom: 0.5em;
+    text-align: center;
   }
   .contact {
     position: relative;
