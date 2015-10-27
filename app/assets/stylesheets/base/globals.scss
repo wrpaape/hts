@@ -153,7 +153,7 @@ a.logo {
         width: 90%;
       }
       .caption {
-        @include outline-shadow($c-bg-main, $c-f-main);
+        @include txt-outline-shadow($c-bg-main, $c-f-main);
         margin-top: -50%;
         font-size: 1.25em;
         font-weight: bold;
@@ -175,6 +175,7 @@ a.logo {
   display: inline-block;
   top: 2.25em;
   right: 0;
+  height: 2.5em;
   & > div {
     @include box-shadow(2px 2px 2px $c-f-main);
     margin-right: 0.5em;
@@ -205,7 +206,19 @@ a.logo {
   color: $c-bg-main;
   a {
     font-size: 1.5em;
-    text-shadow: 2px 2px 2px $c-f-main;
+    font-weight: bold;
+    &.employee {
+      font-size: 1.25em;
+    }
+    &:hover {
+      @include txt-outline($c-bg-main);
+    }
+    &:active {
+      @include txt-outline-shadow($c-bg-main, $c-f-main)
+    }
+    &:hover, &:active {
+      color: $c-f-main;
+    }
   }
   .all-contacts {
     padding: 1em;
@@ -215,7 +228,7 @@ a.logo {
     height: 16em;
     padding: 1em;
     margin-bottom: 1em;
-    width: 50%;
+    width: 33%;
     vertical-align: top;
   }
   .contactable, .contacts, .link {
@@ -254,13 +267,21 @@ a.logo {
   }
   .link {
     max-height: 50%;
+    max-width: 25%;
     float: right;
+    &:hover {
+      @include filters(drop-shadow(0em 0em 0.5em $c-bg-main));
+    }
+    &:active {
+      @include filters(drop-shadow(0.25em 0.25em 0.25em $c-f-main));
+    }
   }
   .head-shot {
     @include border-radii(4%);
   }
   .hts {
     font-family: $f-logo;
+    font-weight: normal;
   }
 }
 #pop-ups > div {
@@ -284,12 +305,12 @@ a.logo {
     outline: none;
     overflow: hidden;
     &:hover {
-      @include outline-shadow($c-f-main, $c-bg-main);
+      @include txt-outline-shadow($c-f-main, $c-bg-main);
       color: $c-bg-main;
     }
   }
   button, button:active, h1 {
-    @include outline-shadow($c-bg-main, $c-f-main);
+    @include txt-outline-shadow($c-bg-main, $c-f-main);
     color: $c-f-main;
   }
 }

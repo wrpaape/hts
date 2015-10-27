@@ -178,12 +178,33 @@
   @include transforms(translateY(-1.25em));
   opacity: 1;
 }
-@mixin outline-shadow($c-o, $c-s) {
-  text-shadow: -1px -1px 0 $c-o,
-    1px -1px 0 $c-o,
-    -1px 1px 0 $c-o,
-    1px 1px 0 $c-o,
-    2px 2px 2px $c-s;
+@mixin txt-outline($c-o) {
+  text-shadow: -0.025em -0.025em 0 $c-o,
+    0.025em -0.025em 0 $c-o,
+    -0.025em 0.025em 0 $c-o,
+    0.025em 0.025em 0 $c-o;
+}
+@mixin txt-outline-shadow($c-o, $c-s) {
+  text-shadow: -0.025em -0.025em 0 $c-o,
+    0.025em -0.025em 0 $c-o,
+    -0.025em 0.025em 0 $c-o,
+    0.025em 0.025em 0 $c-o,
+    0.1em 0.1em 0.1em $c-s;
+}
+@mixin box-outline($c-o) {
+  @include box-shadow((
+    -0.25em -0.25em 0 $c-o,
+    0.25em -0.25em 0 $c-o,
+    -0.25em 0.25em 0 $c-o,
+    0.25em 0.25em 0 $c-o));
+}
+@mixin box-outline-shadow($c-o, $c-s) {
+  @include box-shadow((
+    -0.25em -0.25em 0 $c-o,
+    0.25em -0.25em 0 $c-o,
+    -0.25em 0.25em 0 $c-o,
+    0.25em 0.25em 0 $c-o,
+    0.5em 0.5em 0.5em $c-s));
 }
 @mixin bg-grad($grad, $bg) {
   background: -webkit-linear-gradient($grad), $bg;
