@@ -2,6 +2,7 @@ class CreateEmployees < ActiveRecord::Migration
   def change
     create_table :employees do |t|
       t.string :key, index: true, uniqueness: true
+      t.string :type_display, index: true
       t.string :first_name, index: true
       t.string :middle_name, index: true
       t.string :last_name, index: true

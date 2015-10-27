@@ -1,7 +1,7 @@
 class Email < Contact
   alias_attribute :address, :info1
   
-  def display_info
+  def info_display
     [address]
   end
 end

@@ -176,6 +176,7 @@ a.logo {
   top: 2.25em;
   right: 0;
   & > div {
+    @include box-shadow(2px 2px 2px $c-f-main);
     margin-right: 0.5em;
     display: inline-block;
     position: relative;
@@ -201,9 +202,33 @@ a.logo {
 }
 #contact-content {
   @include bg-grad((to left, $c-btn-bg2, $c-btn-bg1 25em, $c-btn-bg1), none);
-  li {
-    list-style: none;
-
+  color: $c-bg-main;
+  a {
+    display: block;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 2px $c-f-main;
+    text-align: center;
+  }
+  .all-contacts {
+    padding: 1em;
+  }
+  .contactable {
+    @include box-sizing(border-box);
+    height: 16em;
+    padding: 1em;
+    margin-bottom: 1em;
+    width: 50%;
+    vertical-align: top;
+  }
+  .contactable, .contacts, .link {
+    display: inline-block;
+  }
+  .contact {
+    position: relative;
+    padding-left: 2.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.5em;
   }
   .phone {
     @include icon-bullet($url-icon-phone);
@@ -216,25 +241,28 @@ a.logo {
   }
   .toll-free-phone {
     @include icon-bullet($url-icon-toll-free-phone);
-
   }
   .fax {
     @include icon-bullet($url-icon-fax);
-
   }
   .email {
     @include icon-bullet($url-icon-email);
-
   }
   .address {
     @include icon-bullet($url-icon-address);
-
   }
   .link {
-    max-width: 100px;
+    max-height: 50%;
+    float: right;
+  }
+  .head-shot {
+    @include border-radii(4%);
+  }
+  .hts {
+    font-family: $f-logo;
   }
 }
-#pop-ups > * {
+#pop-ups > div {
   @include transitions(all $dur-main $tf-main);
   @include hide-under-header;
   position: fixed;

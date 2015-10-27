@@ -2,6 +2,8 @@ module Contactable
   extend ActiveSupport::Concern
 
   included do
+    include HasTypeDisplay
+
     has_many :contacts, -> { by_display }, as: :parent, before_add: :set_secondary_if_any_primary
     has_many :phones, -> { by_priority }, as: :parent
     has_many :faxes, -> { by_priority }, as: :parent
@@ -17,11 +19,11 @@ module Contactable
     end
 
     def self.contact_content_props
-      includes(:contacts, :image).as_json(only: [:key, :path_show], include: [
+      includes(:contacts, :image).as_json(only: [:key, :type_display, :path_show], include: [
         {
           contacts: {
-            only: [:key, :display_type],
-            methods: :display_info
+            only: [:key, :type_display],
+            methods: :info_display
           }
         },
         {
@@ -29,7 +31,7 @@ module Contactable
             only: [:key, :class_name, :filename, :path_file, :path_default, :path_link]
           }
         }
-      ], methods: :display_name)
+      ], methods: :name_display)
     end
   end
 end

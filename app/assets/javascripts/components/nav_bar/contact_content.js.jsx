@@ -3,38 +3,47 @@
 
 var ContactContent = React.createClass({
   render: function() {
-    var contactLis, display, className, contacts, image;
+    var contactLis, display, className, contacts, image, name;
     var allContacts = this.props.contactables.map(function(contactable) {
       contactLis = contactable.contacts.map(function(contact) {
-        display = contact.display_info.map(function(line, i) {
+        display = contact.info_display.map(function(line, i) {
           className = 'line-' + i;
-          return React.createElement('span', {
+          return React.createElement('div', {
             key: className,
             className: className
-          }, line, React.createElement('br'));
+          }, line);
         });
 
-        return React.createElement('li', {
+        return React.createElement('div', {
           key: contact.key,
-          className: contact.display_type
+          className: 'contact ' + contact.type_display
         }, display);
       });
 
-      contacts = React.createElement('ul', null, contactLis);
+      contacts = React.createElement('div', {
+        className: 'contacts'
+      }, contactLis);
 
       image = React.createElement(window.ImageLink, contactable.image);
 
-      return React.createElement('li', {
+      name = React.createElement('a', {
+        className: contactable.type_display,
+        href: contactable.path_show
+      }, contactable.name_display);
+
+      return React.createElement('div', {
         key: contactable.key,
-        className: 'contact'
-      }, contactable.display_name, image, contacts);
+        className: 'contactable'
+      }, name, contacts, image);
     });
 
     return React.createElement(window.Content, {
       key: 'contact-content',
       contentId: 'contact-content',
       title: 'Contact',
-      content: React.createElement('ul', null, allContacts)
+      content: React.createElement('div', {
+        className: 'all-contacts'
+      }, allContacts)
     });
   }
 });

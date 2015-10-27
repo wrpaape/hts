@@ -4,7 +4,7 @@ class Address < Contact
   alias_attribute :line3, :info3
   alias_attribute :line4, :info4
 
-  def display_info
+  def info_display
     [line1, line2, line3, line4].compact
   end
 end

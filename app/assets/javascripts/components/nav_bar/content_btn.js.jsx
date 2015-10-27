@@ -24,8 +24,27 @@ var ContentBtn = React.createClass({
     });
   },
   toggleContent: function() {
-    var content = document.getElementById(this.props.contentId);
-    content.className = /hide/.test(content.className) ? 'show' : 'hide';
+    var ids = this.props.contentIds;
+    var content = document.getElementById(ids[0]);
+    var delay = 0;
+    var newClassName = 'hide';
+    if (/hide/.test(content.className)) {
+      newClassName = 'show';
+      var other;
+      var otherShown = ids.slice(1).some(function(id) {
+        other = document.getElementById(id);
+
+        return /show/.test(other.className);
+      });
+      if (otherShown) {
+        other.className = 'hide';
+        delay = 500;
+      } 
+    }
+
+    window.setTimeout(function() {
+      content.className = newClassName;
+    }, delay);
   },
   render: function() {
     return React.createElement('div', {

@@ -14,7 +14,7 @@ class Employee < ActiveRecord::Base
   self.image_type = HeadShot
   self.pool_fields = [:full_name, :title]
 
-  def display_name
+  def name_display
     "#{name} (#{title})"
   end
 

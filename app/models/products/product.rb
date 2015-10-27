@@ -1,7 +1,5 @@
 class Product < ActiveRecord::Base
-  include AddPath, HasAllAssets, Searchable
-
-  before_create :set_type_display
+  include AddPath, HasAllAssets, Searchable, HasTypeDisplay
 
   has_many :details, as: :parent
 

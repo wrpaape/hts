@@ -45,22 +45,24 @@ ActiveRecord::Schema.define(version: 20151017230118) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "key"
+    t.string   "type_display"
     t.string   "name"
     t.string   "slogan"
     t.string   "path_show"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "companies", ["key"], name: "index_companies_on_key", using: :btree
   add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
   add_index "companies", ["path_show"], name: "index_companies_on_path_show", using: :btree
   add_index "companies", ["slogan"], name: "index_companies_on_slogan", using: :btree
+  add_index "companies", ["type_display"], name: "index_companies_on_type_display", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
-    t.string   "display_type"
+    t.string   "type_display"
     t.boolean  "primary",      default: true
     t.string   "info1"
     t.string   "info2"
@@ -72,7 +74,6 @@ ActiveRecord::Schema.define(version: 20151017230118) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "contacts", ["display_type"], name: "index_contacts_on_display_type", using: :btree
   add_index "contacts", ["info1"], name: "index_contacts_on_info1", using: :btree
   add_index "contacts", ["info2"], name: "index_contacts_on_info2", using: :btree
   add_index "contacts", ["info3"], name: "index_contacts_on_info3", using: :btree
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "contacts", ["parent_type"], name: "index_contacts_on_parent_type", using: :btree
   add_index "contacts", ["primary"], name: "index_contacts_on_primary", using: :btree
   add_index "contacts", ["type"], name: "index_contacts_on_type", using: :btree
+  add_index "contacts", ["type_display"], name: "index_contacts_on_type_display", using: :btree
 
   create_table "details", force: :cascade do |t|
     t.string   "key"
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "key"
+    t.string   "type_display"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
@@ -112,8 +115,8 @@ ActiveRecord::Schema.define(version: 20151017230118) do
     t.string   "path_show"
     t.string   "title"
     t.text     "bio"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "employees", ["bio"], name: "index_employees_on_bio", using: :btree
@@ -124,6 +127,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "employees", ["middle_name"], name: "index_employees_on_middle_name", using: :btree
   add_index "employees", ["path_show"], name: "index_employees_on_path_show", using: :btree
   add_index "employees", ["title"], name: "index_employees_on_title", using: :btree
+  add_index "employees", ["type_display"], name: "index_employees_on_type_display", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "key"
