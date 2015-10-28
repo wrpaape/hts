@@ -13,4 +13,9 @@ class String
   def fileize
     tr("/\\-/", "▓").underscore.tr("/▓/", "-").tr("/ /", "_")
   end
+
+  def escape_regex
+    pattern = /(\'|\"|\.|\*|\/|\-|\\|\)|\$|\+|\(|\^|\?|\!|\~|\`)/
+    gsub(pattern) { |match| "\\#{match}" }
+  end
 end

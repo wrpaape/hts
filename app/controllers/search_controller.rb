@@ -7,7 +7,7 @@ class SearchController < ApplicationController
 
   def search
     search_pool = searchable_type.get_pool(exclude_text?)
-    render json: query(search_pool, params[:input])
+    render json: query(search_pool, escaped_input)
   end
 
   self.searchable = [
@@ -18,6 +18,10 @@ class SearchController < ApplicationController
   ]
     
   private
+
+  def escaped_input
+    params[:input].escape_regex
+  end
 
   def exclude_text?
     params[:input].length < 3
