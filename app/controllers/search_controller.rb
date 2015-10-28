@@ -20,7 +20,7 @@ class SearchController < ApplicationController
   private
 
   def escaped_input
-    params[:input].escape_regex
+    Regexp.escape(params[:input])
   end
 
   def exclude_text?

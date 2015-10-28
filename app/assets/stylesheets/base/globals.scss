@@ -225,10 +225,9 @@ a.logo {
   }
   .contactable {
     @include box-sizing(border-box);
-    height: 16em;
     padding: 1em;
     margin-bottom: 1em;
-    width: 33%;
+    // width: 33%;
     vertical-align: top;
   }
   .contactable, .contacts, .link {
@@ -243,6 +242,9 @@ a.logo {
     padding-left: 2.5em;
     margin-bottom: 0.5em;
     line-height: 1.5em;
+  }
+  .contacts {
+    max-width: 75%;
   }
   .phone {
     @include icon-bullet($url-icon-phone);
@@ -282,6 +284,9 @@ a.logo {
   .hts {
     font-family: $f-logo;
     font-weight: normal;
+  }
+  .line-0, .line-1, .line-2, .line-3 {
+    word-wrap: break-word;
   }
 }
 #pop-ups > div {

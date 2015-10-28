@@ -3,18 +3,22 @@
 /* smartphones portrait */
 @media only screen and (min-width: 20.16em) and (max-width: 30.17em){
   @include hp-img-cols(1);
+  @include contacts-cols(1);
 }
 /* smartphones landscacpe */
 @media only screen and (min-width: 30.18em) and (max-width: 48.32em){
   @include hp-img-cols(2);
+  @include contacts-cols(2);
 }
 /* tablets portrait */
 @media only screen and (min-width: 48.38em) and (max-width: 62.43em){
   @include hp-img-cols(3);
+  @include contacts-cols(3);
 }
 /* tablets landscape / desktop */
 @media only screen and (min-width: 62.44em) {
   @include hp-img-cols(4);
+  @include contacts-cols(4);
 }
 @media print {
   #header {
