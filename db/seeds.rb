@@ -152,20 +152,14 @@ products.each do |product|
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
 
-Document.create({
-  title: "About Us",
-  body: rand_paragraphs(2, 5),
-})
-
-ExtGasSec.create({
-  name: "Extended Gas Section X",
-  info: rand_paragraphs(1, 3)
-})
-
-EquipScreen.create({
-  name: "Equipment Screen X",
-  info: rand_paragraphs(1, 3)
-})
+[ExtGasSec, EquipScreen, VRVAcc, Catalog, Drawing, InstallManual, PartsList].each do |category_model|
+  rand(1..3).times do |i|
+    category_model.create({
+      name: "#{category_model.category.tr("/_/", " ").titleize} #{i}",
+      info: rand_paragraphs(1, 3)
+    })
+  end
+end
 
 Good.create({
   name: "High Perf AHU",
@@ -186,20 +180,12 @@ Good.create({
 
 6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
 
-HomePageImage.create([
-  {
-    caption: "Modifications",
-    path_link: modifications_path
-  },
-  {
-    caption: "Equipment Screens",
-    path_link: equipment_screens_path
-  },
-  {
-    caption: "Extended Gas Sections",
-    path_link: extended_gas_sections_path
-  }
-])
+[Mod, EquipScreen, EquipScreen].each do |home_page_index_good|
+  HomePageImage.create({
+    caption: home_page_index_good.category.tr("/_/", " ").titleize,
+    path_link: send("#{home_page_index_good.category}_path")
+    })
+end
 
 Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
 

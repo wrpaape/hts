@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   resources :products, controller: "products", type: "Good"
   scope :products do
-    resources :extended_gas_sections, as: "extended_gas_sections", type: "ExtGasSec"
+    resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
   end
   
   resources :modifications, controller: "products", type: "Mod"
   scope :modifications do
-    resources :equipment_screens, as: "equipment_screens", type: "EquipScreen"
+    resources :equipment_screens, as: "equipment_screens", controller: "products", type: "EquipScreen"
   end
 
-  resources :documents, controller: "documents", type: "Document"
-  scope :documents, controller: "documents" do
-    resources :catalogs, as: "catalogs", type: "Catalog"
-    resources :drawings, as: "drawings", type: "Drawing"
-    resources :installation_manuals, as: "installation_manuals", type: "InstallManual"
-    resources :parts_lists, as: "parts_lists", type: "PartsList"
+  resources :documents, type: "Document"
+  scope :documents do
+    resources :catalogs, as: "catalogs", controller: "documents", type: "Catalog"
+    resources :drawings, as: "drawings", controller: "documents", type: "Drawing"
+    resources :installation_manuals, as: "installation_manuals", controller: "documents", type: "InstallManual"
+    resources :parts_lists, as: "parts_lists", controller: "documents", type: "PartsList"
   end
 
   resources :employees

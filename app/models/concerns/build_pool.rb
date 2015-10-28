@@ -6,7 +6,7 @@ module BuildPool
       attrs =
         case search_for
           when :type_display
-            return Proc.new { |input| Product.descendants.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
+            return Proc.new { |input| [Product, Document].flat_map(&:descendants).map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
           when :name
             [:path_show, :name] 
           when :full_name
@@ -21,13 +21,13 @@ module BuildPool
             [:path_dl, :filename]
         end
       searchable_model = self
-      
+
       Proc.new { |input| searchable_model.where("#{search_for} ~* ?", input).pluck(*attrs) }
     end
 
     def self.display_proc(search_for)
-      searchable_model = self
-        return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
+      # searchable_model = self
+        return Proc.new { |result| "#{result[1]} (#{result[2]})" } if self == Employee
       case search_for
         when :info, :body
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }

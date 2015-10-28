@@ -21,6 +21,6 @@ class ProductsController < ApplicationController
   end
 
   def product_search_path
-    eval("search_#{product_type.category}_path")
+    send("search_#{product_type.category}_path")
   end
 end

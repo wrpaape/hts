@@ -17,10 +17,10 @@ class DocumentsController < ApplicationController
   end
 
   def document_placeholder
-     "search #{document_type.category.to_s.tr("/_/", " ")}"
+     "search #{document_type.category.tr("/_/", " ")}"
   end
 
   def document_search_path
-    eval("#{document_type.category}_search_path")
+    send("search#{document_type.category}_path")
   end
 end
