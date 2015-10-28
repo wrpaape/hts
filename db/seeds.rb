@@ -11,7 +11,7 @@ end
 def rand_assets(min, max, ext)
   rand(min..max).times.map do |i|
     {
-      filename: "#{i}.#{ext}"
+      filename: "#{ext}-#{i}.#{ext}"
     }
   end
 end
@@ -134,13 +134,16 @@ products = Product.create(4.times.map {
 })
 
 products.each do |product|
-  product.details.create(rand(1..3).times.map { |i|
+  product.documents.create(rand(1..3).times.map { |i|
+    type = %w(Catalog Document Drawing InstallManual PartsList).sample
+
     {
-      title: "Detail-#{i}",
+      type: type,
+      title: "#{type.underscore}-#{i}",
       body: rand_paragraphs(1, 5),
     }
   })
-  product.details.each do |detail|
+  product.documents.each do |detail|
     detail.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
     detail.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
@@ -149,7 +152,7 @@ products.each do |product|
   product.pdfs.create(rand_assets(0, 3, "pdf"))
 end
 
-Detail.create({
+Document.create({
   title: "About Us",
   body: rand_paragraphs(2, 5),
 })

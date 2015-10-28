@@ -1,4 +1,4 @@
 class EquipScreen < Mod
-  self.category = "equipment screens"
+  self.category = "equipment_screens"
 
 end

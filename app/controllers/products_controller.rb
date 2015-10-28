@@ -17,10 +17,10 @@ class ProductsController < ApplicationController
   end
 
   def product_placeholder
-     "search #{product_type.category.to_s.tr("/_/", " ")}"
+     "search #{product_type.category.tr("/_/", " ").titleize(exclude: %w(and))}"
   end
 
   def product_search_path
-    eval("#{product_type.category}_search_path")
+    eval("search_#{product_type.category}_path")
   end
 end

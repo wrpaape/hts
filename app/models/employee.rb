@@ -12,7 +12,7 @@ class Employee < ActiveRecord::Base
   alias_attribute :head_shot, :image
 
   self.image_type = HeadShot
-  self.pool_fields = [:full_name, :title]
+  self.pool_fields = [:full_name, :job_title]
 
   def name_display
     "#{name} (#{title})"

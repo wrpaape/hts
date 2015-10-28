@@ -10,7 +10,12 @@ class SearchController < ApplicationController
     render json: query(search_pool, params[:input])
   end
 
-  self.searchable = [Employee, Pdf, Product, Good, Mod]
+  self.searchable = [
+    Employee,
+    Pdf,
+    Product, Good, Mod, EquipScreen, ExtGasSec,
+    Document, Catalog, Drawing, InstallManual, PartsList
+  ]
     
   private
 

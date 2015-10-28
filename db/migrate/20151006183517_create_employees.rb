@@ -8,7 +8,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :last_name, index: true
       t.string :full_name, index: true
       t.string :path_show, index: true, uniqueness: true
-      t.string :title, index: true, uniqueness: true
+      t.string :job_title, index: true, uniqueness: true
       t.text :bio, index: true, uniqueness: true
 
       t.timestamps null: false

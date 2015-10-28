@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "contacts", ["type"], name: "index_contacts_on_type", using: :btree
   add_index "contacts", ["type_display"], name: "index_contacts_on_type_display", using: :btree
 
-  create_table "details", force: :cascade do |t|
+  create_table "documents", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
     t.string   "title"
@@ -97,13 +97,13 @@ ActiveRecord::Schema.define(version: 20151017230118) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "details", ["body"], name: "index_details_on_body", using: :btree
-  add_index "details", ["key"], name: "index_details_on_key", using: :btree
-  add_index "details", ["parent_id", "parent_type"], name: "index_details_on_parent_id_and_parent_type", using: :btree
-  add_index "details", ["parent_id"], name: "index_details_on_parent_id", using: :btree
-  add_index "details", ["parent_type"], name: "index_details_on_parent_type", using: :btree
-  add_index "details", ["title"], name: "index_details_on_title", using: :btree
-  add_index "details", ["type"], name: "index_details_on_type", using: :btree
+  add_index "documents", ["body"], name: "index_documents_on_body", using: :btree
+  add_index "documents", ["key"], name: "index_documents_on_key", using: :btree
+  add_index "documents", ["parent_id", "parent_type"], name: "index_documents_on_parent_id_and_parent_type", using: :btree
+  add_index "documents", ["parent_id"], name: "index_documents_on_parent_id", using: :btree
+  add_index "documents", ["parent_type"], name: "index_documents_on_parent_type", using: :btree
+  add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
+  add_index "documents", ["type"], name: "index_documents_on_type", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "key"

@@ -1,3 +1,3 @@
 class ExtGasSec < Good
-  self.category = "extended gas sections"
+  self.category = "extended_gas_sections"
 end

@@ -1,7 +1,10 @@
-class AboutUs < Detail
+class AboutUs < Document
+  before_create :set_title
+  
   has_one :bg_image, -> { bg }, as: :parent, class_name: "AboutUsImage"
   has_many :fg_images, -> { fg }, as: :parent, class_name: "AboutUsImage"
-  before_create :set_title
+  
+  self.category = "about_us"
 
   private
 

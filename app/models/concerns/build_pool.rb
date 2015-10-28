@@ -5,20 +5,23 @@ module BuildPool
     def self.results_proc(search_for)
       attrs =
         case search_for
+          when :type_display
+            return Proc.new { |input| Product.descendants.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
           when :name
             [:path_show, :name] 
           when :full_name
-            [:path_show, :name, :title] 
-          when :type_display
-            return Proc.new { |input| Product.subclasses.map(&:category).grep(Regexp.new(input, "i")).map { |cat| [send("#{cat}_path"), cat] } }
+            [:path_show, :name, :job_title] 
+          when :job_title
+            [:path_show, :job_title, :name]
           when :info
             [:path_show, :info, :name]
-          when :title
-            [:path_show, :title, :name]
+          when :body
+            [:path_show, :body, :title]
           when :filename
             [:path_dl, :filename]
         end
       searchable_model = self
+      
       Proc.new { |input| searchable_model.where("#{search_for} ~* ?", input).pluck(*attrs) }
     end
 
@@ -26,7 +29,7 @@ module BuildPool
       searchable_model = self
         return Proc.new { |result| "#{result[1]} (#{result[2]})" } if searchable_model == Employee
       case search_for
-        when :info
+        when :info, :body
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }
         else
           Proc.new { |result| result[1] }
