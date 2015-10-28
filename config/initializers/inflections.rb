@@ -16,4 +16,5 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.uncountable 'us'
+  inflect.acronym 'VRV'
 end
