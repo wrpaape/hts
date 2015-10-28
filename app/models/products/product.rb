@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  include AddPath, HasAllAssets, Searchable, HasTypeDisplay, HasCategory
+  include AddPath, HasAllAssets, Searchable, HasCategory, HasTypeDisplay
 
   has_many :documents, as: :parent
 

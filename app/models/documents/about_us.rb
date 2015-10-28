@@ -8,6 +8,10 @@ class AboutUs < Document
 
   private
 
+  def add_path
+    nil
+  end
+
   def set_title
     self.title = "About Us"
   end

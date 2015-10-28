@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  include AddPath, HasAllAssets, Searchable, HasTypeDisplay, HasCategory
+  include AddPath, HasAllAssets, Searchable, HasCategory, HasTypeDisplay
 
   belongs_to :parent, polymorphic: true
 

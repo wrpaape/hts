@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :products, controller: "products", type: "Good"
   scope :products do
     resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
+    resources :vrv_accessories, as: "vrv_accessories", controller: "products", type: "VRVAcc"
   end
   
   resources :modifications, controller: "products", type: "Mod"

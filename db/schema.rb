@@ -89,12 +89,14 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   create_table "documents", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
+    t.string   "type_display"
     t.string   "title"
     t.text     "body"
+    t.string   "path_show"
     t.integer  "parent_id"
     t.string   "parent_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "documents", ["body"], name: "index_documents_on_body", using: :btree
@@ -102,8 +104,10 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "documents", ["parent_id", "parent_type"], name: "index_documents_on_parent_id_and_parent_type", using: :btree
   add_index "documents", ["parent_id"], name: "index_documents_on_parent_id", using: :btree
   add_index "documents", ["parent_type"], name: "index_documents_on_parent_type", using: :btree
+  add_index "documents", ["path_show"], name: "index_documents_on_path_show", using: :btree
   add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
   add_index "documents", ["type"], name: "index_documents_on_type", using: :btree
+  add_index "documents", ["type_display"], name: "index_documents_on_type_display", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "key"
@@ -113,7 +117,7 @@ ActiveRecord::Schema.define(version: 20151017230118) do
     t.string   "last_name"
     t.string   "full_name"
     t.string   "path_show"
-    t.string   "title"
+    t.string   "job_title"
     t.text     "bio"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -122,11 +126,11 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "employees", ["bio"], name: "index_employees_on_bio", using: :btree
   add_index "employees", ["first_name"], name: "index_employees_on_first_name", using: :btree
   add_index "employees", ["full_name"], name: "index_employees_on_full_name", using: :btree
+  add_index "employees", ["job_title"], name: "index_employees_on_job_title", using: :btree
   add_index "employees", ["key"], name: "index_employees_on_key", using: :btree
   add_index "employees", ["last_name"], name: "index_employees_on_last_name", using: :btree
   add_index "employees", ["middle_name"], name: "index_employees_on_middle_name", using: :btree
   add_index "employees", ["path_show"], name: "index_employees_on_path_show", using: :btree
-  add_index "employees", ["title"], name: "index_employees_on_title", using: :btree
   add_index "employees", ["type_display"], name: "index_employees_on_type_display", using: :btree
 
   create_table "locations", force: :cascade do |t|

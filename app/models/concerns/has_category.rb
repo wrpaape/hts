@@ -18,7 +18,7 @@ module HasCategory
     end
 
     def add_path
-      update(path_show: send("#{type_display.fileize.singularize}_path(#{id})"))
+      update(path_show: eval("#{type_display.fileize.singularize}_path(#{id})"))
     end
   end
 end
