@@ -15,7 +15,7 @@ class Employee < ActiveRecord::Base
   self.pool_fields = [:full_name, :job_title]
 
   def name_display
-    "#{name} (#{title})"
+    "#{name} (#{job_title})"
   end
 
   private

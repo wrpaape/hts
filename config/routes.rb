@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :all_products, as: "all_products", controller: "products", type: "Product"
+
   resources :products, controller: "products", type: "Good"
   scope :products do
     resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
     resources :vrv_accessories, as: "vrv_accessories", controller: "products", type: "VRVAcc"
+    resources :custom_metal_products, as: "custom_metal_products", controller: "products", type: "CMProduct"
   end
   
   resources :modifications, controller: "products", type: "Mod"

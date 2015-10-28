@@ -155,7 +155,7 @@ end
 [ExtGasSec, EquipScreen, VRVAcc, Catalog, Drawing, InstallManual, PartsList].each do |category_model|
   keys = /products/ === category_model.table_name ? [:name, :info] : [:title, :body]
   attrs = rand(1..3).times.map do |i|
-    Hash[keys.zip(["#{category_model.category.tr("/_/", " ").titleize} #{i}", rand_paragraphs(1, 3)])]
+    Hash[keys.zip(["#{category_model.category.tr("/_/", " ").titleize.singularize} #{i}", rand_paragraphs(1, 3)])]
   end
     category_model.create(attrs)
 end

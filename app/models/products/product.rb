@@ -5,6 +5,6 @@ class Product < ActiveRecord::Base
 
   alias_attribute :display, :name
 
-  self.category = "products_and_modifications"
+  self.category = "all_products"
   self.pool_fields = [:name, :type_display, :info]
 end

@@ -13,7 +13,7 @@ class SearchController < ApplicationController
   self.searchable = [
     Employee,
     Pdf,
-    Product, Good, Mod, EquipScreen, ExtGasSec,
+    Product, Good, Mod, EquipScreen, ExtGasSec, VRVAcc,
     Document, Catalog, Drawing, InstallManual, PartsList
   ]
     

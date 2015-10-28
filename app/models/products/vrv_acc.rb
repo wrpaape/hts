@@ -1,3 +1,3 @@
 class VRVAcc < Good
-  self.category = "VRV_accessories"
+  self.category = "vrv_accessories"
 end
