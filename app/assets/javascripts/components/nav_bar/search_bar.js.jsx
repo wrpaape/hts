@@ -15,13 +15,10 @@ var SearchBar = React.createClass({
       btnsProps: btnsSearch
     });
   },
-  updateAll: function(newValue, newBtnsResults) {
+  updateBtns: function(newBtnsResults) {
     var btnsSearch = this.state.btnsSearch;
-    btnsSearch[0].bot.className = 'nav-btn search-bar-block bot';
     
     this.setState({
-      value: newValue,
-      btnsSearch: btnsSearch,
       btnsResults: newBtnsResults,
       btnsProps: btnsSearch.concat(newBtnsResults)
     });
@@ -49,13 +46,16 @@ var SearchBar = React.createClass({
       return this.props.buildBtnProps(args);
     }.bind(this));
 
-    this.updateAll(newValue, newBtnsResults);
+    this.updateBtns(newBtnsResults);
   },
   focusInput: function() {
     this.refs.searchBar.getDOMNode().focus();
   },
   updateSearch: function(event) {
     var newValue = event.target.value;
+    this.setState({
+      value: newValue
+    });
     if (newValue.length) {
       ajax.get(this.props.url,
         { input: newValue },
@@ -64,7 +64,7 @@ var SearchBar = React.createClass({
         }.bind(this),
         true);
     } else {
-      this.updateAll(newValue, []);
+      this.updateBtns([]);
     }
   },
   submitSearch: function(event) {
