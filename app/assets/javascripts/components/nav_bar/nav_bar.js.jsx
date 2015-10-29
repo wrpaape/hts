@@ -28,13 +28,13 @@ var NavBar = React.createClass({
 
     var setLines = function(mids, lines) {
       var btnsProps = this.state.btnsProps;
-      var bot;
-      mids.some(function(mid) {
+      var prefix, match, bot;
+      mids.forEach(function(mid) {
+        prefix = ' ' + mid.from + '-lines-';
+        match = new RegExp(prefix + '\\d|$');
         bot =  btnsProps[mid.id].bot;
-        if(/lines.*lines/.test(bot.className)) {
-          return true;
-        }
-        bot.className += ' ' + mid.from + '-lines-' + lines;
+
+        bot.className = bot.className.replace(match, prefix + lines);
       });
 
       this.setState({
