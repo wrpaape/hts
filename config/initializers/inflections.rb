@@ -14,10 +14,12 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+ACRONYMS = %w(VRV VAV ERV AHU)
 ActiveSupport::Inflector.inflections(:en) do |inflect|
+  ACRONYMS.each do |a|
+    inflect.acronym a
+    inflect.acronym "#{a}s"
+  end
   inflect.uncountable 'us'
-  inflect.acronym 'VRV'
-  inflect.acronym 'VAV'
-  inflect.acronym 'ERV'
-  inflect.acronym 'AHU'
+  inflect.human /multi_zone/i, "Multi-Zone"
 end

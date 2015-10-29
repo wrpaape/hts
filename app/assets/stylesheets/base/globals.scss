@@ -195,8 +195,10 @@ a.logo {
   .about-us-image {
     width: 10em;
     margin: 0 1em;
-    float: left;
-    &:last-of-type {
+    &:nth-of-type(odd) {
+      float: left;
+    }    
+    &:nth-of-type(even) {
       float: right;
     }
   }
