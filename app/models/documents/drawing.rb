@@ -1,3 +1,4 @@
 class Drawing < Document
-  self.category = "drawings"
+  self.pool_fields -= [:type_display]
+  set_attrs("drawings")
 end

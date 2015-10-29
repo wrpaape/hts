@@ -1,4 +1,3 @@
 class EquipScreen < Mod
-  self.category = "equipment_screens"
-
+  set_attrs("equipment_screens")
 end

@@ -1,3 +1,3 @@
 class MultiZoneVAV < Good
-  self.category = "multi-zone_vavs"
+  set_attrs("multi_zone_vavs")
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017230118) do
+ActiveRecord::Schema.define(version: 20151029165843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,25 @@ ActiveRecord::Schema.define(version: 20151017230118) do
   add_index "products", ["path_show"], name: "index_products_on_path_show", using: :btree
   add_index "products", ["type"], name: "index_products_on_type", using: :btree
   add_index "products", ["type_display"], name: "index_products_on_type_display", using: :btree
+
+  create_table "texts", force: :cascade do |t|
+    t.string   "key"
+    t.string   "type"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "texts", ["body"], name: "index_texts_on_body", using: :btree
+  add_index "texts", ["key"], name: "index_texts_on_key", using: :btree
+  add_index "texts", ["parent_id", "parent_type"], name: "index_texts_on_parent_id_and_parent_type", using: :btree
+  add_index "texts", ["parent_id"], name: "index_texts_on_parent_id", using: :btree
+  add_index "texts", ["parent_type"], name: "index_texts_on_parent_type", using: :btree
+  add_index "texts", ["title"], name: "index_texts_on_title", using: :btree
+  add_index "texts", ["type"], name: "index_texts_on_type", using: :btree
 
   add_foreign_key "locations", "companies"
   add_foreign_key "locations", "employees"

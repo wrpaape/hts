@@ -18,22 +18,22 @@ class ApplicationController < ActionController::Base
 
   def nav_bar_props
     {
-      nav_btns_all: [
-        {
-          key: "goods",
-          key_head: "goods-index",
-          path: products_path,
-          display: "Products",
-          nav_btns: Good.component_props
-        },
-        {
-          key: "documents",
-          key_head: "documents-index",
-          path: documents_path,
-          display: "Documents",
-          nav_btns: Document.component_props
-        }
-      ],
+      nav_btns_all: [Product, Document].map(&:nav_btns_props),
+        # {
+        #   key: "goods",
+        #   key_head: "goods-index",
+        #   path: products_path,
+        #   display: "Products",
+        #   nav_btns: Good.nav_bar_props
+        # },
+        # {
+        #   key: "documents",
+        #   key_head: "documents-index",
+        #   path: documents_path,
+        #   display: "Documents",
+        #   nav_btns: Document.nav_bar_props
+        # }
+      # ],
       search_bar: {
         key: "search-bar",
         url: search_path,

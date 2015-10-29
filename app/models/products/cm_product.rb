@@ -1,3 +1,3 @@
 class CMProduct < Good
-  self.category = "custom_metal_products"
+  set_attrs("custom_metal_products")
 end

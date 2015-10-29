@@ -1,10 +1,16 @@
 class Document < ActiveRecord::Base
-  include AddPath, HasAllAssets, Searchable, HasCategory, HasTypeDisplay
+  include HasCategory
 
   belongs_to :parent, polymorphic: true
 
-  alias_attribute :display, :title
+  # alias_attribute :display, :title
 
-  self.category = "documents"
   self.pool_fields = [:title, :type_display, :body]
+  set_attrs("documents")
+
+  private
+
+  def self.load_descendants
+    [Catalog, Drawing, InstallManual, PartsList]
+  end
 end

@@ -1,3 +1,3 @@
 class HighPerfAHU < Good
-  self.category = "high_performance_ahus"
+  set_attrs("high_performance_ahus")
 end

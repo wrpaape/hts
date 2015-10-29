@@ -1,3 +1,4 @@
 class InstallManual < Document
-  self.category = "installation_manuals"
+  self.pool_fields -= [:type_display]
+  set_attrs("installation_manuals")
 end

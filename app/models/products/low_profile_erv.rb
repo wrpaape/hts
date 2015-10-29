@@ -1,3 +1,3 @@
 class LowProfileERV < Good
-  self.category = "low_profile_ervs"
+  set_attrs("low_profile_ervs")
 end

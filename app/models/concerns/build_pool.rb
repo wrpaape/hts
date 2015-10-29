@@ -7,7 +7,11 @@ module BuildPool
       attrs =
         case search_for
           when :type_display
-            return Proc.new { |input| searchable_model.instance_exec { descendants.push(self) }.map(&:category).grep(Regexp.new(input.tr("/ /", "_"), "i")).map { |cat| [send("#{cat}_path"), cat] } }
+            return Proc.new do |input| 
+              searchable_models = searchable_model.instance_exec { descendants.push(self) }
+              matching_categories = searchable_models.select { |model| model.type_display =~ Regexp.new(input, "i") }
+              matching_categories.map { |model| [model.path_index, model.type_display] }
+            end
           when :name
             [:path_show, :name] 
           when :full_name
@@ -30,8 +34,8 @@ module BuildPool
       case search_for
         when :info, :body
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }
-        when :type_display
-          Proc.new { |result| result[1].titleize(exclude: %w(and)) }  
+        # when :type_display
+          # Proc.new { |result| result[1].titleize(exclude: %w(and)) }  
         else
           Proc.new { |result| result[1] }
       end

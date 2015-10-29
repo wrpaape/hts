@@ -1,5 +1,5 @@
 class Array
-  def hash_map(key = :itself)
-    Hash[map { |el| [el.send(key), yield(el)] }]
+  def hash_map
+    Hash[map { |el| [el, yield(el)] }]
   end
 end

@@ -2,23 +2,39 @@ module HasCategory
   extend ActiveSupport::Concern
 
   included do
+    include AddPath, HasAllAssets, Searchable, HasTypeDisplay
+
     class_attribute :category
+    class_attribute :path_index
 
-    alias_attribute :path, :path_show
-
-    private 
-    
-    def self.component_props
-      keys = [:key, :path, :display]
-      pluck(*keys).map { |values| Hash[keys.zip(values)] }
-    end
-
-    def set_type_display
-      self.type_display = category.titleize(exclude: %w(and))
-    end
+    private
 
     def add_path
-      update(path_show: eval("#{type_display.fileize.singularize}_path(#{id})"))
+      update(path_show: Rails.application.routes.url_helpers.send("#{category.singularize}_path", id))
+    end
+
+    def self.nav_btn_props
+      {
+        key: category,
+        path: path_index,
+        display: type_display
+      }
+    end
+
+    def self.nav_btns_props
+      {
+        key: category,
+        key_head: "#{category}-index",
+        path: path_index,
+        display: type_display,
+        nav_btns: load_descendants.map(&:nav_btn_props)
+      }
+    end
+
+    def self.set_attrs(category)
+      self.category = category
+      self.type_display = category.titleize(exclude: %w(and))
+      self.path_index = Rails.application.routes.url_helpers.send("#{category}_path")
     end
   end
 end

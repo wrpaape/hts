@@ -1,3 +1,3 @@
 class VRVAcc < Good
-  self.category = "vrv_accessories"
+  set_attrs("vrv_accessories")
 end

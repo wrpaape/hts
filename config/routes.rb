@@ -3,9 +3,12 @@ Rails.application.routes.draw do
 
   resources :products, controller: "products", type: "Good"
   scope :products do
-    resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
-    resources :vrv_accessories, as: "vrv_accessories", controller: "products", type: "VRVAcc"
     resources :custom_metal_products, as: "custom_metal_products", controller: "products", type: "CMProduct"
+    resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
+    resources :high_performance_ahus, as: "high_performance_ahus", controller: "products", type: "HighPerfAHU"
+    resources :low_profile_ervs, as: "low_profile_ervs", controller: "products", type: "LowProfileERV"
+    resources :multi_zone_vavs, as: "multi_zone_vavs", controller: "products", type: "MultiZoneVAV"
+    resources :vrv_accessories, as: "vrv_accessories", controller: "products", type: "VRVAcc"
   end
   
   resources :modifications, controller: "products", type: "Mod"

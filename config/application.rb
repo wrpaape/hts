@@ -17,7 +17,7 @@ module Hts
     config.time_zone = 'Central Time (US & Canada)'
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')].find_all { |f| File.stat(f).directory? }
     config.assets.enabled = true  
-    config.eager_load = true
+    # config.eager_load = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

@@ -1,3 +1,4 @@
 class PartsList < Document
-  self.category = "parts_lists"
+  self.pool_fields -= [:type_display]
+  set_attrs("parts_lists")
 end

@@ -1,16 +1,12 @@
-class AboutUs < Document
+class AboutUs < Text
+  include HasAllAssets
+  
   before_create :set_title
   
   has_one :bg_image, -> { bg }, as: :parent, class_name: "AboutUsImage"
   has_many :fg_images, -> { fg }, as: :parent, class_name: "AboutUsImage"
   
-  self.category = "about_us"
-
   private
-
-  def add_path
-    nil
-  end
 
   def set_title
     self.title = "About Us"
