@@ -16,11 +16,9 @@ var SearchBar = React.createClass({
     });
   },
   updateBtns: function(newBtnsResults) {
-    var btnsSearch = this.state.btnsSearch;
-    
     this.setState({
       btnsResults: newBtnsResults,
-      btnsProps: btnsSearch.concat(newBtnsResults)
+      btnsProps: this.state.btnsSearch.concat(newBtnsResults)
     });
   },
   setBtnsProps: function(output, newValue) {

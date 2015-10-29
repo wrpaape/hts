@@ -17,4 +17,7 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.uncountable 'us'
   inflect.acronym 'VRV'
+  inflect.acronym 'VAV'
+  inflect.acronym 'ERV'
+  inflect.acronym 'AHU'
 end

@@ -31,7 +31,7 @@ module BuildPool
         when :info, :body
           Proc.new { |result, input| "#{result[1][Regexp.new("\\w*\\.*\\s*\\w*#{input}\\w*\\.*\\s*\\w*", "i")]}▓\u200B(#{result[2]})" }
         when :type_display
-          Proc.new { |result| result[1].tr("/_/", " ").titleize(exclude: %w(and)) }  
+          Proc.new { |result| result[1].titleize(exclude: %w(and)) }  
         else
           Proc.new { |result| result[1] }
       end

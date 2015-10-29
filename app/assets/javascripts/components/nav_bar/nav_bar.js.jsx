@@ -28,8 +28,13 @@ var NavBar = React.createClass({
 
     var setLines = function(mids, lines) {
       var btnsProps = this.state.btnsProps;
-      mids.forEach(function(mid) {
-        btnsProps[mid.id].bot.className += ' ' + mid.from + '-lines-' + lines;
+      var bot;
+      mids.some(function(mid) {
+        bot =  btnsProps[mid.id].bot;
+        if(/lines.*lines/.test(bot.className)) {
+          return true;
+        }
+        bot.className += ' ' + mid.from + '-lines-' + lines;
       });
 
       this.setState({
