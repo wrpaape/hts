@@ -11,7 +11,7 @@ module HasCategory
     private
 
     def add_path
-      update(path_show: new.send("#{category.singularize}_path", id))
+      update(path_show: send("#{category.singularize}_path", id))
     end
 
     def self.nav_btn_props
