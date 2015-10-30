@@ -2,7 +2,7 @@ class Image < Asset
   scope :bg, -> { where("class_name ~* ' bg'") }
   scope :fg, -> { where.not(id: bg.select(:id))  }
 
-  protected
+  private
 
   def add_path
     default_filename = /bg/ === class_name ? "bg-default.png" : "default.png"

@@ -12,7 +12,7 @@ class ActiveRecord::Base
     super(options)
   end
 
-  protected
+  private
 
   def set_key
     self.key = "#{self.class.to_s.fileize}-#{self.class.count}" if respond_to?(:key) && !key

@@ -1,14 +1,12 @@
 class AboutUs < Text
-  include HasAllAssets
-  
-  before_create :set_title
+  include HasAllAssets, SingletonRecord
   
   has_one :bg_image, -> { bg }, as: :parent, class_name: "AboutUsImage"
   has_many :fg_images, -> { fg }, as: :parent, class_name: "AboutUsImage"
   
   private
 
-  def set_title
+  def set_label
     self.title = "About Us"
   end
 

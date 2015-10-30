@@ -1,5 +1,10 @@
 include Rails.application.routes.url_helpers
 
+def rand_number
+  els = ([("A".."Z")] + [("0".."9")] * 10).flat_map(&:to_a)
+  "#{rand(1..2).times.map { els.sample(rand(3..8)).join }.join("‐")}#{"‐#{rand(99)}" if rand(3) > 1}"
+end
+
 def rand_paragraphs(min, max)
   Faker::Lorem.paragraphs(rand(min..max)).join("\n\n")
 end
@@ -155,16 +160,23 @@ end
 [ExtGasSec, EquipScreen, VRVAcc, Catalog, Drawing, InstallManual, PartsList].each do |category_model|
   keys = /products/ === category_model.table_name ? [:name, :info] : [:title, :body]
   attrs = rand(1..3).times.map do |i|
-    Hash[keys.zip(["#{category_model.category.titleize.singularize} #{i}", rand_paragraphs(1, 3)])]
+    Hash[keys.zip(["#{category_model.class_type_display.singularize} #{i}", rand_paragraphs(1, 3)])]
   end
     category_model.create(attrs)
 end
 
-Good.create({
-  name: "High Perf AHU",
+Product.descendants.each do |product|
+  info = rand_paragraphs(1, 3)
+  if product.include?(SingletonRecord)
+    product.create(info: info).pdfs.create(filename: "0.pdf")
+  else
+
+  end
+end
+
+CMProduct.create({
   info: rand_paragraphs(1, 3)
-})
-Good.last.pdfs.create(filename: "0.pdf")
+}).pdfs.create(filename: "0.pdf")
 
 Good.create({
   name: "Multi-zone VAV",
@@ -181,7 +193,7 @@ Good.create({
 
 [Mod, EquipScreen, EquipScreen].each do |home_page_index_good|
   HomePageImage.create({
-    caption: home_page_index_good.category.tr("/_/", " ").titleize,
+    caption: home_page_index_good.class_type_display,
     path_link: send("#{home_page_index_good.category}_path")
     })
 end
