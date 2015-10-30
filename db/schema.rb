@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029165843) do
+ActiveRecord::Schema.define(version: 20151030214149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151029165843) do
   add_index "contacts", ["type"], name: "index_contacts_on_type", using: :btree
   add_index "contacts", ["type_display"], name: "index_contacts_on_type_display", using: :btree
 
-  create_table "documents", force: :cascade do |t|
+  create_table "docs", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
     t.string   "type_display"
@@ -99,15 +99,15 @@ ActiveRecord::Schema.define(version: 20151029165843) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "documents", ["body"], name: "index_documents_on_body", using: :btree
-  add_index "documents", ["key"], name: "index_documents_on_key", using: :btree
-  add_index "documents", ["parent_id", "parent_type"], name: "index_documents_on_parent_id_and_parent_type", using: :btree
-  add_index "documents", ["parent_id"], name: "index_documents_on_parent_id", using: :btree
-  add_index "documents", ["parent_type"], name: "index_documents_on_parent_type", using: :btree
-  add_index "documents", ["path_show"], name: "index_documents_on_path_show", using: :btree
-  add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
-  add_index "documents", ["type"], name: "index_documents_on_type", using: :btree
-  add_index "documents", ["type_display"], name: "index_documents_on_type_display", using: :btree
+  add_index "docs", ["body"], name: "index_docs_on_body", using: :btree
+  add_index "docs", ["key"], name: "index_docs_on_key", using: :btree
+  add_index "docs", ["parent_id", "parent_type"], name: "index_docs_on_parent_id_and_parent_type", using: :btree
+  add_index "docs", ["parent_id"], name: "index_docs_on_parent_id", using: :btree
+  add_index "docs", ["parent_type"], name: "index_docs_on_parent_type", using: :btree
+  add_index "docs", ["path_show"], name: "index_docs_on_path_show", using: :btree
+  add_index "docs", ["title"], name: "index_docs_on_title", using: :btree
+  add_index "docs", ["type"], name: "index_docs_on_type", using: :btree
+  add_index "docs", ["type_display"], name: "index_docs_on_type_display", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "key"
@@ -133,23 +133,24 @@ ActiveRecord::Schema.define(version: 20151029165843) do
   add_index "employees", ["path_show"], name: "index_employees_on_path_show", using: :btree
   add_index "employees", ["type_display"], name: "index_employees_on_type_display", using: :btree
 
-  create_table "locations", force: :cascade do |t|
+  create_table "parts", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
-    t.integer  "company_id"
-    t.integer  "employee_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "number"
+    t.integer  "prod_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "locations", ["company_id"], name: "index_locations_on_company_id", using: :btree
-  add_index "locations", ["employee_id"], name: "index_locations_on_employee_id", using: :btree
-  add_index "locations", ["key"], name: "index_locations_on_key", using: :btree
-  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+  add_index "parts", ["key"], name: "index_parts_on_key", using: :btree
+  add_index "parts", ["name"], name: "index_parts_on_name", using: :btree
+  add_index "parts", ["number"], name: "index_parts_on_number", using: :btree
+  add_index "parts", ["prod_id"], name: "index_parts_on_prod_id", using: :btree
 
-  create_table "products", force: :cascade do |t|
+  create_table "prods", force: :cascade do |t|
     t.string   "key"
     t.string   "type"
+    t.string   "model_number"
     t.string   "type_display"
     t.string   "name"
     t.string   "path_show"
@@ -158,12 +159,13 @@ ActiveRecord::Schema.define(version: 20151029165843) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "products", ["info"], name: "index_products_on_info", using: :btree
-  add_index "products", ["key"], name: "index_products_on_key", using: :btree
-  add_index "products", ["name"], name: "index_products_on_name", using: :btree
-  add_index "products", ["path_show"], name: "index_products_on_path_show", using: :btree
-  add_index "products", ["type"], name: "index_products_on_type", using: :btree
-  add_index "products", ["type_display"], name: "index_products_on_type_display", using: :btree
+  add_index "prods", ["info"], name: "index_prods_on_info", using: :btree
+  add_index "prods", ["key"], name: "index_prods_on_key", using: :btree
+  add_index "prods", ["model_number"], name: "index_prods_on_model_number", using: :btree
+  add_index "prods", ["name"], name: "index_prods_on_name", using: :btree
+  add_index "prods", ["path_show"], name: "index_prods_on_path_show", using: :btree
+  add_index "prods", ["type"], name: "index_prods_on_type", using: :btree
+  add_index "prods", ["type_display"], name: "index_prods_on_type_display", using: :btree
 
   create_table "texts", force: :cascade do |t|
     t.string   "key"
@@ -184,6 +186,5 @@ ActiveRecord::Schema.define(version: 20151029165843) do
   add_index "texts", ["title"], name: "index_texts_on_title", using: :btree
   add_index "texts", ["type"], name: "index_texts_on_type", using: :btree
 
-  add_foreign_key "locations", "companies"
-  add_foreign_key "locations", "employees"
+  add_foreign_key "parts", "prods"
 end

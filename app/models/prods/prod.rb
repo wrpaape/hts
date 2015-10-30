@@ -1,12 +1,12 @@
-class Good < ActiveRecord::Base
+class Prod < ActiveRecord::Base
   include HasCategory
 
-  has_many :documents, as: :parent
+  has_many :docs, as: :parent
 
   alias_attribute :display, :name
 
   self.pool_fields = [:name, :type_display, :info]
-  set_attrs("goods")
+  set_attrs("prods")
 
   private
 

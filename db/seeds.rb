@@ -139,7 +139,7 @@ products = Product.create(4.times.map {
 })
 
 products.each do |product|
-  product.documents.create(rand(1..3).times.map { |i|
+  product.docs.create(rand(1..3).times.map { |i|
     type = %w(Catalog Document Drawing InstallManual PartsList).sample
 
     {
@@ -148,7 +148,7 @@ products.each do |product|
       body: rand_paragraphs(1, 5),
     }
   })
-  product.documents.each do |detail|
+  product.docs.each do |detail|
     detail.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
     detail.pdfs.create(rand_assets(0, 1, "pdf")) 
   end
@@ -165,12 +165,22 @@ end
     category_model.create(attrs)
 end
 
-Product.descendants.each do |product|
-  info = rand_paragraphs(1, 3)
-  if product.include?(SingletonRecord)
-    product.create(info: info).pdfs.create(filename: "0.pdf")
+Good.descendants.each do |good|
+  rand_text = -> { rand_paragraphs(1, 3) }
+  label = ->(model, i) { "#{category_model.class_type_display.singularize} #{i}" }
+  rand_doc_type = ->{ Documentation.descendants.sample }
+  attr_keys = -> { is_a?(Good) ? [:name, :info] : [:title, :body] }
+  attrs = ->(model) { Hash[attr_keys.call.zip([label.call(model, i), rand_text.call])] }
+  gen_model = ->(model) { (10..rand(11..20)).times.map { |i|  }
+  if good.include?(SingletonRecord)
+    good.create(info: text)
   else
-
+    (10..rand(11..20)).times do |i|
+      good.create(info: text, name: "#{good.class_type_display.singularize} #{i}")
+    end
+  end
+  (1..rand(10..50)).times do |i|
+    good.pdfs.create(filename: "#{i}.pdf")
   end
 end
 

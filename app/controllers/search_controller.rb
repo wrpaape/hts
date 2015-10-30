@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   class_attribute :searchable
   
   def self.get_pool(exclude_text)
-    (searchable - searchable.flat_map(&:descendants)).map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
+    searchable_top_level.map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
   end
 
   def search
@@ -12,13 +12,17 @@ class SearchController < ApplicationController
   end
 
   self.searchable = [
+    Prod, Product, Mod, EquipScreen, ExtGasSec, VRVAcc, LowProfileERV, MultiZoneVAV,
+    Doc, Document, Catalog, Drawing, InstallManual, PartsList
     Employee,
-    Pdf,
-    Product, Good, Mod, EquipScreen, ExtGasSec, VRVAcc,
-    Document, Catalog, Drawing, InstallManual, PartsList
+    Pdf
   ]
     
   private
+
+  def searchable_top_level
+    searchable - searchable.flat_map(&:descendants)
+  end
 
   def escaped_input
     Regexp.escape(params[:input])
