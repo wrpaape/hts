@@ -1,8 +1,6 @@
 class Company < ActiveRecord::Base
   include Contactable, AddImage
 
-  before_create :add_name_to_type_display
-
   has_many :locations
   has_many :employees, through: :locations
   has_many :addresses, -> { by_priority }, as: :parent
@@ -19,7 +17,7 @@ class Company < ActiveRecord::Base
 
   private 
 
-  def add_name_to_type_display
-    self.type_display << " #{name.fileize.dasherize}"
+  def set_type_display
+    self.type_display = "#{class_type_display} #{name.fileize.dasherize}"
   end
 end

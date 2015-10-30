@@ -11,8 +11,8 @@ module Contactable
     has_one :fax, ->(faxes) { primary }, as: :parent
     has_one :email, ->(emails) { primary }, as: :parent
 
-    self.type_display = self.class.to_s.underscore.dasherize
-    
+    self.class_type_display = to_s.underscore.dasherize
+
     private
 
     def set_secondary_if_any_primary(contact)
