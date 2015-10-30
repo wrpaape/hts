@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  skip_before_action :set_header
   class_attribute :searchable
   
   def self.get_pool(exclude_text)
@@ -28,14 +29,14 @@ class SearchController < ApplicationController
   end
 
   def searchable_type
-    searchable && params[:type].try(:constantize)
+    searchable && params[:type].safe_constantize
   end
 
   def query(search_pool, input)
     output = []
     search_pool.each do |search_for, fields|
       fields.each do |field, procs|
-        instance_exec(input, &procs[:results]).each_with_index do |result, i|
+        procs[:results].call(input).each_with_index do |result, i|
           output.push({
             key: "#{input}-#{search_for}-#{field}-result-#{i}",
             input: input,

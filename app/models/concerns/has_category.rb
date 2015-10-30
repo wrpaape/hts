@@ -1,5 +1,6 @@
 module HasCategory
   extend ActiveSupport::Concern
+  include Rails.application.routes.url_helpers
 
   included do
     include AddPath, HasAllAssets, Searchable, HasTypeDisplay
@@ -10,7 +11,7 @@ module HasCategory
     private
 
     def add_path
-      update(path_show: Rails.application.routes.url_helpers.send("#{category.singularize}_path", id))
+      update(path_show: new.send("#{category.singularize}_path", id))
     end
 
     def self.nav_btn_props
@@ -34,7 +35,7 @@ module HasCategory
     def self.set_attrs(category)
       self.category = category
       self.type_display = category.titleize(exclude: %w(and))
-      self.path_index = Rails.application.routes.url_helpers.send("#{category}_path")
+      self.path_index = new.send("#{category}_path")
     end
   end
 end
