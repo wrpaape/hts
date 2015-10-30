@@ -35,7 +35,7 @@ module HasCategory
     def self.set_attrs(category)
       self.category = category
       self.type_display = category.titleize(exclude: %w(and))
-      self.path_index = send("#{category}_path")
+      self.path_index = Rails.application.routes.url_helpers.send("#{category}_path")
     end
   end
 end
