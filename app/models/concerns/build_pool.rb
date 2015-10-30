@@ -9,8 +9,8 @@ module BuildPool
           when :type_display
             return Proc.new do |input| 
               searchable_models = searchable_model.instance_exec { descendants.push(self) }
-              matching_categories = searchable_models.select { |model| model.type_display =~ Regexp.new(input, "i") }
-              matching_categories.map { |model| [model.path_index, model.type_display] }
+              matching_categories = searchable_models.select { |model| model.class_type_display =~ Regexp.new(input, "i") }
+              matching_categories.map { |model| [model.path_index, model.class_type_display] }
             end
           when :name
             [:path_show, :name] 
