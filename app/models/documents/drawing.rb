@@ -1,2 +1,2 @@
-class Drawing < Doc
+class Drawing < Document
 end

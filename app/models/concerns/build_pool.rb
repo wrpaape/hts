@@ -6,11 +6,11 @@ module BuildPool
       searchable_model = self
       attrs =
         case search_for
-          when :type_display
+          when :category
             return Proc.new do |input| 
               searchable_models = searchable_model.instance_exec { descendants.push(self) }
-              matching_categories = searchable_models.select { |model| model.class_type_display =~ Regexp.new(input, "i") }
-              matching_categories.map { |model| [model.path_index, model.class_type_display] }
+              matching_categories = searchable_models.select { |model| model.category =~ Regexp.new(input, "i") }
+              matching_categories.map { |model| [model.path_index, model.category] }
             end
           when :name
             [:path_show, :name] 
@@ -48,7 +48,7 @@ module BuildPool
     end
 
     def self.build_pool
-      Hash[to_s.fileize.pluralize.to_sym, build_categories]
+      Hash[tableized, build_categories]
     end
   end
 end

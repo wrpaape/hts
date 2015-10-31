@@ -29,8 +29,4 @@ class Employee < ActiveRecord::Base
   def set_full_name
     self.full_name = all_names.join(" ")
   end
-
-  def add_path
-    update(path_show: employee_path(id))
-  end
 end

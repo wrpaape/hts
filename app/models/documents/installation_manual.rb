@@ -1,2 +1,2 @@
-class InstallationManual < Doc
+class InstallationManual < Document
 end

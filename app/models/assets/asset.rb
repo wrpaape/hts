@@ -15,13 +15,13 @@ class Asset < ActiveRecord::Base
     return if path_file
     steps = ""
     ancestor = parent
-    steps.prepend("#{ancestor.class.to_s.fileize.pluralize}/") while ancestor.try(:parent_id) && ancestor = ancestor.parent
+    steps.prepend("#{ancestor.class.tableized}/") while ancestor.try(:parent_id) && ancestor = ancestor.parent
 
     steps.sub!(/\//, "/#{(ancestor.try(:name) || ancestor.try(:title)).fileize}/")
 
     ancestor = ancestor.class
     until ancestor == ActiveRecord::Base
-      steps.prepend("#{ancestor.to_s.fileize.pluralize}/")
+      steps.prepend("#{ancestor.tableized}/")
       ancestor = ancestor.superclass
     end
       
@@ -29,6 +29,6 @@ class Asset < ActiveRecord::Base
   end
 
   def set_class_name
-    class_name.prepend("#{type.fileize.dasherize}#{class_name.present? ? " " : ""}")
+    class_name.prepend("#{dasherized}#{class_name.present? ? " " : ""}")
   end
 end

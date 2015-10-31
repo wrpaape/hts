@@ -9,7 +9,7 @@ class Image < Asset
 
     regex = type.in?(%w(HomePageImage AboutUsImage)) ? /$/ :
     case parent_type
-      when "Product", "Spec" then /(?<=\/).*/
+      when "Product", "Document" then /(?<=\/).*/
       else /[^\/]+\/$/
     end
 

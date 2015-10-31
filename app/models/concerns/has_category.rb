@@ -3,20 +3,14 @@ module HasCategory
   include Rails.application.routes.url_helpers
 
   included do
-    include AddPath, HasAllAssets, Searchable
+    include HasAllAssets, Searchable, AddPath
 
-    class_attribute :underscored, :dasherized, :category, :controller, :path_index
-    self.underscored = to_s.underscore
-    self.dasherized = to_s.dasherize
+    class_attribute :category, :controller, :path_index
     self.category = to_s.titleize(exclude: %w(and)).pluralize
     self.controller = to_s.pluralize.to_sym
-    # self.path_index = send("#{underscored.pluralize}_path")
+    # self.path_index = send("#{tableized}_path")
 
     private
-
-    def add_path
-      update(path_show: send("#{underscored}_path", id))
-    end
 
     def self.nav_btn_props
       {

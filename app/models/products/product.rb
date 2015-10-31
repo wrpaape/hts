@@ -1,17 +1,17 @@
 class Product < ActiveRecord::Base
   include HasCategory
+  
+  self.pool_fields = [:name, :category, :info]
 
   has_many :documents, as: :parent
 
   alias_attribute :display, :name
 
-  self.pool_fields = [:name, :type_display, :info]
-
   private
 
   def self.load_descendants
-    [Modification, CMProduct, EquipmentScreen, ExtendedGasSection, HighPerformanceAHU, LowProfileERV, MultiZoneVAV, VRVAccessory]
+    [Modification, CustomMetalProduct, EquipmentScreen, ExtendedGasSection, HighPerformanceAHU, LowProfileERV, MultiZoneVAV, VRVAccessory]
   end
-  
-  load_descendants.each { self.pool_fields -= [:type_display] }
+
+  load_descendants.each { self.pool_fields -= [:category] }
 end

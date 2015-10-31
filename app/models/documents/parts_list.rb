@@ -1,2 +1,2 @@
-class PartsList < Doc
+class PartsList < Document
 end

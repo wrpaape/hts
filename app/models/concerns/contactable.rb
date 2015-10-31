@@ -2,16 +2,12 @@ module Contactable
   extend ActiveSupport::Concern
 
   included do
-    include HasTypeDisplay
-
     has_many :contacts, -> { by_display }, as: :parent, before_add: :set_secondary_if_any_primary
     has_many :phones, -> { by_priority }, as: :parent
     has_many :faxes, -> { by_priority }, as: :parent
     has_many :emails, -> { by_priority }, as: :parent
     has_one :fax, ->(faxes) { primary }, as: :parent
     has_one :email, ->(emails) { primary }, as: :parent
-
-    self.class_type_display = to_s.underscore.dasherize
 
     private
 
@@ -21,10 +17,10 @@ module Contactable
     end
 
     def self.contact_content_props
-      includes(:contacts, :image).as_json(only: [:key, :type_display, :path_show], include: [
+      includes(:contacts, :image).as_json(only: [:key, :class_name, :path_show], include: [
         {
           contacts: {
-            only: [:key, :type_display],
+            only: [:key, :class_name],
             methods: :info_display
           }
         },
