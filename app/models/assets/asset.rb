@@ -14,20 +14,17 @@ class Asset < ActiveRecord::Base
   def build_path_file
     return if path_file
     steps = ""
-    ancestor = self
-    while ancestor.respond_to?(:parent)
-      ancestor = ancestor.parent
-      steps.prepend("#{ancestor.class.to_s.fileize.pluralize}/")
-    end
+    ancestor = parent
+    steps.prepend("#{ancestor.class.to_s.fileize.pluralize}/") while ancestor.try(:parent_id) && ancestor = ancestor.parent
 
-    steps.sub!(/\//, "/#{ancestor.name.fileize}/")
+    steps.sub!(/\//, "/#{(ancestor.try(:name) || ancestor.try(:title)).fileize}/")
 
     ancestor = ancestor.class
-    until ancestor.superclass == ActiveRecord::Base
-      ancestor = ancestor.superclass
+    until ancestor == ActiveRecord::Base
       steps.prepend("#{ancestor.to_s.fileize.pluralize}/")
+      ancestor = ancestor.superclass
     end
-    
+      
     set_path_file(steps)
   end
 

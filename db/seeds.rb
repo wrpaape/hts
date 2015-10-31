@@ -117,84 +117,26 @@ Employee.create([
   }
 ])
 
-# products = Product.create(4.times.map {
-#   {
-#     type: ["Good", "Mod"].sample,
-#     name: Faker::Commerce.product_name,
-#     info: rand_paragraphs(1, 3)
-#   }
-# })
-
-# products.each do |product|
-#   product.docs.create(rand(1..3).times.map { |i|
-#     type = %w(Catalog Document Drawing InstallManual PartsList).sample
-
-#     {
-#       type: type,
-#       title: "#{type.underscore}-#{i}",
-#       body: rand_paragraphs(1, 5),
-#     }
-#   })
-#   product.docs.each do |detail|
-#     detail.images.create(rand_assets(0, 3, ["gif", "png", "jpg"].sample)) 
-#     detail.pdfs.create(rand_assets(0, 1, "pdf")) 
-#   end
-
-#   product.images.create(rand_assets(1, 5, ["gif", "png", "jpg"].sample))
-#   product.pdfs.create(rand_assets(0, 3, "pdf"))
-# end
-
-# [ExtGasSec, EquipScreen, VRVAcc, Catalog, Drawing, InstallManual, PartsList].each do |category_model|
-#   keys = /products/ === category_model.table_name ? [:name, :info] : [:title, :body]
-#   attrs = rand(1..3).times.map do |i|
-#     Hash[keys.zip(["#{category_model.class_type_display.singularize} #{i}", rand_paragraphs(1, 3)])]
-#   end
-#     category_model.create(attrs)
-# end
-
 label = ->(i) { "#{class_type_display.singularize} #{i}" }
-attr_keys = -> { is_a?(Prod) ? [:name, :info, :model_number] : [:title, :body] }
-doc_vals = ->(i) { [instance_exec(i, &label), rand_paragraphs(1, 3)] }
-prod_vals = ->(i) { instance_exec(i, &doc_vals).push(rand_model_number) }
-attr_vals = ->(i) { instance_exec(i, &(is_a?(Prod) ? prod_vals : attr_vals)) }
-attrs = ->(i) { Hash[instance_exec(&attr_keys).zip(instance_exec(i, &attr_vals))] }
-gen_pdfs = -> { pdfs.create(rand_assets(10, 20, "pdf")) }
-gen_doc = ->(i) { create(instance_exec(i, &attrs)).instance_exec(&gen_pdfs) }
-gen_docs = -> { rand(10..20).times { |i| docs << Doc.descendants.sample.instance_exec(i, &gen_doc) } }
-gen_prods = ->(num) { num.times { |i| create(instance_exec(i, &attrs)).instance_exec(&gen_docs) }
-seed = -> { instance_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods) }
+attr_keys = -> { /prods/ === table_name ? [:name, :info, :model_number] : [:title, :body] }
+doc_vals = ->(i) { [class_exec(i, &label), rand_paragraphs(1, 3)] }
+prod_vals = ->(i) { class_exec(i, &doc_vals).push(rand_model_number) }
+attr_vals = ->(i) { class_exec(i, &(/prods/ === table_name ? prod_vals : doc_vals)) }
+attrs = ->(i) { Hash[class_exec(&attr_keys).zip(class_exec(i, &attr_vals))] }
+gen_pdfs = ->(docs) { docs.pdfs.create(rand_assets(10, 20, "pdf")) }
+gen_doc = ->(i) { create(class_exec(i, &attrs)) }
+gen_docs = -> { rand(10..20).times.map { |i| docs << Doc.descendants.sample.class_exec(i, &gen_doc) } }
+gen_prods = ->(num) { num.times { |i| create(class_exec(i, &attrs)).instance_exec(&gen_docs) } }
+# gen_prods = ->(num) { num.times { |i| create(class_exec(i, &attrs)) } }
+seed = -> { class_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods); all.each(&gen_pdfs) }
 
-Prod.descendants.each { |prod| prod.instance_exec(&seed) }
+Prod.descendants.each { |prod| prod.class_exec(&seed) }
 
-# CMProduct.create({
-#   info: rand_paragraphs(1, 3)
-# }).pdfs.create(filename: "0.pdf")
-
-# Good.create({
-#   name: "Multi-zone VAV",
-#   info: rand_paragraphs(1, 3)
-# })
-# Good.last.pdfs.create(filename: "0.pdf")
-
-# Good.create({
-#   name: "Low Profile ERV",
-#   info: rand_paragraphs(1, 3)
-# }).images
-
-# 6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
 
 home_page_attrs = ->(name) { { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number } }
-gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)).images.create(type: "HomePageImage") }
-[Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.instance_exec(&gen_home_page_inst) }
+gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)) } #images.create(type: "HomePageImage") }
 
-# [Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each do |home_page_index_good|
-#   HomePageImage.create({
-#     caption: home_page_index_good.class_type_display,
-#     path_link: send("#{home_page_index_good.category}_path")
-#   })
-# end
-
-# Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
+[Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.class_exec(&gen_home_page_inst) }
 
 AboutUs.create(body: big_paragraphs(2))
 
