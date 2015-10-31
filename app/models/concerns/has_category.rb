@@ -5,37 +5,35 @@ module HasCategory
   included do
     include AddPath, HasAllAssets, Searchable, HasTypeDisplay
 
-    class_attribute :category
-    class_attribute :path_index
+    class_attribute :underscored, :dasherized, :category, :controller, :path_index
+    self.underscored = to_s.underscore
+    self.dasherized = to_s.dasherize
+    self.category = to_s.titleize(exclude: %w(and)).pluralize
+    self.controller = to_s.pluralize.to_sym
+    # self.path_index = send("#{underscored.pluralize}_path")
 
     private
 
     def add_path
-      update(path_show: send("#{category.singularize}_path", id))
+      update(path_show: send("#{underscored}_path", id))
     end
 
     def self.nav_btn_props
       {
-        key: category,
+        key: dasherized,
         path: path_index,
-        display: class_type_display
+        display: category
       }
     end
 
     def self.nav_btns_props
       {
-        key: category,
-        key_head: "#{category}-index",
+        key: dasherized,
+        key_head: "#{dasherized}-index",
         path: path_index,
-        display: class_type_display,
-        nav_btns: load_other_categories.map(&:nav_btn_props)
+        display: category,
+        nav_btns: load_categories.map(&:nav_btn_props)
       }
-    end
-
-    def self.set_attrs(category)
-      self.category = category
-      self.class_type_display = category.titleize(exclude: %w(and))
-      # self.path_index = send("#{category}_path")
     end
   end
 end

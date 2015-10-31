@@ -1,0 +1,2 @@
+class InstallationManual < Doc
+end

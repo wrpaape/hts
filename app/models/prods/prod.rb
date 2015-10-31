@@ -6,5 +6,4 @@ class Prod < ActiveRecord::Base
   alias_attribute :display, :name
 
   self.pool_fields = [:name, :type_display, :info]
-  set_attrs("prods")
 end

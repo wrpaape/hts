@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  Product.load_other_categories.map { |prod| Object.const_set("#{prod.to_s.pluralize}Controller".to_sym, Class.new(self)) }
+  Product.load_other_categories.map { |prod| Object.const_set(prod.controller, Class.new(self)) }
 
   def index
     # @nav_bar_props = {
@@ -15,15 +15,16 @@ class ProductsController < ApplicationController
   private
 
   def product_type
-    Prod.descendants && params[:type].constantize 
+    # Prod.descendants && params[:type].constantize
+    controller_name.classify.constantize 
   end
 
   def product_placeholder
-     "search #{product_type.class_type_display}"
+     "search #{product_type.category}"
   end
 
   def product_search_path
-    send("search_#{product_type.category}_path")
+    send("search_#{product_type.underscored}_path")
   end
 
   def nav_bar_props

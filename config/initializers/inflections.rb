@@ -14,12 +14,9 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
-ACRONYMS = %w(VRV VAV ERV AHU)
+ACRONYMS = %w(PDF VRV VAV ERV AHU)
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  ACRONYMS.each do |a|
-    inflect.acronym a
-    inflect.acronym "#{a}s"
-  end
+  ACRONYMS.each { |a| inflect.acronym a }
   inflect.uncountable 'us'
   inflect.human /multi_zone/i, "Multi-Zone"
 end

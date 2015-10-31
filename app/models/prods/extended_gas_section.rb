@@ -1,0 +1,2 @@
+class ExtendedGasSection < Product
+end

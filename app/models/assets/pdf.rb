@@ -1,4 +1,4 @@
-class Pdf < Asset
+class PDF < Asset
   include Searchable
 
   alias_attribute :path_dl, :path_link
@@ -8,7 +8,7 @@ class Pdf < Asset
   private
 
   def add_path
-    update(path_dl: download_pdf_path(id))
+    update(path_dl: downloads_pdfs_path(id))
   end
 
   def set_path_file(steps)

@@ -12,10 +12,10 @@ class SearchController < ApplicationController
   end
 
   self.searchable = [
-    Prod, Product, Modification, EquipScreen, ExtGasSec, VRVAcc, LowProfileERV, MultiZoneVAV,
-    Doc, Document, Catalog, Drawing, InstallManual, PartsList
+    Prod, Product, Modification, EquipmentScreen, ExtendedGasSection, VRVAccessory, LowProfileERV, MultiZoneVAV,
+    Doc, Document, Catalog, Drawing, InstallationManual, PartsList
     Employee,
-    Pdf
+    PDF
   ]
     
   private

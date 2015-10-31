@@ -1,6 +1,6 @@
-class CreateDocs < ActiveRecord::Migration
+class CreateDocuments < ActiveRecord::Migration
   def change
-    create_table :docs do |t|
+    create_table :documents do |t|
       t.string :key, index: true, uniqueness: true
       t.string :type, index: true
       t.string :type_display, index: true
@@ -13,6 +13,6 @@ class CreateDocs < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :docs, [:parent_id, :parent_type]
+    add_index :documents, [:parent_id, :parent_type]
   end
 end

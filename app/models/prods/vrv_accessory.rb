@@ -1,0 +1,2 @@
+class VRVAccessory < Product
+end
