@@ -2,7 +2,7 @@ include Rails.application.routes.url_helpers
 
 def rand_model_number
   els = ([("A".."Z")] + [("0".."9")] * 10).flat_map(&:to_a)
-  "#{rand(1..2).times.map { els.sample(rand(3..8)).join }.join("‐")}#{"‐#{rand(99)}" if rand(3) > 1}"
+  "#{rand(1..2).times.map { els.sample(rand(3..8)).join }.join("‐")}#{"‐#{rand(99)}" if rand > 0.8}"
 end
 
 def rand_paragraphs(min, max)
@@ -21,7 +21,6 @@ def rand_assets(min, max, ext)
   end
 end
 
-# Ingersoll Rand brands
 Company.create([
   {
     name: "ModWerks",
@@ -115,18 +114,6 @@ Employee.create([
       }
     ]),
     bio: rand_paragraphs(1, 3)
-  },
-  {
-    first_name: "Walter",
-    last_name: "bomhoff",
-    job_title: "South Texas Area Manager",
-    contacts: Contact.create([
-        {
-          type: "Email",
-          address: "walter.bomhoff@trane.com"
-        }
-      ]),
-    bio: rand_paragraphs(1, 3)
   }
 ])
 
@@ -169,15 +156,15 @@ label = ->(i) { "#{class_type_display.singularize} #{i}" }
 attr_keys = -> { is_a?(Prod) ? [:name, :info, :model_number] : [:title, :body] }
 doc_vals = ->(i) { [instance_exec(i, &label), rand_paragraphs(1, 3)] }
 prod_vals = ->(i) { instance_exec(i, &doc_vals).push(rand_model_number) }
-attr_vals = ->(i) { instance_exec(i, is_a?(Prod) ? &prod_vals : &attr_vals) }
+attr_vals = ->(i) { instance_exec(i, &(is_a?(Prod) ? prod_vals : attr_vals)) }
 attrs = ->(i) { Hash[instance_exec(&attr_keys).zip(instance_exec(i, &attr_vals))] }
 gen_pdfs = -> { pdfs.create(rand_assets(10, 20, "pdf")) }
 gen_doc = ->(i) { create(instance_exec(i, &attrs)).instance_exec(&gen_pdfs) }
 gen_docs = -> { rand(10..20).times { |i| docs << Doc.descendants.sample.instance_exec(i, &gen_doc) } }
 gen_prods = ->(num) { num.times { |i| create(instance_exec(i, &attrs)).instance_exec(&gen_docs) }
-seed = ->(prod) { prod.instance_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods) }
+seed = -> { instance_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods) }
 
-Prod.descendants.each(&seed)
+Prod.descendants.each { |prod| prod.instance_exec(&seed) }
 
 # CMProduct.create({
 #   info: rand_paragraphs(1, 3)
@@ -196,7 +183,7 @@ Prod.descendants.each(&seed)
 
 # 6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
 
-home_page_attrs = ->(name) { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number}
+home_page_attrs = ->(name) { { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number } }
 gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)).images.create(type: "HomePageImage") }
 [Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.instance_exec(&gen_home_page_inst) }
 
@@ -209,9 +196,7 @@ gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)).image
 
 # Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
 
-AboutUs.create({
-  body: big_paragraphs(2)
-});
+AboutUs.create(body: big_paragraphs(2))
 
 AboutUsImage.create([
   {
