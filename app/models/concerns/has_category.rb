@@ -35,7 +35,7 @@ module HasCategory
     def self.set_attrs(category)
       self.category = category
       self.class_type_display = category.titleize(exclude: %w(and))
-      self.path_index = new.send("#{category}_path")
+      # self.path_index = new.send("#{category}_path")
     end
   end
 end
