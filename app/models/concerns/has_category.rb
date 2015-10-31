@@ -4,11 +4,15 @@ module HasCategory
   included do
     include HasAllAssets, Searchable, AddPath
 
-    class_attribute :category, :controller
-    self.category = to_s.titleize(exclude: %w(and)).pluralize
-    self.controller = to_s.pluralize.to_sym
-
     private
+
+    def self.category
+      titleized.pluralize
+    end
+
+    def self.controller
+      "#{pluralized}Controller".to_sym
+    end
 
     def self.path_index
       new.send("#{tableized}_path")

@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   def product_type
     # Prod.descendants && params[:type].constantize
+    pp "hi"
     controller_name.classify.constantize 
   end
 

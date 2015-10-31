@@ -7,9 +7,17 @@ module BaseClassMethods
     def model
       self.class
     end
-    
+
     def self.fileized
       to_s.fileize
+    end
+
+    def self.titleized
+      to_s.titleize(exclude: %w(and))
+    end
+
+    def self.pluralized
+      to_s.pluralize
     end
 
     def self.underscored
