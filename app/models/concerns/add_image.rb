@@ -11,7 +11,7 @@ module AddImage
     private
 
     def add_image
-      image_type.create(parent_id: id, parent_type: self.class.to_s)
+      image_type.create(parent_id: id, parent_type: model.to_s)
     end
   end
 end

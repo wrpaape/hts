@@ -1,4 +1,5 @@
-include Rails.application.routes.url_helpers
+# include Rails.application.routes.url_helpers
+ActiveRecord::Base.send(:include, BaseCallbacks)
 
 def rand_model_number
   els = ([("A".."Z")] + [("0".."9")] * 10).flat_map(&:to_a)
@@ -117,25 +118,25 @@ Employee.create([
   }
 ])
 
-label = ->(i) { "#{class_type_display.singularize} #{i}" }
-attr_keys = -> { /prods/ === table_name ? [:name, :info, :model_number] : [:title, :body] }
+label = ->(i) { "#{category.singularize} #{i}" }
+attr_keys = -> { /products/ === table_name ? [:name, :info, :model_number] : [:title, :body] }
 doc_vals = ->(i) { [class_exec(i, &label), rand_paragraphs(1, 3)] }
 prod_vals = ->(i) { class_exec(i, &doc_vals).push(rand_model_number) }
-attr_vals = ->(i) { class_exec(i, &(/prods/ === table_name ? prod_vals : doc_vals)) }
+attr_vals = ->(i) { class_exec(i, &(/products/ === table_name ? prod_vals : doc_vals)) }
 attrs = ->(i) { Hash[class_exec(&attr_keys).zip(class_exec(i, &attr_vals))] }
 gen_pdfs = ->(docs) { docs.pdfs.create(rand_assets(10, 20, "pdf")) }
 gen_doc = ->(i) { create(class_exec(i, &attrs)) }
-gen_docs = -> { rand(10..20).times.map { |i| docs << Doc.descendants.sample.class_exec(i, &gen_doc) } }
+gen_docs = -> { rand(10..20).times.map { |i| documents << Document.descendants.sample.class_exec(i, &gen_doc) } }
 gen_prods = ->(num) { num.times { |i| create(class_exec(i, &attrs)).instance_exec(&gen_docs) } }
 seed = -> { class_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods); all.each(&gen_pdfs) }
 
-Prod.descendants.each { |prod| prod.class_exec(&seed) }
+Product.descendants.each { |prod| prod.class_exec(&seed) }
 
 
 home_page_attrs = ->(name) { { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number } }
-gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)); last.images.create(type: "HomePageImage") }
+gen_home_page_inst = -> { create(home_page_attrs.call(category)); last.images.create(type: "HomePageImage") }
 
-[Modification, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.class_exec(&gen_home_page_inst) }
+[Modification, EquipmentScreen, LowProfileERV, MultiZoneVAV, HighPerformanceAHU, ExtendedGasSection].each { |prod| prod.class_exec(&gen_home_page_inst) }
 
 AboutUs.create(body: big_paragraphs(2))
 

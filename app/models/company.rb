@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  include Contactable, AddImage, HasClassName
+  include Contactable, AddImage
 
   has_many :addresses, -> { by_priority }, as: :parent
   has_one :phone, ->(phones) { primary }, as: :parent
@@ -16,6 +16,6 @@ class Company < ActiveRecord::Base
   private 
 
   def set_class_name
-    self.class_name = "#{dasherized} #{name.underscore.dasherize}"
+    self.class_name = "#{model.dasherized} #{name.underscore.dasherize}"
   end
 end

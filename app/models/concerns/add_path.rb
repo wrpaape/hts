@@ -1,5 +1,6 @@
 module AddPath
   extend ActiveSupport::Concern
+  include Rails.application.routes.url_helpers
 
   included do    
     after_create :add_path
@@ -7,7 +8,7 @@ module AddPath
     private 
 
     def add_path
-      update(path_show: send("#{underscored}_path", id))
+      update(path_show: send("#{model.underscored}_path", id))
     end
   end
 end

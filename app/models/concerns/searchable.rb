@@ -3,9 +3,7 @@ module Searchable
   include BuildPool
 
   included do
-    class_attribute :tableized, :pool_fields
-
-    self.tableized = underscored.pluralize.to_sym
+    class_attribute :pool_fields
 
     def self.get_pool(exclude_text)
       exclude_text ? build_pool.tap { |pool| pool[tableized].delete(:info) } : build_pool

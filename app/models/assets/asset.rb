@@ -29,6 +29,6 @@ class Asset < ActiveRecord::Base
   end
 
   def set_class_name
-    class_name.prepend("#{dasherized}#{class_name.present? ? " " : ""}")
+    class_name.prepend("#{model.dasherized}#{class_name.present? ? " " : ""}")
   end
 end

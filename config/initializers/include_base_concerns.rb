@@ -1,1 +1,1 @@
-ActiveRecord::Base.send(:include, BaseCallbacks, BaseClassMethods)
+ActiveRecord::Base.send(:include, BaseClassMethods)

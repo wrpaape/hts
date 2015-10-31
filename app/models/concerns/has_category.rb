@@ -1,6 +1,5 @@
 module HasCategory
   extend ActiveSupport::Concern
-  include Rails.application.routes.url_helpers
 
   included do
     include HasAllAssets, Searchable, AddPath

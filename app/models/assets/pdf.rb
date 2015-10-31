@@ -8,7 +8,7 @@ class PDF < Asset
   private
 
   def add_path
-    update(path_dl: downloads_pdfs_path(id))
+    update(path_dl: download_pdf_path(id))
   end
 
   def set_path_file(steps)

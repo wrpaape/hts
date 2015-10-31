@@ -3,7 +3,7 @@ module PrimaryImage
 
   included do
     class_attribute :file_extension, :desc_lambda
-    
+
     before_create :set_filename_suffix, :set_description, :set_path_show
 
     alias_attribute :path_show, :path_link
@@ -11,7 +11,7 @@ module PrimaryImage
     private
 
     def set_filename_suffix
-      filename << "#{self.class.to_s.fileize}.#{file_extension}"
+      filename << "#{model.fileized}.#{file_extension}"
     end
 
     def set_description

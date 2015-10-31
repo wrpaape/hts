@@ -7,11 +7,11 @@ module BaseCallbacks
     private
 
     def set_key
-      self.key = "#{dasherized}-#{self.class.count}" if respond_to?(:key) && !key
+      self.key = "#{model.dasherized}-#{model.count}" if respond_to?(:key) && !key
     end
 
     def set_class_name
-      self.class_name = dasherized
+      self.class_name = model.dasherized
     end
 
     def strip_newlines
