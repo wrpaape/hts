@@ -175,9 +175,9 @@ gen_pdfs = -> { pdfs.create(rand_assets(10, 20, "pdf")) }
 gen_doc = ->(i) { create(instance_exec(i, &attrs)).instance_exec(&gen_pdfs) }
 gen_docs = -> { rand(10..20).times { |i| docs << Doc.descendants.sample.instance_exec(i, &gen_doc) } }
 gen_prods = ->(num) { num.times { |i| create(instance_exec(i, &attrs)).instance_exec(&gen_docs) }
-seed = -> { instance_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods) }
+seed = ->(prod) { prod.instance_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods) }
 
-Prod.descendants.each { |prod| prod.instance_exec(&seed) }
+Prod.descendants.each(&seed)
 
 # CMProduct.create({
 #   info: rand_paragraphs(1, 3)
@@ -194,16 +194,20 @@ Prod.descendants.each { |prod| prod.instance_exec(&seed) }
 #   info: rand_paragraphs(1, 3)
 # }).images
 
-6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
+# 6.times { |i| HomePageImage.create(caption: "Resize Test Filler-#{i}", path_link: "/") }
 
-[Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each do |home_page_index_good|
-  HomePageImage.create({
-    caption: home_page_index_good.class_type_display,
-    path_link: send("#{home_page_index_good.category}_path")
-  })
-end
+home_page_attrs = ->(name) { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number}
+gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)).images.create(type: "HomePageImage") }
+[Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.instance_exec(&gen_home_page_inst) }
 
-Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
+# [Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each do |home_page_index_good|
+#   HomePageImage.create({
+#     caption: home_page_index_good.class_type_display,
+#     path_link: send("#{home_page_index_good.category}_path")
+#   })
+# end
+
+# Good.last(3).each { |home_page_good| home_page_good.images.create(type: "HomePageImage") }
 
 AboutUs.create({
   body: big_paragraphs(2)
