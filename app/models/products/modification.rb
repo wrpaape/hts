@@ -1,0 +1,2 @@
+class Modification < Product
+end

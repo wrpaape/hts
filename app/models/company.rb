@@ -16,6 +16,6 @@ class Company < ActiveRecord::Base
   private 
 
   def set_type_display
-    self.type_display = "#{class_type_display} #{name.fileize.dasherize}"
+    self.type_display = "#{dasherized} #{name.fileize.dasherize}"
   end
 end

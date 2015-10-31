@@ -4,7 +4,7 @@ class CreateParts < ActiveRecord::Migration
       t.string :key, index: true, uniqueness: true
       t.string :name, index: true, uniqueness: true
       t.string :number, index: true, uniqueness: true
-      t.belongs_to :prod, index: true, foreign_key: true
+      t.belongs_to :product, index: true, foreign_key: true
 
       t.timestamps null: false
     end

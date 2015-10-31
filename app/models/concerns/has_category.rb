@@ -3,7 +3,7 @@ module HasCategory
   include Rails.application.routes.url_helpers
 
   included do
-    include AddPath, HasAllAssets, Searchable, HasTypeDisplay
+    include AddPath, HasAllAssets, Searchable
 
     class_attribute :underscored, :dasherized, :category, :controller, :path_index
     self.underscored = to_s.underscore
@@ -27,13 +27,10 @@ module HasCategory
     end
 
     def self.nav_btns_props
-      {
-        key: dasherized,
+      nav_btn_props.merge({
         key_head: "#{dasherized}-index",
-        path: path_index,
-        display: category,
-        nav_btns: load_categories.map(&:nav_btn_props)
-      }
+        nav_btns: load_descendants.map(&:nav_btn_props)
+      })
     end
   end
 end

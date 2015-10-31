@@ -9,7 +9,7 @@ module HasTypeDisplay
     private
 
     def set_type_display
-      self.type_display = class_type_display
+      self.type_display = underscored.pluralize
     end
   end
 end

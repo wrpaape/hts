@@ -28,8 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :prods,
-    :products,
+  resources :products,
     :modifications,
     :custom_metal_products,
     :extended_gas_sections,
@@ -38,7 +37,6 @@ Rails.application.routes.draw do
     :multi_zone_vavs,
     :vrv_accessories,
     :equipment_screens,
-    :docs,
     :documents,
     :catalogs,
     :drawings,

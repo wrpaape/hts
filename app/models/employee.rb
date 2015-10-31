@@ -3,8 +3,6 @@ class Employee < ActiveRecord::Base
 
   before_save :titleize_names, :set_full_name
 
-  has_one :location
-  has_one :company, through: :location
   has_one :office_phone, as: :parent
   has_one :mobile_phone, as: :parent
 

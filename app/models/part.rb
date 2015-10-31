@@ -1,3 +1,7 @@
 class Part < ActiveRecord::Base
-  belongs_to :good
+  include Searchable
+  
+  belongs_to :product
+
+  self.pool_fields = [:name, :number, :product_id]
 end
