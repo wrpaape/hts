@@ -7,10 +7,4 @@ class Prod < ActiveRecord::Base
 
   self.pool_fields = [:name, :type_display, :info]
   set_attrs("prods")
-
-  private
-
-  def self.load_descendants
-    [Good, Mod, CMProduct, EquipScreen, ExtGasSec, HighPerfAHU, LowProfileERV, MultiZoneVAV, VRVAcc]
-  end
 end

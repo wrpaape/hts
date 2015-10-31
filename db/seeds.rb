@@ -127,16 +127,15 @@ gen_pdfs = ->(docs) { docs.pdfs.create(rand_assets(10, 20, "pdf")) }
 gen_doc = ->(i) { create(class_exec(i, &attrs)) }
 gen_docs = -> { rand(10..20).times.map { |i| docs << Doc.descendants.sample.class_exec(i, &gen_doc) } }
 gen_prods = ->(num) { num.times { |i| create(class_exec(i, &attrs)).instance_exec(&gen_docs) } }
-# gen_prods = ->(num) { num.times { |i| create(class_exec(i, &attrs)) } }
 seed = -> { class_exec(include?(SingletonRecord) ? 1 : rand(10..20), &gen_prods); all.each(&gen_pdfs) }
 
 Prod.descendants.each { |prod| prod.class_exec(&seed) }
 
 
 home_page_attrs = ->(name) { { name: name, info: rand_paragraphs(1, 3), model_number: rand_model_number } }
-gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)) } #images.create(type: "HomePageImage") }
+gen_home_page_inst = -> { create(home_page_attrs.call(class_type_display)); last.images.create(type: "HomePageImage") }
 
-[Mod, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.class_exec(&gen_home_page_inst) }
+[Modification, EquipScreen, LowProfileERV, MultiZoneVAV, HighPerfAHU, ExtGasSec].each { |prod| prod.class_exec(&gen_home_page_inst) }
 
 AboutUs.create(body: big_paragraphs(2))
 

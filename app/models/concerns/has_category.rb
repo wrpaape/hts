@@ -28,14 +28,14 @@ module HasCategory
         key_head: "#{category}-index",
         path: path_index,
         display: class_type_display,
-        nav_btns: load_descendants.map(&:nav_btn_props)
+        nav_btns: load_other_categories.map(&:nav_btn_props)
       }
     end
 
     def self.set_attrs(category)
       self.category = category
       self.class_type_display = category.titleize(exclude: %w(and))
-      # self.path_index = new.send("#{category}_path")
+      # self.path_index = send("#{category}_path")
     end
   end
 end

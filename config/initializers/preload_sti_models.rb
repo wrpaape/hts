@@ -1,6 +1,6 @@
 if Rails.env.development?
   sti_models = {
-    "prods"=> %w(prod product mod cm_product equip_screen ext_gas_sec multi_zone_vav vrv_acc),
+    "prods"=> %w(prod product modification cm_product equip_screen ext_gas_sec multi_zone_vav vrv_acc),
     "docs"=> %w(doc document catalog drawing install_manual parts_list),
     "texts"=> %w(text about_us)
     # "contacts": %w(contact address email phone mobile_phone office_phone toll_free_phone)

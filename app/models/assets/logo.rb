@@ -10,7 +10,11 @@ class Logo < Image
 
   private
 
+  def set_path_file(steps)
+    self.path_file = steps + parent.name.fileize
+  end
+
   def prepend_company_name_to_class_name
-    class_name.prepend("#{parent.name.fileize.tr("/_/","-")} ")
+    class_name.prepend("#{parent.name.fileize.dasherize} ")
   end
 end
