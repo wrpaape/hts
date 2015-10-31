@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  Product.load_other_categories.map { |prod| Object.const_set("#{prod.to_s.pluralize}Controller".to_sym, Class.new(self)) }
+
   def index
     # @nav_bar_props = {
     #   navBtnsAll: [],
@@ -13,11 +15,11 @@ class ProductsController < ApplicationController
   private
 
   def product_type
-    Product.descendants && params[:type].constantize 
+    Prod.descendants && params[:type].constantize 
   end
 
   def product_placeholder
-     "search #{product_type.category.tr("/_/", " ").titleize(exclude: %w(and))}"
+     "search #{product_type.class_type_display}"
   end
 
   def product_search_path
@@ -35,3 +37,4 @@ class ProductsController < ApplicationController
     }
   end
 end
+

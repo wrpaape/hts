@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  resources :all_products, as: "all_products", controller: "products", type: "Product"
 
-  resources :products, controller: "products", type: "Good"
+  resources :products, controller: "products", type: "Product"
   scope :products do
-    resources :custom_metal_products, as: "custom_metal_products", controller: "products", type: "CMProduct"
-    resources :extended_gas_sections, as: "extended_gas_sections", controller: "products", type: "ExtGasSec"
-    resources :high_performance_ahus, as: "high_performance_ahus", controller: "products", type: "HighPerfAHU"
-    resources :low_profile_ervs, as: "low_profile_ervs", controller: "products", type: "LowProfileERV"
-    resources :multi_zone_vavs, as: "multi_zone_vavs", controller: "products", type: "MultiZoneVAV"
-    resources :vrv_accessories, as: "vrv_accessories", controller: "products", type: "VRVAcc"
+    resources :custom_metal_products, as: "custom_metal_products", type: "CMProduct"
+    resources :extended_gas_sections, as: "extended_gas_sections", type: "ExtGasSec"
+    resources :high_performance_ahus, as: "high_performance_ahus", type: "HighPerfAHU"
+    resources :low_profile_ervs, as: "low_profile_ervs", type: "LowProfileERV"
+    resources :multi_zone_vavs, as: "multi_zone_vavs", type: "MultiZoneVAV"
+    resources :vrv_accessories, as: "vrv_accessories", type: "VRVAcc"
   end
   
-  resources :modifications, controller: "products", type: "Mod"
+  resources :modifications, controller: "products", type: "Modification"
   scope :modifications do
     resources :equipment_screens, as: "equipment_screens", controller: "products", type: "EquipScreen"
   end
@@ -31,12 +30,12 @@ Rails.application.routes.draw do
   end
 
   scope :search do
-    get "products", to: "search#search", as: "search_products", type: "Good"
+    get "products", to: "search#search", as: "search_products", type: "Product"
     get "extended_gas_sections", to: "search#search", as: "search_extended_gas_sections", type: "ExtGasSec"
     get "custom_metal_products", to: "search#search", as: "search_custom_metal_products", type: "CMProduct"
     get "equipment_screens", to: "search#search", as: "search_equipment_screens", type: "EquipScreen"
     get "vrv_accessories", to: "search#search", as: "search_vrv_accessories", type: "VRVAcc"
-    get "modifications", to: "search#search", as: "search_modifications", type: "Mod"
+    get "modifications", to: "search#search", as: "search_modifications", type: "Modification"
     get "documents", to: "search#search", as: "search_documents", type: "Document"
     get "drawings", to: "search#search", as: "search_drawings", type: "Drawing"
     get "installation_manuals", to: "search#search", as: "search_installation_manuals", type: "InstallManual"
