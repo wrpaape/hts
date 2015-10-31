@@ -4,12 +4,15 @@ module HasCategory
   included do
     include HasAllAssets, Searchable, AddPath
 
-    class_attribute :category, :controller, :path_index
+    class_attribute :category, :controller
     self.category = to_s.titleize(exclude: %w(and)).pluralize
     self.controller = to_s.pluralize.to_sym
-    # self.path_index = send("#{tableized}_path")
 
     private
+
+    def self.path_index
+      new.send("#{tableized}_path")
+    end
 
     def self.nav_btn_props
       {
@@ -22,7 +25,7 @@ module HasCategory
     def self.nav_btns_props
       nav_btn_props.merge({
         key_head: "#{dasherized}-index",
-        nav_btns: load_descendants.map(&:nav_btn_props)
+        nav_btns: descendants.map(&:nav_btn_props)
       })
     end
   end

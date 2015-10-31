@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  Product.load_other_categories.map { |prod| Object.const_set(prod.controller, Class.new(self)) }
+  Product.descendants.map { |prod| Object.const_set(prod.controller, Class.new(self)) }
 
   def index
     # @nav_bar_props = {

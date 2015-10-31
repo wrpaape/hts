@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.console do
+    load Rails.root.join("config", "initializers", "preload_sti_models.rb")
+  end
 end

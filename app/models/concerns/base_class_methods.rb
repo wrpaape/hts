@@ -7,6 +7,7 @@ module BaseClassMethods
     def model
       self.class
     end
+    
     def self.fileized
       to_s.fileize
     end
@@ -18,7 +19,7 @@ module BaseClassMethods
     def self.dasherized
       underscored.dasherize
     end
-    
+
     def self.tableized
       underscored.pluralize.to_sym
     end

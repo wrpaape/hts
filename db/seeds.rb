@@ -1,4 +1,3 @@
-# include Rails.application.routes.url_helpers
 ActiveRecord::Base.send(:include, BaseCallbacks)
 
 def rand_model_number
