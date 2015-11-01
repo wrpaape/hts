@@ -22,10 +22,23 @@ Rails.application.routes.draw do
   #   resources :installation_manuals, as: "installation_manuals", controller: "documents", type: "InstallManual"
   #   resources :parts_lists, as: "parts_lists", controller: "documents", type: "PartsList"
   # end
+  
+  # scope :search do
+  #   get "products", to: "search#search", as: "search_products", type: "Product"
+  #   get "extended_gas_sections", to: "search#search", as: "search_extended_gas_sections", type: "ExtGasSec"
+  #   get "custom_metal_products", to: "search#search", as: "search_custom_metal_products", type: "CMProduct"
+  #   get "equipment_screens", to: "search#search", as: "search_equipment_screens", type: "EquipScreen"
+  #   get "vrv_accessories", to: "search#search", as: "search_vrv_accessories", type: "VRVAcc"
+  #   get "modifications", to: "search#search", as: "search_modifications", type: "Modification"
+  #   get "documents", to: "search#search", as: "search_documents", type: "Document"
+  #   get "drawings", to: "search#search", as: "search_drawings", type: "Drawing"
+  #   get "installation_manuals", to: "search#search", as: "search_installation_manuals", type: "InstallManual"
+  #   get "parts_lists", to: "search#search", as: "search_parts_lists", type: "PartsList"
+  #   root "search#search", as: "search", type: "SearchController"
+  # end
+
   concern :searchable do
-    collection do
-      get "search", to: "search#search"
-    end
+    get "/search", to: "search#search", on: :collection
   end
 
   resources :products,
@@ -42,24 +55,11 @@ Rails.application.routes.draw do
     :drawings,
     :installation_manuals,
     :parts_lists,
-    :employees, concerns: :searchable, type: ""
+    :employees, concerns: :searchable
 
   namespace :download do
     get "pdfs/:id", to: "#pdf", as: "pdf"
   end
-  # scope :search do
-  #   get "products", to: "search#search", as: "search_products", type: "Product"
-  #   get "extended_gas_sections", to: "search#search", as: "search_extended_gas_sections", type: "ExtGasSec"
-  #   get "custom_metal_products", to: "search#search", as: "search_custom_metal_products", type: "CMProduct"
-  #   get "equipment_screens", to: "search#search", as: "search_equipment_screens", type: "EquipScreen"
-  #   get "vrv_accessories", to: "search#search", as: "search_vrv_accessories", type: "VRVAcc"
-  #   get "modifications", to: "search#search", as: "search_modifications", type: "Modification"
-  #   get "documents", to: "search#search", as: "search_documents", type: "Document"
-  #   get "drawings", to: "search#search", as: "search_drawings", type: "Drawing"
-  #   get "installation_manuals", to: "search#search", as: "search_installation_manuals", type: "InstallManual"
-  #   get "parts_lists", to: "search#search", as: "search_parts_lists", type: "PartsList"
-  #   root "search#search", as: "search", type: "SearchController"
-  # end
 
   root "main#index"
 end

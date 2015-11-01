@@ -3,7 +3,9 @@ module Searchable
   include BuildPool
 
   included do
-    class_attribute :pool_fields
+    class_attribute :top_level, :pool_fields
+
+    self.top_level = true
 
     def self.get_pool(exclude_text)
       exclude_text ? build_pool.tap { |pool| pool[tableized].delete(:info) } : build_pool

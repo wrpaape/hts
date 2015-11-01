@@ -6,4 +6,7 @@ class Document < ActiveRecord::Base
   self.pool_fields = [:title, :category, :body]
 end
 
-Document.descendants.each { |desc| desc.pool_fields -= [:category] }
+Document.descendants.each do |desc|
+  desc.pool_fields -= [:category]
+  desc.top_level = false
+end

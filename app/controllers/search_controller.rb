@@ -1,27 +1,36 @@
 class SearchController < ApplicationController
   skip_before_action :set_header
-  class_attribute :searchable
   
-  def self.get_pool(exclude_text)
-    searchable_top_level.map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
-  end
-
   def search
-    search_pool = searchable_type.get_pool(exclude_text?)
-    render json: query(search_pool, escaped_input)
+    search_pool = (searchable_type || self).get_pool(exclude_text?)
+    # render json: query(search_pool, escaped_input)
   end
 
-  self.searchable = [
-    Product, Modification, EquipmentScreen, ExtendedGasSection, VRVAccessory, LowProfileERV, MultiZoneVAV,
-    Document, Catalog, Drawing, InstallationManual, PartsList,
-    Employee,
-    PDF
-  ]
+  # self.searchable = [
+  #   Product, Modification, EquipmentScreen, ExtendedGasSection, VRVAccessory, LowProfileERV, MultiZoneVAV,
+  #   Document, Catalog, Drawing, InstallationManual, PartsList,
+  #   Employee,
+  #   PDF
+  # ]
+
     
   private
 
-  def searchable_top_level
-    searchable - searchable.flat_map(&:descendants)
+  def get_pool(exclude_text)
+    searchables.map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
+  end
+
+  def searchables
+    ActiveRecord::Base.descendants.select { |model| model.include?(Searchable) }
+  end
+
+  def type_match
+    resource = request.path.scan(/[^\/]+(?=\/search)/).first
+    resource && Regexp.new(resource)
+  end
+
+  def get_searchable_type
+    searchables.find { |model| type_match === model.tabelized } if type_match
   end
 
   def escaped_input
