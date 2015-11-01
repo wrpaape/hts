@@ -8,9 +8,7 @@ module BuildPool
         case search_for
           when :category
             return Proc.new do |input| 
-              searchable_models = searchable_model.instance_exec { descendants.push(self) }
-              matching_categories = searchable_models.select { |model| model.category =~ Regexp.new(input, "i") }
-              matching_categories.map { |model| [model.path_index, model.category] }
+              searchable_models.descendants.flat_map { |desc| desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i") }
             end
           when :name
             [:path_show, :name] 

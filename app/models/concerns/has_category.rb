@@ -4,6 +4,10 @@ module HasCategory
   included do
     include HasAllAssets, Searchable, AddPath
 
+    class_attribute :search_category
+
+    self.search_category = true
+
     private
 
     def self.category
@@ -33,4 +37,16 @@ module HasCategory
       })
     end
   end
+
+  def self.search_by_category
+    descendants.flat_map { |desc| desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i") }
+  end
+
+  def self.search(output, input, exclude_text)
+
+  end
 end
+
+
+
+
