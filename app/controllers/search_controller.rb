@@ -3,22 +3,10 @@ class SearchController < ApplicationController
   
   def search
     search_pool = (searchable_type || self).get_pool(exclude_text?)
-    # render json: query(search_pool, escaped_input)
+    render json: query(search_pool, escaped_input)
   end
 
-  # self.searchable = [
-  #   Product, Modification, EquipmentScreen, ExtendedGasSection, VRVAccessory, LowProfileERV, MultiZoneVAV,
-  #   Document, Catalog, Drawing, InstallationManual, PartsList,
-  #   Employee,
-  #   PDF
-  # ]
-
-    
   private
-
-  def get_pool(exclude_text)
-    searchables.map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
-  end
 
   def searchables
     ActiveRecord::Base.descendants.select { |model| model.include?(Searchable) }
@@ -29,7 +17,7 @@ class SearchController < ApplicationController
     resource && Regexp.new(resource)
   end
 
-  def get_searchable_type
+  def searchable_type
     searchables.find { |model| type_match === model.tabelized } if type_match
   end
 
@@ -41,8 +29,8 @@ class SearchController < ApplicationController
     params[:input].length < 3
   end
 
-  def searchable_type
-    searchable && params[:type].safe_constantize
+  def get_pool(exclude_text)
+    searchables.select(&:top_level).map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
   end
 
   def query(search_pool, input)

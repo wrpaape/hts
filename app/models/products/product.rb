@@ -7,8 +7,3 @@ class Product < ActiveRecord::Base
 
   alias_attribute :display, :name
 end
-  
-Product.descendants.each do |desc|
-  desc.pool_fields -= [:category]
-  desc.top_level = false
-end
