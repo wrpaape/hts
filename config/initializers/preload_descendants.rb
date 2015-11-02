@@ -40,4 +40,6 @@ if Rails.env.development?
   sti_models.each do |table, filenames|
     filenames.each { |f| require_dependency File.join("app", "models", table, "#{f}.rb") }
   end
+  
+  require_dependency File.join("app", "controllers", "products_controller.rb")
 end

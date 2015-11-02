@@ -14,7 +14,7 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
-ACRONYMS = %w(PDF VRV VAV ERV AHU)
+ACRONYMS = %w(PDF VRV VAV ERV AHU).flat_map { |a| [a, "#{a}s"] }
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   ACRONYMS.each { |a| inflect.acronym a }
   inflect.uncountable 'us'

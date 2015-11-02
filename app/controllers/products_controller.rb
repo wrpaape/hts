@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   end
 
   def product_search_path
-    send("search_#{product_type.underscored}_path")
+    send("search_#{product_type.tableized}_path")
   end
 
   def nav_bar_props

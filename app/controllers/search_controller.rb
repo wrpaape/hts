@@ -1,5 +1,9 @@
 class SearchController < ApplicationController
   skip_before_action :set_header
+
+  cattr_reader :searchables do
+    ActiveRecord::Base.descendants.select { |model| model.include?(Searchable) }
+  end
   
   def search
     output = []
@@ -9,17 +13,13 @@ class SearchController < ApplicationController
 
   private
 
-  def self.searchables
-    ActiveRecord::Base.descendants.select { |model| model.include?(Searchable) }
-  end
-
   def type_match
     resource = request.path.scan(/[^\/]+(?=\/search)/).first
     resource && Regexp.new(resource)
   end
 
   def searchable_type
-    searchables.find { |model| type_match === model.tabelized } if type_match
+    searchables.find { |model| type_match === model.tableized } if type_match
   end
 
   def escaped_input

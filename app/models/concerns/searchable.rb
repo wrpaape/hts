@@ -9,7 +9,7 @@ module Searchable
     private
 
     def self.search_db(input, attrs)
-      where("#{attrs.first} ~* ?", input).pluck(*attrs)
+      where("#{attrs.first} ~* ?", input).limit(2).pluck(*attrs)
     end
 
     def self.display_general(input, result)
@@ -31,6 +31,7 @@ module Searchable
         attr_sets.each do |attrs|
           search_db(input, attrs).each do |result|
             output.append_result(input, result.pop, send(display, input, *result))
+            return if output.length > 5
           end
         end
       end
