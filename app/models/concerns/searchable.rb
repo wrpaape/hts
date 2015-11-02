@@ -16,7 +16,7 @@ module Searchable
       result
     end
 
-    def self.display_labeled(result, label)
+    def self.display_labeled(input, result, label)
       "#{result} (#{label})"
     end
 

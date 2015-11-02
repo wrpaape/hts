@@ -8,10 +8,10 @@ class Image < Asset
     default_filename = /bg/ === class_name ? "bg-default.png" : "default.png"
 
     regex = type.in?(%w(HomePageImage AboutUsImage)) ? /$/ :
-    case parent_type
-      when "Product", "Document" then /(?<=\/).*/
-      else /[^\/]+\/$/
-    end
+      case parent_type
+        when "Product", "Document", "Employee" then /(?<=\/).*/
+        else /[^\/]+\/$/
+      end
 
     update(path_default: path_file.sub(regex, default_filename))
   end

@@ -57,6 +57,8 @@ Rails.application.routes.draw do
     :parts_lists,
     :employees, concerns: :searchable
 
+  get "/search", to: "search#search"
+
   namespace :download do
     get "pdfs/:id", to: "#pdf", as: "pdf"
   end

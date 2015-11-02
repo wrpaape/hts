@@ -31,6 +31,7 @@ module HasCategory
     end
 
     def self.nav_btns_props
+      10.times { pp descendants }
       nav_btn_props.merge({
         key_head: "#{dasherized}-index",
         nav_btns: descendants.map(&:nav_btn_props)

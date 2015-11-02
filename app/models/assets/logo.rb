@@ -11,7 +11,7 @@ class Logo < Image
   private
 
   def set_path_file(steps)
-    self.path_file = steps + parent.name.fileize
+    self.path_file = steps + "#{parent.name.fileize}/"
   end
 
   def prepend_company_name_to_class_name
