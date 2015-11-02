@@ -3,18 +3,12 @@ class Document < ActiveRecord::Base
 
   belongs_to :parent, polymorphic: true
 
-  self.search_db = {
+  self.db_opts = {
     display_general: [
-      {
-        field: :title
-        attrs: [:title, :path_show]
-      }
+      [:title, :path_show],
     ],
     display_text: [
-      {
-        field: :body
-        attrs: [:body, :title, :path_show]
-      }
+      [:body, :title, :path_show],
     ]
   }
 end

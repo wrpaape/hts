@@ -4,6 +4,11 @@ class PDF < Asset
   alias_attribute :path_dl, :path_link
 
   self.pool_fields = [:filename]
+  self.db_opts = {
+    display_general: [
+      [:filename, :path_dl]
+    ]
+  }
 
   private
 

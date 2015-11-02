@@ -4,9 +4,9 @@ module HasCategory
   included do
     include HasAllAssets, Searchable, AddPath
 
-    class_attribute :search_category
+    class_attribute :search_categories?
 
-    self.search_category = true
+    self.search_categories? = true
 
     private
 
@@ -36,14 +36,16 @@ module HasCategory
         nav_btns: descendants.map(&:nav_btn_props)
       })
     end
-  end
 
-  def self.search_by_category
-    descendants.flat_map { |desc| desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i") }
-  end
+    def self.search(*args)
+      search_default(*args)
+    end
 
-  def self.search(output, input, exclude_text)
-
+    def self.search_cats(input)
+      descendants.flat_map do |desc|
+        desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i")
+      end
+    end
   end
 end
 

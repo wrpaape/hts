@@ -1,18 +1,12 @@
 class Product < ActiveRecord::Base
   include HasCategory
 
-  self.search_db = {
-    strings: [
-      {
-        field: :name
-        attrs: [:path_show, :name]
-      }
+  self.db_opts = {
+    display_general: [
+      [:name, :path_show]
     ],
-    texts: [
-      {
-        field: :info
-        attrs: [:path_show, :info, :name]
-      }
+    display_text: [
+      [:info, :name, :path_show]
     ]
   }
 
