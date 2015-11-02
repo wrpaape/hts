@@ -37,15 +37,16 @@ module HasCategory
       })
     end
 
-    def self.search_cats(input)
-      descendants.flat_map do |desc|
-        desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i")
+    def self.search_cats(output, input, exclude_text)
+      descendants.each do |desc|
+        next unless desc.category =~ Regexp.new(input, "i")
+        desc.class_exec { output.append_result(input, path_index, category) } 
       end
     end
-    
-    def self.search(output, input, exclude_text)
-      output.append_result(input, *search_cats(input)) if search_categories
-      search_default(output, input, exclude_text)
+
+    def self.search(*args)
+      search_cats(*args) if search_categories
+      search_default(*args)
     end
   end
 end

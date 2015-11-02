@@ -2,13 +2,14 @@ class SearchController < ApplicationController
   skip_before_action :set_header
   
   def search
-    search_pool = (searchable_type || self).get_pool(exclude_text?)
-    render json: query(search_pool, escaped_input)
+    output = []
+    (searchable_type || self.class).search(output, escaped_input, exclude_text?)
+    render json: output
   end
 
   private
 
-  def searchables
+  def self.searchables
     ActiveRecord::Base.descendants.select { |model| model.include?(Searchable) }
   end
 
@@ -29,25 +30,30 @@ class SearchController < ApplicationController
     params[:input].length < 3
   end
 
-  def get_pool(exclude_text)
-    searchables.select(&:top_level).map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
+  def self.search(*args)
+    searchables.select(&:top_level).each { |model| model.search(*args) }
   end
 
-  def query(search_pool, input)
-    output = []
-    search_pool.each do |search_for, fields|
-      fields.each do |field, procs|
-        procs[:results].call(input).each_with_index do |result, i|
-          output.push({
-            key: "#{input}-#{search_for}-#{field}-result-#{i}",
-            input: input,
-            path: result[0],
-            display: procs[:display].call(result, input)
-          })
-          return output if output.length > 4
-        end
-      end
-    end
-    output
-  end
+
+  # def get_pool(exclude_text)
+  #   searchables.select(&:top_level).map { |model| model.get_pool(exclude_text) }.reduce({}, :merge)
+  # end
+
+  # def query(search_pool, input)
+  #   output = []
+  #   search_pool.each do |search_for, fields|
+  #     fields.each do |field, procs|
+  #       procs[:results].call(input).each_with_index do |result, i|
+  #         output.push({
+  #           key: "#{input}-#{search_for}-#{field}-result-#{i}",
+  #           input: input,
+  #           path: result[0],
+  #           display: procs[:display].call(result, input)
+  #         })
+  #         return output if output.length > 4
+  #       end
+  #     end
+  #   end
+  #   output
+  # end
 end
