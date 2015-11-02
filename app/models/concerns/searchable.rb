@@ -3,9 +3,9 @@ module Searchable
   # include BuildPool
 
   included do
-    class_attribute :top_level?, :search_opts
+    class_attribute :top_level, :db_opts
 
-    self.top_level? = true
+    self.top_level = true
 
     # def self.get_pool(exclude_text)
     #   exclude_text ? build_pool.tap { |pool| pool[tableized].delete(:info) } : build_pool
@@ -35,28 +35,15 @@ module Searchable
       "#{result[match_neighbors]}▓\u200B(#{label})"
     end
 
-    def self.search_default(exclude_text, input, output)
+    def self.search_default(output, input, exclude_text)
       db_opts.tap { |opts|  opts.delete(:display_text) if exclude_text }.each do |display, attrs|
         search_db(input, attrs).each do |result|
-          output.push({
-            key: "result-#{output.length}",
-            input: input,
-            path: result.pop,
-            display: send(display, input, *result)
-          })
+          output.append_result(input, result.pop, send(display, input, *result))
         end
       end
     end
 
-    def self.search(*args)
-      search_default(*args)
-    end
-
-    def self.search_cats(input)
-      descendants.flat_map do |desc|
-        desc.class_exec { [path_index, category] } if desc.category =~ Regexp.new(input, "i")
-      end
-    end
+    singleton_class.send(:alias_method, :search, :search_default)
   end
 end
 
