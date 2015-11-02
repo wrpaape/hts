@@ -17,6 +17,6 @@
 ACRONYMS = %w(PDF VRV VAV ERV AHU).flat_map { |a| [a, "#{a}s"] }
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   ACRONYMS.each { |a| inflect.acronym a }
-  inflect.uncountable 'us'
+  inflect.uncountable "us"
   inflect.human /multi_zone/i, "Multi-Zone"
 end

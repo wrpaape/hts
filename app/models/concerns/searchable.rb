@@ -31,7 +31,6 @@ module Searchable
         attr_sets.each do |attrs|
           search_db(input, attrs).each do |result|
             output.append_result(input, result.pop, send(display, input, *result))
-            return if output.length > 5
           end
         end
       end

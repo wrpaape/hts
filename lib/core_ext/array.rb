@@ -10,5 +10,6 @@ class Array
       path: path,
       display: display
     })
+    throw :max_results if length > 4
   end
 end

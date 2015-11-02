@@ -7,7 +7,10 @@ class SearchController < ApplicationController
   
   def search
     output = []
-    (searchable_type || self.class).search(output, escaped_input, exclude_text?)
+    catch :max_results do
+      (searchable_type || self.class).search(output, escaped_input, exclude_text?)
+    end
+    
     render json: output
   end
 
