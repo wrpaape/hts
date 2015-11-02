@@ -2,6 +2,8 @@ module Contactable
   extend ActiveSupport::Concern
 
   included do
+    include HasAllAssets
+    
     has_many :contacts, -> { by_display }, as: :parent, before_add: :set_secondary_if_any_primary
     has_many :phones, -> { by_priority }, as: :parent
     has_many :faxes, -> { by_priority }, as: :parent

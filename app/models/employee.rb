@@ -6,6 +6,7 @@ class Employee < ActiveRecord::Base
   has_one :office_phone, as: :parent
   has_one :mobile_phone, as: :parent
 
+  alias_attribute :name, :full_name
   alias_attribute :head_shot, :image
 
   self.image_type = HeadShot

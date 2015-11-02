@@ -153,19 +153,19 @@ ActiveRecord::Schema.define(version: 20151030214149) do
     t.string   "key"
     t.string   "class_name"
     t.string   "type"
-    t.string   "model_number"
+    t.string   "number"
     t.string   "name"
     t.string   "path_show"
     t.text     "info"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "products", ["class_name"], name: "index_products_on_class_name", using: :btree
   add_index "products", ["info"], name: "index_products_on_info", using: :btree
   add_index "products", ["key"], name: "index_products_on_key", using: :btree
-  add_index "products", ["model_number"], name: "index_products_on_model_number", using: :btree
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["number"], name: "index_products_on_number", using: :btree
   add_index "products", ["path_show"], name: "index_products_on_path_show", using: :btree
   add_index "products", ["type"], name: "index_products_on_type", using: :btree
 
