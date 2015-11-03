@@ -15,7 +15,17 @@ module Hts
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Central Time (US & Canada)'
-    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')].find_all { |f| File.stat(f).directory? }
+
+    # steps = []
+    # paths = []
+    #  d[/(?<=\/)[^\/.]*$/]
+    # def append_paths(steps)
+    #   Dir[Rails.root.join("app", "models", steps ,"{**}")]
+    # end
+    # config.autoload_paths += Dir[Rails.root.join('app', 'models', steps ,'{**}')].find_all { |f| File.stat(f).directory? }
+    # config.autoload_paths += Dir[Rails.root.join("app", "models", "**", "**")].grep /(?<=\/)[^\/.]*$/
+    config.autoload_paths += Dir[Rails.root.join("app", "models", "**/")]
+    
     config.assets.enabled = true  
     # config.eager_load = true
 

@@ -27,7 +27,7 @@ class Employee < ActiveRecord::Base
     [first_name, middle_name, last_name].compact
   end
 
-  def titleize_names
+  def titleize_namesz
     all_names.each(&:titleize!)
   end
 

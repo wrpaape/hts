@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  Product.descendants.map { |prod| Object.const_set(prod.controller, Class.new(self)) }
+  Product.descendants.each { |prod| Object.const_set(prod.controller, Class.new(self)) }
 
   def index
     # @nav_bar_props = {
@@ -15,7 +15,6 @@ class ProductsController < ApplicationController
   private
 
   def product_type
-    # Prod.descendants && params[:type].constantize
     controller_name.classify.constantize 
   end
 
