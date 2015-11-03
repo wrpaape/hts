@@ -40,6 +40,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   console do
-    load Rails.root.join("config", "initializers", "preload_descendants.rb")
+    Dir[Rails.root.join("app", "models", "**", "*.rb")].each { |model| require_dependency model }
   end
 end

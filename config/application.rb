@@ -16,14 +16,6 @@ module Hts
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Central Time (US & Canada)'
 
-    # steps = []
-    # paths = []
-    #  d[/(?<=\/)[^\/.]*$/]
-    # def append_paths(steps)
-    #   Dir[Rails.root.join("app", "models", steps ,"{**}")]
-    # end
-    # config.autoload_paths += Dir[Rails.root.join('app', 'models', steps ,'{**}')].find_all { |f| File.stat(f).directory? }
-    # config.autoload_paths += Dir[Rails.root.join("app", "models", "**", "**")].grep /(?<=\/)[^\/.]*$/
     config.autoload_paths += Dir[Rails.root.join("app", "models", "**/")]
     
     config.assets.enabled = true  

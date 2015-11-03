@@ -1,9 +1,8 @@
 module HasCategory
   extend ActiveSupport::Concern
+  include HasAllAssets, Searchable, AddPath
 
   included do
-    include HasAllAssets, Searchable, AddPath
-
     class_attribute :search_categories
 
     self.search_categories = true
@@ -31,7 +30,6 @@ module HasCategory
     end
 
     def self.nav_btns_props
-      10.times { pp descendants }
       nav_btn_props.merge({
         key_head: "#{dasherized}-index",
         nav_btns: descendants.map(&:nav_btn_props)

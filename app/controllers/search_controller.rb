@@ -1,3 +1,5 @@
+
+
 class SearchController < ApplicationController
   skip_before_action :set_header
 
@@ -7,7 +9,7 @@ class SearchController < ApplicationController
   
   def search
     output = []
-    catch :max_results do
+    catch :limit_reached do
       (searchable_type || self.class).search(output, escaped_input, exclude_text?)
     end
     
@@ -34,6 +36,7 @@ class SearchController < ApplicationController
   end
 
   def self.search(*args)
+    pp searchables.select(&:top_level)
     searchables.select(&:top_level).each { |model| model.search(*args) }
   end
 
